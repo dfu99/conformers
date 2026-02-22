@@ -3,10 +3,11 @@
 # Runs Protenix inference with a self-template to bias toward extended integrin conformation.
 
 #SBATCH --job-name=protenix_template
-#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/logs/protenix_template_%j.out
-#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/logs/protenix_template_%j.err
+#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix_template_%j.out
+#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix_template_%j.err
 #SBATCH -A gts-yke8
-#SBATCH -N1 --gres=gpu:RTX_6000:1
+#SBATCH -N1 --gres=gpu:A100:1
+#SBATCH -C A100-80GB
 #SBATCH --mem=64G
 #SBATCH --time=24:00:00
 #SBATCH --mail-type=END,FAIL
@@ -20,10 +21,10 @@ module load python/3.12
 source ~/scratch/venv_protenix/bin/activate
 
 # --- Paths (adjust as needed) ---
-PROTENIX_ROOT="$HOME/scratch/Protenix"
+PROTENIX_ROOT="$HOME/scratch/conformers"
 SCRIPT="${PROTENIX_ROOT}/scripts/template_self_sampling_workflow.py"
 INPUT_PDB="${PROTENIX_ROOT}/data/template_example/seed_090_frame_000.pdb"
-MSA_ROOT="$HOME/scratch/Protenix/data/seed_090_frame_000/msa"
+MSA_ROOT="$HOME/scratch/conformers/data/seed_090_frame_000/msa"
 WORKFLOW_DIR="${PROTENIX_ROOT}/data/template_example/workflow_outputs"
 TEMPLATE_CIF="${PROTENIX_ROOT}/data/template_example/seed_090_frame_000.cif"
 # Expected chain order for integrin alpha/beta input.
