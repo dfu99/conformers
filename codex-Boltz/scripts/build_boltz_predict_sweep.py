@@ -1,0 +1,177 @@
+#!/usr/bin/env python3
+"""Generate a Boltz predict YAML sweep for conformation sampling."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+from pathlib import Path
+from typing import List
+
+import yaml
+
+
+def read_seq(path: Path) -> str:
+    text = path.read_text(encoding="utf-8").strip()
+    if not text:
+        raise ValueError(f"Empty sequence file: {path}")
+    return text
+
+
+def parse_thresholds(raw: str) -> List[float]:
+    if not raw.strip():
+        return []
+    out = []
+    for token in raw.split(","):
+        token = token.strip()
+        if not token:
+            continue
+        out.append(float(token))
+    return out
+
+
+def build_templates(template_cif: Path, chain_id: str, force: bool, threshold: float | None) -> list[dict]:
+    block = {
+        "cif": str(template_cif.resolve()),
+        "chain_id": chain_id,
+        "template_inclusion_prob": 1.0,
+        "template_filter": True,
+        "force_template": bool(force),
+    }
+    if threshold is not None:
+        block["force_template_threshold"] = float(threshold)
+    return [block]
+
+
+def write_yaml(path: Path, doc: dict) -> None:
+    path.write_text(yaml.safe_dump(doc, sort_keys=False), encoding="utf-8")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--chain-a-seq-file", required=True, type=Path)
+    parser.add_argument("--chain-b-seq-file", required=True, type=Path)
+    parser.add_argument("--outdir", required=True, type=Path)
+    parser.add_argument("--job-prefix", default="integrin_ab_boltz")
+    parser.add_argument("--chain-a-msa", default="")
+    parser.add_argument("--chain-b-msa", default="")
+    parser.add_argument("--template-cif", default="")
+    parser.add_argument(
+        "--force-thresholds",
+        default="0.60,0.75,0.90",
+        help="Comma-separated template force thresholds for force_template mode.",
+    )
+    args = parser.parse_args()
+
+    seq_a = read_seq(args.chain_a_seq_file)
+    seq_b = read_seq(args.chain_b_seq_file)
+    outdir = args.outdir
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    msa_a = args.chain_a_msa.strip() or "empty"
+    msa_b = args.chain_b_msa.strip() or "empty"
+    has_template = bool(args.template_cif.strip())
+    template_cif = Path(args.template_cif) if has_template else None
+    if template_cif is not None and not template_cif.exists():
+        raise FileNotFoundError(f"Template CIF not found: {template_cif}")
+
+    thresholds = parse_thresholds(args.force_thresholds)
+    manifest_path = outdir / "jobs_manifest.tsv"
+    job_count = 0
+
+    with manifest_path.open("w", encoding="utf-8") as handle:
+        writer = csv.writer(handle, delimiter="\t")
+        writer.writerow(["job_name", "mode", "yaml_path"])
+
+        # Baseline with user-provided MSA paths (or empty).
+        baseline_name = f"{args.job_prefix}_msa_baseline"
+        baseline_doc = {
+            "version": 1,
+            "sequences": [
+                {"protein": {"id": "A", "sequence": seq_a, "msa": msa_a}},
+                {"protein": {"id": "B", "sequence": seq_b, "msa": msa_b}},
+            ],
+        }
+        baseline_yaml = outdir / f"{baseline_name}.yaml"
+        write_yaml(baseline_yaml, baseline_doc)
+        writer.writerow([baseline_name, "msa_baseline", baseline_yaml])
+        job_count += 1
+
+        # No-MSA control.
+        no_msa_name = f"{args.job_prefix}_empty_msa_control"
+        no_msa_doc = {
+            "version": 1,
+            "sequences": [
+                {"protein": {"id": "A", "sequence": seq_a, "msa": "empty"}},
+                {"protein": {"id": "B", "sequence": seq_b, "msa": "empty"}},
+            ],
+        }
+        no_msa_yaml = outdir / f"{no_msa_name}.yaml"
+        write_yaml(no_msa_yaml, no_msa_doc)
+        writer.writerow([no_msa_name, "empty_msa_control", no_msa_yaml])
+        job_count += 1
+
+        if template_cif is not None:
+            # Soft template guidance.
+            soft_name = f"{args.job_prefix}_template_soft"
+            soft_doc = {
+                "version": 1,
+                "sequences": [
+                    {
+                        "protein": {
+                            "id": "A",
+                            "sequence": seq_a,
+                            "msa": msa_a,
+                            "templates": build_templates(template_cif, "A", force=False, threshold=None),
+                        }
+                    },
+                    {
+                        "protein": {
+                            "id": "B",
+                            "sequence": seq_b,
+                            "msa": msa_b,
+                            "templates": build_templates(template_cif, "B", force=False, threshold=None),
+                        }
+                    },
+                ],
+            }
+            soft_yaml = outdir / f"{soft_name}.yaml"
+            write_yaml(soft_yaml, soft_doc)
+            writer.writerow([soft_name, "template_soft", soft_yaml])
+            job_count += 1
+
+            for thr in thresholds:
+                force_name = f"{args.job_prefix}_template_force_{thr:.2f}".replace(".", "p")
+                force_doc = {
+                    "version": 1,
+                    "sequences": [
+                        {
+                            "protein": {
+                                "id": "A",
+                                "sequence": seq_a,
+                                "msa": msa_a,
+                                "templates": build_templates(template_cif, "A", force=True, threshold=thr),
+                            }
+                        },
+                        {
+                            "protein": {
+                                "id": "B",
+                                "sequence": seq_b,
+                                "msa": msa_b,
+                                "templates": build_templates(template_cif, "B", force=True, threshold=thr),
+                            }
+                        },
+                    ],
+                }
+                force_yaml = outdir / f"{force_name}.yaml"
+                write_yaml(force_yaml, force_doc)
+                writer.writerow([force_name, f"template_force_{thr:.2f}", force_yaml])
+                job_count += 1
+
+    print(f"[sweep] wrote {job_count} jobs to {outdir}")
+    print(f"[sweep] manifest: {manifest_path}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

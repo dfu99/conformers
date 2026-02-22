@@ -1,0 +1,37 @@
+---------------------------------------
+Begin Slurm Prolog: Feb-20-2026 19:49:18
+Job ID:    4087130
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  protenix_template
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+=========================================
+Job ID:        4087130
+Node:          atl1-1-01-006-5-0.pace.gatech.edu
+GPU:           NVIDIA A100 80GB PCIe
+Script:        /storage/home/hcoda1/6/dfu71/scratch/Protenix/scripts/template_self_sampling_workflow.py
+Input PDB:     /storage/home/hcoda1/6/dfu71/scratch/Protenix/data/template_example/seed_090_frame_000.pdb
+MSA root:      /storage/home/hcoda1/6/dfu71/scratch/Protenix/data/seed_090_frame_000/msa
+Workflow dir:  /storage/home/hcoda1/6/dfu71/scratch/Protenix/data/template_example/workflow_outputs
+PROTENIX_ROOT_DIR: /storage/home/hcoda1/6/dfu71/scratch/Protenix
+mmcif source:  /storage/home/hcoda1/6/dfu71/scratch/Protenix/mmcif
+mmcif target:  /storage/home/hcoda1/6/dfu71/scratch/Protenix/mmcif
+kalign:        /storage/home/hcoda1/6/dfu71/scratch/kalign/build/src/kalign
+=========================================
+Parsed chains from PDB:
+  chain A: length=434
+ERROR: Workflow exited with non-zero status: 1
+---------------------------------------
+Begin Slurm Epilog: Feb-20-2026 19:49:25
+Job ID:        4087130
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      protenix_template
+Resources:     cpu=8,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:01:04,vmem=0,walltime=00:00:08,mem=20784K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-5-0
+---------------------------------------
