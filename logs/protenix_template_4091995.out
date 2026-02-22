@@ -1,0 +1,62 @@
+---------------------------------------
+Begin Slurm Prolog: Feb-21-2026 02:01:38
+Job ID:    4091995
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  protenix_template
+Partition: gpu-rtx6000
+QOS:       inferno
+---------------------------------------
+Preflight chain CA counts:
+  chain A: length=962
+  chain B: length=692
+=========================================
+Job ID:        4091995
+Node:          atl1-1-02-004-35-0.pace.gatech.edu
+GPU:           Quadro RTX 6000
+Script:        /storage/home/hcoda1/6/dfu71/scratch/Protenix/scripts/template_self_sampling_workflow.py
+Input PDB:     /storage/home/hcoda1/6/dfu71/scratch/Protenix/data/template_example/seed_090_frame_000.pdb
+Chain order:   A,B
+MSA root:      /storage/home/hcoda1/6/dfu71/scratch/Protenix/data/seed_090_frame_000/msa
+Workflow dir:  /storage/home/hcoda1/6/dfu71/scratch/Protenix/data/template_example/workflow_outputs
+PROTENIX_ROOT_DIR: /storage/home/hcoda1/6/dfu71/scratch/Protenix
+mmcif source:  /storage/home/hcoda1/6/dfu71/scratch/Protenix/mmcif
+mmcif target:  /storage/home/hcoda1/6/dfu71/scratch/Protenix/mmcif
+kalign:        /storage/home/hcoda1/6/dfu71/scratch/kalign/build/src/kalign
+=========================================
+train scheduler 16.0
+inference scheduler 16.0
+Diffusion Module has 16.0
+Parsed chains from PDB:
+  chain A: length=962
+  chain B: length=692
+
+Converting template PDB -> mmCIF: /storage/scratch1/6/dfu71/Protenix/data/template_example/seed_090_frame_000.pdb -> /storage/scratch1/6/dfu71/Protenix/data/template_example/seed_090_frame_000.cif
+
+Generated inputs:
+  MSA-only:      /storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/inputs/seed_090_frame_000_msa_only.json
+  Self-template: /storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/inputs/seed_090_frame_000_msa_self_template.json
+  Template CIF:  /storage/scratch1/6/dfu71/Protenix/data/template_example/seed_090_frame_000.cif
+  Template mode: templatesPath
+  Template .a3m:
+    chain A: /storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/inputs/template_search_results/s090_A.a3m
+    chain B: /storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/inputs/template_search_results/s090_B.a3m
+  Registered mmcif entry: /storage/scratch1/6/dfu71/Protenix/mmcif/09/s090.cif.gz
+
+[run] protenix pred -i /storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/inputs/seed_090_frame_000_msa_self_template.json -o /storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/outputs/msa_self_template -n protenix_base_default_v1.0.0 -s 101,202,303,404,505,606,707,808,909 -e 5 --dtype bf16 --use_msa true --use_template true --triatt_kernel torch --trimul_kernel torch --kalign_binary_path /storage/scratch1/6/dfu71/kalign/build/src/kalign
+
+Done.
+Outputs root: /storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/outputs
+Done. Exit code: 0
+---------------------------------------
+Begin Slurm Epilog: Feb-21-2026 02:10:04
+Job ID:        4091995
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      protenix_template
+Resources:     cpu=6,gres/gpu:rtx_6000=1,mem=64G,node=1
+Rsrc Used:     cput=00:50:48,vmem=0,walltime=00:08:28,mem=23464K,energy_used=0
+Partition:     gpu-rtx6000
+QOS:           inferno
+Nodes:         atl1-1-02-004-35-0
+---------------------------------------

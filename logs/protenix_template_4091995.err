@@ -1,0 +1,948 @@
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded:
+libxml2/2.13.5-xvypeyo (required by: cuda/12.9.1)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) libxml2/2.13.5-xvypeyo => libxml2/2.10.3-74cdfsk
+  2) xz/5.6.3-u3gckxx => xz/5.2.5-y72uqzs
+
+2026-02-21 02:04:36,165 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:792] INFO runner.batch_inference: Run infer with input=/storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/inputs/seed_090_frame_000_msa_self_template.json, out_dir=/storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/outputs/msa_self_template, sample=5
+2026-02-21 02:04:36,165 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:819] INFO runner.batch_inference: Using default params for model protenix_base_default_v1.0.0: cycle=10, step=200, use_msa=True
+2026-02-21 02:04:36,165 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:838] INFO runner.batch_inference: ==================================================
+2026-02-21 02:04:36,165 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:839] INFO runner.batch_inference: Using templates for inference. Template files should have .hrr or .a3m extensions and be specified in the JSON file.
+Example: /path/to/template.hrr or /path/to/template.a3m
+Note: Inference will proceed with automatic template search if none are provided and use_template is True.
+2026-02-21 02:04:36,165 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:846] INFO runner.batch_inference: ==================================================
+2026-02-21 02:04:36,165 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:486] INFO runner.batch_inference: Will infer with 1 jsons
+2026-02-21 02:04:36,447 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:557] INFO runner.inference: Enforcing FP32 and torch kernels for compatibility with detected GPU (Compute Capability 7.x).
+2026-02-21 02:04:36,447 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:391] INFO runner.batch_inference: Inference by Protenix: model_size: base, with_feature: default, model_version: v1.0.0, dtype: fp32
+2026-02-21 02:04:36,447 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:396] INFO runner.batch_inference: Triangle_multiplicative kernel: torch, Triangle_attention kernel: torch
+2026-02-21 02:04:36,447 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:400] INFO runner.batch_inference: enable_diffusion_shared_vars_cache: True, enable_efficient_fusion: True, enable_tf32: True
+2026-02-21 02:04:36,495 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:336] INFO runner.inference: obsolete_pdbs_path already exists at /storage/home/hcoda1/6/dfu71/scratch/Protenix/common/obsolete_to_successor.json
+2026-02-21 02:04:36,497 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:336] INFO runner.inference: release_dates_path already exists at /storage/home/hcoda1/6/dfu71/scratch/Protenix/common/release_date_cache.json
+2026-02-21 02:04:36,526 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Distributed environment: world size: 1, global rank: 0, local rank: 0
+2026-02-21 02:04:36,526 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:98] INFO root: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+2026-02-21 02:04:36,526 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:123] INFO root: Kernels will be compiled when fast_layernorm is first called.
+2026-02-21 02:04:36,527 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:127] INFO root: Finished environment initialization.
+2026-02-21 02:05:59,745 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Loading from /storage/home/hcoda1/6/dfu71/scratch/Protenix/checkpoint/protenix_base_default_v1.0.0.pt, strict: True
+2026-02-21 02:06:02,475 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Sampled key: module.input_embedder.atom_attention_encoder.linear_no_bias_ref_pos.weight
+2026-02-21 02:06:02,701 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Finish loading checkpoint.
+2026-02-21 02:06:02,714 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Model parameters: 368.48M
+  0%|          | 0/1 [00:00<?, ?it/s]2026-02-21 02:06:02,727 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/msa_search.py:252] INFO runner.msa_search: do not need to update msa result, so return itself /storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/inputs/seed_090_frame_000_msa_self_template.json
+2026-02-21 02:06:02,727 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:420] INFO runner.inference: Loading data from /storage/scratch1/6/dfu71/Protenix/data/template_example/workflow_outputs/inputs/seed_090_frame_000_msa_self_template.json
+2026-02-21 02:06:05,248 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing seed_090_frame_000_msa_self_template...
+2026-02-21 02:06:17,960 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-02-21 02:06:31,744 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-02-21 02:06:31,746 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence FNLDVDSPAEYSGPEGSYFGFAVDFFVPSASSRMFLLVGAPKANTTQPGIVEGGQVLKCDWSSTRRCQPIEFDATGNRDYAKDDPLEFKSHQWFGASVRSKQDKILACAPLYHWRTEMKQEREPVGTCFLQDGTKTVEYAPCRSQDIDADGQGFCQGGFSIDFTKADRVLLGGPGSFYWQGQLISDQVAEIVSKYDPNVYSIKYNNQLATRTAQAIFDDSYLGYSVAVGDFNGDGIDDFVSGVPRAARTLGMVYIYDGKNMSSLYNFTGEQMAAYFGFSVAATDINGDDYADVFIGAPLFMDRGSDGKLQEVGQVSVSLQRASGDFQTTKLNGFEVFARFGSAIAPLGDLDQDGFNDIAIAAPYGGEDKKGIVYIFNGRSTGLNAVPSQILEGQWAARSMPPSFGYSMKGATDIDKNGYPDLIVGAFGVDRAILYRARPVITVNAGLEVYPSILNQDNKTCSLPGTALKVSCFNVRFCLKADGKGVLPRKLNFQVELLLDKLKQKGAIRRALFLYSRSPSHSKNMTISRGGLMQCEELIAYLRDESEFRDKLTPITIFMEYRLDYRTAADTTGLQPILNQFTPANISRQAHILLDCGEDNVCKPKLEVSVDSDQKKIYIGDDNPLTLIVKAQNQGEGAYEAELIVSIPLQADFIGVVRNNEALARLSCAFKTENQTRQVVCDLGNPMKAGTQLLAGLRFSVHQQSEMDTSVKFDLQIQSSNLFDKVSPVVSHKVDLAVLAAVEIRGVSSPDHIFLPIPNWEHKENPETEEDVGPVVQHIYELRNNGPSSFSKAMLHLQWPYKYNNNTLLYILHYDIDGPMNCTSDMEINPLRIKISSLQTTEKNDTVAGQGERDHLITKRDLALSEGDIHTLGCGVAQCLKIVCQVGRLDRGKSAILYVKSLLWTETFMNKENQNHSYSLKSSASFNVIEFPYKNLPIEDITNSTLVTTNVTWGIQPAPMPV
+2026-02-21 02:06:31,746 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence GPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPD
+2026-02-21 02:06:38,354 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] seed_090_frame_000_msa_self_template [seed:101]: N_asym 2, N_token 1654, N_atom 12791, N_msa 11382
+2026-02-21 02:06:54,478 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:497] ERROR runner.inference: [Rank 0] seed_090_frame_000_msa_self_template failed: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.55 GiB is free. Including non-PyTorch memory, this process has 14.91 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 531.50 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 472, in infer_predict
+    prediction = runner.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 228, in predict
+    prediction, _, _ = self.model(
+                       ^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 897, in forward
+    pred_dict, log_dict, time_tracker = self.main_inference_loop(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 425, in main_inference_loop
+    return self._main_inference_loop(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 496, in _main_inference_loop
+    s_inputs, s, z = self.get_pairformer_output(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 249, in get_pairformer_output
+    z += self.template_embedder(
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1018, in forward
+    u = u + self.single_template_forward(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1080, in single_template_forward
+    _, v = self.pairformer_stack(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 327, in forward
+    s, z = checkpoint_blocks(
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 866, in checkpoint_blocks
+    return exec(blocks, args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 853, in exec
+    a = wrap(block(*a))
+             ^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 151, in forward
+    z += self.tri_att_start(
+         ^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 697, in forward
+    x = self._chunk(
+        ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 646, in _chunk
+    return chunk_layer(
+           ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 774, in chunk_layer
+    output_chunk = layer(**chunks)
+                   ^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 468, in forward
+    o = _attention(q, k, v, biases)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 286, in _attention
+    a = torch.matmul(query, key)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.55 GiB is free. Including non-PyTorch memory, this process has 14.91 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 531.50 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-02-21 02:06:54,525 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 101 completed in 49.40s.
+2026-02-21 02:06:54,525 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing seed_090_frame_000_msa_self_template...
+2026-02-21 02:06:56,232 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-02-21 02:07:09,393 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-02-21 02:07:09,395 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence FNLDVDSPAEYSGPEGSYFGFAVDFFVPSASSRMFLLVGAPKANTTQPGIVEGGQVLKCDWSSTRRCQPIEFDATGNRDYAKDDPLEFKSHQWFGASVRSKQDKILACAPLYHWRTEMKQEREPVGTCFLQDGTKTVEYAPCRSQDIDADGQGFCQGGFSIDFTKADRVLLGGPGSFYWQGQLISDQVAEIVSKYDPNVYSIKYNNQLATRTAQAIFDDSYLGYSVAVGDFNGDGIDDFVSGVPRAARTLGMVYIYDGKNMSSLYNFTGEQMAAYFGFSVAATDINGDDYADVFIGAPLFMDRGSDGKLQEVGQVSVSLQRASGDFQTTKLNGFEVFARFGSAIAPLGDLDQDGFNDIAIAAPYGGEDKKGIVYIFNGRSTGLNAVPSQILEGQWAARSMPPSFGYSMKGATDIDKNGYPDLIVGAFGVDRAILYRARPVITVNAGLEVYPSILNQDNKTCSLPGTALKVSCFNVRFCLKADGKGVLPRKLNFQVELLLDKLKQKGAIRRALFLYSRSPSHSKNMTISRGGLMQCEELIAYLRDESEFRDKLTPITIFMEYRLDYRTAADTTGLQPILNQFTPANISRQAHILLDCGEDNVCKPKLEVSVDSDQKKIYIGDDNPLTLIVKAQNQGEGAYEAELIVSIPLQADFIGVVRNNEALARLSCAFKTENQTRQVVCDLGNPMKAGTQLLAGLRFSVHQQSEMDTSVKFDLQIQSSNLFDKVSPVVSHKVDLAVLAAVEIRGVSSPDHIFLPIPNWEHKENPETEEDVGPVVQHIYELRNNGPSSFSKAMLHLQWPYKYNNNTLLYILHYDIDGPMNCTSDMEINPLRIKISSLQTTEKNDTVAGQGERDHLITKRDLALSEGDIHTLGCGVAQCLKIVCQVGRLDRGKSAILYVKSLLWTETFMNKENQNHSYSLKSSASFNVIEFPYKNLPIEDITNSTLVTTNVTWGIQPAPMPV
+2026-02-21 02:07:09,395 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence GPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPD
+2026-02-21 02:07:15,260 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] seed_090_frame_000_msa_self_template [seed:202]: N_asym 2, N_token 1654, N_atom 12791, N_msa 11382
+2026-02-21 02:07:17,010 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:497] ERROR runner.inference: [Rank 0] seed_090_frame_000_msa_self_template failed: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.57 GiB is free. Including non-PyTorch memory, this process has 14.89 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 512.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 472, in infer_predict
+    prediction = runner.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 228, in predict
+    prediction, _, _ = self.model(
+                       ^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 897, in forward
+    pred_dict, log_dict, time_tracker = self.main_inference_loop(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 425, in main_inference_loop
+    return self._main_inference_loop(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 496, in _main_inference_loop
+    s_inputs, s, z = self.get_pairformer_output(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 249, in get_pairformer_output
+    z += self.template_embedder(
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1018, in forward
+    u = u + self.single_template_forward(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1080, in single_template_forward
+    _, v = self.pairformer_stack(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 327, in forward
+    s, z = checkpoint_blocks(
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 866, in checkpoint_blocks
+    return exec(blocks, args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 853, in exec
+    a = wrap(block(*a))
+             ^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 151, in forward
+    z += self.tri_att_start(
+         ^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 697, in forward
+    x = self._chunk(
+        ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 646, in _chunk
+    return chunk_layer(
+           ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 774, in chunk_layer
+    output_chunk = layer(**chunks)
+                   ^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 468, in forward
+    o = _attention(q, k, v, biases)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 286, in _attention
+    a = torch.matmul(query, key)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.57 GiB is free. Including non-PyTorch memory, this process has 14.89 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 512.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-02-21 02:07:17,011 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 202 completed in 22.49s.
+2026-02-21 02:07:17,012 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing seed_090_frame_000_msa_self_template...
+2026-02-21 02:07:18,706 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-02-21 02:07:31,755 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-02-21 02:07:31,756 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence FNLDVDSPAEYSGPEGSYFGFAVDFFVPSASSRMFLLVGAPKANTTQPGIVEGGQVLKCDWSSTRRCQPIEFDATGNRDYAKDDPLEFKSHQWFGASVRSKQDKILACAPLYHWRTEMKQEREPVGTCFLQDGTKTVEYAPCRSQDIDADGQGFCQGGFSIDFTKADRVLLGGPGSFYWQGQLISDQVAEIVSKYDPNVYSIKYNNQLATRTAQAIFDDSYLGYSVAVGDFNGDGIDDFVSGVPRAARTLGMVYIYDGKNMSSLYNFTGEQMAAYFGFSVAATDINGDDYADVFIGAPLFMDRGSDGKLQEVGQVSVSLQRASGDFQTTKLNGFEVFARFGSAIAPLGDLDQDGFNDIAIAAPYGGEDKKGIVYIFNGRSTGLNAVPSQILEGQWAARSMPPSFGYSMKGATDIDKNGYPDLIVGAFGVDRAILYRARPVITVNAGLEVYPSILNQDNKTCSLPGTALKVSCFNVRFCLKADGKGVLPRKLNFQVELLLDKLKQKGAIRRALFLYSRSPSHSKNMTISRGGLMQCEELIAYLRDESEFRDKLTPITIFMEYRLDYRTAADTTGLQPILNQFTPANISRQAHILLDCGEDNVCKPKLEVSVDSDQKKIYIGDDNPLTLIVKAQNQGEGAYEAELIVSIPLQADFIGVVRNNEALARLSCAFKTENQTRQVVCDLGNPMKAGTQLLAGLRFSVHQQSEMDTSVKFDLQIQSSNLFDKVSPVVSHKVDLAVLAAVEIRGVSSPDHIFLPIPNWEHKENPETEEDVGPVVQHIYELRNNGPSSFSKAMLHLQWPYKYNNNTLLYILHYDIDGPMNCTSDMEINPLRIKISSLQTTEKNDTVAGQGERDHLITKRDLALSEGDIHTLGCGVAQCLKIVCQVGRLDRGKSAILYVKSLLWTETFMNKENQNHSYSLKSSASFNVIEFPYKNLPIEDITNSTLVTTNVTWGIQPAPMPV
+2026-02-21 02:07:31,757 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence GPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPD
+2026-02-21 02:07:37,673 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] seed_090_frame_000_msa_self_template [seed:303]: N_asym 2, N_token 1654, N_atom 12791, N_msa 11382
+2026-02-21 02:07:39,382 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:497] ERROR runner.inference: [Rank 0] seed_090_frame_000_msa_self_template failed: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 7.83 GiB is free. Including non-PyTorch memory, this process has 15.62 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 1.23 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 472, in infer_predict
+    prediction = runner.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 228, in predict
+    prediction, _, _ = self.model(
+                       ^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 897, in forward
+    pred_dict, log_dict, time_tracker = self.main_inference_loop(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 425, in main_inference_loop
+    return self._main_inference_loop(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 496, in _main_inference_loop
+    s_inputs, s, z = self.get_pairformer_output(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 249, in get_pairformer_output
+    z += self.template_embedder(
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1018, in forward
+    u = u + self.single_template_forward(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1080, in single_template_forward
+    _, v = self.pairformer_stack(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 327, in forward
+    s, z = checkpoint_blocks(
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 866, in checkpoint_blocks
+    return exec(blocks, args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 853, in exec
+    a = wrap(block(*a))
+             ^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 151, in forward
+    z += self.tri_att_start(
+         ^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 697, in forward
+    x = self._chunk(
+        ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 646, in _chunk
+    return chunk_layer(
+           ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 774, in chunk_layer
+    output_chunk = layer(**chunks)
+                   ^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 468, in forward
+    o = _attention(q, k, v, biases)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 286, in _attention
+    a = torch.matmul(query, key)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 7.83 GiB is free. Including non-PyTorch memory, this process has 15.62 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 1.23 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-02-21 02:07:39,384 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 303 completed in 22.37s.
+2026-02-21 02:07:39,385 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing seed_090_frame_000_msa_self_template...
+2026-02-21 02:07:41,081 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-02-21 02:07:54,233 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-02-21 02:07:54,234 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence FNLDVDSPAEYSGPEGSYFGFAVDFFVPSASSRMFLLVGAPKANTTQPGIVEGGQVLKCDWSSTRRCQPIEFDATGNRDYAKDDPLEFKSHQWFGASVRSKQDKILACAPLYHWRTEMKQEREPVGTCFLQDGTKTVEYAPCRSQDIDADGQGFCQGGFSIDFTKADRVLLGGPGSFYWQGQLISDQVAEIVSKYDPNVYSIKYNNQLATRTAQAIFDDSYLGYSVAVGDFNGDGIDDFVSGVPRAARTLGMVYIYDGKNMSSLYNFTGEQMAAYFGFSVAATDINGDDYADVFIGAPLFMDRGSDGKLQEVGQVSVSLQRASGDFQTTKLNGFEVFARFGSAIAPLGDLDQDGFNDIAIAAPYGGEDKKGIVYIFNGRSTGLNAVPSQILEGQWAARSMPPSFGYSMKGATDIDKNGYPDLIVGAFGVDRAILYRARPVITVNAGLEVYPSILNQDNKTCSLPGTALKVSCFNVRFCLKADGKGVLPRKLNFQVELLLDKLKQKGAIRRALFLYSRSPSHSKNMTISRGGLMQCEELIAYLRDESEFRDKLTPITIFMEYRLDYRTAADTTGLQPILNQFTPANISRQAHILLDCGEDNVCKPKLEVSVDSDQKKIYIGDDNPLTLIVKAQNQGEGAYEAELIVSIPLQADFIGVVRNNEALARLSCAFKTENQTRQVVCDLGNPMKAGTQLLAGLRFSVHQQSEMDTSVKFDLQIQSSNLFDKVSPVVSHKVDLAVLAAVEIRGVSSPDHIFLPIPNWEHKENPETEEDVGPVVQHIYELRNNGPSSFSKAMLHLQWPYKYNNNTLLYILHYDIDGPMNCTSDMEINPLRIKISSLQTTEKNDTVAGQGERDHLITKRDLALSEGDIHTLGCGVAQCLKIVCQVGRLDRGKSAILYVKSLLWTETFMNKENQNHSYSLKSSASFNVIEFPYKNLPIEDITNSTLVTTNVTWGIQPAPMPV
+2026-02-21 02:07:54,235 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence GPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPD
+2026-02-21 02:08:00,141 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] seed_090_frame_000_msa_self_template [seed:404]: N_asym 2, N_token 1654, N_atom 12791, N_msa 11382
+2026-02-21 02:08:01,870 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:497] ERROR runner.inference: [Rank 0] seed_090_frame_000_msa_self_template failed: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.93 GiB is free. Including non-PyTorch memory, this process has 14.52 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 133.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 472, in infer_predict
+    prediction = runner.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 228, in predict
+    prediction, _, _ = self.model(
+                       ^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 897, in forward
+    pred_dict, log_dict, time_tracker = self.main_inference_loop(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 425, in main_inference_loop
+    return self._main_inference_loop(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 496, in _main_inference_loop
+    s_inputs, s, z = self.get_pairformer_output(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 249, in get_pairformer_output
+    z += self.template_embedder(
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1018, in forward
+    u = u + self.single_template_forward(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1080, in single_template_forward
+    _, v = self.pairformer_stack(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 327, in forward
+    s, z = checkpoint_blocks(
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 866, in checkpoint_blocks
+    return exec(blocks, args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 853, in exec
+    a = wrap(block(*a))
+             ^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 151, in forward
+    z += self.tri_att_start(
+         ^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 697, in forward
+    x = self._chunk(
+        ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 646, in _chunk
+    return chunk_layer(
+           ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 774, in chunk_layer
+    output_chunk = layer(**chunks)
+                   ^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 468, in forward
+    o = _attention(q, k, v, biases)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 286, in _attention
+    a = torch.matmul(query, key)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.93 GiB is free. Including non-PyTorch memory, this process has 14.52 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 133.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-02-21 02:08:01,871 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 404 completed in 22.49s.
+2026-02-21 02:08:01,872 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing seed_090_frame_000_msa_self_template...
+2026-02-21 02:08:03,565 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-02-21 02:08:16,858 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-02-21 02:08:16,859 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence FNLDVDSPAEYSGPEGSYFGFAVDFFVPSASSRMFLLVGAPKANTTQPGIVEGGQVLKCDWSSTRRCQPIEFDATGNRDYAKDDPLEFKSHQWFGASVRSKQDKILACAPLYHWRTEMKQEREPVGTCFLQDGTKTVEYAPCRSQDIDADGQGFCQGGFSIDFTKADRVLLGGPGSFYWQGQLISDQVAEIVSKYDPNVYSIKYNNQLATRTAQAIFDDSYLGYSVAVGDFNGDGIDDFVSGVPRAARTLGMVYIYDGKNMSSLYNFTGEQMAAYFGFSVAATDINGDDYADVFIGAPLFMDRGSDGKLQEVGQVSVSLQRASGDFQTTKLNGFEVFARFGSAIAPLGDLDQDGFNDIAIAAPYGGEDKKGIVYIFNGRSTGLNAVPSQILEGQWAARSMPPSFGYSMKGATDIDKNGYPDLIVGAFGVDRAILYRARPVITVNAGLEVYPSILNQDNKTCSLPGTALKVSCFNVRFCLKADGKGVLPRKLNFQVELLLDKLKQKGAIRRALFLYSRSPSHSKNMTISRGGLMQCEELIAYLRDESEFRDKLTPITIFMEYRLDYRTAADTTGLQPILNQFTPANISRQAHILLDCGEDNVCKPKLEVSVDSDQKKIYIGDDNPLTLIVKAQNQGEGAYEAELIVSIPLQADFIGVVRNNEALARLSCAFKTENQTRQVVCDLGNPMKAGTQLLAGLRFSVHQQSEMDTSVKFDLQIQSSNLFDKVSPVVSHKVDLAVLAAVEIRGVSSPDHIFLPIPNWEHKENPETEEDVGPVVQHIYELRNNGPSSFSKAMLHLQWPYKYNNNTLLYILHYDIDGPMNCTSDMEINPLRIKISSLQTTEKNDTVAGQGERDHLITKRDLALSEGDIHTLGCGVAQCLKIVCQVGRLDRGKSAILYVKSLLWTETFMNKENQNHSYSLKSSASFNVIEFPYKNLPIEDITNSTLVTTNVTWGIQPAPMPV
+2026-02-21 02:08:16,860 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence GPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPD
+2026-02-21 02:08:22,780 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] seed_090_frame_000_msa_self_template [seed:505]: N_asym 2, N_token 1654, N_atom 12791, N_msa 11382
+2026-02-21 02:08:24,520 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:497] ERROR runner.inference: [Rank 0] seed_090_frame_000_msa_self_template failed: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.93 GiB is free. Including non-PyTorch memory, this process has 14.52 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 133.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 472, in infer_predict
+    prediction = runner.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 228, in predict
+    prediction, _, _ = self.model(
+                       ^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 897, in forward
+    pred_dict, log_dict, time_tracker = self.main_inference_loop(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 425, in main_inference_loop
+    return self._main_inference_loop(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 496, in _main_inference_loop
+    s_inputs, s, z = self.get_pairformer_output(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 249, in get_pairformer_output
+    z += self.template_embedder(
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1018, in forward
+    u = u + self.single_template_forward(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1080, in single_template_forward
+    _, v = self.pairformer_stack(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 327, in forward
+    s, z = checkpoint_blocks(
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 866, in checkpoint_blocks
+    return exec(blocks, args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 853, in exec
+    a = wrap(block(*a))
+             ^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 151, in forward
+    z += self.tri_att_start(
+         ^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 697, in forward
+    x = self._chunk(
+        ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 646, in _chunk
+    return chunk_layer(
+           ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 774, in chunk_layer
+    output_chunk = layer(**chunks)
+                   ^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 468, in forward
+    o = _attention(q, k, v, biases)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 286, in _attention
+    a = torch.matmul(query, key)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.93 GiB is free. Including non-PyTorch memory, this process has 14.52 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 133.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-02-21 02:08:24,521 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 505 completed in 22.65s.
+2026-02-21 02:08:24,522 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing seed_090_frame_000_msa_self_template...
+2026-02-21 02:08:26,221 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-02-21 02:08:39,326 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-02-21 02:08:39,327 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence FNLDVDSPAEYSGPEGSYFGFAVDFFVPSASSRMFLLVGAPKANTTQPGIVEGGQVLKCDWSSTRRCQPIEFDATGNRDYAKDDPLEFKSHQWFGASVRSKQDKILACAPLYHWRTEMKQEREPVGTCFLQDGTKTVEYAPCRSQDIDADGQGFCQGGFSIDFTKADRVLLGGPGSFYWQGQLISDQVAEIVSKYDPNVYSIKYNNQLATRTAQAIFDDSYLGYSVAVGDFNGDGIDDFVSGVPRAARTLGMVYIYDGKNMSSLYNFTGEQMAAYFGFSVAATDINGDDYADVFIGAPLFMDRGSDGKLQEVGQVSVSLQRASGDFQTTKLNGFEVFARFGSAIAPLGDLDQDGFNDIAIAAPYGGEDKKGIVYIFNGRSTGLNAVPSQILEGQWAARSMPPSFGYSMKGATDIDKNGYPDLIVGAFGVDRAILYRARPVITVNAGLEVYPSILNQDNKTCSLPGTALKVSCFNVRFCLKADGKGVLPRKLNFQVELLLDKLKQKGAIRRALFLYSRSPSHSKNMTISRGGLMQCEELIAYLRDESEFRDKLTPITIFMEYRLDYRTAADTTGLQPILNQFTPANISRQAHILLDCGEDNVCKPKLEVSVDSDQKKIYIGDDNPLTLIVKAQNQGEGAYEAELIVSIPLQADFIGVVRNNEALARLSCAFKTENQTRQVVCDLGNPMKAGTQLLAGLRFSVHQQSEMDTSVKFDLQIQSSNLFDKVSPVVSHKVDLAVLAAVEIRGVSSPDHIFLPIPNWEHKENPETEEDVGPVVQHIYELRNNGPSSFSKAMLHLQWPYKYNNNTLLYILHYDIDGPMNCTSDMEINPLRIKISSLQTTEKNDTVAGQGERDHLITKRDLALSEGDIHTLGCGVAQCLKIVCQVGRLDRGKSAILYVKSLLWTETFMNKENQNHSYSLKSSASFNVIEFPYKNLPIEDITNSTLVTTNVTWGIQPAPMPV
+2026-02-21 02:08:39,328 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence GPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPD
+2026-02-21 02:08:45,258 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] seed_090_frame_000_msa_self_template [seed:606]: N_asym 2, N_token 1654, N_atom 12791, N_msa 11382
+2026-02-21 02:08:46,995 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:497] ERROR runner.inference: [Rank 0] seed_090_frame_000_msa_self_template failed: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.93 GiB is free. Including non-PyTorch memory, this process has 14.52 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 133.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 472, in infer_predict
+    prediction = runner.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 228, in predict
+    prediction, _, _ = self.model(
+                       ^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 897, in forward
+    pred_dict, log_dict, time_tracker = self.main_inference_loop(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 425, in main_inference_loop
+    return self._main_inference_loop(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 496, in _main_inference_loop
+    s_inputs, s, z = self.get_pairformer_output(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 249, in get_pairformer_output
+    z += self.template_embedder(
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1018, in forward
+    u = u + self.single_template_forward(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1080, in single_template_forward
+    _, v = self.pairformer_stack(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 327, in forward
+    s, z = checkpoint_blocks(
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 866, in checkpoint_blocks
+    return exec(blocks, args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 853, in exec
+    a = wrap(block(*a))
+             ^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 151, in forward
+    z += self.tri_att_start(
+         ^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 697, in forward
+    x = self._chunk(
+        ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 646, in _chunk
+    return chunk_layer(
+           ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 774, in chunk_layer
+    output_chunk = layer(**chunks)
+                   ^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 468, in forward
+    o = _attention(q, k, v, biases)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 286, in _attention
+    a = torch.matmul(query, key)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.93 GiB is free. Including non-PyTorch memory, this process has 14.52 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 133.70 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-02-21 02:08:46,996 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 606 completed in 22.47s.
+2026-02-21 02:08:46,997 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing seed_090_frame_000_msa_self_template...
+2026-02-21 02:08:48,699 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-02-21 02:09:01,758 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-02-21 02:09:01,759 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence FNLDVDSPAEYSGPEGSYFGFAVDFFVPSASSRMFLLVGAPKANTTQPGIVEGGQVLKCDWSSTRRCQPIEFDATGNRDYAKDDPLEFKSHQWFGASVRSKQDKILACAPLYHWRTEMKQEREPVGTCFLQDGTKTVEYAPCRSQDIDADGQGFCQGGFSIDFTKADRVLLGGPGSFYWQGQLISDQVAEIVSKYDPNVYSIKYNNQLATRTAQAIFDDSYLGYSVAVGDFNGDGIDDFVSGVPRAARTLGMVYIYDGKNMSSLYNFTGEQMAAYFGFSVAATDINGDDYADVFIGAPLFMDRGSDGKLQEVGQVSVSLQRASGDFQTTKLNGFEVFARFGSAIAPLGDLDQDGFNDIAIAAPYGGEDKKGIVYIFNGRSTGLNAVPSQILEGQWAARSMPPSFGYSMKGATDIDKNGYPDLIVGAFGVDRAILYRARPVITVNAGLEVYPSILNQDNKTCSLPGTALKVSCFNVRFCLKADGKGVLPRKLNFQVELLLDKLKQKGAIRRALFLYSRSPSHSKNMTISRGGLMQCEELIAYLRDESEFRDKLTPITIFMEYRLDYRTAADTTGLQPILNQFTPANISRQAHILLDCGEDNVCKPKLEVSVDSDQKKIYIGDDNPLTLIVKAQNQGEGAYEAELIVSIPLQADFIGVVRNNEALARLSCAFKTENQTRQVVCDLGNPMKAGTQLLAGLRFSVHQQSEMDTSVKFDLQIQSSNLFDKVSPVVSHKVDLAVLAAVEIRGVSSPDHIFLPIPNWEHKENPETEEDVGPVVQHIYELRNNGPSSFSKAMLHLQWPYKYNNNTLLYILHYDIDGPMNCTSDMEINPLRIKISSLQTTEKNDTVAGQGERDHLITKRDLALSEGDIHTLGCGVAQCLKIVCQVGRLDRGKSAILYVKSLLWTETFMNKENQNHSYSLKSSASFNVIEFPYKNLPIEDITNSTLVTTNVTWGIQPAPMPV
+2026-02-21 02:09:01,760 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence GPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPD
+2026-02-21 02:09:07,656 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] seed_090_frame_000_msa_self_template [seed:707]: N_asym 2, N_token 1654, N_atom 12791, N_msa 11382
+2026-02-21 02:09:09,396 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:497] ERROR runner.inference: [Rank 0] seed_090_frame_000_msa_self_template failed: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.30 GiB is free. Including non-PyTorch memory, this process has 15.15 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 781.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 472, in infer_predict
+    prediction = runner.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 228, in predict
+    prediction, _, _ = self.model(
+                       ^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 897, in forward
+    pred_dict, log_dict, time_tracker = self.main_inference_loop(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 425, in main_inference_loop
+    return self._main_inference_loop(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 496, in _main_inference_loop
+    s_inputs, s, z = self.get_pairformer_output(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 249, in get_pairformer_output
+    z += self.template_embedder(
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1018, in forward
+    u = u + self.single_template_forward(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1080, in single_template_forward
+    _, v = self.pairformer_stack(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 327, in forward
+    s, z = checkpoint_blocks(
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 866, in checkpoint_blocks
+    return exec(blocks, args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 853, in exec
+    a = wrap(block(*a))
+             ^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 151, in forward
+    z += self.tri_att_start(
+         ^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 697, in forward
+    x = self._chunk(
+        ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 646, in _chunk
+    return chunk_layer(
+           ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 774, in chunk_layer
+    output_chunk = layer(**chunks)
+                   ^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 468, in forward
+    o = _attention(q, k, v, biases)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 286, in _attention
+    a = torch.matmul(query, key)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.30 GiB is free. Including non-PyTorch memory, this process has 15.15 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 781.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-02-21 02:09:09,397 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 707 completed in 22.40s.
+2026-02-21 02:09:09,398 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing seed_090_frame_000_msa_self_template...
+2026-02-21 02:09:11,099 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-02-21 02:09:24,167 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-02-21 02:09:24,168 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence FNLDVDSPAEYSGPEGSYFGFAVDFFVPSASSRMFLLVGAPKANTTQPGIVEGGQVLKCDWSSTRRCQPIEFDATGNRDYAKDDPLEFKSHQWFGASVRSKQDKILACAPLYHWRTEMKQEREPVGTCFLQDGTKTVEYAPCRSQDIDADGQGFCQGGFSIDFTKADRVLLGGPGSFYWQGQLISDQVAEIVSKYDPNVYSIKYNNQLATRTAQAIFDDSYLGYSVAVGDFNGDGIDDFVSGVPRAARTLGMVYIYDGKNMSSLYNFTGEQMAAYFGFSVAATDINGDDYADVFIGAPLFMDRGSDGKLQEVGQVSVSLQRASGDFQTTKLNGFEVFARFGSAIAPLGDLDQDGFNDIAIAAPYGGEDKKGIVYIFNGRSTGLNAVPSQILEGQWAARSMPPSFGYSMKGATDIDKNGYPDLIVGAFGVDRAILYRARPVITVNAGLEVYPSILNQDNKTCSLPGTALKVSCFNVRFCLKADGKGVLPRKLNFQVELLLDKLKQKGAIRRALFLYSRSPSHSKNMTISRGGLMQCEELIAYLRDESEFRDKLTPITIFMEYRLDYRTAADTTGLQPILNQFTPANISRQAHILLDCGEDNVCKPKLEVSVDSDQKKIYIGDDNPLTLIVKAQNQGEGAYEAELIVSIPLQADFIGVVRNNEALARLSCAFKTENQTRQVVCDLGNPMKAGTQLLAGLRFSVHQQSEMDTSVKFDLQIQSSNLFDKVSPVVSHKVDLAVLAAVEIRGVSSPDHIFLPIPNWEHKENPETEEDVGPVVQHIYELRNNGPSSFSKAMLHLQWPYKYNNNTLLYILHYDIDGPMNCTSDMEINPLRIKISSLQTTEKNDTVAGQGERDHLITKRDLALSEGDIHTLGCGVAQCLKIVCQVGRLDRGKSAILYVKSLLWTETFMNKENQNHSYSLKSSASFNVIEFPYKNLPIEDITNSTLVTTNVTWGIQPAPMPV
+2026-02-21 02:09:24,169 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence GPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPD
+2026-02-21 02:09:30,084 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] seed_090_frame_000_msa_self_template [seed:808]: N_asym 2, N_token 1654, N_atom 12791, N_msa 11382
+2026-02-21 02:09:31,823 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:497] ERROR runner.inference: [Rank 0] seed_090_frame_000_msa_self_template failed: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.30 GiB is free. Including non-PyTorch memory, this process has 15.15 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 782.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 472, in infer_predict
+    prediction = runner.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 228, in predict
+    prediction, _, _ = self.model(
+                       ^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 897, in forward
+    pred_dict, log_dict, time_tracker = self.main_inference_loop(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 425, in main_inference_loop
+    return self._main_inference_loop(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 496, in _main_inference_loop
+    s_inputs, s, z = self.get_pairformer_output(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 249, in get_pairformer_output
+    z += self.template_embedder(
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1018, in forward
+    u = u + self.single_template_forward(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1080, in single_template_forward
+    _, v = self.pairformer_stack(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 327, in forward
+    s, z = checkpoint_blocks(
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 866, in checkpoint_blocks
+    return exec(blocks, args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 853, in exec
+    a = wrap(block(*a))
+             ^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 151, in forward
+    z += self.tri_att_start(
+         ^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 697, in forward
+    x = self._chunk(
+        ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 646, in _chunk
+    return chunk_layer(
+           ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 774, in chunk_layer
+    output_chunk = layer(**chunks)
+                   ^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 468, in forward
+    o = _attention(q, k, v, biases)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 286, in _attention
+    a = torch.matmul(query, key)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 8.30 GiB is free. Including non-PyTorch memory, this process has 15.15 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 782.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-02-21 02:09:31,825 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 808 completed in 22.43s.
+2026-02-21 02:09:31,826 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing seed_090_frame_000_msa_self_template...
+2026-02-21 02:09:33,530 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-02-21 02:09:46,692 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-02-21 02:09:46,693 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence FNLDVDSPAEYSGPEGSYFGFAVDFFVPSASSRMFLLVGAPKANTTQPGIVEGGQVLKCDWSSTRRCQPIEFDATGNRDYAKDDPLEFKSHQWFGASVRSKQDKILACAPLYHWRTEMKQEREPVGTCFLQDGTKTVEYAPCRSQDIDADGQGFCQGGFSIDFTKADRVLLGGPGSFYWQGQLISDQVAEIVSKYDPNVYSIKYNNQLATRTAQAIFDDSYLGYSVAVGDFNGDGIDDFVSGVPRAARTLGMVYIYDGKNMSSLYNFTGEQMAAYFGFSVAATDINGDDYADVFIGAPLFMDRGSDGKLQEVGQVSVSLQRASGDFQTTKLNGFEVFARFGSAIAPLGDLDQDGFNDIAIAAPYGGEDKKGIVYIFNGRSTGLNAVPSQILEGQWAARSMPPSFGYSMKGATDIDKNGYPDLIVGAFGVDRAILYRARPVITVNAGLEVYPSILNQDNKTCSLPGTALKVSCFNVRFCLKADGKGVLPRKLNFQVELLLDKLKQKGAIRRALFLYSRSPSHSKNMTISRGGLMQCEELIAYLRDESEFRDKLTPITIFMEYRLDYRTAADTTGLQPILNQFTPANISRQAHILLDCGEDNVCKPKLEVSVDSDQKKIYIGDDNPLTLIVKAQNQGEGAYEAELIVSIPLQADFIGVVRNNEALARLSCAFKTENQTRQVVCDLGNPMKAGTQLLAGLRFSVHQQSEMDTSVKFDLQIQSSNLFDKVSPVVSHKVDLAVLAAVEIRGVSSPDHIFLPIPNWEHKENPETEEDVGPVVQHIYELRNNGPSSFSKAMLHLQWPYKYNNNTLLYILHYDIDGPMNCTSDMEINPLRIKISSLQTTEKNDTVAGQGERDHLITKRDLALSEGDIHTLGCGVAQCLKIVCQVGRLDRGKSAILYVKSLLWTETFMNKENQNHSYSLKSSASFNVIEFPYKNLPIEDITNSTLVTTNVTWGIQPAPMPV
+2026-02-21 02:09:46,694 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence GPNICTTRGVSSCQQCLAVSPMCAWCSDEALPLGSPRCDLKENLLKDNCAPESIEFPVSEARVLEDRPLSDKGSGDSSQVTQVSPQRIALRLRPDDSKNFSIQVRQVEDYPVDIYYLMDLSYSMKDDLWSIQNLGTKLATQMRKLTSNLRIGFGAFVDKPVSPYMYISPPEALENPCYDMKTTCLPMFGYKHVLTLTDQVTRFNEEVKKQSVSRNRDAPEGGFDAIMQATVCDEKIGWRNDASHLLVFTTDAKTHIALDGRLAGIVQPNDGQCHVGSDNHYSASTTMDYPSLGLMTEKLSQKNINLIFAVTENVVNLYQNYSELIPGTTVGVLSMDSSNVLQLIVDAYGKIRSKVELEVRDLPEELSLSFNATCLNNEVIPGLKSCMGLKIGDTVSFSIEAKVRGCPQEKEKSFTIKPVGFKDSLIVQVTFDCDCACQAQAEPNSHRCNNGNGTFECGVCRCGPGWLGSQCECSEEDYRPSQQDECSPREGQPVCSQRGECLCGQCVCHSSDFGKITGKYCECDDFSCVRYKGEMCSGHGQCSCGDCLCDSDWTGYYCNCTTRTDTCMSSNGLLCSGRGKCECGSCVCIQPGSYGDTCEKCPTCPDACTFKKECVECKKFDRGALHDENTCNRYCRDEIESVKELKDTGKDAVNCTYKNEDDCVVRFQYYEDSSGKSILYVVEEPECPKGPD
+2026-02-21 02:09:52,637 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] seed_090_frame_000_msa_self_template [seed:909]: N_asym 2, N_token 1654, N_atom 12791, N_msa 11382
+2026-02-21 02:09:54,347 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:497] ERROR runner.inference: [Rank 0] seed_090_frame_000_msa_self_template failed: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 7.65 GiB is free. Including non-PyTorch memory, this process has 15.81 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 1.42 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 472, in infer_predict
+    prediction = runner.predict(data)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py", line 228, in predict
+    prediction, _, _ = self.model(
+                       ^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 897, in forward
+    pred_dict, log_dict, time_tracker = self.main_inference_loop(
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 425, in main_inference_loop
+    return self._main_inference_loop(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 496, in _main_inference_loop
+    s_inputs, s, z = self.get_pairformer_output(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/protenix.py", line 249, in get_pairformer_output
+    z += self.template_embedder(
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1018, in forward
+    u = u + self.single_template_forward(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 1080, in single_template_forward
+    _, v = self.pairformer_stack(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 327, in forward
+    s, z = checkpoint_blocks(
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 866, in checkpoint_blocks
+    return exec(blocks, args)
+           ^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 853, in exec
+    a = wrap(block(*a))
+             ^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/modules/pairformer.py", line 151, in forward
+    z += self.tri_att_start(
+         ^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 697, in forward
+    x = self._chunk(
+        ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/triangular.py", line 646, in _chunk
+    return chunk_layer(
+           ^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/utils.py", line 774, in chunk_layer
+    output_chunk = layer(**chunks)
+                   ^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 468, in forward
+    o = _attention(q, k, v, biases)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/model/triangular/layers.py", line 286, in _attention
+    a = torch.matmul(query, key)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 10.44 GiB. GPU 0 has a total capacity of 23.46 GiB of which 7.65 GiB is free. Including non-PyTorch memory, this process has 15.81 GiB memory in use. Of the allocated memory 14.20 GiB is allocated by PyTorch, and 1.42 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2026-02-21 02:09:54,349 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 909 completed in 22.52s.
+2026-02-21 02:09:54,350 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:518] INFO runner.inference: [Rank 0] Job completed in 229.36s.
+100%|██████████| 1/1 [03:51<00:00, 231.62s/it]100%|██████████| 1/1 [03:51<00:00, 231.62s/it]
