@@ -102,19 +102,63 @@ def parse_pdb_sequences(pdb_path: Path) -> Dict[str, str]:
     return {chain: "".join(seq) for chain, seq in chains.items()}
 
 
-def convert_pdb_to_mmcif(pdb_path: Path, cif_path: Path) -> None:
-    """Convert PDB to mmCIF using gemmi."""
+def resolve_mkdssp_binary(explicit_path: str) -> str | None:
+    if explicit_path:
+        path = Path(explicit_path)
+        if not path.exists():
+            raise FileNotFoundError(
+                f"--mkdssp_binary_path was provided but does not exist: {explicit_path}"
+            )
+        return str(path.resolve())
+    discovered = shutil.which("mkdssp")
+    return discovered
+
+
+def convert_pdb_to_mmcif(
+    pdb_path: Path,
+    cif_path: Path,
+    converter: str,
+    mkdssp_binary_path: str,
+) -> str:
+    """Convert PDB to mmCIF. Prefer mkdssp for Protenix template compatibility."""
+    cif_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if converter not in {"auto", "mkdssp", "gemmi"}:
+        raise ValueError(f"Unsupported converter: {converter}")
+
+    if converter in {"auto", "mkdssp"}:
+        mkdssp = resolve_mkdssp_binary(mkdssp_binary_path)
+        if mkdssp is not None:
+            cmd = [mkdssp, "--output-format", "mmcif", str(pdb_path), str(cif_path)]
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            if result.returncode == 0 and cif_path.exists() and cif_path.stat().st_size > 0:
+                return "mkdssp"
+            if converter == "mkdssp":
+                stderr = result.stderr.strip() or "(no stderr)"
+                raise RuntimeError(
+                    "mkdssp conversion failed.\n"
+                    f"Command: {' '.join(cmd)}\n"
+                    f"stderr: {stderr}"
+                )
+        elif converter == "mkdssp":
+            raise RuntimeError(
+                "--template_converter mkdssp was requested but mkdssp was not found in PATH.\n"
+                "Provide --mkdssp_binary_path /path/to/mkdssp."
+            )
+
     try:
         import gemmi  # type: ignore
     except Exception as exc:  # pragma: no cover - runtime dependency
         raise RuntimeError(
-            "gemmi is required to convert PDB -> mmCIF.\n"
-            "Install with: pip install gemmi"
+            "PDB->mmCIF conversion failed: mkdssp unavailable/failed and gemmi not installed.\n"
+            "Install one of:\n"
+            "  1) mkdssp (preferred)\n"
+            "  2) gemmi (`pip install gemmi`)"
         ) from exc
 
     structure = gemmi.read_structure(str(pdb_path))
-    cif_path.parent.mkdir(parents=True, exist_ok=True)
     structure.make_mmcif_document().write_file(str(cif_path))
+    return "gemmi"
 
 
 def normalize_template_entry_id(value: str) -> str:
@@ -148,10 +192,19 @@ def write_self_template_a3m_files(
                 f"Chain '{chain_id}' not found in parsed PDB chains. Available: {available}"
             )
         seq = chain_to_seq[chain_id]
-        # Protenix parse_a3m expects template hit header: ENTRY_CHAIN/start-end.
-        hit_header = f">{template_entry_id}_{chain_id}/1-{len(seq)}"
+        # Some Protenix builds parse ENTRY_CHAIN while others parse ENTRY_CHAIN/start-end.
+        # Emit both to maximize compatibility with the installed template parser.
+        hit_header_plain = f">{template_entry_id}_{chain_id}"
+        hit_header_with_range = f">{template_entry_id}_{chain_id}/1-{len(seq)}"
         path = output_dir / f"{template_entry_id}_{chain_id}.a3m"
-        path.write_text(f">query\n{seq}\n{hit_header}\n{seq}\n", encoding="utf-8")
+        path.write_text(
+            (
+                f">query\n{seq}\n"
+                f"{hit_header_plain}\n{seq}\n"
+                f"{hit_header_with_range}\n{seq}\n"
+            ),
+            encoding="utf-8",
+        )
         out[chain_id] = path.resolve()
 
     return out
@@ -359,7 +412,7 @@ def parse_args() -> argparse.Namespace:
         default="s090",
         help=(
             "Template entry ID used in generated .a3m hit headers (ENTRY_CHAIN/start-end). "
-            "Example: s090 -> mmcif/s0/s090.cif.gz"
+            "Example: s090 -> mmcif/09/s090.cif.gz"
         ),
     )
     parser.add_argument(
@@ -392,6 +445,25 @@ def parse_args() -> argparse.Namespace:
         "--no_convert_template",
         action="store_true",
         help="Skip PDB->mmCIF conversion and use existing --template_cif file.",
+    )
+    parser.add_argument(
+        "--template_converter",
+        type=str,
+        default="auto",
+        choices=("auto", "mkdssp", "gemmi"),
+        help=(
+            "PDB->mmCIF converter. `auto` prefers mkdssp (recommended by Protenix maintainers) "
+            "and falls back to gemmi."
+        ),
+    )
+    parser.add_argument(
+        "--mkdssp_binary_path",
+        type=str,
+        default="",
+        help=(
+            "Optional explicit path to mkdssp binary used when --template_converter "
+            "is auto/mkdssp."
+        ),
     )
     parser.add_argument(
         "--model_name",
@@ -539,10 +611,16 @@ def main() -> int:
     needs_template_cif = (
         args.template_json_mode == "legacy_templates" or args.register_template_mmcif
     )
+    template_converter_used: str | None = None
     if needs_template_cif:
         if not args.no_convert_template:
             print(f"\nConverting template PDB -> mmCIF: {input_pdb} -> {template_cif}")
-            convert_pdb_to_mmcif(input_pdb, template_cif)
+            template_converter_used = convert_pdb_to_mmcif(
+                pdb_path=input_pdb,
+                cif_path=template_cif,
+                converter=args.template_converter,
+                mkdssp_binary_path=args.mkdssp_binary_path,
+            )
         elif not template_cif.exists():
             raise FileNotFoundError(
                 f"--no_convert_template was set, but template CIF does not exist: {template_cif}"
@@ -609,6 +687,8 @@ def main() -> int:
     print(f"  MSA-only:      {msa_only_json}")
     print(f"  Self-template: {self_template_json}")
     print(f"  Template CIF:  {template_cif if needs_template_cif else '(not required)'}")
+    if template_converter_used is not None:
+        print(f"  Template converter: {template_converter_used}")
     print(f"  Template mode: {args.template_json_mode}")
     if template_paths_by_chain:
         print("  Template .a3m:")

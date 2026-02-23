@@ -49,6 +49,9 @@ if [ -z "$KALIGN_BIN" ]; then
     exit 1
 fi
 
+# mkdssp is preferred for PDB->mmCIF conversion when building custom templates.
+MKDSSP_BIN=$(which mkdssp 2>/dev/null || true)
+
 # Verify critical files exist
 for f in "$SCRIPT" "$INPUT_PDB"; do
     if [ ! -f "$f" ]; then
@@ -134,23 +137,32 @@ echo "PROTENIX_ROOT_DIR: $PROTENIX_ROOT_DIR"
 echo "mmcif source:  $MMCIF_SOURCE_DIR"
 echo "mmcif target:  $MMCIF_TARGET_DIR"
 echo "kalign:        $KALIGN_BIN"
+echo "mkdssp:       ${MKDSSP_BIN:-not found (workflow will fall back to gemmi)}"
 echo "========================================="
 
-srun python "$SCRIPT" \
-    --input_pdb "$INPUT_PDB" \
-    --chain_order "$CHAIN_ORDER" \
-    --msa_root "$MSA_ROOT" \
-    --workflow_dir "$WORKFLOW_DIR" \
-    --template_cif "$TEMPLATE_CIF" \
-    --template_json_mode templatesPath \
-    --template_entry_id s090 \
-    --register_template_mmcif \
-    --template_mmcif_dir "$MMCIF_TARGET_DIR" \
-    --seeds 101,202,303,404,505,606,707,808,909 \
-    --samples_per_seed 5 \
-    --dtype bf16 \
-    --kalign_binary_path "$KALIGN_BIN" \
-    --run --run_template_only
+WORKFLOW_ARGS=(
+    --input_pdb "$INPUT_PDB"
+    --chain_order "$CHAIN_ORDER"
+    --msa_root "$MSA_ROOT"
+    --workflow_dir "$WORKFLOW_DIR"
+    --template_cif "$TEMPLATE_CIF"
+    --template_converter auto
+    --template_json_mode templatesPath
+    --template_entry_id s090
+    --register_template_mmcif
+    --template_mmcif_dir "$MMCIF_TARGET_DIR"
+    --seeds 101,202,303,404,505,606,707,808,909
+    --samples_per_seed 5
+    --dtype bf16
+    --kalign_binary_path "$KALIGN_BIN"
+    --run
+    --run_template_only
+)
+if [ -n "$MKDSSP_BIN" ]; then
+    WORKFLOW_ARGS+=(--mkdssp_binary_path "$MKDSSP_BIN")
+fi
+
+srun python "$SCRIPT" "${WORKFLOW_ARGS[@]}"
 
 RC=$?
 if [ $RC -ne 0 ]; then
@@ -165,6 +177,16 @@ if ! find "$PRED_ROOT" -type f -name '*.cif' -print -quit | grep -q .; then
     echo "ERROR: No prediction .cif files found under: $PRED_ROOT"
     echo "Check stderr for template/mmcif dependency failures."
     exit 2
+fi
+
+# Hard-fail if template-enabled run never resolved any template hits.
+ERR_LOG="$HOME/scratch/conformers/logs/protenix_template_${SLURM_JOB_ID}.err"
+if [ -f "$ERR_LOG" ]; then
+    if grep -Eq "Found 0 templates for sequence" "$ERR_LOG" && ! grep -Eq "Found [1-9][0-9]* templates for sequence" "$ERR_LOG"; then
+        echo "ERROR: Protenix resolved zero templates for all chains (see $ERR_LOG)."
+        echo "Most common causes: incompatible template mmCIF conversion or template header format."
+        exit 3
+    fi
 fi
 
 echo "Done. Exit code: $RC"
