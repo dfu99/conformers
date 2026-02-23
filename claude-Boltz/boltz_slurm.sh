@@ -5,10 +5,11 @@
 # Install: pip install boltz
 
 #SBATCH --job-name=boltz_integrin
-#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/logs/boltz_integrin_%j.out
-#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/logs/boltz_integrin_%j.err
+#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/boltz_integrin_%j.out
+#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/boltz_integrin_%j.err
 #SBATCH -A gts-yke8
-#SBATCH -N1 --gres=gpu:RTX_6000:1
+#SBATCH -N1 --gres=gpu:A100:1
+#SBATCH -C A100-80GB
 #SBATCH --mem=64G
 #SBATCH --time=48:00:00
 #SBATCH --mail-type=END,FAIL
@@ -21,7 +22,7 @@ module load python/3.12
 source ~/scratch/venv_boltz/bin/activate
 
 # --- Paths ---
-PROTENIX_ROOT="$HOME/scratch/Protenix"
+PROTENIX_ROOT="$HOME/scratch/conformers"
 SCRIPT="${PROTENIX_ROOT}/claude-Boltz/boltz_workflow.py"
 INPUT_PDB="${PROTENIX_ROOT}/data/template_example/seed_090_frame_000.pdb"
 WORKFLOW_DIR="${PROTENIX_ROOT}/data/boltz_outputs"
