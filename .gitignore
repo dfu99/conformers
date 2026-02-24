@@ -4,8 +4,10 @@ __pycache__/
 *$py.class
 
 # 
-data/
 mmcif/
+checkpoint/
+common/
+data/
 
 # C extensions
 *.so
