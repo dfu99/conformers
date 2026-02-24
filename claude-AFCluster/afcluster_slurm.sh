@@ -7,10 +7,11 @@
 #   bash install_colabfold.sh ~/scratch/localcolabfold
 
 #SBATCH --job-name=afcluster_integrin
-#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/logs/afcluster_integrin_%j.out
-#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/logs/afcluster_integrin_%j.err
+#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/afcluster_integrin_%j.out
+#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/afcluster_integrin_%j.err
 #SBATCH -A gts-yke8
-#SBATCH -N1 --gres=gpu:RTX_6000:1
+#SBATCH -N1 --gres=gpu:A100:1
+#SBATCH -C A100-80GB
 #SBATCH --mem=64G
 #SBATCH --time=48:00:00
 #SBATCH --mail-type=END,FAIL
@@ -26,7 +27,7 @@ source ~/scratch/venv_protenix/bin/activate
 export PATH="$HOME/scratch/localcolabfold/colabfold-conda/bin:$PATH"
 
 # --- Paths ---
-PROTENIX_ROOT="$HOME/scratch/Protenix"
+PROTENIX_ROOT="$HOME/scratch/conformers"
 SCRIPT="${PROTENIX_ROOT}/claude-AFCluster/afcluster_workflow.py"
 INPUT_PDB="${PROTENIX_ROOT}/data/template_example/seed_090_frame_000.pdb"
 # MSA root with per-chain subdirs (0/non_pairing.a3m, 1/non_pairing.a3m, ...)

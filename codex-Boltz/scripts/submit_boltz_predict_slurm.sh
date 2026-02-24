@@ -1,21 +1,24 @@
 #!/bin/bash
 #SBATCH --job-name=boltz_sweep
-#SBATCH --output=%x_%j.out
-#SBATCH --error=%x_%j.err
-#SBATCH --gres=gpu:1
-#SBATCH --cpus-per-task=8
+#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/boltz_sweep_%j.out
+#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/boltz_sweep_%j.err
+#SBATCH -A gts-yke8
+#SBATCH -N1 --gres=gpu:A100:1
+#SBATCH -C A100-80GB
 #SBATCH --mem=64G
 #SBATCH --time=24:00:00
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=daniel.fu@emory.edu
 
 set -euo pipefail
 
-# Edit these paths for your cluster.
-ROOT="${ROOT:-$HOME/scratch/Protenix/codex-Boltz}"
-SEQUENCE_FILE="${SEQUENCE_FILE:-$ROOT/../data/sequences_updated}"
-TEMPLATE_CIF="${TEMPLATE_CIF:-$ROOT/../data/template_example/seed_090_frame_000.cif}"
-MSA_A="${MSA_A:-$ROOT/../data/outputs/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/msa/0/non_pairing.a3m}"
-MSA_B="${MSA_B:-$ROOT/../data/outputs/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/msa/1/non_pairing.a3m}"
-OUTDIR="${OUTDIR:-$ROOT/runs/slurm_boltz_${SLURM_JOB_ID}}"
+# Defaults aligned with scratch/conformers layout used by Protenix jobs.
+ROOT="${ROOT:-$HOME/scratch/conformers/codex-Boltz}"
+SEQUENCE_FILE="${SEQUENCE_FILE:-$HOME/scratch/conformers/data/sequences_updated}"
+TEMPLATE_CIF="${TEMPLATE_CIF:-$HOME/scratch/conformers/data/template_example/seed_090_frame_000.cif}"
+MSA_A="${MSA_A:-$HOME/scratch/conformers/data/seed_090_frame_000/msa/0/non_pairing.a3m}"
+MSA_B="${MSA_B:-$HOME/scratch/conformers/data/seed_090_frame_000/msa/1/non_pairing.a3m}"
+OUTDIR="${OUTDIR:-$HOME/scratch/conformers/data/boltz_outputs/slurm_boltz_${SLURM_JOB_ID}}"
 
 echo "ROOT=$ROOT"
 echo "OUTDIR=$OUTDIR"
