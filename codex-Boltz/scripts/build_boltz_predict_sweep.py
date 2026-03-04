@@ -61,6 +61,14 @@ def main() -> int:
         default="0.60,0.75,0.90",
         help="Comma-separated template force thresholds for force_template mode.",
     )
+    parser.add_argument(
+        "--extended-only",
+        action="store_true",
+        help=(
+            "Generate only template-force jobs (skip baseline, empty-MSA control, and soft template) "
+            "to focus purely on extended-state search."
+        ),
+    )
     args = parser.parse_args()
 
     seq_a = read_seq(args.chain_a_seq_file)
@@ -74,8 +82,13 @@ def main() -> int:
     template_cif = Path(args.template_cif) if has_template else None
     if template_cif is not None and not template_cif.exists():
         raise FileNotFoundError(f"Template CIF not found: {template_cif}")
+    if args.extended_only and template_cif is None:
+        raise ValueError("--extended-only requires --template-cif.")
 
     thresholds = parse_thresholds(args.force_thresholds)
+    if args.extended_only and not thresholds:
+        raise ValueError("--extended-only requires at least one --force-thresholds value.")
+
     manifest_path = outdir / "jobs_manifest.tsv"
     job_count = 0
 
@@ -83,62 +96,64 @@ def main() -> int:
         writer = csv.writer(handle, delimiter="\t")
         writer.writerow(["job_name", "mode", "yaml_path"])
 
-        # Baseline with user-provided MSA paths (or empty).
-        baseline_name = f"{args.job_prefix}_msa_baseline"
-        baseline_doc = {
-            "version": 1,
-            "sequences": [
-                {"protein": {"id": "A", "sequence": seq_a, "msa": msa_a}},
-                {"protein": {"id": "B", "sequence": seq_b, "msa": msa_b}},
-            ],
-        }
-        baseline_yaml = outdir / f"{baseline_name}.yaml"
-        write_yaml(baseline_yaml, baseline_doc)
-        writer.writerow([baseline_name, "msa_baseline", baseline_yaml])
-        job_count += 1
-
-        # No-MSA control.
-        no_msa_name = f"{args.job_prefix}_empty_msa_control"
-        no_msa_doc = {
-            "version": 1,
-            "sequences": [
-                {"protein": {"id": "A", "sequence": seq_a, "msa": "empty"}},
-                {"protein": {"id": "B", "sequence": seq_b, "msa": "empty"}},
-            ],
-        }
-        no_msa_yaml = outdir / f"{no_msa_name}.yaml"
-        write_yaml(no_msa_yaml, no_msa_doc)
-        writer.writerow([no_msa_name, "empty_msa_control", no_msa_yaml])
-        job_count += 1
-
-        if template_cif is not None:
-            # Soft template guidance.
-            soft_name = f"{args.job_prefix}_template_soft"
-            soft_doc = {
+        if not args.extended_only:
+            # Baseline with user-provided MSA paths (or empty).
+            baseline_name = f"{args.job_prefix}_msa_baseline"
+            baseline_doc = {
                 "version": 1,
                 "sequences": [
-                    {
-                        "protein": {
-                            "id": "A",
-                            "sequence": seq_a,
-                            "msa": msa_a,
-                            "templates": build_templates(template_cif, "A", force=False, threshold=None),
-                        }
-                    },
-                    {
-                        "protein": {
-                            "id": "B",
-                            "sequence": seq_b,
-                            "msa": msa_b,
-                            "templates": build_templates(template_cif, "B", force=False, threshold=None),
-                        }
-                    },
+                    {"protein": {"id": "A", "sequence": seq_a, "msa": msa_a}},
+                    {"protein": {"id": "B", "sequence": seq_b, "msa": msa_b}},
                 ],
             }
-            soft_yaml = outdir / f"{soft_name}.yaml"
-            write_yaml(soft_yaml, soft_doc)
-            writer.writerow([soft_name, "template_soft", soft_yaml])
+            baseline_yaml = outdir / f"{baseline_name}.yaml"
+            write_yaml(baseline_yaml, baseline_doc)
+            writer.writerow([baseline_name, "msa_baseline", baseline_yaml])
             job_count += 1
+
+            # No-MSA control.
+            no_msa_name = f"{args.job_prefix}_empty_msa_control"
+            no_msa_doc = {
+                "version": 1,
+                "sequences": [
+                    {"protein": {"id": "A", "sequence": seq_a, "msa": "empty"}},
+                    {"protein": {"id": "B", "sequence": seq_b, "msa": "empty"}},
+                ],
+            }
+            no_msa_yaml = outdir / f"{no_msa_name}.yaml"
+            write_yaml(no_msa_yaml, no_msa_doc)
+            writer.writerow([no_msa_name, "empty_msa_control", no_msa_yaml])
+            job_count += 1
+
+        if template_cif is not None:
+            if not args.extended_only:
+                # Soft template guidance.
+                soft_name = f"{args.job_prefix}_template_soft"
+                soft_doc = {
+                    "version": 1,
+                    "sequences": [
+                        {
+                            "protein": {
+                                "id": "A",
+                                "sequence": seq_a,
+                                "msa": msa_a,
+                                "templates": build_templates(template_cif, "A", force=False, threshold=None),
+                            }
+                        },
+                        {
+                            "protein": {
+                                "id": "B",
+                                "sequence": seq_b,
+                                "msa": msa_b,
+                                "templates": build_templates(template_cif, "B", force=False, threshold=None),
+                            }
+                        },
+                    ],
+                }
+                soft_yaml = outdir / f"{soft_name}.yaml"
+                write_yaml(soft_yaml, soft_doc)
+                writer.writerow([soft_name, "template_soft", soft_yaml])
+                job_count += 1
 
             for thr in thresholds:
                 force_name = f"{args.job_prefix}_template_force_{thr:.2f}".replace(".", "p")
