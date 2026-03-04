@@ -353,7 +353,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--input_pdb",
         type=Path,
-        default=Path("data/template_example/seed_090_frame_000.pdb"),
+        default=Path("data/avb3/template_example/seed_090_frame_000.pdb"),
         help="Starting PDB used for sequence extraction and self-template construction.",
     )
     parser.add_argument(
@@ -371,14 +371,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--workflow_dir",
         type=Path,
-        default=Path("data/template_example/workflow_outputs"),
+        default=Path("data/runs/avb3/protenix_template/workflow_outputs"),
         help="Directory where generated inputs and outputs are stored.",
     )
     parser.add_argument(
         "--msa_root",
         type=Path,
         default=Path(
-            "/content/drive/MyDrive/colab_cache/afmfold-data/AVB3/seed_090_frame_000/msa"
+            "data/avb3/template_example/msa"
         ),
         help=(
             "Root folder containing per-chain MSA subfolders "
@@ -393,7 +393,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--template_cif",
         type=Path,
-        default=Path("data/template_example/seed_090_frame_000.cif"),
+        default=Path("data/avb3/template_example/seed_090_frame_000.cif"),
         help="Path for generated mmCIF self-template.",
     )
     parser.add_argument(

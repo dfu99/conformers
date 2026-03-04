@@ -3,8 +3,8 @@
 # Runs Protenix inference with a self-template to bias toward extended integrin conformation.
 
 #SBATCH --job-name=protenix_template
-#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix_template_%j.out
-#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix_template_%j.err
+#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-avb3/protenix_template_%j.out
+#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-avb3/protenix_template_%j.err
 #SBATCH -A gts-yke8
 #SBATCH -N1 --gres=gpu:A100:1
 #SBATCH -C A100-80GB
@@ -17,16 +17,22 @@
 module load cuda
 module load python/3.12
 
-# Activate virtual environment (adjust if you have a protenix-specific venv)
-source ~/scratch/venv_protenix/bin/activate
+# Activate Protenix environment.
+PROTENIX_VENV="${PROTENIX_VENV:-$HOME/scratch/venv_protenix}"
+if [ ! -f "$PROTENIX_VENV/bin/activate" ]; then
+    echo "ERROR: Protenix venv not found: $PROTENIX_VENV"
+    echo "Set PROTENIX_VENV to your Protenix environment path."
+    exit 1
+fi
+source "$PROTENIX_VENV/bin/activate"
 
-# --- Paths (adjust as needed) ---
-PROTENIX_ROOT="$HOME/scratch/conformers"
-SCRIPT="${PROTENIX_ROOT}/scripts/template_self_sampling_workflow.py"
-INPUT_PDB="${PROTENIX_ROOT}/data/template_example/seed_090_frame_000.pdb"
-MSA_ROOT="$HOME/scratch/conformers/data/seed_090_frame_000/msa"
-WORKFLOW_DIR="${PROTENIX_ROOT}/data/template_example/workflow_outputs"
-TEMPLATE_CIF="${PROTENIX_ROOT}/data/template_example/seed_090_frame_000.cif"
+# --- Paths (AVB3 stream only) ---
+PROTENIX_ROOT="${PROTENIX_ROOT:-$HOME/scratch/conformers}"
+SCRIPT="${PROTENIX_ROOT}/pipelines/protenix-avb3-template/scripts/template_self_sampling_workflow.py"
+INPUT_PDB="${INPUT_PDB:-$PROTENIX_ROOT/data/avb3/template_example/seed_090_frame_000.pdb}"
+MSA_ROOT="${MSA_ROOT:-$PROTENIX_ROOT/data/avb3/template_example/msa}"
+WORKFLOW_DIR="${WORKFLOW_DIR:-$PROTENIX_ROOT/data/runs/avb3/protenix_template/workflow_outputs}"
+TEMPLATE_CIF="${TEMPLATE_CIF:-$PROTENIX_ROOT/data/avb3/template_example/seed_090_frame_000.cif}"
 # Expected chain order for integrin alpha/beta input.
 # Override at submit time if needed, e.g.:
 #   CHAIN_ORDER=A sbatch scripts/protenix_template_slurm.sh
@@ -180,7 +186,7 @@ if ! find "$PRED_ROOT" -type f -name '*.cif' -print -quit | grep -q .; then
 fi
 
 # Hard-fail if template-enabled run never resolved any template hits.
-ERR_LOG="$HOME/scratch/conformers/logs/protenix_template_${SLURM_JOB_ID}.err"
+ERR_LOG="$HOME/scratch/conformers/logs/protenix-avb3/protenix_template_${SLURM_JOB_ID}.err"
 if [ -f "$ERR_LOG" ]; then
     if grep -Eq "Found 0 templates for sequence" "$ERR_LOG" && ! grep -Eq "Found [1-9][0-9]* templates for sequence" "$ERR_LOG"; then
         echo "ERROR: Protenix resolved zero templates for all chains (see $ERR_LOG)."

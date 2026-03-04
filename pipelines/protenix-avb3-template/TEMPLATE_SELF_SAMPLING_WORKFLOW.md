@@ -2,7 +2,7 @@
 
 This workflow starts from:
 
-- `data/template_example/seed_090_frame_000.pdb`
+- `data/avb3/template_example/seed_090_frame_000.pdb`
 
 and generates two Protenix jobs:
 
@@ -21,26 +21,26 @@ apt-get update -y && apt-get install -y kalign dssp
 ## 2. Generate inputs only (no inference)
 
 ```bash
-python scripts/template_self_sampling_workflow.py \
-  --input_pdb data/template_example/seed_090_frame_000.pdb \
+python pipelines/protenix-avb3-template/scripts/template_self_sampling_workflow.py \
+  --input_pdb data/avb3/template_example/seed_090_frame_000.pdb \
   --msa_root /content/drive/MyDrive/colab_cache/afmfold-data/AVB3/seed_090_frame_000/msa \
-  --workflow_dir data/template_example/workflow_outputs
+  --workflow_dir data/runs/avb3/protenix_template/workflow_outputs
 ```
 
 This writes:
 
-- `data/template_example/workflow_outputs/inputs/seed_090_frame_000_msa_only.json`
-- `data/template_example/workflow_outputs/inputs/seed_090_frame_000_msa_self_template.json`
-- `data/template_example/seed_090_frame_000.cif` (template converted from PDB)
-- `data/template_example/workflow_outputs/inputs/template_search_results/*.a3m`
+- `data/runs/avb3/protenix_template/workflow_outputs/inputs/seed_090_frame_000_msa_only.json`
+- `data/runs/avb3/protenix_template/workflow_outputs/inputs/seed_090_frame_000_msa_self_template.json`
+- `data/avb3/template_example/seed_090_frame_000.cif` (template converted from PDB)
+- `data/runs/avb3/protenix_template/workflow_outputs/inputs/template_search_results/*.a3m`
 
 ## 3. Run both jobs (recommended)
 
 ```bash
-python scripts/template_self_sampling_workflow.py \
-  --input_pdb data/template_example/seed_090_frame_000.pdb \
+python pipelines/protenix-avb3-template/scripts/template_self_sampling_workflow.py \
+  --input_pdb data/avb3/template_example/seed_090_frame_000.pdb \
   --msa_root /content/drive/MyDrive/colab_cache/afmfold-data/AVB3/seed_090_frame_000/msa \
-  --workflow_dir data/template_example/workflow_outputs \
+  --workflow_dir data/runs/avb3/protenix_template/workflow_outputs \
   --template_converter auto \
   --template_json_mode templatesPath \
   --template_entry_id s090 \
@@ -53,21 +53,21 @@ python scripts/template_self_sampling_workflow.py \
 
 Outputs:
 
-- `data/template_example/workflow_outputs/outputs/msa_only/...`
-- `data/template_example/workflow_outputs/outputs/msa_self_template/...`
+- `data/runs/avb3/protenix_template/workflow_outputs/outputs/msa_only/...`
+- `data/runs/avb3/protenix_template/workflow_outputs/outputs/msa_self_template/...`
 
 ## 4. Run one mode only
 
 MSA-only:
 
 ```bash
-python scripts/template_self_sampling_workflow.py --run --run_msa_only
+python pipelines/protenix-avb3-template/scripts/template_self_sampling_workflow.py --run --run_msa_only
 ```
 
 Self-template only:
 
 ```bash
-python scripts/template_self_sampling_workflow.py --run --run_template_only
+python pipelines/protenix-avb3-template/scripts/template_self_sampling_workflow.py --run --run_template_only
 ```
 
 ## Notes

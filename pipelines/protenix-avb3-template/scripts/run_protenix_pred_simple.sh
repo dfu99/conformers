@@ -6,8 +6,8 @@ set -euo pipefail
 #   protenix pred -i <input.json> -o <out_dir> -s 101 -n protenix_base_default_v1.0.0 \
 #     --use_template true --use_default_params true
 
-INPUT_JSON="${1:-data/template_example/simple_pipeline/inputs/seed_090_frame_000_template.json}"
-OUT_DIR="${2:-data/template_example/simple_pipeline/outputs/output_base_v1}"
+INPUT_JSON="${1:-data/runs/avb3/protenix_template/simple_pipeline/inputs/seed_090_frame_000_template.json}"
+OUT_DIR="${2:-data/runs/avb3/protenix_template/simple_pipeline/outputs/output_base_v1}"
 SEED="${3:-101}"
 MODEL_NAME="${4:-protenix_base_default_v1.0.0}"
 USE_TEMPLATE="${5:-true}"

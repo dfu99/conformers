@@ -238,7 +238,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--input_pdb",
         type=Path,
-        default=Path("data/template_example/seed_090_frame_000.pdb"),
+        default=Path("data/avb3/template_example/seed_090_frame_000.pdb"),
         help="Input seed PDB used for sequence extraction.",
     )
     parser.add_argument(
@@ -250,13 +250,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--msa_root",
         type=Path,
-        default=Path("data/seed_090_frame_000/msa"),
+        default=Path("data/avb3/template_example/msa"),
         help="MSA root with per-chain folders: 0/, 1/, ...",
     )
     parser.add_argument(
         "--output_root",
         type=Path,
-        default=Path("data/template_example/simple_pipeline"),
+        default=Path("data/runs/avb3/protenix_template/simple_pipeline"),
         help="Output root for generated inputs.",
     )
     parser.add_argument(
