@@ -1,0 +1,27 @@
+---------------------------------------
+Begin Slurm Prolog: Mar-02-2026 14:17:24
+Job ID:    4553475
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  protenix_template
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+PROTENIX_ROOT_DIR: /storage/home/hcoda1/6/dfu71/scratch/Protenix
+mmcif source:      /storage/home/hcoda1/6/dfu71/scratch/conformers/mmcif
+mmcif target:      /storage/home/hcoda1/6/dfu71/scratch/Protenix/mmcif
+train scheduler 16.0
+inference scheduler 16.0
+Diffusion Module has 16.0
+---------------------------------------
+Begin Slurm Epilog: Mar-02-2026 14:23:09
+Job ID:        4553475
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      protenix_template
+Resources:     cpu=8,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:46:08,vmem=0,walltime=00:05:46,mem=10644K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-9-0
+---------------------------------------

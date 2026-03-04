@@ -1,0 +1,23 @@
+---------------------------------------
+Begin Slurm Prolog: Mar-02-2026 03:38:11
+Job ID:    4517701
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  protenix_template
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+ERROR: /storage/home/hcoda1/6/dfu71/scratch/Protenix/mmcif exists and is not a symlink.
+Rename/remove it, or point PROTENIX_MMCIF_DIR to /storage/home/hcoda1/6/dfu71/scratch/Protenix/mmcif.
+---------------------------------------
+Begin Slurm Epilog: Mar-02-2026 03:38:13
+Job ID:        4517701
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      protenix_template
+Resources:     cpu=8,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:00:24,vmem=0,walltime=00:00:03,mem=10640K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-9-0
+---------------------------------------

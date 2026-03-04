@@ -1,0 +1,23 @@
+---------------------------------------
+Begin Slurm Prolog: Mar-03-2026 20:30:22
+Job ID:    4592750
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  boltz_sweep
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+ROOT=/storage/home/hcoda1/6/dfu71/scratch/conformers/codex-Boltz
+OUTDIR=/storage/home/hcoda1/6/dfu71/scratch/conformers/data/boltz_outputs/slurm_boltz_4592750
+---------------------------------------
+Begin Slurm Epilog: Mar-03-2026 20:30:23
+Job ID:        4592750
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      boltz_sweep
+Resources:     cpu=8,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:00:08,vmem=0,walltime=00:00:01,mem=3520K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-1-0
+---------------------------------------

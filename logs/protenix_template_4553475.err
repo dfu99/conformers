@@ -1,0 +1,36 @@
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded:
+libxml2/2.13.5-xvypeyo (required by: cuda/12.9.1)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) libxml2/2.13.5-xvypeyo => libxml2/2.10.3-74cdfsk
+  2) xz/5.6.3-u3gckxx => xz/5.2.5-y72uqzs
+
+2026-03-02 14:19:59,945 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:617] INFO __main__: Using params for model protenix_base_default_v1.0.0: cycle=10, step=200
+2026-03-02 14:19:59,945 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:632] INFO __main__: Inference by Protenix: model_size: base, with_feature: default, model_version: v1.0.0, dtype: bf16
+2026-03-02 14:20:00,229 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:638] INFO __main__: Triangle kernels: multiplicative=cuequivariance, attention=cuequivariance
+2026-03-02 14:20:00,229 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:642] INFO __main__: Optimization: shared_vars_cache=True, efficient_fusion=True, tf32=True
+2026-03-02 14:20:00,369 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:336] INFO __main__: obsolete_pdbs_path already exists at /storage/home/hcoda1/6/dfu71/scratch/Protenix/common/obsolete_to_successor.json
+2026-03-02 14:20:00,371 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:336] INFO __main__: release_dates_path already exists at /storage/home/hcoda1/6/dfu71/scratch/Protenix/common/release_date_cache.json
+2026-03-02 14:20:00,390 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:246] INFO __main__: Distributed environment: world size: 1, global rank: 0, local rank: 0
+2026-03-02 14:20:00,391 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:98] INFO root: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+2026-03-02 14:20:00,391 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:123] INFO root: Kernels will be compiled when fast_layernorm is first called.
+2026-03-02 14:20:00,391 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:127] INFO root: Finished environment initialization.
+2026-03-02 14:20:51,355 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:246] INFO __main__: Loading from /storage/home/hcoda1/6/dfu71/scratch/Protenix/checkpoint/protenix_base_default_v1.0.0.pt, strict: True
+2026-03-02 14:20:54,275 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:246] INFO __main__: Sampled key: module.input_embedder.atom_attention_encoder.linear_no_bias_ref_pos.weight
+2026-03-02 14:20:54,423 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:246] INFO __main__: Finish loading checkpoint.
+2026-03-02 14:20:54,432 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:246] INFO __main__: Model parameters: 368.48M
+2026-03-02 14:20:54,446 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:420] INFO __main__: Loading data from ./examples/examples_with_template/example_9fm7.json
+2026-03-02 14:20:56,227 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing 9fm7...
+2026-03-02 14:21:03,314 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-03-02 14:21:06,102 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-03-02 14:21:06,227 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:715] INFO protenix.data.template.template_featurizer: Found 0 templates for sequence MDVSILGTGLMGTALAQALIRSGTKVTVWNRTADRALPLAAAGATVAESPQSAIAASPLIVISLLNYEIAKDVVTEADSIAGKIIVNTATGTPEEANQFAEWIAGRGARYLDGAIAAYPEDIGTESSGINYSGDEDVWEDVQSLLTPIAAQSRYVGARPGAANVIDAAMAGAFFNVALGAFHEAAAYVRSEDVAIAEMRHSLHLWTDKLLELLHEALKAFESGEYETDQATLNVYAAAVEAWQQSMQRAGQRAALMTANLDNLQRACAAGHGDKGIFAQIETLSANPQSAI
+2026-03-02 14:21:07,004 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:470] INFO __main__: [Rank 0 (1/1)] 9fm7 [seed:103]: N_asym 4, N_token 644, N_atom 4372, N_msa 8856
+2026-03-02 14:22:55,980 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:492] INFO __main__: [Rank 0] 9fm7 [seed:103] succeeded. Model forward time: 108.98s. Results saved to ./test_outputs/sh/output_m_9fm7
+2026-03-02 14:22:55,985 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:512] INFO __main__: [Rank 0] Seed 103 completed in 119.94s.
+2026-03-02 14:22:55,986 [/storage/scratch1/6/dfu71/Protenix/runner/inference.py:524] INFO __main__: [Rank 0] Job completed in 120.04s.
