@@ -2,19 +2,27 @@
 set -euo pipefail
 
 usage() {
-  cat <<'EOF'
+  cat <<'EOF2'
 Usage:
   run_boltz_predict_sweep.sh \
-    --sequence-file <fasta_like.txt> \
     --outdir <dir> \
+    [--chain-a-seq-file <path>] [--chain-b-seq-file <path>] \
+    [--sequence-file <fasta_like.txt> --name-a <header> --name-b <header>] \
     [--template-cif <path.cif>] \
     [--chain-a-msa <path.a3m>] [--chain-b-msa <path.a3m>] \
     [--force-thresholds <csv>] [--extended-only] \
     [--diffusion-samples 12] [--recycles 6]
-EOF
+
+Notes:
+- Provide either:
+  1) --chain-a-seq-file + --chain-b-seq-file
+  2) --sequence-file (then sequences are extracted by header name)
+EOF2
 }
 
 SEQUENCE_FILE=""
+CHAIN_A_SEQ_FILE=""
+CHAIN_B_SEQ_FILE=""
 OUTDIR=""
 TEMPLATE_CIF=""
 CHAIN_A_MSA=""
@@ -23,12 +31,14 @@ FORCE_THRESHOLDS="0.60,0.75,0.90"
 EXTENDED_ONLY=0
 DIFFUSION_SAMPLES=12
 RECYCLES=6
-NAME_A="Integrin alpha5-Avi"
-NAME_B="Integrin beta1-spycatcher"
+NAME_A="Integrin alphaV"
+NAME_B="Integrin beta3"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --sequence-file) SEQUENCE_FILE="$2"; shift 2 ;;
+    --chain-a-seq-file) CHAIN_A_SEQ_FILE="$2"; shift 2 ;;
+    --chain-b-seq-file) CHAIN_B_SEQ_FILE="$2"; shift 2 ;;
     --outdir) OUTDIR="$2"; shift 2 ;;
     --template-cif) TEMPLATE_CIF="$2"; shift 2 ;;
     --chain-a-msa) CHAIN_A_MSA="$2"; shift 2 ;;
@@ -44,15 +54,37 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ -z "$SEQUENCE_FILE" || -z "$OUTDIR" ]]; then
-  echo "Missing required args." >&2
+if [[ -z "$OUTDIR" ]]; then
+  echo "Missing required --outdir." >&2
   usage
   exit 1
 fi
-if [[ ! -f "$SEQUENCE_FILE" ]]; then
-  echo "Sequence file not found: $SEQUENCE_FILE" >&2
-  exit 1
+
+if [[ -n "$CHAIN_A_SEQ_FILE" || -n "$CHAIN_B_SEQ_FILE" ]]; then
+  if [[ -z "$CHAIN_A_SEQ_FILE" || -z "$CHAIN_B_SEQ_FILE" ]]; then
+    echo "Provide both --chain-a-seq-file and --chain-b-seq-file." >&2
+    exit 1
+  fi
+  if [[ ! -f "$CHAIN_A_SEQ_FILE" ]]; then
+    echo "chain A seq file not found: $CHAIN_A_SEQ_FILE" >&2
+    exit 1
+  fi
+  if [[ ! -f "$CHAIN_B_SEQ_FILE" ]]; then
+    echo "chain B seq file not found: $CHAIN_B_SEQ_FILE" >&2
+    exit 1
+  fi
+else
+  if [[ -z "$SEQUENCE_FILE" ]]; then
+    echo "Provide --sequence-file or both chain seq files." >&2
+    usage
+    exit 1
+  fi
+  if [[ ! -f "$SEQUENCE_FILE" ]]; then
+    echo "Sequence file not found: $SEQUENCE_FILE" >&2
+    exit 1
+  fi
 fi
+
 if [[ -n "$TEMPLATE_CIF" && ! -f "$TEMPLATE_CIF" ]]; then
   echo "Template cif not found: $TEMPLATE_CIF" >&2
   exit 1
@@ -74,12 +106,18 @@ BOLTZ_OUT="$OUTDIR/boltz_outputs"
 
 mkdir -p "$SEQ_DIR" "$JOB_DIR" "$BOLTZ_OUT"
 
-echo "[1/4] Extracting target integrin sequences"
-python3 "$SCRIPT_DIR/extract_integrin_sequences.py" \
-  --sequence-file "$SEQUENCE_FILE" \
-  --outdir "$SEQ_DIR" \
-  --name-a "$NAME_A" \
-  --name-b "$NAME_B"
+if [[ -n "$CHAIN_A_SEQ_FILE" && -n "$CHAIN_B_SEQ_FILE" ]]; then
+  echo "[1/4] Using provided chain sequence files"
+  cp "$CHAIN_A_SEQ_FILE" "$SEQ_DIR/chain_A.seq"
+  cp "$CHAIN_B_SEQ_FILE" "$SEQ_DIR/chain_B.seq"
+else
+  echo "[1/4] Extracting target chain sequences from FASTA-like input"
+  python3 "$SCRIPT_DIR/extract_integrin_sequences.py" \
+    --sequence-file "$SEQUENCE_FILE" \
+    --outdir "$SEQ_DIR" \
+    --name-a "$NAME_A" \
+    --name-b "$NAME_B"
+fi
 
 echo "[2/4] Building Boltz sweep jobs"
 SWEEP_ARGS=(

@@ -12,20 +12,22 @@
 
 set -euo pipefail
 
-# A5B1 stream only: data/a5b1 + data/runs/a5b1
+# AVB3 stream defaults for extended-conformation search.
 CONFORMERS_ROOT="${CONFORMERS_ROOT:-$HOME/scratch/conformers}"
 ROOT="${ROOT:-$CONFORMERS_ROOT/pipelines/boltz}"
-SEQUENCE_FILE="${SEQUENCE_FILE:-$CONFORMERS_ROOT/data/a5b1/sequences/sequences_updated}"
+SEED_PDB="${SEED_PDB:-$CONFORMERS_ROOT/data/avb3/template_example/seed_090_frame_000.pdb}"
+CHAIN_A_ID="${CHAIN_A_ID:-A}"
+CHAIN_B_ID="${CHAIN_B_ID:-B}"
 
-# Use heterodimer-only MSA stream from prior Protenix run.
-MSA_A="${MSA_A:-$CONFORMERS_ROOT/data/runs/a5b1/protenix/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/msa/0/non_pairing.a3m}"
-MSA_B="${MSA_B:-$CONFORMERS_ROOT/data/runs/a5b1/protenix/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/msa/1/non_pairing.a3m}"
+SEQ_DIR_DEFAULT="$CONFORMERS_ROOT/data/runs/boltz/avb3/seq"
+SEQ_A="${SEQ_A:-$SEQ_DIR_DEFAULT/chain_A.seq}"
+SEQ_B="${SEQ_B:-$SEQ_DIR_DEFAULT/chain_B.seq}"
 
-# Default template from A5B1 stream.
-TEMPLATE_CIF="${TEMPLATE_CIF:-$CONFORMERS_ROOT/data/runs/a5b1/protenix/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/seed_101/predictions/integrin_alpha5_beta1_sample_0.cif}"
+MSA_A="${MSA_A:-$CONFORMERS_ROOT/data/avb3/template_example/msa/0/non_pairing.a3m}"
+MSA_B="${MSA_B:-$CONFORMERS_ROOT/data/avb3/template_example/msa/1/non_pairing.a3m}"
+TEMPLATE_CIF="${TEMPLATE_CIF:-$CONFORMERS_ROOT/data/avb3/template_example/seed_090_frame_000.cif}"
 
-# Boltz stream output root.
-OUTDIR="${OUTDIR:-$CONFORMERS_ROOT/data/runs/boltz/slurm_boltz_${SLURM_JOB_ID}}"
+OUTDIR="${OUTDIR:-$CONFORMERS_ROOT/data/runs/boltz/avb3/slurm_boltz_${SLURM_JOB_ID}}"
 
 # Environment split: use Boltz venv, not Protenix venv.
 BOLTZ_VENV="${BOLTZ_VENV:-$HOME/scratch/venv_boltz}"
@@ -44,7 +46,9 @@ RECYCLES="${RECYCLES:-6}"
 
 echo "CONFORMERS_ROOT=$CONFORMERS_ROOT"
 echo "ROOT=$ROOT"
-echo "SEQUENCE_FILE=$SEQUENCE_FILE"
+echo "SEED_PDB=$SEED_PDB"
+echo "CHAIN_A_ID=$CHAIN_A_ID"
+echo "CHAIN_B_ID=$CHAIN_B_ID"
 echo "OUTDIR=$OUTDIR"
 echo "BOLTZ_VENV=$BOLTZ_VENV"
 echo "EXTENDED_ONLY=$EXTENDED_ONLY"
@@ -54,9 +58,28 @@ import gemmi
 print(f"gemmi={gemmi.__version__}")
 PY
 
+if [[ ! -f "$SEQ_A" || ! -f "$SEQ_B" ]]; then
+  EXTRACT_SCRIPT="$CONFORMERS_ROOT/pipelines/afcluster/scripts/extract_chain_sequences_from_pdb.py"
+  if [[ ! -f "$EXTRACT_SCRIPT" ]]; then
+    echo "ERROR: sequence extractor not found: $EXTRACT_SCRIPT" >&2
+    exit 1
+  fi
+  if [[ ! -f "$SEED_PDB" ]]; then
+    echo "ERROR: seed pdb not found: $SEED_PDB" >&2
+    exit 1
+  fi
+  mkdir -p "$(dirname "$SEQ_A")"
+  python3 "$EXTRACT_SCRIPT" \
+    --pdb "$SEED_PDB" \
+    --outdir "$(dirname "$SEQ_A")" \
+    --chain-a "$CHAIN_A_ID" \
+    --chain-b "$CHAIN_B_ID"
+fi
+
 cd "$ROOT"
 RUN_ARGS=(
-  --sequence-file "$SEQUENCE_FILE"
+  --chain-a-seq-file "$SEQ_A"
+  --chain-b-seq-file "$SEQ_B"
   --chain-a-msa "$MSA_A"
   --chain-b-msa "$MSA_B"
   --force-thresholds "$FORCE_THRESHOLDS"

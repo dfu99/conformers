@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract integrin alpha5/beta1 sequences from FASTA-like file."""
+"""Extract two target chain sequences from FASTA-like file."""
 
 from __future__ import annotations
 
@@ -57,8 +57,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--sequence-file", required=True, type=Path)
     parser.add_argument("--outdir", required=True, type=Path)
-    parser.add_argument("--name-a", default="Integrin alpha5-Avi")
-    parser.add_argument("--name-b", default="Integrin beta1-spycatcher")
+    parser.add_argument("--name-a", default="Integrin alphaV")
+    parser.add_argument("--name-b", default="Integrin beta3")
     args = parser.parse_args()
 
     records = parse_fasta_like(args.sequence_file)
