@@ -5,7 +5,7 @@ CONFORMERS_ROOT="${CONFORMERS_ROOT:-$HOME/scratch/conformers}"
 WORKFLOW_DIR="${WORKFLOW_DIR:-$CONFORMERS_ROOT/data/runs/a5b1/staged_attachment}"
 
 SEQUENCE_FILE="${SEQUENCE_FILE:-$CONFORMERS_ROOT/data/a5b1/sequences/sequences_updated}"
-HETERODIMER_PREDICTIONS_DIR="${HETERODIMER_PREDICTIONS_DIR:-$CONFORMERS_ROOT/data/runs/a5b1/protenix/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/seed_101/predictions}"
+HETERODIMER_PREDICTIONS_DIR="${HETERODIMER_PREDICTIONS_DIR:-$CONFORMERS_ROOT/data/a5b1/outputs/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/seed_101/predictions}"
 HETERODIMER_CIF="${HETERODIMER_CIF:-}"
 
 MODEL_NAME="${MODEL_NAME:-protenix_base_default_v1.0.0}"

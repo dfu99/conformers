@@ -5,7 +5,7 @@ CONFORMERS_ROOT="${CONFORMERS_ROOT:-$HOME/scratch/conformers}"
 SCRIPT="$CONFORMERS_ROOT/pipelines/protenix-a5b1/scripts/setup_staged_attachment_workflow.py"
 
 SEQUENCE_FILE="${SEQUENCE_FILE:-$CONFORMERS_ROOT/data/a5b1/sequences/sequences_updated}"
-PREDICTIONS_DIR="${PREDICTIONS_DIR:-$CONFORMERS_ROOT/data/runs/a5b1/protenix/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/seed_101/predictions}"
+PREDICTIONS_DIR="${PREDICTIONS_DIR:-$CONFORMERS_ROOT/data/a5b1/outputs/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/seed_101/predictions}"
 HETERODIMER_CIF="${HETERODIMER_CIF:-}"
 OUTDIR="${OUTDIR:-$CONFORMERS_ROOT/data/runs/a5b1/staged_attachment}"
 
