@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=a5b1_tagged_full
-#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/a5b1_tagged_full_%j.out
-#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/a5b1_tagged_full_%j.err
+#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-a5b1/a5b1_tagged_full_%j.out
+#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-a5b1/a5b1_tagged_full_%j.err
 #SBATCH -A gts-yke8
 #SBATCH -N1 --gres=gpu:A100:1
 #SBATCH -C A100-80GB
