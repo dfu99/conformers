@@ -1,6 +1,6 @@
 # afcluster
 
-AFCluster-style conformational sampling for AVB3 using Boltz as the structure backend.
+AFCluster-style conformational sampling for AVB3 with selectable backend execution.
 
 ## Data stream
 - Seed structure: `data/avb3/template_example/seed_090_frame_000.pdb`
@@ -11,8 +11,19 @@ AFCluster-style conformational sampling for AVB3 using Boltz as the structure ba
 - `scripts/run_afcluster_pipeline.sh`
 - `scripts/submit_afcluster_boltz_slurm.sh`
 
+## Backend modes
+- `boltzgen` (default): runs each generated YAML spec via
+  `boltzgen run <spec.yaml> --output <dir> --protocol <name> --num_designs <N> --budget <K>`
+- `boltz` (legacy): runs `boltz predict` over generated YAML sweep.
+
 ## SLURM submit (cluster)
 ```bash
+sbatch pipelines/afcluster/scripts/submit_afcluster_boltz_slurm.sh
+```
+
+Useful overrides:
+```bash
+BACKEND=boltzgen PROTOCOL=protein-anything NUM_DESIGNS=10000 BUDGET=200 \
 sbatch pipelines/afcluster/scripts/submit_afcluster_boltz_slurm.sh
 ```
 

@@ -40,7 +40,34 @@ Keep A5B1 and AVB3 efforts decoupled at script, data, and output levels while it
 2. Run Boltz and AFCluster sweeps as independent branches.
 3. Rank by extension proxy + interface plausibility and compare across branches.
 
+## Implemented: A5B1 Complete Tagged Pipeline (2026-03-06)
+
+Added end-to-end staged pipeline under `pipelines/protenix-a5b1/scripts`:
+- `run_complete_tagged_pipeline.sh`
+- `submit_complete_tagged_pipeline_slurm.sh`
+- `build_staged_protenix_inputs.py`
+- `merge_staged_tagged_complex.py`
+- existing `setup_staged_attachment_workflow.py`
+
+Execution flow:
+1. Select accepted heterodimer CIF from `data/runs/a5b1/protenix/outputs_integrin_alpha5_beta1/...`.
+2. Build stage-1 (`A5B1 + SpyTag`) and stage-2 (`A5B1 + Streptavidin`) Protenix input JSONs.
+3. Run `protenix pred` for both stages.
+4. Select best sample per stage by `ranking_score`.
+5. Receptor-align stage outputs to the accepted heterodimer and write one merged final tagged CIF/PDB.
+
+Final outputs:
+- `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.cif`
+- `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
+
 ## Next Implementation Tasks
-- [ ] Add a dedicated `pipelines/protenix-a5b1/scripts/submit_slurm.sh` for heterodimer-only runs.
-- [ ] Add pipeline-local smoke tests for path wiring and input generation.
+- [x] Add dedicated A5B1 staged pipeline runner + sbatch entrypoint.
+- [x] Add deterministic stage-merging utility for final tagged complex export.
+- [ ] Add post-merge geometry checks (tail distance/interface sanity) before ranking final structure.
 - [ ] Add one unified ranking table script across Protenix/Boltz/AFCluster outputs.
+
+## Implemented: AFCluster BoltzGen CLI Alignment (2026-03-06)
+- Updated `pipelines/afcluster/scripts/run_afcluster_pipeline.sh` to support backend selection and BoltzGen-native execution.
+- Default backend is now `boltzgen` with parameters: `--protocol`, `--num-designs`, `--budget`.
+- Updated `pipelines/afcluster/scripts/submit_afcluster_boltz_slurm.sh` to pass BoltzGen parameters by default while retaining legacy `boltz` mode.
+- Corrected helper launcher `pipelines/boltz/scripts/run_boltzgen_attempt.sh` to use `boltzgen run ... --output ... --protocol ... --num_designs ... --budget ...`.

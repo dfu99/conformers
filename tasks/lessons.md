@@ -22,6 +22,21 @@ Capture recurring operational/debugging lessons for existing pipelines.
 - mkdssp is not strictly mandatory in your current workflow if gemmi fallback is active.
 - Missing mkdssp alone does not explain zero-template detection when registration/parsing is wrong.
 
+### Environment Isolation
+- Symptom: conflicting dependency requirements across Protenix and Boltz (e.g., gemmi version mismatch).
+- Resolution: enforce separate virtual environments per pipeline (`venv_protenix` vs `venv_boltz`) in submit scripts.
+- Practical implication: avoid sharing one venv between Protenix and Boltz/AFCluster workflows.
+
+### Protenix-Dock Scope
+- Symptom: trying to use Protenix-Dock for SpyTag/Streptavidin attachment to A5B1.
+- Likely cause: tool mismatch. Protenix-Dock CLI expects protein + ligand SDF style inputs (protein-ligand docking), not full protein-protein docking between integrin and protein tags.
+- Action: use staged multichain Protenix inference for each attachment branch, then merge branches by receptor alignment.
+
+### A5B1 Tagged Assembly Strategy
+- Symptom: one-shot 4-chain inference can place tags in unrealistic internal positions.
+- Likely cause: unconstrained global co-folding of all chains at once.
+- Action: split into two stage predictions (`A5B1+SpyTag`, `A5B1+Streptavidin`) and merge ligand placements onto an accepted heterodimer receptor frame.
+
 ## Runbook Reminder
 Before diagnosing new failures, verify in order:
 1. Input JSON points to expected MSA/template files.
@@ -30,7 +45,8 @@ Before diagnosing new failures, verify in order:
 4. a3m headers match entry and chain IDs.
 5. Runtime logs confirm template parsing and non-zero template hits.
 
-### Environment Isolation
-- Symptom: conflicting dependency requirements across Protenix and Boltz (e.g., gemmi version mismatch).
-- Resolution: enforce separate virtual environments per pipeline (`venv_protenix` vs `venv_boltz`) in submit scripts.
-- Practical implication: avoid sharing one venv between Protenix and Boltz/AFCluster workflows.
+### BoltzGen CLI Contract
+- Symptom: scripts invoked `boltz predict` or `boltzgen run` with `--out_dir`, causing mismatch with BoltzGen docs.
+- Likely cause: confusion between Boltz and BoltzGen CLIs.
+- Action: for BoltzGen use `boltzgen run <spec.yaml> --output <dir> --protocol <name> --num_designs <N> --budget <K>`.
+- Practical implication: keep backend-explicit scripts (`boltzgen` vs `boltz`) and avoid mixing command/flag conventions.

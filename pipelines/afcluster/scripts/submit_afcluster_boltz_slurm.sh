@@ -30,7 +30,19 @@ TEMPLATE_CIF="${TEMPLATE_CIF:-$CONFORMERS_ROOT/data/avb3/template_example/seed_0
 
 OUTDIR="${OUTDIR:-$CONFORMERS_ROOT/data/runs/afcluster/avb3/slurm_afcluster_boltz_${SLURM_JOB_ID}}"
 
-# Environment split: AFCluster+Boltz pipeline uses boltz venv.
+# Backend can be boltzgen (default) or boltz.
+BACKEND="${BACKEND:-boltzgen}"
+PROTOCOL="${PROTOCOL:-protein-anything}"
+NUM_DESIGNS="${NUM_DESIGNS:-10000}"
+BUDGET="${BUDGET:-200}"
+BOLTZGEN_BIN="${BOLTZGEN_BIN:-boltzgen}"
+BOLTZGEN_EXTRA="${BOLTZGEN_EXTRA:-}"
+
+# Legacy boltz-only params.
+DIFFUSION_SAMPLES="${DIFFUSION_SAMPLES:-8}"
+RECYCLES="${RECYCLES:-3}"
+
+# Environment split: AFCluster/BoltzGen pipeline uses boltz venv.
 BOLTZ_VENV="${BOLTZ_VENV:-$HOME/scratch/venv_boltz}"
 if [[ ! -f "$BOLTZ_VENV/bin/activate" ]]; then
   echo "ERROR: Boltz venv not found at $BOLTZ_VENV" >&2
@@ -45,6 +57,11 @@ echo "SEED_PDB=$SEED_PDB"
 echo "CHAIN_A_ID=$CHAIN_A_ID"
 echo "CHAIN_B_ID=$CHAIN_B_ID"
 echo "OUTDIR=$OUTDIR"
+echo "BACKEND=$BACKEND"
+echo "PROTOCOL=$PROTOCOL"
+echo "NUM_DESIGNS=$NUM_DESIGNS"
+echo "BUDGET=$BUDGET"
+echo "BOLTZGEN_BIN=$BOLTZGEN_BIN"
 echo "BOLTZ_VENV=$BOLTZ_VENV"
 python - <<'PY'
 import gemmi
@@ -70,10 +87,31 @@ if [[ ! -f "$SEQ_A" || ! -f "$SEQ_B" ]]; then
 fi
 
 cd "$ROOT"
-bash scripts/run_afcluster_pipeline.sh \
-  --chain-a-seq-file "$SEQ_A" \
-  --chain-b-seq-file "$SEQ_B" \
-  --chain-a-msa "$MSA_A" \
-  --chain-b-msa "$MSA_B" \
-  --template-cif "$TEMPLATE_CIF" \
+RUN_ARGS=(
+  --chain-a-seq-file "$SEQ_A"
+  --chain-b-seq-file "$SEQ_B"
+  --chain-a-msa "$MSA_A"
+  --chain-b-msa "$MSA_B"
+  --template-cif "$TEMPLATE_CIF"
   --outdir "$OUTDIR"
+  --backend "$BACKEND"
+)
+
+if [[ "$BACKEND" == "boltzgen" ]]; then
+  RUN_ARGS+=(
+    --protocol "$PROTOCOL"
+    --num-designs "$NUM_DESIGNS"
+    --budget "$BUDGET"
+    --boltzgen-bin "$BOLTZGEN_BIN"
+  )
+  if [[ -n "$BOLTZGEN_EXTRA" ]]; then
+    RUN_ARGS+=(--boltzgen-extra "$BOLTZGEN_EXTRA")
+  fi
+else
+  RUN_ARGS+=(
+    --diffusion-samples "$DIFFUSION_SAMPLES"
+    --recycles "$RECYCLES"
+  )
+fi
+
+bash scripts/run_afcluster_pipeline.sh "${RUN_ARGS[@]}"
