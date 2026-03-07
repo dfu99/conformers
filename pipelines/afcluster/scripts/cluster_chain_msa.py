@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-"""Cluster one chain MSA with AF-Cluster and write per-cluster A3Ms."""
+"""Cluster one chain MSA with AF-Cluster and write per-cluster A3Ms.
+
+Compatible with multiple AFCluster API variants.
+"""
 
 from __future__ import annotations
 
 import argparse
+import inspect
 import re
 from pathlib import Path
 
@@ -12,7 +16,12 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Cluster a chain MSA with AF-Cluster.")
     parser.add_argument("--input-a3m", required=True, type=Path, help="Input .a3m file")
     parser.add_argument("--outdir", required=True, type=Path, help="Output directory")
-    parser.add_argument("--max-dist", type=float, default=0.9, help="AFCluster max_dist")
+    parser.add_argument(
+        "--max-dist",
+        type=float,
+        default=0.9,
+        help="Compatibility parameter: used only if AFCluster API supports max_dist.",
+    )
     parser.add_argument("--min-samples", type=int, default=2, help="DBSCAN min_samples")
     parser.add_argument(
         "--n-controls",
@@ -42,6 +51,22 @@ def numeric_hint(path: Path) -> int:
     return int(m.group(1))
 
 
+def filter_supported_kwargs(callable_obj, kwargs: dict) -> dict:
+    """Keep only kwargs supported by callable_obj signature.
+
+    If signature cannot be inspected, return input kwargs as-is.
+    """
+    try:
+        sig = inspect.signature(callable_obj)
+    except (TypeError, ValueError):
+        return kwargs
+
+    params = sig.parameters
+    if any(p.kind == inspect.Parameter.VAR_KEYWORD for p in params.values()):
+        return kwargs
+    return {k: v for k, v in kwargs.items() if k in params}
+
+
 def main() -> int:
     args = parse_args()
 
@@ -61,30 +86,61 @@ def main() -> int:
     except TypeError:
         msa = read_a3m(args.input_a3m)
 
-    clusterer = AFCluster(
-        max_dist=args.max_dist,
-        min_samples=args.min_samples,
-        n_controls=args.n_controls,
+    ctor_kwargs = filter_supported_kwargs(
+        AFCluster.__init__,
+        {
+            "max_dist": args.max_dist,
+            "min_samples": args.min_samples,
+            "n_controls": args.n_controls,
+        },
     )
+
+    # AFCluster API changed across versions; pass only supported constructor kwargs.
+    clusterer = AFCluster(**ctor_kwargs)
 
     eps = args.eps
     if eps < 0:
         if hasattr(clusterer, "gridsearch_eps"):
-            eps = float(clusterer.gridsearch_eps(msa))
+            try:
+                eps = float(clusterer.gridsearch_eps(msa))
+            except TypeError:
+                eps = float(clusterer.gridsearch_eps(str(args.input_a3m)))
             print(f"[afcluster] gridsearch eps={eps:.4f}")
         else:
             eps = 0.6
             print(f"[afcluster] gridsearch_eps unavailable; using eps={eps:.4f}")
 
-    cluster_result = clusterer.cluster(msa, eps=eps, min_samples=args.min_samples)
+    cluster_kwargs = filter_supported_kwargs(
+        clusterer.cluster,
+        {
+            "eps": eps,
+            "min_samples": args.min_samples,
+            "max_dist": args.max_dist,
+        },
+    )
+
+    try:
+        cluster_result = clusterer.cluster(msa, **cluster_kwargs)
+    except TypeError:
+        try:
+            cluster_result = clusterer.cluster(msa)
+        except TypeError:
+            cluster_result = clusterer.cluster(str(args.input_a3m), **cluster_kwargs)
+
     if hasattr(cluster_result, "to_csv"):
         cluster_result.to_csv(args.outdir / "cluster_result.tsv", sep="\t", index=False)
 
-    clusterer.write_a3m(str(args.outdir))
+    try:
+        clusterer.write_a3m(str(args.outdir))
+    except TypeError:
+        clusterer.write_a3m(args.outdir)
 
     a3m_files = sorted(args.outdir.glob("*.a3m"), key=lambda p: (numeric_hint(p), p.name))
     if not a3m_files:
-        raise RuntimeError(f"No cluster .a3m files were written to {args.outdir}")
+        raise RuntimeError(
+            f"No cluster .a3m files were written to {args.outdir}. "
+            "This often means an AFCluster API/data format mismatch."
+        )
 
     ranked = sorted(a3m_files, key=lambda p: p.stat().st_size, reverse=True)
     if args.keep_top > 0:

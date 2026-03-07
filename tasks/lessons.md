@@ -50,3 +50,9 @@ Before diagnosing new failures, verify in order:
 - Likely cause: confusion between Boltz and BoltzGen CLIs.
 - Action: for BoltzGen use `boltzgen run <spec.yaml> --output <dir> --protocol <name> --num_designs <N> --budget <K>`.
 - Practical implication: keep backend-explicit scripts (`boltzgen` vs `boltz`) and avoid mixing command/flag conventions.
+
+### AFCluster API Drift (`max_dist` Constructor Error)
+- Symptom: `TypeError: AFCluster.__init__() got an unexpected keyword argument 'max_dist'`.
+- Likely cause: installed `afcluster` version uses a different constructor signature than expected by script.
+- Action: introspect AFCluster constructor/cluster signatures and pass only supported kwargs at runtime.
+- Practical implication: keep `cluster_chain_msa.py` API-compatible across AFCluster releases.
