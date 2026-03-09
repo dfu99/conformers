@@ -1,0 +1,16 @@
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded:
+libxml2/2.13.5-xvypeyo (required by: cuda/12.9.1)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) libxml2/2.13.5-xvypeyo => libxml2/2.10.3-74cdfsk
+  2) xz/5.6.3-u3gckxx => xz/5.2.5-y72uqzs
+
+ERROR: heterodimer predictions dir not found: /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/protenix/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/seed_101/predictions
+Set HETERODIMER_CIF to bypass auto-selection from predictions.
+srun: error: atl1-1-01-006-9-0: task 0: Exited with exit code 1

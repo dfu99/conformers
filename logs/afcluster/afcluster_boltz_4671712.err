@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/storage/home/hcoda1/6/dfu71/scratch/conformers/pipelines/afcluster/scripts/cluster_chain_msa.py", line 53, in main
+    from afcluster import AFCluster, read_a3m
+ModuleNotFoundError: No module named 'afcluster'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/storage/home/hcoda1/6/dfu71/scratch/conformers/pipelines/afcluster/scripts/cluster_chain_msa.py", line 108, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/storage/home/hcoda1/6/dfu71/scratch/conformers/pipelines/afcluster/scripts/cluster_chain_msa.py", line 55, in main
+    raise RuntimeError(
+RuntimeError: Could not import afcluster. Install with: pip install afcluster

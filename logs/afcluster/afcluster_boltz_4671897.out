@@ -1,0 +1,51 @@
+---------------------------------------
+Begin Slurm Prolog: Mar-07-2026 00:08:14
+Job ID:    4671897
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  afcluster_boltz
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+CONFORMERS_ROOT=/storage/home/hcoda1/6/dfu71/scratch/conformers
+ROOT=/storage/home/hcoda1/6/dfu71/scratch/conformers/pipelines/afcluster
+SEED_PDB=/storage/home/hcoda1/6/dfu71/scratch/conformers/data/avb3/template_example/seed_090_frame_000.pdb
+CHAIN_A_ID=A
+CHAIN_B_ID=B
+OUTDIR=/storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/afcluster/avb3/slurm_afcluster_boltz_4671897
+BACKEND=boltzgen
+PROTOCOL=protein-anything
+NUM_DESIGNS=10000
+BUDGET=200
+BOLTZGEN_BIN=boltzgen
+BOLTZ_VENV=/storage/home/hcoda1/6/dfu71/scratch/venv_boltz
+gemmi=0.6.5
+[1/4] Clustering chain A MSA
+[afcluster] gridsearch eps=7.0912
+[afcluster] wrote 6 cluster MSAs to: /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/afcluster/avb3/slurm_afcluster_boltz_4671897/clusters/A
+[afcluster] summary: /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/afcluster/avb3/slurm_afcluster_boltz_4671897/clusters/A/clusters.tsv
+[2/4] Clustering chain B MSA
+[afcluster] gridsearch eps=6.5817
+[afcluster] wrote 3 cluster MSAs to: /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/afcluster/avb3/slurm_afcluster_boltz_4671897/clusters/B
+[afcluster] summary: /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/afcluster/avb3/slurm_afcluster_boltz_4671897/clusters/B/clusters.tsv
+[3/4] Building YAML job set
+[jobs] wrote 19 Boltz YAML files in /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/afcluster/avb3/slurm_afcluster_boltz_4671897/boltz_jobs
+[jobs] manifest: /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/afcluster/avb3/slurm_afcluster_boltz_4671897/boltz_jobs/jobs_manifest.tsv
+[4/4] Running BoltzGen over generated YAML jobs
+Running BoltzGen job: integrin_ab_afcluster_a01_b01
+
+=== Configuring pipeline ===
+Using dataset artifact: /storage/home/hcoda1/6/dfu71/.cache/huggingface/hub/datasets--boltzgen--inference-data/snapshots/c3d36fd276e9caf098c75d4113c6d5eb320b1a4c/mols.zip
+************** Checking design spec: /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/afcluster/avb3/slurm_afcluster_boltz_4671897/boltz_jobs/integrin_ab_afcluster_a01_b01.yaml **************
+---------------------------------------
+Begin Slurm Epilog: Mar-07-2026 00:13:11
+Job ID:        4671897
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      afcluster_boltz
+Resources:     cpu=8,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:39:36,vmem=0,walltime=00:04:57,mem=1517008K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-1-0
+---------------------------------------

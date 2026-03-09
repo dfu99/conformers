@@ -1,0 +1,29 @@
+---------------------------------------
+Begin Slurm Prolog: Mar-06-2026 23:28:23
+Job ID:    4671485
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  a5b1_tagged_full
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+=========================================
+Job ID:           4671485
+Node:             atl1-1-01-006-9-0.pace.gatech.edu
+GPU:              NVIDIA A100 80GB PCIe
+CONFORMERS_ROOT:  /storage/home/hcoda1/6/dfu71/scratch/conformers
+PROTENIX_VENV:    /storage/home/hcoda1/6/dfu71/scratch/venv_protenix
+RUN_SCRIPT:       /storage/home/hcoda1/6/dfu71/scratch/conformers/pipelines/protenix-a5b1/scripts/run_complete_tagged_pipeline.sh
+=========================================
+---------------------------------------
+Begin Slurm Epilog: Mar-06-2026 23:28:26
+Job ID:        4671485
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      a5b1_tagged_full
+Resources:     cpu=8,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:00:24,vmem=0,walltime=00:00:03,mem=20664K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-9-0
+---------------------------------------

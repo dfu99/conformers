@@ -1,0 +1,29 @@
+---------------------------------------
+Begin Slurm Prolog: Mar-06-2026 23:43:19
+Job ID:    4671687
+User ID:   dfu71
+Account:   gts-yke8
+Job name:  afcluster_boltz
+Partition: gpu-a100
+QOS:       inferno
+---------------------------------------
+CONFORMERS_ROOT=/storage/home/hcoda1/6/dfu71/scratch/conformers
+ROOT=/storage/home/hcoda1/6/dfu71/scratch/conformers/pipelines/afcluster
+SEED_PDB=/storage/home/hcoda1/6/dfu71/scratch/conformers/data/avb3/template_example/seed_090_frame_000.pdb
+CHAIN_A_ID=A
+CHAIN_B_ID=B
+OUTDIR=/storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/afcluster/avb3/slurm_afcluster_boltz_4671687
+BOLTZ_VENV=/storage/home/hcoda1/6/dfu71/scratch/venv_boltz
+gemmi=0.6.5
+---------------------------------------
+Begin Slurm Epilog: Mar-06-2026 23:43:24
+Job ID:        4671687
+User ID:       dfu71
+Account:       gts-yke8
+Job name:      afcluster_boltz
+Resources:     cpu=8,gres/gpu:a100=1,mem=64G,node=1
+Rsrc Used:     cput=00:00:40,vmem=0,walltime=00:00:05,mem=47248K,energy_used=0
+Partition:     gpu-a100
+QOS:           inferno
+Nodes:         atl1-1-01-006-5-0
+---------------------------------------

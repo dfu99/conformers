@@ -1,0 +1,144 @@
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded:
+libxml2/2.13.5-xvypeyo (required by: cuda/12.9.1)
+-------------------------------------------------------------------------------
+
+
+
+
+The following have been reloaded with a version change:
+  1) libxml2/2.13.5-xvypeyo => libxml2/2.10.3-74cdfsk
+  2) xz/5.6.3-u3gckxx => xz/5.2.5-y72uqzs
+
+2026-03-06 23:42:36,197 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:792] INFO runner.batch_inference: Run infer with input=/storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/inputs/protenix/stage1_spytag_input.json, out_dir=/storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/outputs/protenix_stage1_spytag, sample=5
+2026-03-06 23:42:36,197 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:819] INFO runner.batch_inference: Using default params for model protenix_base_default_v1.0.0: cycle=10, step=200, use_msa=True
+2026-03-06 23:42:36,197 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:486] INFO runner.batch_inference: Will infer with 1 jsons
+2026-03-06 23:42:36,444 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:391] INFO runner.batch_inference: Inference by Protenix: model_size: base, with_feature: default, model_version: v1.0.0, dtype: bf16
+2026-03-06 23:42:36,444 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:396] INFO runner.batch_inference: Triangle_multiplicative kernel: torch, Triangle_attention kernel: torch
+2026-03-06 23:42:36,444 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:400] INFO runner.batch_inference: enable_diffusion_shared_vars_cache: True, enable_efficient_fusion: True, enable_tf32: True
+2026-03-06 23:42:36,446 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:313] INFO runner.inference: Downloading data cache from
+ https://protenix.tos-cn-beijing.volces.com/common/components.cif...
+ to /storage/home/hcoda1/6/dfu71/common/components.cif
+2026-03-06 23:42:59,434 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:313] INFO runner.inference: Downloading data cache from
+ https://protenix.tos-cn-beijing.volces.com/common/components.cif.rdkit_mol.pkl...
+ to /storage/home/hcoda1/6/dfu71/common/components.cif.rdkit_mol.pkl
+2026-03-06 23:43:18,450 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:313] INFO runner.inference: Downloading data cache from
+ https://protenix.tos-cn-beijing.volces.com/common/clusters-by-entity-40.txt...
+ to /storage/home/hcoda1/6/dfu71/common/clusters-by-entity-40.txt
+2026-03-06 23:43:24,933 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:313] INFO runner.inference: Downloading data cache from
+ https://protenix.tos-cn-beijing.volces.com/common/obsolete_release_date.csv...
+ to /storage/home/hcoda1/6/dfu71/common/obsolete_release_date.csv
+2026-03-06 23:43:28,466 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:344] INFO runner.inference: Downloading model checkpoint from
+ https://protenix.tos-cn-beijing.volces.com/checkpoint/protenix_base_default_v1.0.0.pt...
+ to /storage/home/hcoda1/6/dfu71/checkpoint/protenix_base_default_v1.0.0.pt
+2026-03-06 23:44:08,806 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Distributed environment: world size: 1, global rank: 0, local rank: 0
+2026-03-06 23:44:08,806 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:98] INFO root: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+2026-03-06 23:44:08,806 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:123] INFO root: Kernels will be compiled when fast_layernorm is first called.
+2026-03-06 23:44:08,806 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:127] INFO root: Finished environment initialization.
+2026-03-06 23:44:55,079 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Loading from /storage/home/hcoda1/6/dfu71/checkpoint/protenix_base_default_v1.0.0.pt, strict: True
+2026-03-06 23:44:56,187 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Sampled key: module.input_embedder.atom_attention_encoder.linear_no_bias_ref_pos.weight
+2026-03-06 23:44:56,341 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Finish loading checkpoint.
+2026-03-06 23:44:56,350 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Model parameters: 368.48M
+  0%|          | 0/1 [00:00<?, ?it/s]2026-03-06 23:44:56,373 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/msa_search.py:225] INFO runner.msa_search: starting to update msa result for task 0 in /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/inputs/protenix/stage1_spytag_input.json
+2026-03-06 23:44:56,375 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:209] INFO protenix.web_service.colab_request_utils: Msa server is running.
+
+  0%|          | 0/100 [elapsed: 00:00 estimate remaining: ?][A
+SUBMIT:   0%|          | 0/100 [elapsed: 00:00 estimate remaining: ?][A
+PENDING:   0%|          | 0/100 [elapsed: 00:05 estimate remaining: ?][A2026-03-06 23:45:01,706 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: PENDING
+
+RUNNING:   0%|          | 0/100 [elapsed: 01:09 estimate remaining: ?][A
+RUNNING:   3%|▎         | 3/100 [elapsed: 01:09 estimate remaining: 37:17][A2026-03-06 23:46:05,584 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:   3%|▎         | 3/100 [elapsed: 02:09 estimate remaining: 1:10:01][A
+RUNNING:   6%|▌         | 6/100 [elapsed: 02:09 estimate remaining: 33:55]  [A2026-03-06 23:47:06,331 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:   6%|▌         | 6/100 [elapsed: 03:10 estimate remaining: 49:47][A
+RUNNING:  10%|█         | 10/100 [elapsed: 03:10 estimate remaining: 28:36][A2026-03-06 23:48:07,097 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  10%|█         | 10/100 [elapsed: 04:15 estimate remaining: 38:20][A
+RUNNING:  13%|█▎        | 13/100 [elapsed: 04:15 estimate remaining: 28:30][A2026-03-06 23:49:12,011 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  13%|█▎        | 13/100 [elapsed: 05:16 estimate remaining: 35:17][A
+RUNNING:  16%|█▌        | 16/100 [elapsed: 05:16 estimate remaining: 27:41][A2026-03-06 23:50:12,789 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  16%|█▌        | 16/100 [elapsed: 06:17 estimate remaining: 33:00][A
+RUNNING:  20%|██        | 20/100 [elapsed: 06:17 estimate remaining: 25:08][A2026-03-06 23:51:13,564 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  20%|██        | 20/100 [elapsed: 07:21 estimate remaining: 29:27][A
+RUNNING:  23%|██▎       | 23/100 [elapsed: 07:21 estimate remaining: 24:39][A2026-03-06 23:52:18,360 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  23%|██▎       | 23/100 [elapsed: 08:22 estimate remaining: 28:02][A
+RUNNING:  26%|██▌       | 26/100 [elapsed: 08:22 estimate remaining: 23:50][A2026-03-06 23:53:19,085 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+COMPLETE:  26%|██▌       | 26/100 [elapsed: 09:23 estimate remaining: 26:43][A
+COMPLETE:  26%|██▌       | 26/100 [elapsed: 09:23 estimate remaining: 26:43][A
+COMPLETE: 100%|██████████| 100/100 [elapsed: 09:23 estimate remaining: 00:00][ACOMPLETE: 100%|██████████| 100/100 [elapsed: 09:25 estimate remaining: 00:00]
+2026-03-06 23:54:22,507 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/msa_search.py:240] INFO runner.msa_search: update msa result success and save to /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/inputs/protenix/stage1_spytag_input-update-msa.json
+2026-03-06 23:54:22,508 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:420] INFO runner.inference: Loading data from /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/inputs/protenix/stage1_spytag_input-update-msa.json
+2026-03-06 23:54:26,032 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing a5b1_stage1_spytag...
+2026-03-06 23:54:38,219 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-03-06 23:54:51,379 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-03-06 23:54:58,274 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] a5b1_stage1_spytag [seed:101]: N_asym 3, N_token 1805, N_atom 13849, N_msa 14954
+2026-03-07 00:10:52,777 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:486] INFO runner.inference: [Rank 0] a5b1_stage1_spytag [seed:101] succeeded. Model forward time: 954.50s. Results saved to /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/outputs/protenix_stage1_spytag
+2026-03-07 00:10:53,283 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 101 completed in 989.37s.
+2026-03-07 00:10:53,285 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:518] INFO runner.inference: [Rank 0] Job completed in 990.41s.
+100%|██████████| 1/1 [25:56<00:00, 1556.91s/it]100%|██████████| 1/1 [25:56<00:00, 1556.91s/it]
+2026-03-07 00:13:34,049 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:792] INFO runner.batch_inference: Run infer with input=/storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/inputs/protenix/stage2_streptavidin_input.json, out_dir=/storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/outputs/protenix_stage2_streptavidin, sample=5
+2026-03-07 00:13:34,049 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:819] INFO runner.batch_inference: Using default params for model protenix_base_default_v1.0.0: cycle=10, step=200, use_msa=True
+2026-03-07 00:13:34,072 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:486] INFO runner.batch_inference: Will infer with 1 jsons
+2026-03-07 00:13:34,373 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:391] INFO runner.batch_inference: Inference by Protenix: model_size: base, with_feature: default, model_version: v1.0.0, dtype: bf16
+2026-03-07 00:13:34,374 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:396] INFO runner.batch_inference: Triangle_multiplicative kernel: torch, Triangle_attention kernel: torch
+2026-03-07 00:13:34,374 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/batch_inference.py:400] INFO runner.batch_inference: enable_diffusion_shared_vars_cache: True, enable_efficient_fusion: True, enable_tf32: True
+2026-03-07 00:13:34,377 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Distributed environment: world size: 1, global rank: 0, local rank: 0
+2026-03-07 00:13:34,377 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:98] INFO root: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+2026-03-07 00:13:34,377 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:123] INFO root: Kernels will be compiled when fast_layernorm is first called.
+2026-03-07 00:13:34,377 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:127] INFO root: Finished environment initialization.
+2026-03-07 00:14:23,839 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Loading from /storage/home/hcoda1/6/dfu71/checkpoint/protenix_base_default_v1.0.0.pt, strict: True
+2026-03-07 00:14:24,959 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Sampled key: module.input_embedder.atom_attention_encoder.linear_no_bias_ref_pos.weight
+2026-03-07 00:14:25,093 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Finish loading checkpoint.
+2026-03-07 00:14:25,102 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:246] INFO runner.inference: Model parameters: 368.48M
+  0%|          | 0/1 [00:00<?, ?it/s]2026-03-07 00:14:25,125 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/msa_search.py:225] INFO runner.msa_search: starting to update msa result for task 0 in /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/inputs/protenix/stage2_streptavidin_input.json
+2026-03-07 00:14:25,148 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:209] INFO protenix.web_service.colab_request_utils: Msa server is running.
+
+  0%|          | 0/100 [elapsed: 00:00 estimate remaining: ?][A
+SUBMIT:   0%|          | 0/100 [elapsed: 00:00 estimate remaining: ?][A
+PENDING:   0%|          | 0/100 [elapsed: 00:04 estimate remaining: ?][A2026-03-07 00:14:29,171 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: PENDING
+
+RUNNING:   0%|          | 0/100 [elapsed: 01:04 estimate remaining: ?][A
+RUNNING:   3%|▎         | 3/100 [elapsed: 01:04 estimate remaining: 34:54][A2026-03-07 00:15:29,914 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:   3%|▎         | 3/100 [elapsed: 02:08 estimate remaining: 1:09:24][A
+RUNNING:   6%|▌         | 6/100 [elapsed: 02:08 estimate remaining: 33:37]  [A2026-03-07 00:16:33,934 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:   6%|▌         | 6/100 [elapsed: 03:09 estimate remaining: 49:29][A
+RUNNING:  10%|█         | 10/100 [elapsed: 03:09 estimate remaining: 28:25][A2026-03-07 00:17:34,682 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  10%|█         | 10/100 [elapsed: 04:10 estimate remaining: 37:32][A
+RUNNING:  13%|█▎        | 13/100 [elapsed: 04:10 estimate remaining: 27:54][A2026-03-07 00:18:35,422 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  13%|█▎        | 13/100 [elapsed: 05:11 estimate remaining: 34:41][A
+RUNNING:  16%|█▌        | 16/100 [elapsed: 05:11 estimate remaining: 27:13][A2026-03-07 00:19:36,249 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  16%|█▌        | 16/100 [elapsed: 06:11 estimate remaining: 32:32][A
+RUNNING:  20%|██        | 20/100 [elapsed: 06:11 estimate remaining: 24:47][A2026-03-07 00:20:37,023 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  20%|██        | 20/100 [elapsed: 07:12 estimate remaining: 28:50][A
+RUNNING:  23%|██▎       | 23/100 [elapsed: 07:12 estimate remaining: 24:08][A2026-03-07 00:21:37,806 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+RUNNING:  23%|██▎       | 23/100 [elapsed: 08:13 estimate remaining: 27:31][A
+RUNNING:  26%|██▌       | 26/100 [elapsed: 08:13 estimate remaining: 23:24][A2026-03-07 00:22:38,551 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/web_service/colab_request_utils.py:240] ERROR protenix.web_service.colab_request_utils: Sleeping for 60s. Reason: RUNNING
+
+COMPLETE:  26%|██▌       | 26/100 [elapsed: 09:14 estimate remaining: 26:17][A
+COMPLETE:  26%|██▌       | 26/100 [elapsed: 09:14 estimate remaining: 26:17][A
+COMPLETE: 100%|██████████| 100/100 [elapsed: 09:14 estimate remaining: 00:00][ACOMPLETE: 100%|██████████| 100/100 [elapsed: 09:16 estimate remaining: 00:00]
+2026-03-07 00:23:41,884 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/msa_search.py:240] INFO runner.msa_search: update msa result success and save to /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/inputs/protenix/stage2_streptavidin_input-update-msa.json
+2026-03-07 00:23:41,884 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:420] INFO runner.inference: Loading data from /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/inputs/protenix/stage2_streptavidin_input-update-msa.json
+2026-03-07 00:23:42,839 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/inference/infer_dataloader.py:275] INFO protenix.data.inference.infer_dataloader: Featurizing a5b1_stage2_streptavidin...
+2026-03-07 00:23:54,960 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/constraint/constraint_featurizer.py:392] INFO protenix.data.constraint.constraint_featurizer: Loaded constraint feature: #atom contact:0 #contact:0 #pocket:0
+2026-03-07 00:24:08,276 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/protenix/data/template/template_featurizer.py:668] INFO protenix.data.template.template_featurizer: Calling InferenceTemplateFeaturizer.make_template_feature
+2026-03-07 00:24:13,205 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:464] INFO runner.inference: [Rank 0 (1/1)] a5b1_stage2_streptavidin [seed:101]: N_asym 3, N_token 1903, N_atom 14601, N_msa 14974
+2026-03-07 00:43:07,322 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:486] INFO runner.inference: [Rank 0] a5b1_stage2_streptavidin [seed:101] succeeded. Model forward time: 1134.12s. Results saved to /storage/home/hcoda1/6/dfu71/scratch/conformers/data/runs/a5b1/staged_attachment/outputs/protenix_stage2_streptavidin
+2026-03-07 00:43:07,762 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:506] INFO runner.inference: [Rank 0] Seed 101 completed in 1165.21s.
+2026-03-07 00:43:07,764 [/storage/scratch1/6/dfu71/venv_protenix/lib/python3.12/site-packages/runner/inference.py:518] INFO runner.inference: [Rank 0] Job completed in 1165.80s.
+100%|██████████| 1/1 [28:42<00:00, 1722.66s/it]100%|██████████| 1/1 [28:42<00:00, 1722.66s/it]

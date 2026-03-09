@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/storage/home/hcoda1/6/dfu71/scratch/conformers/pipelines/afcluster/scripts/cluster_chain_msa.py", line 108, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/storage/home/hcoda1/6/dfu71/scratch/conformers/pipelines/afcluster/scripts/cluster_chain_msa.py", line 64, in main
+    clusterer = AFCluster(
+                ^^^^^^^^^^
+TypeError: AFCluster.__init__() got an unexpected keyword argument 'max_dist'
