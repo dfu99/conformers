@@ -56,3 +56,9 @@ Before diagnosing new failures, verify in order:
 - Likely cause: installed `afcluster` version uses a different constructor signature than expected by script.
 - Action: introspect AFCluster constructor/cluster signatures and pass only supported kwargs at runtime.
 - Practical implication: keep `cluster_chain_msa.py` API-compatible across AFCluster releases.
+
+### PACE SSH Timeout During Non-Interactive Automation
+- Command context: `pipelines/protenix-a5b1/scripts/pace_minimal.sh smoke 5`.
+- Symptom: `ssh: connect to host pace port 22: Operation timed out`.
+- Likely cause: VPN/session routing not active to PACE login host, or SSH alias/host not reachable from current network.
+- Action: run `pace_minimal.sh check` first, verify VPN is connected, and confirm `PACE_HOST` resolves to the correct PACE login endpoint.

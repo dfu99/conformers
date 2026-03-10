@@ -71,3 +71,13 @@ Final outputs:
 - Default backend is now `boltzgen` with parameters: `--protocol`, `--num-designs`, `--budget`.
 - Updated `pipelines/afcluster/scripts/submit_afcluster_boltz_slurm.sh` to pass BoltzGen parameters by default while retaining legacy `boltz` mode.
 - Corrected helper launcher `pipelines/boltz/scripts/run_boltzgen_attempt.sh` to use `boltzgen run ... --output ... --protocol ... --num_designs ... --budget ...`.
+
+## Implemented: PACE Minimal Remote Control + RTX_6000 Test Target (2026-03-09)
+- Added `pipelines/protenix-a5b1/scripts/pace_minimal.sh` with:
+  - `check` (connectivity + SLURM command availability check)
+  - `submit` (remote `git pull` + `sbatch`)
+  - `watch` (remote `squeue`/`sacct` poll loop)
+  - `fetch` (job logs + result sync back to local workspace)
+  - `smoke` (tiny submit/watch/fetch validation job)
+- Updated `pipelines/protenix-a5b1/scripts/submit_complete_tagged_pipeline_slurm.sh` GPU request from `A100` to `RTX_6000` and removed A100-only constraint for queue availability.
+- Documented minimal usage in `pipelines/protenix-a5b1/README.md`.
