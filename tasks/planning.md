@@ -77,7 +77,17 @@ Final outputs:
   - `check` (connectivity + SLURM command availability check)
   - `submit` (remote `git pull` + `sbatch`)
   - `watch` (remote `squeue`/`sacct` poll loop)
-  - `fetch` (job logs + result sync back to local workspace)
-  - `smoke` (tiny submit/watch/fetch validation job)
+  - `fetch` (job logs + result sync back to local workspace; supports `.log`, `.err`, and `.out`)
+  - `smoke` (tiny submit/watch/fetch validation job with configurable poll/sleep; default sleep 60s)
 - Updated `pipelines/protenix-a5b1/scripts/submit_complete_tagged_pipeline_slurm.sh` GPU request from `A100` to `RTX_6000` and removed A100-only constraint for queue availability.
 - Documented minimal usage in `pipelines/protenix-a5b1/README.md`.
+- Verified against `dfu71@login-phoenix.pace.gatech.edu` with completed smoke jobs (`4734209`, `4734230`), successful `squeue -u dfu71` status checks, and local fetch of `.log`, `.err`, and smoke result artifacts.
+
+## Implemented: Claude Skill for PACE Job Ops (2026-03-10)
+- Added `.claude/skills/pace-slurm-ops/SKILL.md` with explicit trigger conditions and deterministic command flow for:
+  - SSH preflight/auth checks
+  - smoke submit/watch/fetch (`hello world`, 60s sleep)
+  - real pipeline submit/watch/fetch
+  - queue/status verification (`squeue -u dfu71`, `sacct`)
+  - common failure handling (VPN, key auth, account requirement)
+- Added `CLAUDE.md` pointer to this skill so Claude agents can discover and apply it directly instead of re-deriving workflow details.

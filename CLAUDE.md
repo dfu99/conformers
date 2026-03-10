@@ -2,6 +2,10 @@
 
 This file is an implementation contract for Claude-assisted refactors in this repository.
 
+## Skills
+For PACE job operations (submit/watch/fetch/smoke), use:
+- `.claude/skills/pace-slurm-ops/SKILL.md`
+
 ## 1) Canonical Structure (Do Not Revert)
 As of 2026-03-04, runnable pipelines were consolidated into:
 

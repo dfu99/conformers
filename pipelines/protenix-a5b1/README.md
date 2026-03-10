@@ -34,21 +34,41 @@ sbatch ~/scratch/conformers/pipelines/protenix-a5b1/scripts/submit_complete_tagg
 ## Minimal remote control (submit/watch/fetch)
 Use `scripts/pace_minimal.sh` to avoid repeated interactive SSH login loops.
 
+### SSH auth (secure, non-interactive)
+Do not store your GT account password for automation. Use an SSH key and keychain:
+
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+ssh-copy-id -i ~/.ssh/id_ed25519.pub dfu71@login-phoenix.pace.gatech.edu
+```
+
+Optional SSH config alias:
+```sshconfig
+Host pace-phoenix
+  HostName login-phoenix.pace.gatech.edu
+  User dfu71
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+  AddKeysToAgent yes
+  UseKeychain yes
+```
+
 ```bash
 chmod +x pipelines/protenix-a5b1/scripts/pace_minimal.sh
 ```
 
 Quick smoke check (tiny SLURM job + watch + fetch):
 ```bash
-pipelines/protenix-a5b1/scripts/pace_minimal.sh check
-pipelines/protenix-a5b1/scripts/pace_minimal.sh smoke
+PACE_HOST='dfu71@login-phoenix.pace.gatech.edu' pipelines/protenix-a5b1/scripts/pace_minimal.sh check
+PACE_HOST='dfu71@login-phoenix.pace.gatech.edu' pipelines/protenix-a5b1/scripts/pace_minimal.sh smoke 10 60
 ```
+The smoke job writes `pace_smoke_<jobid>.log` and `pace_smoke_<jobid>.err`, sleeps for 60 seconds by default, and fetches both logs plus a small result file.
 
 Submit real A5B1 tagged run, then watch and fetch:
 ```bash
-pipelines/protenix-a5b1/scripts/pace_minimal.sh submit
-pipelines/protenix-a5b1/scripts/pace_minimal.sh watch <job_id>
-pipelines/protenix-a5b1/scripts/pace_minimal.sh fetch <job_id>
+PACE_HOST='dfu71@login-phoenix.pace.gatech.edu' pipelines/protenix-a5b1/scripts/pace_minimal.sh submit
+PACE_HOST='dfu71@login-phoenix.pace.gatech.edu' pipelines/protenix-a5b1/scripts/pace_minimal.sh watch <job_id>
+PACE_HOST='dfu71@login-phoenix.pace.gatech.edu' pipelines/protenix-a5b1/scripts/pace_minimal.sh fetch <job_id>
 ```
 
 Defaults:

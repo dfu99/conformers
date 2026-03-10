@@ -62,3 +62,21 @@ Before diagnosing new failures, verify in order:
 - Symptom: `ssh: connect to host pace port 22: Operation timed out`.
 - Likely cause: VPN/session routing not active to PACE login host, or SSH alias/host not reachable from current network.
 - Action: run `pace_minimal.sh check` first, verify VPN is connected, and confirm `PACE_HOST` resolves to the correct PACE login endpoint.
+
+### PACE Non-Interactive Auth Requires Authorized SSH Key
+- Command context: `PACE_HOST='dfu71@login-phoenix.pace.gatech.edu' pipelines/protenix-a5b1/scripts/pace_minimal.sh check`.
+- Symptom: `Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password,hostbased)` in BatchMode.
+- Likely cause: local private key exists but matching public key is not installed in remote `~/.ssh/authorized_keys`.
+- Action: perform one-time key enrollment (`ssh-copy-id` or manual append) and then re-run `pace_minimal.sh check`.
+
+### PACE Smoke Submit Requires Explicit Account
+- Command context: `pace_minimal.sh smoke 5 60`.
+- Symptom: `sbatch: error: --account option required`.
+- Likely cause: cluster policy requires account on ad hoc smoke jobs.
+- Action: pass `-A` in smoke submit (`PACE_ACCOUNT`, default `gts-yke8`).
+
+### SSH Quoting Bug in Remote Watch Loop
+- Command context: `pace_minimal.sh smoke` right after successful submit.
+- Symptom: local shell error `line 164: JOB_ID: unbound variable` before watch/fetch.
+- Likely cause: remote `$JOB_ID`/`$POLL_SECONDS` expanded locally under `set -u`.
+- Action: escape remote variable references (`\$JOB_ID`, `\$POLL_SECONDS`) in the watch command string.

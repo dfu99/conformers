@@ -9,6 +9,7 @@ PACE_REMOTE_ROOT="${PACE_REMOTE_ROOT:-}"
 PACE_CONTROL_PERSIST="${PACE_CONTROL_PERSIST:-15m}"
 PACE_CONTROL_PATH="${PACE_CONTROL_PATH:-$HOME/.ssh/cm-%r@%h:%p}"
 PACE_GIT_PULL="${PACE_GIT_PULL:-1}"
+PACE_ACCOUNT="${PACE_ACCOUNT:-gts-yke8}"
 
 DEFAULT_SUBMIT_SCRIPT="pipelines/protenix-a5b1/scripts/submit_complete_tagged_pipeline_slurm.sh"
 
@@ -30,11 +31,12 @@ Usage:
   pace_minimal.sh submit [submit_script_rel]
   pace_minimal.sh watch <job_id> [poll_seconds]
   pace_minimal.sh fetch <job_id> [remote_log_dir_or_rel] [log_prefix] [remote_results_rel] [local_log_dir] [local_results_dir]
-  pace_minimal.sh smoke [poll_seconds]
+  pace_minimal.sh smoke [poll_seconds] [sleep_seconds]
 
 Environment:
   PACE_HOST             SSH host alias for PACE (default: pace)
   PACE_REMOTE_ROOT      Remote conformers root (default on remote: $HOME/scratch/conformers)
+  PACE_ACCOUNT          SLURM account for smoke submits (default: gts-yke8)
   PACE_GIT_PULL         If 1, run git pull --ff-only before submit (default: 1)
   PACE_CONTROL_PERSIST  SSH ControlPersist value (default: 15m)
   PACE_CONTROL_PATH     SSH ControlPath (default: ~/.ssh/cm-%r@%h:%p)
@@ -144,21 +146,21 @@ watch_job() {
     "JOB_ID=$(q "$job_id") POLL_SECONDS=$(q "$poll_seconds") bash -lc 'set -euo pipefail
 while true; do
   ts=\$(date \"+%Y-%m-%dT%H:%M:%S%z\")
-  line=\$(squeue -h -j \"$JOB_ID\" -o \"%i|%t|%M|%D|%R\" || true)
+  line=\$(squeue -h -j \"\$JOB_ID\" -o \"%i|%t|%M|%D|%R\" || true)
   if [[ -n \"\$line\" ]]; then
     printf \"%s|SQUEUE|%s\\n\" \"\$ts\" \"\$line\"
-    sleep \"$POLL_SECONDS\"
+    sleep \"\$POLL_SECONDS\"
     continue
   fi
 
-  final=\$(sacct -n -P -j \"$JOB_ID\" --format=JobIDRaw,State,ExitCode,Elapsed,End | awk -F \"|\" -v id=\"$JOB_ID\" \"\\\$1==id {print; exit}\")
+  final=\$(sacct -n -P -j \"\$JOB_ID\" --format=JobIDRaw,State,ExitCode,Elapsed,End | awk -F \"|\" -v id=\"\$JOB_ID\" \"\\\$1==id {print; exit}\")
   if [[ -n \"\$final\" ]]; then
     printf \"%s|SACCT|%s\\n\" \"\$ts\" \"\$final\"
     break
   fi
 
   printf \"%s|WAIT|No squeue/sacct record yet\\n\" \"\$ts\"
-  sleep \"$POLL_SECONDS\"
+  sleep \"\$POLL_SECONDS\"
 done'"
 }
 
@@ -195,7 +197,7 @@ fetch_artifacts() {
     remote_log_dir="$remote_root/$remote_log_dir_input"
   fi
 
-  for ext in out err; do
+  for ext in log err out; do
     remote_file="$remote_log_dir/${log_prefix}_${job_id}.${ext}"
     if run_ssh "test -f $(q "$remote_file")"; then
       rsync -av -e "$rsync_ssh" "$PACE_HOST:$remote_file" "$local_log_dir/"
@@ -230,6 +232,7 @@ fetch_artifacts() {
 
 smoke_check() {
   local poll_seconds="${1:-10}"
+  local sleep_seconds="${2:-60}"
   local raw
   local job_id
   local remote_root
@@ -241,14 +244,15 @@ smoke_check() {
 
   raw="$(
     run_ssh \
-      "PACE_REMOTE_ROOT=$(q "$PACE_REMOTE_ROOT") bash -lc 'set -euo pipefail
+      "PACE_REMOTE_ROOT=$(q "$PACE_REMOTE_ROOT") PACE_ACCOUNT=$(q "$PACE_ACCOUNT") bash -lc 'set -euo pipefail
 remote_root=\"\${PACE_REMOTE_ROOT:-\$HOME/scratch/conformers}\"
 log_dir=\"\$remote_root/$SMOKE_LOG_DIR_REL\"
 result_dir=\"\$remote_root/$SMOKE_RESULTS_REL\"
 mkdir -p \"\$log_dir\" \"\$result_dir\"
+account=\"\${PACE_ACCOUNT:-gts-yke8}\"
 
-wrap_cmd=\"set -euo pipefail; mkdir -p \\\"\$result_dir\\\"; result=\\\"\$result_dir/smoke_\\\${SLURM_JOB_ID}.txt\\\"; echo \\\"job_id=\\\${SLURM_JOB_ID}\\\" > \\\"\\\$result\\\"; echo \\\"host=\\\$(hostname)\\\" >> \\\"\\\$result\\\"; date -Is >> \\\"\\\$result\\\"; sleep 5\"
-sbatch --parsable --job-name=pace_smoke --time=00:03:00 --mem=1G --output \"\$log_dir/${SMOKE_LOG_PREFIX}_%j.out\" --error \"\$log_dir/${SMOKE_LOG_PREFIX}_%j.err\" --wrap \"\$wrap_cmd\"'"
+wrap_cmd=\"set -euo pipefail; mkdir -p \\\"\$result_dir\\\"; result=\\\"\$result_dir/smoke_\\\${SLURM_JOB_ID}.txt\\\"; echo \\\"hello world from pace smoke\\\"; echo \\\"hello=world\\\" > \\\"\\\$result\\\"; echo \\\"job_id=\\\${SLURM_JOB_ID}\\\" >> \\\"\\\$result\\\"; echo \\\"host=\\\$(hostname)\\\" >> \\\"\\\$result\\\"; date -Is >> \\\"\\\$result\\\"; sleep $sleep_seconds\"
+sbatch --parsable -A \"\$account\" --job-name=pace_smoke --time=00:03:00 --mem=1G --output \"\$log_dir/${SMOKE_LOG_PREFIX}_%j.log\" --error \"\$log_dir/${SMOKE_LOG_PREFIX}_%j.err\" --wrap \"\$wrap_cmd\"'"
   )"
 
   if ! job_id="$(extract_job_id "$raw")"; then
@@ -298,7 +302,7 @@ main() {
         "${6:-$DEFAULT_LOCAL_RESULTS_DIR}"
       ;;
     smoke)
-      smoke_check "${1:-10}"
+      smoke_check "${1:-10}" "${2:-60}"
       ;;
     -h|--help|help)
       usage
