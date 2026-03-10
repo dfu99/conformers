@@ -31,6 +31,31 @@ Direct 4-chain prediction can place tags unrealistically in the core. This pipel
 sbatch ~/scratch/conformers/pipelines/protenix-a5b1/scripts/submit_complete_tagged_pipeline_slurm.sh
 ```
 
+## Minimal remote control (submit/watch/fetch)
+Use `scripts/pace_minimal.sh` to avoid repeated interactive SSH login loops.
+
+```bash
+chmod +x pipelines/protenix-a5b1/scripts/pace_minimal.sh
+```
+
+Quick smoke check (tiny SLURM job + watch + fetch):
+```bash
+pipelines/protenix-a5b1/scripts/pace_minimal.sh check
+pipelines/protenix-a5b1/scripts/pace_minimal.sh smoke
+```
+
+Submit real A5B1 tagged run, then watch and fetch:
+```bash
+pipelines/protenix-a5b1/scripts/pace_minimal.sh submit
+pipelines/protenix-a5b1/scripts/pace_minimal.sh watch <job_id>
+pipelines/protenix-a5b1/scripts/pace_minimal.sh fetch <job_id>
+```
+
+Defaults:
+- Remote host alias: `pace` (override `PACE_HOST`).
+- Remote repo root: `$HOME/scratch/conformers` (override `PACE_REMOTE_ROOT`).
+- Submit script requested GPU: `--gres=gpu:RTX_6000:1`.
+
 ## Key outputs
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.cif`
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`

@@ -3,8 +3,7 @@
 #SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-a5b1/a5b1_tagged_full_%j.out
 #SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-a5b1/a5b1_tagged_full_%j.err
 #SBATCH -A gts-yke8
-#SBATCH -N1 --gres=gpu:A100:1
-#SBATCH -C A100-80GB
+#SBATCH -N1 --gres=gpu:RTX_6000:1
 #SBATCH --mem=64G
 #SBATCH --time=24:00:00
 #SBATCH --mail-type=END,FAIL
