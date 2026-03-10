@@ -86,3 +86,29 @@ After refactor work:
 2. `python -m py_compile` on touched Python scripts.
 3. Verify no new references to legacy paths (`codex-*`, `data/outputs`, `data/template_example`, `data/sequences_updated`).
 4. Verify submit scripts still map to correct venv (`venv_protenix` vs `venv_boltz`).
+
+## PACE Cluster SLURM Rules
+
+When writing SLURM scripts for the PACE cluster:
+
+- **Account**: Always use `-A gts-yke8`
+- **A100**: `--gres=gpu:A100:N` and **must** add `-C A100-80GB` constraint
+- **RTX 6000**: `--gres=gpu:RTX_6000:N` (note underscore). No constraint needed.
+- **H100**: `--gres=gpu:H100:N`. No constraint needed.
+- **H200**: `--gres=gpu:H200:N`. No constraint needed.
+- **Modules**: Always `module load cuda` for GPU jobs
+- **Mail**: `--mail-type=END,FAIL` / `--mail-user=daniel.fu@emory.edu`
+- **Paths**: scratch at `~/scratch/`, project storage at `~/p-yke8-0/`
+
+## PACE Cluster SLURM Rules
+
+When writing SLURM scripts for the PACE cluster:
+
+- **Account**: Always use `-A gts-yke8`
+- **A100**: `--gres=gpu:A100:N` and **must** add `-C A100-80GB` constraint
+- **RTX 6000**: `--gres=gpu:RTX_6000:N` (note underscore). No constraint needed.
+- **H100**: `--gres=gpu:H100:N`. No constraint needed.
+- **H200**: `--gres=gpu:H200:N`. No constraint needed.
+- **Modules**: Always `module load cuda` for GPU jobs
+- **Mail**: `--mail-type=END,FAIL` / `--mail-user=daniel.fu@emory.edu`
+- **Paths**: scratch at `~/scratch/`, project storage at `~/p-yke8-0/`

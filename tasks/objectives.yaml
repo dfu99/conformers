@@ -1,0 +1,18 @@
+objectives:
+- id: obj-001
+  status: completed
+  statement: Add dedicated A5B1 staged pipeline runner + sbatch entrypoint.
+  methodology: ''
+  figures:
+  - results/obj-001-add-dedicated-a5b1-staged-pipeline-runne.png
+  conclusions: ''
+  connects_to: obj-002
+  completed_date: '2026-03-10'
+- id: obj-002
+  status: completed
+  statement: Add deterministic stage-merging utility for final tagged complex export.
+  methodology: ''
+  figures:
+  - results/obj-002-add-deterministic-stage-merging-utility.png
+  conclusions: ''
+  completed_date: '2026-03-10'
