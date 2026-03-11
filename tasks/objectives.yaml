@@ -1,18 +1,70 @@
 objectives:
 - id: obj-001
   status: completed
-  statement: Add dedicated A5B1 staged pipeline runner + sbatch entrypoint.
-  methodology: ''
+  statement: Add dedicated A5B1 staged pipeline runner and sbatch entrypoint.
+  methodology: >
+    Built run_complete_tagged_pipeline.sh and submit_complete_tagged_pipeline_slurm.sh
+    under pipelines/protenix-a5b1/scripts. Pipeline chains setup, input building,
+    two-stage protenix pred, and merge into final CIF/PDB.
+  metrics:
+    scripts_added: 5
+    stages: 2
+    outputs: [CIF, PDB]
   figures:
-  - results/obj-001-add-dedicated-a5b1-staged-pipeline-runne.png
-  conclusions: ''
+  - results/obj-001-a5b1-pipeline-architecture.png
+  conclusions: >
+    End-to-end staged pipeline enables heterodimer + SpyTag + Streptavidin assembly
+    with deterministic ranking_score selection and receptor-aligned merging.
   connects_to: obj-002
-  completed_date: '2026-03-10'
+  completed_date: '2026-03-06'
 - id: obj-002
   status: completed
   statement: Add deterministic stage-merging utility for final tagged complex export.
-  methodology: ''
+  methodology: >
+    Implemented merge_staged_tagged_complex.py which receptor-aligns stage-1 and
+    stage-2 predictions to the accepted heterodimer frame, extracts ligand chains,
+    and writes a single merged CIF/PDB output.
+  metrics:
+    alignment_method: receptor RMSD minimization
+    output_formats: [CIF, PDB]
   figures:
-  - results/obj-002-add-deterministic-stage-merging-utility.png
-  conclusions: ''
+  - results/obj-002-stage-merging-architecture.png
+  conclusions: >
+    Deterministic merging avoids manual structure alignment; ligand placements from
+    independent stages are guaranteed compatible via shared receptor reference frame.
+  connects_to: obj-003
+  completed_date: '2026-03-06'
+- id: obj-003
+  status: completed
+  statement: Build PACE minimal remote control script with smoke test validation.
+  methodology: >
+    Created pace_minimal.sh with check/submit/watch/fetch/smoke commands. Supports
+    SSH control sockets, configurable poll intervals, and rsync artifact fetching.
+    Validated with smoke jobs 4734209 and 4734230 on PACE Phoenix cluster.
+  metrics:
+    commands: 5
+    smoke_jobs_validated: 2
+    gpu_target: RTX_6000
+  figures:
+  - results/obj-003-pace-remote-control.png
+  conclusions: >
+    Non-interactive PACE orchestration eliminates manual SSH sessions. Smoke test
+    confirmed full submit/watch/fetch cycle works end-to-end with RTX_6000 queues.
+  connects_to: obj-004
+  completed_date: '2026-03-09'
+- id: obj-004
+  status: completed
+  statement: Add Claude skill for deterministic PACE job operations.
+  methodology: >
+    Created .claude/skills/pace-slurm-ops/SKILL.md with trigger conditions, preflight
+    checklist, smoke/real pipeline workflows, and failure handling documentation.
+    Added CLAUDE.md discovery pointer so agents find the skill automatically.
+  metrics:
+    failure_modes_documented: 4
+    workflow_types: [smoke, real_pipeline, status_check]
+  figures:
+  - results/obj-004-pace-skill-integration.png
+  conclusions: >
+    Claude agents now follow a deterministic flow for PACE interactions instead of
+    re-deriving SSH/SLURM commands each time. Reduces errors from ad-hoc scripting.
   completed_date: '2026-03-10'
