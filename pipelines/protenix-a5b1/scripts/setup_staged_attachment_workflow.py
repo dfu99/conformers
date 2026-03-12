@@ -170,6 +170,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--beta-name", default="Integrin beta1-spycatcher")
     parser.add_argument("--spytag-name", default="Spytag")
     parser.add_argument("--streptavidin-name", default="Streptavidin")
+    parser.add_argument(
+        "--spytag-reactive-residue",
+        type=int,
+        default=10,
+        help="Reactive Asp residue in SpyTag (RGVPHIVMVDAYKRYK -> D10).",
+    )
     parser.add_argument("--alpha-chain", default="A")
     parser.add_argument("--beta-chain", default="B")
     return parser.parse_args()
@@ -219,7 +225,7 @@ def main() -> int:
         "receptor_chain": args.beta_chain,
         "receptor_tail_residue": tail_anchors[args.beta_chain]["tail_residue"],
         "ligand_name": "spytag",
-        "ligand_residue": 1,
+        "ligand_residue": args.spytag_reactive_residue,
         "target_distance_angstrom": 6.0,
         "distance_tolerance_angstrom": 3.0,
         "note": "Bias SpyTag near beta1-SpyCatcher tail.",

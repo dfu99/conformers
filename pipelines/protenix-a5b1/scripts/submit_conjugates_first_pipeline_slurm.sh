@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=a5b1_tagged_full
-#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-a5b1/a5b1_tagged_full_%j.out
-#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-a5b1/a5b1_tagged_full_%j.err
+#SBATCH --job-name=a5b1_conjugates_first
+#SBATCH --output=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-a5b1/a5b1_conjugates_first_%j.out
+#SBATCH --error=/storage/home/hcoda1/6/dfu71/scratch/conformers/logs/protenix-a5b1/a5b1_conjugates_first_%j.err
 #SBATCH -A gts-yke8
 #SBATCH --partition=gpu-a100
 #SBATCH --gres=gpu:A100:1
@@ -24,7 +24,7 @@ fi
 source "$PROTENIX_VENV/bin/activate"
 
 CONFORMERS_ROOT="${CONFORMERS_ROOT:-$HOME/scratch/conformers}"
-RUN_SCRIPT="$CONFORMERS_ROOT/pipelines/protenix-a5b1/scripts/run_complete_tagged_pipeline.sh"
+RUN_SCRIPT="$CONFORMERS_ROOT/pipelines/protenix-a5b1/scripts/run_conjugates_first_pipeline.sh"
 if [[ ! -f "$RUN_SCRIPT" ]]; then
   echo "ERROR: run script not found: $RUN_SCRIPT" >&2
   exit 1

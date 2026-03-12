@@ -80,3 +80,33 @@ Before diagnosing new failures, verify in order:
 - Symptom: local shell error `line 164: JOB_ID: unbound variable` before watch/fetch.
 - Likely cause: remote `$JOB_ID`/`$POLL_SECONDS` expanded locally under `set -u`.
 - Action: escape remote variable references (`\$JOB_ID`, `\$POLL_SECONDS`) in the watch command string.
+
+### A5B1 Staged Constraints Were Prepared But Not Enforced
+- Command context: `run_complete_tagged_pipeline.sh` with staged attachment inputs.
+- Symptom: tags can land near integrin head despite tail-intent manifests.
+- Likely cause: tail constraints are written to JSON/manifests but Protenix stage inputs keep `covalent_bonds: []`, and runner calls `protenix pred` without consuming constraint files.
+- Action: enforce tail-aware sample selection during merge (`tail_distance`/`hybrid`) and expose anchor/tail controls in runner.
+
+### Ranking-Only Selection Can Oppose Tail Objective
+- Command context: tail-distance diagnostics over synced stage outputs (`seed_101`, samples 0-4).
+- Symptom: highest ranking sample was `sample_0` for both stages, while closest-to-tail sample was `sample_4`.
+- Likely cause: ranking objective does not encode tail proximity directly.
+- Action: when tail placement matters, use `SELECTION_MODE=tail_distance` or `SELECTION_MODE=hybrid` with max tail-distance thresholds.
+
+### RTX6000 Incompatibility for A5B1 Protenix Production Runs
+- Command context: `a5b1_conjugates_first` on `gpu-rtx6000` (job `4738472`).
+- Symptom: runtime forced `dtype: fp32` on Compute Capability 7.x and OOMed in pairformer/template attention (`torch.OutOfMemoryError`).
+- Likely cause: Protenix compatibility path disables bf16/deepspeed kernels on RTX 6000, increasing peak memory beyond ~24 GB.
+- Action: run A5B1 production jobs on A100 80GB (`--partition=gpu-a100 --gres=gpu:A100:1 --constraint=A100-80GB`).
+
+### Heterodimer Predictions Path Drift Between Local/Remote Layouts
+- Command context: `a5b1_tagged_full` tail-aware submit (job `4738744`).
+- Symptom: runner exited immediately with missing predictions dir under `data/runs/a5b1/protenix/...`.
+- Likely cause: remote accepted heterodimer outputs still lived under legacy `data/a5b1/outputs/...` path.
+- Action: add runner fallback to legacy predictions path (or set `HETERODIMER_CIF` explicitly).
+
+### Conjugates-First Initially Produced No Combined Complex Artifact
+- Command context: `run_conjugates_first_pipeline.sh` output inspection after successful A100 job.
+- Symptom: only `conjugates_first_summary.json` existed; no merged heterodimer+tags CIF/PDB.
+- Likely cause: workflow stopped after selecting best stage1/2/3 predictions and never executed a merge.
+- Action: add explicit merge step using `merge_staged_tagged_complex.py` with stage-specific receptor mapping (`A:A` for stage1, `B:A` for stage2) and emit combined CIF/PDB + merge summary.

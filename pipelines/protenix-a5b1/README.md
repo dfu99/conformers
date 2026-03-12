@@ -20,16 +20,61 @@ Direct 4-chain prediction can place tags unrealistically in the core. This pipel
 - `scripts/build_staged_protenix_inputs.py`:
   builds stage-1 and stage-2 Protenix JSON inputs.
 - `scripts/merge_staged_tagged_complex.py`:
-  selects best stage outputs and writes one merged final CIF/PDB.
+  selects stage outputs (`ranking`, `tail_distance`, or `hybrid`) and writes one merged final CIF/PDB.
 - `scripts/run_complete_tagged_pipeline.sh`:
   end-to-end runner.
 - `scripts/submit_complete_tagged_pipeline_slurm.sh`:
   sbatch entrypoint for cluster.
+- `scripts/build_conjugates_first_protenix_inputs.py`:
+  experimental branch input builder (`alpha+streptavidin`, `beta+spytag`, then `alpha+beta` docking).
+- `scripts/run_conjugates_first_pipeline.sh`:
+  experimental branch runner for conjugates-first strategy.
 
 ## Cluster run
 ```bash
 sbatch ~/scratch/conformers/pipelines/protenix-a5b1/scripts/submit_complete_tagged_pipeline_slurm.sh
 ```
+
+## Tail-aware sample selection
+By default, merged output uses per-stage best `ranking_score` sample.
+
+To prioritize tail-proximal placement during merge:
+```bash
+SELECTION_MODE=tail_distance \
+STAGE1_LIGAND_ANCHOR_RESIDUE=10 \
+STAGE2_LIGAND_ANCHOR_RESIDUE=1 \
+bash pipelines/protenix-a5b1/scripts/run_complete_tagged_pipeline.sh
+```
+
+Hybrid mode (prefer high ranking among near-tail candidates):
+```bash
+SELECTION_MODE=hybrid \
+STAGE1_MAX_TAIL_DISTANCE=20 \
+STAGE2_MAX_TAIL_DISTANCE=30 \
+bash pipelines/protenix-a5b1/scripts/run_complete_tagged_pipeline.sh
+```
+
+Notes:
+- SpyTag reactive residue defaults to Asp10 from sequence `RGVPHIVMVDAYKRYK`.
+- Tail residues are auto-read from `inputs/components.json` (`A:971`, `B:818` in current run).
+
+## Experimental: Conjugates-first branch
+Run:
+```bash
+bash pipelines/protenix-a5b1/scripts/run_conjugates_first_pipeline.sh
+```
+
+Design references used:
+- `references/Summary.pdf`
+- `references/Group Design PPT.pdf`
+
+This branch currently performs:
+1. `alpha5-Avi + streptavidin` conjugate inference
+2. `beta1-SpyCatcher + spytag` conjugate inference
+3. `alpha5-Avi + beta1-SpyCatcher` docking stage
+
+Outputs summary JSON:
+- `data/runs/a5b1/conjugates_first/outputs/final/conjugates_first_summary.json`
 
 ## Minimal remote control (submit/watch/fetch)
 Use `scripts/pace_minimal.sh` to avoid repeated interactive SSH login loops.
@@ -74,7 +119,7 @@ PACE_HOST='dfu71@login-phoenix.pace.gatech.edu' pipelines/protenix-a5b1/scripts/
 Defaults:
 - Remote host alias: `pace` (override `PACE_HOST`).
 - Remote repo root: `$HOME/scratch/conformers` (override `PACE_REMOTE_ROOT`).
-- Submit script requested GPU: `--gres=gpu:RTX_6000:1`.
+- Submit script requests A100 80GB: `--partition=gpu-a100 --gres=gpu:A100:1 --constraint=A100-80GB`.
 
 ## Key outputs
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.cif`

@@ -5,7 +5,9 @@ CONFORMERS_ROOT="${CONFORMERS_ROOT:-$HOME/scratch/conformers}"
 WORKFLOW_DIR="${WORKFLOW_DIR:-$CONFORMERS_ROOT/data/runs/a5b1/staged_attachment}"
 
 SEQUENCE_FILE="${SEQUENCE_FILE:-$CONFORMERS_ROOT/data/a5b1/sequences/sequences_updated}"
-HETERODIMER_PREDICTIONS_DIR="${HETERODIMER_PREDICTIONS_DIR:-$CONFORMERS_ROOT/data/a5b1/outputs/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/seed_101/predictions}"
+PRIMARY_HETERODIMER_PREDICTIONS_DIR="$CONFORMERS_ROOT/data/runs/a5b1/protenix/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/seed_101/predictions"
+LEGACY_HETERODIMER_PREDICTIONS_DIR="$CONFORMERS_ROOT/data/a5b1/outputs/outputs_integrin_alpha5_beta1/integrin_alpha5_beta1/seed_101/predictions"
+HETERODIMER_PREDICTIONS_DIR="${HETERODIMER_PREDICTIONS_DIR:-$PRIMARY_HETERODIMER_PREDICTIONS_DIR}"
 HETERODIMER_CIF="${HETERODIMER_CIF:-}"
 
 MODEL_NAME="${MODEL_NAME:-protenix_base_default_v1.0.0}"
@@ -17,6 +19,11 @@ USE_DEFAULT_PARAMS="${USE_DEFAULT_PARAMS:-true}"
 TRIATT_KERNEL="${TRIATT_KERNEL:-torch}"
 TRIMUL_KERNEL="${TRIMUL_KERNEL:-torch}"
 FORCE_RERUN="${FORCE_RERUN:-0}"
+SELECTION_MODE="${SELECTION_MODE:-ranking}"
+STAGE1_LIGAND_ANCHOR_RESIDUE="${STAGE1_LIGAND_ANCHOR_RESIDUE:-10}"
+STAGE2_LIGAND_ANCHOR_RESIDUE="${STAGE2_LIGAND_ANCHOR_RESIDUE:-1}"
+STAGE1_MAX_TAIL_DISTANCE="${STAGE1_MAX_TAIL_DISTANCE:-}"
+STAGE2_MAX_TAIL_DISTANCE="${STAGE2_MAX_TAIL_DISTANCE:-}"
 
 A5B1_SETUP_SCRIPT="$CONFORMERS_ROOT/pipelines/protenix-a5b1/scripts/setup_staged_attachment_workflow.py"
 A5B1_INPUT_SCRIPT="$CONFORMERS_ROOT/pipelines/protenix-a5b1/scripts/build_staged_protenix_inputs.py"
@@ -31,6 +38,11 @@ done
 if [[ ! -f "$SEQUENCE_FILE" ]]; then
   echo "ERROR: sequence file not found: $SEQUENCE_FILE" >&2
   exit 1
+fi
+if [[ -z "$HETERODIMER_CIF" && ! -d "$HETERODIMER_PREDICTIONS_DIR" && -d "$LEGACY_HETERODIMER_PREDICTIONS_DIR" ]]; then
+  echo "INFO: default heterodimer predictions dir missing; using legacy path:"
+  echo "      $LEGACY_HETERODIMER_PREDICTIONS_DIR"
+  HETERODIMER_PREDICTIONS_DIR="$LEGACY_HETERODIMER_PREDICTIONS_DIR"
 fi
 if [[ -z "$HETERODIMER_CIF" && ! -d "$HETERODIMER_PREDICTIONS_DIR" ]]; then
   echo "ERROR: heterodimer predictions dir not found: $HETERODIMER_PREDICTIONS_DIR" >&2
@@ -57,6 +69,11 @@ echo "USE_MSA=$USE_MSA"
 echo "USE_TEMPLATE=$USE_TEMPLATE"
 echo "USE_DEFAULT_PARAMS=$USE_DEFAULT_PARAMS"
 echo "FORCE_RERUN=$FORCE_RERUN"
+echo "SELECTION_MODE=$SELECTION_MODE"
+echo "STAGE1_LIGAND_ANCHOR_RESIDUE=$STAGE1_LIGAND_ANCHOR_RESIDUE"
+echo "STAGE2_LIGAND_ANCHOR_RESIDUE=$STAGE2_LIGAND_ANCHOR_RESIDUE"
+echo "STAGE1_MAX_TAIL_DISTANCE=${STAGE1_MAX_TAIL_DISTANCE:-<none>}"
+echo "STAGE2_MAX_TAIL_DISTANCE=${STAGE2_MAX_TAIL_DISTANCE:-<none>}"
 echo "========================================="
 
 SETUP_ARGS=(
@@ -142,20 +159,54 @@ print(obj['heterodimer_cif'])
 PY
 )}"
 
+read_tail_residue() {
+  local chain_id="$1"
+  python3 - "$WORKFLOW_DIR/inputs/components.json" "$chain_id" <<'PY'
+import json
+import sys
+from pathlib import Path
+p = Path(sys.argv[1])
+chain = sys.argv[2]
+obj = json.loads(p.read_text(encoding='utf-8'))
+print(int(obj["tail_anchors"][chain]["tail_residue"]))
+PY
+}
+
+TAIL_A="$(read_tail_residue "A")"
+TAIL_B="$(read_tail_residue "B")"
+
 FINAL_CIF="$FINAL_OUT_DIR/a5b1_tagged_complete.cif"
 FINAL_PDB="$FINAL_OUT_DIR/a5b1_tagged_complete.pdb"
 
-python3 "$A5B1_MERGE_SCRIPT" \
-  --base-cif "$BASE_CIF" \
-  --stage1-predictions-dir "$STAGE1_PRED_DIR" \
-  --stage2-predictions-dir "$STAGE2_PRED_DIR" \
-  --receptor-chains A,B \
-  --stage1-ligand-chain C \
-  --stage2-ligand-chain C \
-  --out-stage1-chain C \
-  --out-stage2-chain D \
-  --out-cif "$FINAL_CIF" \
+MERGE_ARGS=(
+  --base-cif "$BASE_CIF"
+  --stage1-predictions-dir "$STAGE1_PRED_DIR"
+  --stage2-predictions-dir "$STAGE2_PRED_DIR"
+  --receptor-chains A,B
+  --stage1-ligand-chain C
+  --stage2-ligand-chain C
+  --out-stage1-chain C
+  --out-stage2-chain D
+  --selection-mode "$SELECTION_MODE"
+  --stage1-tail-chain B
+  --stage2-tail-chain A
+  --stage1-tail-residue "$TAIL_B"
+  --stage2-tail-residue "$TAIL_A"
+  --stage1-ligand-anchor-residue "$STAGE1_LIGAND_ANCHOR_RESIDUE"
+  --stage2-ligand-anchor-residue "$STAGE2_LIGAND_ANCHOR_RESIDUE"
+  --out-cif "$FINAL_CIF"
   --out-pdb "$FINAL_PDB"
+)
+
+if [[ -n "$STAGE1_MAX_TAIL_DISTANCE" ]]; then
+  MERGE_ARGS+=(--stage1-max-tail-distance "$STAGE1_MAX_TAIL_DISTANCE")
+fi
+if [[ -n "$STAGE2_MAX_TAIL_DISTANCE" ]]; then
+  MERGE_ARGS+=(--stage2-max-tail-distance "$STAGE2_MAX_TAIL_DISTANCE")
+fi
+
+python3 "$A5B1_MERGE_SCRIPT" \
+  "${MERGE_ARGS[@]}"
 
 echo "Pipeline complete."
 echo "  Final CIF: $FINAL_CIF"
