@@ -68,3 +68,26 @@ objectives:
     Claude agents now follow a deterministic flow for PACE interactions instead of
     re-deriving SSH/SLURM commands each time. Reduces errors from ad-hoc scripting.
   completed_date: '2026-03-10'
+- id: obj-005
+  status: completed
+  statement: Build AVB3 conformer generation and pseudo-AFM image pipeline.
+  methodology: >
+    Created pipelines/avb3-conformers/ with 5-stage workflow: steered MD (RoyalMD
+    pull), trajectory splitting, equilibrium relaxation, frame collection, and
+    pseudo-AFM image generation via afmfold. Includes SLURM scripts for PACE
+    (RTX 6000) and a Python processing script that computes inter-domain CVs
+    and generates morphological AFM simulations.
+  metrics:
+    scripts_created: 5
+    stages: 5
+    afm_image_size: 35x35
+    domain_cvs: 3
+    slurm_gpu: RTX_6000
+  figures:
+  - figures/avb3_conformer_pipeline.png
+  conclusions: >
+    End-to-end pipeline automates the manual workflow of pull→split→relax→collect→AFM.
+    Pseudo-AFM images with CV labels can serve as training data for the afmfold CNN
+    even without real HS-AFM data.
+  connects_to: null
+  completed_date: '2026-03-18'
