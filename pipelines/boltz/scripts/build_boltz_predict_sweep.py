@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a Boltz predict YAML sweep for conformation sampling."""
+"""Generate BoltzGen-compatible YAML specs for heterodimer sampling."""
 
 from __future__ import annotations
 
@@ -31,20 +31,39 @@ def parse_thresholds(raw: str) -> List[float]:
 
 
 def build_templates(template_cif: Path, chain_id: str, force: bool, threshold: float | None) -> list[dict]:
-    block = {
-        "cif": str(template_cif.resolve()),
-        "chain_id": chain_id,
-        "template_inclusion_prob": 1.0,
-        "template_filter": True,
-        "force_template": bool(force),
-    }
-    if threshold is not None:
-        block["force_template_threshold"] = float(threshold)
-    return [block]
+    # Legacy helper retained only to keep import-level compatibility if referenced elsewhere.
+    # Current BoltzGen schema does not accept nested protein.templates blocks.
+    return []
 
 
 def write_yaml(path: Path, doc: dict) -> None:
     path.write_text(yaml.safe_dump(doc, sort_keys=False), encoding="utf-8")
+
+
+def build_protein_doc(seq_a: str, seq_b: str, msa_a: str, msa_b: str) -> dict:
+    return {
+        "entities": [
+            {"protein": {"id": "A", "sequence": seq_a, "msa": msa_a}},
+            {"protein": {"id": "B", "sequence": seq_b, "msa": msa_b}},
+        ]
+    }
+
+
+def build_file_context_doc(template_cif: Path, msa_a: str, msa_b: str) -> dict:
+    return {
+        "entities": [
+            {
+                "file": {
+                    "path": str(template_cif.resolve()),
+                    "include": [
+                        {"chain": {"id": "A", "msa": msa_a}},
+                        {"chain": {"id": "B", "msa": msa_b}},
+                    ],
+                    "structure_groups": "all",
+                }
+            }
+        ]
+    }
 
 
 def main() -> int:
@@ -59,7 +78,11 @@ def main() -> int:
     parser.add_argument(
         "--force-thresholds",
         default="0.60,0.75,0.90",
-        help="Comma-separated template force thresholds for force_template mode.",
+        help=(
+            "Legacy template-force labels. Current BoltzGen schema does not expose "
+            "protein.templates force thresholds, so template-guided generation emits "
+            "a single file-context job when --template-cif is provided."
+        ),
     )
     parser.add_argument(
         "--extended-only",
@@ -99,13 +122,7 @@ def main() -> int:
         if not args.extended_only:
             # Baseline with user-provided MSA paths (or empty).
             baseline_name = f"{args.job_prefix}_msa_baseline"
-            baseline_doc = {
-                "version": 1,
-                "sequences": [
-                    {"protein": {"id": "A", "sequence": seq_a, "msa": msa_a}},
-                    {"protein": {"id": "B", "sequence": seq_b, "msa": msa_b}},
-                ],
-            }
+            baseline_doc = build_protein_doc(seq_a, seq_b, msa_a, msa_b)
             baseline_yaml = outdir / f"{baseline_name}.yaml"
             write_yaml(baseline_yaml, baseline_doc)
             writer.writerow([baseline_name, "msa_baseline", baseline_yaml])
@@ -113,75 +130,24 @@ def main() -> int:
 
             # No-MSA control.
             no_msa_name = f"{args.job_prefix}_empty_msa_control"
-            no_msa_doc = {
-                "version": 1,
-                "sequences": [
-                    {"protein": {"id": "A", "sequence": seq_a, "msa": "empty"}},
-                    {"protein": {"id": "B", "sequence": seq_b, "msa": "empty"}},
-                ],
-            }
+            no_msa_doc = build_protein_doc(seq_a, seq_b, "empty", "empty")
             no_msa_yaml = outdir / f"{no_msa_name}.yaml"
             write_yaml(no_msa_yaml, no_msa_doc)
             writer.writerow([no_msa_name, "empty_msa_control", no_msa_yaml])
             job_count += 1
 
         if template_cif is not None:
-            if not args.extended_only:
-                # Soft template guidance.
-                soft_name = f"{args.job_prefix}_template_soft"
-                soft_doc = {
-                    "version": 1,
-                    "sequences": [
-                        {
-                            "protein": {
-                                "id": "A",
-                                "sequence": seq_a,
-                                "msa": msa_a,
-                                "templates": build_templates(template_cif, "A", force=False, threshold=None),
-                            }
-                        },
-                        {
-                            "protein": {
-                                "id": "B",
-                                "sequence": seq_b,
-                                "msa": msa_b,
-                                "templates": build_templates(template_cif, "B", force=False, threshold=None),
-                            }
-                        },
-                    ],
-                }
-                soft_yaml = outdir / f"{soft_name}.yaml"
-                write_yaml(soft_yaml, soft_doc)
-                writer.writerow([soft_name, "template_soft", soft_yaml])
-                job_count += 1
-
-            for thr in thresholds:
-                force_name = f"{args.job_prefix}_template_force_{thr:.2f}".replace(".", "p")
-                force_doc = {
-                    "version": 1,
-                    "sequences": [
-                        {
-                            "protein": {
-                                "id": "A",
-                                "sequence": seq_a,
-                                "msa": msa_a,
-                                "templates": build_templates(template_cif, "A", force=True, threshold=thr),
-                            }
-                        },
-                        {
-                            "protein": {
-                                "id": "B",
-                                "sequence": seq_b,
-                                "msa": msa_b,
-                                "templates": build_templates(template_cif, "B", force=True, threshold=thr),
-                            }
-                        },
-                    ],
-                }
-                force_yaml = outdir / f"{force_name}.yaml"
-                write_yaml(force_yaml, force_doc)
-                writer.writerow([force_name, f"template_force_{thr:.2f}", force_yaml])
-                job_count += 1
+            if len(thresholds) > 1:
+                print(
+                    "[sweep] Note: template force thresholds are not represented in the "
+                    "installed BoltzGen schema; emitting one template_context job."
+                )
+            context_name = f"{args.job_prefix}_template_context"
+            context_doc = build_file_context_doc(template_cif, msa_a, msa_b)
+            context_yaml = outdir / f"{context_name}.yaml"
+            write_yaml(context_yaml, context_doc)
+            writer.writerow([context_name, "template_context", context_yaml])
+            job_count += 1
 
     print(f"[sweep] wrote {job_count} jobs to {outdir}")
     print(f"[sweep] manifest: {manifest_path}")

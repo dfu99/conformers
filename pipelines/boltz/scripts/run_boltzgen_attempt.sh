@@ -51,6 +51,15 @@ fi
 
 mkdir -p "$OUTDIR"
 
+# BoltzGen downloads/checks model artifacts through huggingface_hub. Home quota on
+# PACE is tight, so default the cache to scratch unless the caller overrides it.
+HF_CACHE_ROOT="${HF_HOME:-$HOME/scratch/.cache/huggingface}"
+export HF_HOME="$HF_CACHE_ROOT"
+export HF_HUB_CACHE="${HF_HUB_CACHE:-$HF_HOME/hub}"
+export HF_XET_CACHE="${HF_XET_CACHE:-$HF_HOME/xet}"
+mkdir -p "$HF_HUB_CACHE" "$HF_XET_CACHE"
+echo "HF_HOME=$HF_HOME"
+
 if command -v boltzgen >/dev/null 2>&1; then
   echo "Running: boltzgen run"
   # shellcheck disable=SC2086

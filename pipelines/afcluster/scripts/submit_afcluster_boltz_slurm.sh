@@ -29,6 +29,8 @@ MSA_B="${MSA_B:-$CONFORMERS_ROOT/data/avb3/template_example/msa/1/non_pairing.a3
 TEMPLATE_CIF="${TEMPLATE_CIF:-$CONFORMERS_ROOT/data/avb3/template_example/seed_090_frame_000.cif}"
 
 OUTDIR="${OUTDIR:-$CONFORMERS_ROOT/data/runs/afcluster/avb3/slurm_afcluster_boltz_${SLURM_JOB_ID}}"
+TOP_A="${TOP_A:-8}"
+TOP_B="${TOP_B:-8}"
 
 # Backend can be boltzgen (default) or boltz.
 BACKEND="${BACKEND:-boltzgen}"
@@ -57,6 +59,8 @@ echo "SEED_PDB=$SEED_PDB"
 echo "CHAIN_A_ID=$CHAIN_A_ID"
 echo "CHAIN_B_ID=$CHAIN_B_ID"
 echo "OUTDIR=$OUTDIR"
+echo "TOP_A=$TOP_A"
+echo "TOP_B=$TOP_B"
 echo "BACKEND=$BACKEND"
 echo "PROTOCOL=$PROTOCOL"
 echo "NUM_DESIGNS=$NUM_DESIGNS"
@@ -94,6 +98,8 @@ RUN_ARGS=(
   --chain-b-msa "$MSA_B"
   --template-cif "$TEMPLATE_CIF"
   --outdir "$OUTDIR"
+  --top-a "$TOP_A"
+  --top-b "$TOP_B"
   --backend "$BACKEND"
 )
 
