@@ -228,3 +228,15 @@ Before diagnosing new failures, verify in order:
 - Likely cause: `boltzgen check` defaults to writing the visualization mmCIF into the current working directory when no `--output` directory is provided.
 - Action: when validating on PACE, either `cd ~/scratch/...` first or pass `--output ~/scratch/...` explicitly.
 - Practical implication: avoid cluttering or exhausting home quota with validation artifacts.
+
+### MSA Subsampling Can Validate Conformer Realism (Literature)
+- Source: Wayment-Steele et al., Nature Comms 2024; AFsample2
+- Key insight: subsampling MSA depth causes AF2 to explore different conformational states; predicted frequency correlates with experimental populations (>80% accuracy vs NMR).
+- Implication for pulled conformers: a valid extended state should be "reachable" by some MSA subsample with decent pLDDT. An over-stretched invalid state should have no MSA depth that agrees.
+- Action: use progressive MSA subsampling (100% → 5%) as a cheap conformer validation filter before investing in full pipeline runs.
+
+### ProteinTTT Can Bypass HuggingFace Residue Limits Locally
+- Source: anton-bushuiev/ProteinTTT (ICLR 2026)
+- Symptom: HuggingFace Space rejects AVB3 (>400 residues).
+- Action: install locally and run on PACE A100 80GB — no hard residue limit in the code, only GPU memory.
+- Note: ProteinTTT fine-tunes ESMFold per-protein via test-time training, reportedly 2x pLDDT improvement on hard targets.

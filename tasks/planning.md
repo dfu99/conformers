@@ -61,10 +61,11 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
-2. **Post-merge geometry checks** — Add tail distance and interface sanity validation before ranking the final merged structure.
-3. **Unified ranking table** — Build one script that collects and ranks outputs across Protenix/Boltz/AFCluster pipelines.
-4. **Run real A5B1 pipeline on PACE** — Use pace_minimal.sh to submit the full staged tagged pipeline and fetch results.
+1. **MSA-subsampled conformer validation** — Prototype a script that runs AF2/Protenix with progressively shallower MSA subsamples against pulled PDB frames. Valid conformers should achieve decent pLDDT at some MSA depth; invalid ones should not. Based on Wayment-Steele et al. (Nature Comms 2024).
+2. **Evaluate ProteinTTT for AVB3** — Clone anton-bushuiev/ProteinTTT, install locally, test ESMFold customization on AVB3 sequence on PACE A100 (bypasses HuggingFace <400 residue limit).
+3. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
+4. **Post-merge geometry checks** — Add tail distance and interface sanity validation before ranking the final merged structure.
+5. **Run real A5B1 pipeline on PACE** — Use pace_minimal.sh to submit the full staged tagged pipeline and fetch results.
 
 ## Recently Completed
 - [x] Build AVB3 conformer + pseudo-AFM image pipeline (2026-03-18)
