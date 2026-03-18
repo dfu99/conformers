@@ -51,6 +51,11 @@ def numeric_hint(path: Path) -> int:
     return int(m.group(1))
 
 
+def cluster_sort_key(path: Path) -> tuple[int, int, int, str]:
+    is_outlier = 1 if path.name == "cluster_outliers.a3m" else 0
+    return (is_outlier, -path.stat().st_size, numeric_hint(path), path.name)
+
+
 def filter_supported_kwargs(callable_obj, kwargs: dict) -> dict:
     """Keep only kwargs supported by callable_obj signature.
 
@@ -142,7 +147,8 @@ def main() -> int:
             "This often means an AFCluster API/data format mismatch."
         )
 
-    ranked = sorted(a3m_files, key=lambda p: p.stat().st_size, reverse=True)
+    # Keep bona fide clusters ahead of the outlier bucket, then break ties by size.
+    ranked = sorted(a3m_files, key=cluster_sort_key)
     if args.keep_top > 0:
         keep = set(ranked[: args.keep_top])
         for path in ranked[args.keep_top :]:

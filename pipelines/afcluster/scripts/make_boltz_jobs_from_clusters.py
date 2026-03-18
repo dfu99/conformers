@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Boltz YAML jobs from AF-Cluster outputs for chain A/B."""
+"""Generate BoltzGen YAML jobs from AF-Cluster outputs for chain A/B."""
 
 from __future__ import annotations
 
@@ -18,6 +18,10 @@ def read_text(path: Path) -> str:
     return text
 
 
+def is_outlier_cluster(path: Path) -> bool:
+    return path.name == "cluster_outliers.a3m"
+
+
 def load_ranked_clusters(cluster_dir: Path, top_n: int) -> List[Path]:
     summary = cluster_dir / "clusters.tsv"
     paths: List[Path] = []
@@ -28,10 +32,16 @@ def load_ranked_clusters(cluster_dir: Path, top_n: int) -> List[Path]:
                 path = cluster_dir / row["filename"]
                 if path.exists():
                     paths.append(path)
-                if top_n > 0 and len(paths) >= top_n:
-                    break
+            real_clusters = [path for path in paths if not is_outlier_cluster(path)]
+            outlier_clusters = [path for path in paths if is_outlier_cluster(path)]
+            paths = real_clusters + outlier_clusters
+            if top_n > 0:
+                paths = paths[:top_n]
     else:
-        paths = sorted(cluster_dir.glob("*.a3m"), key=lambda p: p.stat().st_size, reverse=True)
+        paths = sorted(
+            cluster_dir.glob("*.a3m"),
+            key=lambda p: (is_outlier_cluster(p), -p.stat().st_size, p.name),
+        )
         if top_n > 0:
             paths = paths[:top_n]
     if not paths:
@@ -39,8 +49,38 @@ def load_ranked_clusters(cluster_dir: Path, top_n: int) -> List[Path]:
     return paths
 
 
+def write_yaml(path: Path, doc: dict) -> None:
+    path.write_text(yaml.safe_dump(doc, sort_keys=False), encoding="utf-8")
+
+
+def build_protein_doc(seq_a: str, seq_b: str, msa_a: str, msa_b: str) -> dict:
+    return {
+        "entities": [
+            {"protein": {"id": "A", "sequence": seq_a, "msa": msa_a}},
+            {"protein": {"id": "B", "sequence": seq_b, "msa": msa_b}},
+        ]
+    }
+
+
+def build_file_context_doc(template_cif: Path, msa_a: str, msa_b: str) -> dict:
+    return {
+        "entities": [
+            {
+                "file": {
+                    "path": str(template_cif.resolve()),
+                    "include": [
+                        {"chain": {"id": "A", "msa": msa_a}},
+                        {"chain": {"id": "B", "msa": msa_b}},
+                    ],
+                    "structure_groups": "all",
+                }
+            }
+        ]
+    }
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build Boltz YAML jobs from clustered MSAs.")
+    parser = argparse.ArgumentParser(description="Build BoltzGen YAML jobs from clustered MSAs.")
     parser.add_argument("--chain-a-seq-file", type=Path, required=True)
     parser.add_argument("--chain-b-seq-file", type=Path, required=True)
     parser.add_argument("--chain-a-cluster-dir", type=Path, required=True)
@@ -50,7 +90,16 @@ def main() -> int:
     parser.add_argument("--outdir", type=Path, required=True)
     parser.add_argument("--job-prefix", type=str, default="integrin_ab")
     parser.add_argument("--template-cif", type=Path, default=None)
-    parser.add_argument("--template-force-threshold", type=float, default=0.80)
+    parser.add_argument(
+        "--template-force-threshold",
+        type=float,
+        default=0.80,
+        help=(
+            "Legacy compatibility flag. The installed BoltzGen schema does not expose "
+            "per-chain force-template thresholds, so template-guided jobs emit one "
+            "file-context spec whenever --template-cif is provided."
+        ),
+    )
     parser.add_argument(
         "--include-empty-msa-control",
         action="store_true",
@@ -65,30 +114,8 @@ def main() -> int:
     clusters_a = load_ranked_clusters(args.chain_a_cluster_dir, args.top_a)
     clusters_b = load_ranked_clusters(args.chain_b_cluster_dir, args.top_b)
 
-    template_block_a = []
-    template_block_b = []
-    if args.template_cif is not None:
-        template_path = str(args.template_cif.resolve())
-        template_block_a = [
-            {
-                "cif": template_path,
-                "chain_id": "A",
-                "template_inclusion_prob": 1.0,
-                "template_filter": True,
-                "force_template": True,
-                "force_template_threshold": float(args.template_force_threshold),
-            }
-        ]
-        template_block_b = [
-            {
-                "cif": template_path,
-                "chain_id": "B",
-                "template_inclusion_prob": 1.0,
-                "template_filter": True,
-                "force_template": True,
-                "force_template_threshold": float(args.template_force_threshold),
-            }
-        ]
+    if args.template_cif is not None and not args.template_cif.exists():
+        raise FileNotFoundError(f"Template CIF not found: {args.template_cif}")
 
     manifest_path = args.outdir / "jobs_manifest.tsv"
     with manifest_path.open("w", encoding="utf-8") as manifest:
@@ -99,32 +126,14 @@ def main() -> int:
             for j, msa_b in enumerate(clusters_b, start=1):
                 job_name = f"{args.job_prefix}_a{i:02d}_b{j:02d}"
                 yaml_path = args.outdir / f"{job_name}.yaml"
+                msa_a_path = str(msa_a.resolve())
+                msa_b_path = str(msa_b.resolve())
+                if args.template_cif is None:
+                    doc = build_protein_doc(seq_a, seq_b, msa_a_path, msa_b_path)
+                else:
+                    doc = build_file_context_doc(args.template_cif, msa_a_path, msa_b_path)
 
-                doc = {
-                    "version": 1,
-                    "sequences": [
-                        {
-                            "protein": {
-                                "id": "A",
-                                "sequence": seq_a,
-                                "msa": str(msa_a.resolve()),
-                            }
-                        },
-                        {
-                            "protein": {
-                                "id": "B",
-                                "sequence": seq_b,
-                                "msa": str(msa_b.resolve()),
-                            }
-                        },
-                    ],
-                }
-                if template_block_a:
-                    doc["sequences"][0]["protein"]["templates"] = template_block_a
-                if template_block_b:
-                    doc["sequences"][1]["protein"]["templates"] = template_block_b
-
-                yaml_path.write_text(yaml.safe_dump(doc, sort_keys=False), encoding="utf-8")
+                write_yaml(yaml_path, doc)
                 manifest.write(
                     f"{job_name}\t{msa_a}\t{msa_b}\t{yaml_path}\n"
                 )
@@ -133,22 +142,20 @@ def main() -> int:
         if args.include_empty_msa_control:
             job_name = f"{args.job_prefix}_control_empty_msa"
             yaml_path = args.outdir / f"{job_name}.yaml"
-            doc = {
-                "version": 1,
-                "sequences": [
-                    {"protein": {"id": "A", "sequence": seq_a, "msa": "empty"}},
-                    {"protein": {"id": "B", "sequence": seq_b, "msa": "empty"}},
-                ],
-            }
-            if template_block_a:
-                doc["sequences"][0]["protein"]["templates"] = template_block_a
-            if template_block_b:
-                doc["sequences"][1]["protein"]["templates"] = template_block_b
-            yaml_path.write_text(yaml.safe_dump(doc, sort_keys=False), encoding="utf-8")
+            if args.template_cif is None:
+                doc = build_protein_doc(seq_a, seq_b, "empty", "empty")
+            else:
+                doc = build_file_context_doc(args.template_cif, "empty", "empty")
+            write_yaml(yaml_path, doc)
             manifest.write(f"{job_name}\tempty\tempty\t{yaml_path}\n")
             job_count += 1
 
-    print(f"[jobs] wrote {job_count} Boltz YAML files in {args.outdir}")
+    if args.template_cif is not None:
+        print(
+            "[jobs] Note: template_force_threshold is retained for CLI compatibility "
+            "but is not represented in the installed BoltzGen schema."
+        )
+    print(f"[jobs] wrote {job_count} BoltzGen YAML files in {args.outdir}")
     print(f"[jobs] manifest: {manifest_path}")
     return 0
 

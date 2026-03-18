@@ -94,6 +94,14 @@ if [[ "$BACKEND" != "boltzgen" && "$BACKEND" != "boltz" ]]; then
   exit 1
 fi
 
+# BoltzGen uses huggingface_hub for checkpoints and inference data. Keep those
+# downloads on scratch by default to avoid exhausting the home-directory quota.
+HF_CACHE_ROOT="${HF_HOME:-$HOME/scratch/.cache/huggingface}"
+export HF_HOME="$HF_CACHE_ROOT"
+export HF_HUB_CACHE="${HF_HUB_CACHE:-$HF_HOME/hub}"
+export HF_XET_CACHE="${HF_XET_CACHE:-$HF_HOME/xet}"
+mkdir -p "$HF_HUB_CACHE" "$HF_XET_CACHE"
+
 if [[ "$BACKEND" == "boltzgen" ]]; then
   if ! command -v "$BOLTZGEN_BIN" >/dev/null 2>&1; then
     echo "ERROR: $BOLTZGEN_BIN not found in PATH." >&2
@@ -114,6 +122,7 @@ JOB_DIR="$OUTDIR/boltz_jobs"
 BOLTZ_OUT="$OUTDIR/boltz_outputs"
 
 mkdir -p "$CLUSTER_A_DIR" "$CLUSTER_B_DIR" "$JOB_DIR" "$BOLTZ_OUT"
+echo "HF_HOME=$HF_HOME"
 
 echo "[1/4] Clustering chain A MSA"
 python3 "$SCRIPT_DIR/cluster_chain_msa.py" \

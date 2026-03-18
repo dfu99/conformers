@@ -126,3 +126,84 @@ Final outputs:
   - `data/runs/a5b1/conjugates_first/outputs/final/a5b1_conjugates_first_combined.pdb`
   - `data/runs/a5b1/conjugates_first/outputs/final/a5b1_conjugates_first_combined.merge_summary.json`
 - `conjugates_first_summary.json` now includes `combined_output` paths.
+
+## Updated: A5B1 Auto-Search Until Pass (2026-03-12)
+- Added merge-quality validator:
+  - `pipelines/protenix-a5b1/scripts/check_tagged_structure_quality.py`
+  - Checks: chain count (expect 4), alpha-tail to AviTag-branch distance, beta-tail to SpyCatcher-branch distance.
+- Added automatic seed/anchor sweep runner:
+  - `pipelines/protenix-a5b1/scripts/run_complete_tagged_until_pass.sh`
+  - Iterates over `SEED_LIST_CSV` and `STAGE2_ANCHOR_LIST_CSV`, runs complete pipeline, and hard-fails if no attempt passes thresholds.
+- Updated submit entrypoint:
+  - `pipelines/protenix-a5b1/scripts/submit_complete_tagged_pipeline_slurm.sh`
+  - Supports `AUTO_SEARCH_UNTIL_PASS=1` to run the new sweep workflow.
+
+## Updated: A5B1 Anchor Sweep + Seed Expansion (2026-03-13)
+- Refined anchor sweep defaults in `run_complete_tagged_until_pass.sh`:
+  - `STAGE1_ANCHOR_LIST_CSV=1..16` (valid stage-1 chain-C residue range)
+  - `STAGE2_ANCHOR_LIST_CSV=1` (targeted default while stage-2 anchor sensitivity remains low)
+- Confirmed cached-seed (`101..909`) strict sweep still has no pass at `<=25 A` with best near-pass around `26.44/26.12 A`.
+- Began fresh-seed A100 expansion via per-seed submits (`SEED_LIST_CSV=<single_seed>`) to avoid `sbatch --export` CSV pitfalls and continue autonomous pass search.
+- Completed first fresh-seed batch (`1001,1111,1222,1333,1444,1555`; jobs `4901896`..`4901901`): all failed strict pass gating; best structure remained the same near-pass from seed `404`.
+- Tested targeted stage2-anchor expansion for `seed 404` (`stage1=1`, stage2 incremental sweep): observed invariant geometry across tested anchors, so broad stage2 brute force is currently low-yield.
+- Ran post-merge rescoring against alternate heterodimer base frames (`sample_0..4`) and identified that base `sample_2` unlocks a strict pass with existing stage predictions.
+- Produced strict-passing final artifact using base `sample_2` + seed `404` best stage samples and promoted it to canonical final outputs:
+  - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.cif`
+  - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
+  - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.quality.json`
+
+## Updated: Stricter Chemistry + Exclusion Gating (2026-03-13)
+- Extended `pipelines/protenix-a5b1/scripts/check_tagged_structure_quality.py` beyond CA-tail checks:
+  - explicit attachment distances (`A966:NZ -> chain D`, `B735:NZ -> C10:[OD1,OD2,CG]`)
+  - optional receptor exclusion zones (currently `A780-820` for D-branch rejection)
+  - richer JSON diagnostics with nearest atoms and failing constraints.
+- Extended `pipelines/protenix-a5b1/scripts/run_complete_tagged_until_pass.sh`:
+  - base heterodimer frame sweep via `BASE_SAMPLE_LIST_CSV` (defaults `0..4`)
+  - strict defaults (`20 A` tail gates, `6 A` attachment gates, alpha-body exclusion min-distance)
+  - direct `HETERODIMER_CIF` override per attempt so base-frame search is in-loop.
+- Synced stricter scripts to PACE and started:
+  1. cached strict scan for `seed=404`, `base=0..4`, `stage1=1..16` (completed, no pass).
+  2. broader cached strict background scan across seeds `101..1555` (in progress, log:
+     `logs/protenix-a5b1/a5b1_strict_cached_sweep_20260313_160120.log`).
+  3. strict A100 rerun submits for new seeds (queued):
+     - `4925696` (`seed=1666`)
+     - `4925697` (`seed=1777`)
+     - `4925698` (`seed=1888`)
+
+## Updated: Budget-Constrained Search Strategy (2026-03-14)
+- Added bounded search controls to `pipelines/protenix-a5b1/scripts/run_complete_tagged_until_pass.sh`:
+  - `MAX_ATTEMPTS` to hard-cap one sweep chunk
+  - `BASE_CIF_GLOB` to test arbitrary heterodimer base CIF sets (not just Protenix sample `0..4`)
+- Exposed `TOP_A` / `TOP_B` in `pipelines/afcluster/scripts/submit_afcluster_boltz_slurm.sh` so AFCluster search breadth can be explicitly kept small.
+- Strategy change:
+  1. Stop long unconstrained A100 Protenix sweeps as the default.
+  2. Use cheap heterodimer-frame exploration first (`BoltzGen`, `AFCluster -> BoltzGen`) on RTX 6000 with short walltimes.
+  3. Reuse cached tag-attachment stage predictions and rescore merged outputs under the stricter chemistry/exclusion gate.
+- Launched budget-conscious sequential RTX 6000 jobs for A5B1 heterodimer exploration:
+  - direct BoltzGen single-spec run: job `4951450`
+  - AFCluster -> BoltzGen tiny clustered run (`top_a=2`, `top_b=1`) dependent on `4951450`: job `4951452`
+- Result: both jobs failed quickly at BoltzGen config validation because the current YAML generators still emit legacy Boltz schema rather than the installed BoltzGen `entities` schema.
+- Immediate next implementation task: update the Boltz/AFCluster YAML emitters before spending more cluster time on this branch.
+
+## Updated: BoltzGen Schema Fix + AFCluster Outlier Ordering (2026-03-15)
+- Patched BoltzGen YAML emitters to match the installed `entities` schema:
+  - `pipelines/boltz/scripts/build_boltz_predict_sweep.py`
+  - `pipelines/afcluster/scripts/make_boltz_jobs_from_clusters.py`
+- Template-guided jobs now emit one `file`-context spec instead of legacy per-chain `templates` blocks, because the installed parser does not accept the old nested keys.
+- Validated the emitted direct and AFCluster specs on PACE with `boltzgen check`, using real A5B1 sequence/MSA/template inputs. The schema-validation failure is resolved.
+- Patched AFCluster cluster ordering to avoid spending budget on `cluster_outliers.a3m` before numbered clusters:
+  - `pipelines/afcluster/scripts/cluster_chain_msa.py`
+  - `pipelines/afcluster/scripts/make_boltz_jobs_from_clusters.py`
+- Relaunched budget sequential RTX 6000 jobs after the fix:
+  - direct BoltzGen template-context run: job `4957942`
+  - AFCluster -> BoltzGen tiny run (`top_a=2`, `top_b=1`) dependent on `4957942`: job `4957943`
+
+## Updated: BoltzGen Cache Redirect To Scratch (2026-03-16)
+- March 15 relaunches (`4957942`, `4957943`) proved the schema fix worked, but both jobs then failed during Hugging Face checkpoint staging with `Disk quota exceeded`.
+- Root cause: PACE home quota was fully exhausted (`20480M / 20480M`), and BoltzGen was defaulting to `~/.cache/huggingface`.
+- Patched launchers to default Hugging Face caches to scratch:
+  - `pipelines/boltz/scripts/run_boltzgen_attempt.sh`
+  - `pipelines/afcluster/scripts/run_afcluster_pipeline.sh`
+- Relaunched the same tiny sequential RTX 6000 jobs with scratch-backed HF cache:
+  - direct BoltzGen cache-fixed run: job `4963854`
+  - AFCluster -> BoltzGen cache-fixed run (`top_a=2`, `top_b=1`) dependent on `4963854`: job `4963855`

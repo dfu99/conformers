@@ -25,6 +25,9 @@ source "$PROTENIX_VENV/bin/activate"
 
 CONFORMERS_ROOT="${CONFORMERS_ROOT:-$HOME/scratch/conformers}"
 RUN_SCRIPT="$CONFORMERS_ROOT/pipelines/protenix-a5b1/scripts/run_complete_tagged_pipeline.sh"
+if [[ "${AUTO_SEARCH_UNTIL_PASS:-0}" == "1" ]]; then
+  RUN_SCRIPT="$CONFORMERS_ROOT/pipelines/protenix-a5b1/scripts/run_complete_tagged_until_pass.sh"
+fi
 if [[ ! -f "$RUN_SCRIPT" ]]; then
   echo "ERROR: run script not found: $RUN_SCRIPT" >&2
   exit 1
