@@ -1,0 +1,99 @@
+max_chain: 10
+queue:
+- objective: pull. codex has been working on getting the a5b1 geometry correct. it
+    has also tried getting conformers for avb3, but no success so far. it has been
+    working on PACE.
+  priority: 3
+  status: completed
+  added: 2026-03-17 23:52
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-17 23:53
+  completed: 2026-03-17 23:56
+  commits: 1
+  notes: 'Pulled latest from origin (2 commits: 439077f, 12bfc98). Reviewed Codex
+    progress on A5B1 geometry, BoltzGen infrastructure fixes, and AVB3 status. Staged
+    Slack summary. No code changes needed — this was a status pull and review.'
+- objective: codex prefers the method of building the a5b1 geometry by first inferring
+    on a5-AviTag-Streptavidin complex and the b1-SpyCatcher-SpyTag complex separately,
+    and then combining them. do you agree that is the best method?
+  priority: 3
+  status: completed
+  added: 2026-03-17 23:54
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-17 23:56
+  completed: 2026-03-18 00:03
+  notes: 'Reviewed conjugates-first vs staged approach for A5B1. Provided analysis
+    via Slack: conjugates-first is worth trying but the dominant lever is heterodimer
+    frame diversity, not tag staging strategy. No code changes needed.'
+- objective: 'I need a streamlined workflow with ../afmfold/notebooks/Protenix.ipynb
+    and ../RoyalMD that will generate conformers and their pseudo-AFM images. That
+    seems as far as we can get for now without getting our own HS-AFM data. This what
+    I was previously doing: 1. Used RoyalMD with a pulling force on an avb3 pdb to
+    steer the bent conformation into extended conformations. This created a .nc trajectory.
+    I used a script to convert it into a pdb trajectory and then split it into individual
+    frames, each saved as PDB. I didn''t have to save every same because as it pulled
+    more and more, obviously, those conformations were not realistic. 2. I sampled
+    different frames, e.g., 30, 60, 90, 120 and ran them through RoyalMD again without
+    pulling. This created some wiggling of the atoms, slightly diversifying, but it
+    did not help me actually relax any pulled conformers back closer to realistic
+    states. Each of those runs then generated their own trajectory, which I could
+    then process for individual frames. I fed those frames into the notebook script,
+    which could generate the psuedo-AFM images. That script is primarily section 5
+    of the notebook. The other sections above are other attempted workflows that haven''t
+    worked well.'
+  priority: 3
+  status: completed
+  added: 2026-03-18 00:12
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-18 00:13
+  completed: 2026-03-18 00:22
+  notes: 'Built AVB3 conformer + pseudo-AFM image pipeline under pipelines/avb3-conformers/.
+    5 scripts: master orchestrator, SLURM pull/relax jobs, batch relax submitter,
+    and PDB→AFM processing script. Updated planning.md.'
+- objective: I need to find a way, perhaps with the steered RoyalMD frames, to discern
+    what is realistic and what is not. All the template fitting for protenix, afcluster,
+    and boltzgen so far has failed. it seems none are really good at fitting this
+    mechanobiologically sensitive protein. You are welcome to keep trying. What about
+    something else? Can you find ProteinTTT on github by anton-bushuiev? What did
+    they do that might help? I haven't really been able to try it yet. They hosted
+    it on huggingface spaces but our integrin avb3 is too large for their residue
+    limit (less than 400). I was also thinking, is there any way we can simply validate
+    whether a pulled conformer is valid or not? e.g., let there be a smallest MSA
+    pool that achieves a certain confidence number on the structure, without inferring
+    the structure. basically, if i infer with full msa history, it will prefer the
+    bent conformation. eventually, once i get into conformers that are stretched way
+    too much, thus becoming realistic, then I would expect that there is no msa pool
+    that agrees with the structure.
+  priority: 3
+  status: in_progress
+  added: 2026-03-18 00:17
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-18 00:22
+- objective: check on PACE boltzgen jobs `4963854 and 4963855` to see if we have new
+    heterodimer frames to work with
+  priority: 3
+  status: pending
+  added: 2026-03-18 00:19
+  source: slack
+  channel_id: C0AKR3VPKJS
+- objective: Submit the run_conformer_pipeline.sh to PACE if and only if we can develop
+    the previously mentioned validation for the steered conformers.
+  priority: 3
+  status: pending
+  added: 2026-03-18 00:23
+  source: slack
+  channel_id: C0AKR3VPKJS
+- objective: Were you able to check out ProteinTTT? And not infer, but rather, evaluate
+    whether a steered PDB generated via MD has any subset of MSA that validates high
+    confidence (thus, a potentially valid structure, even if MSA inference cannot
+    forward pass infer it), or if no subset of MSA validates it at high confidence
+    (thus, identifying impossible structures).
+  priority: 3
+  status: pending
+  added: 2026-03-18 12:36
+  source: slack
+  channel_id: C0AKR3VPKJS

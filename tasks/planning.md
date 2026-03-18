@@ -61,11 +61,13 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Post-merge geometry checks** — Add tail distance and interface sanity validation before ranking the final merged structure.
-2. **Unified ranking table** — Build one script that collects and ranks outputs across Protenix/Boltz/AFCluster pipelines.
-3. **Run real A5B1 pipeline on PACE** — Use pace_minimal.sh to submit the full staged tagged pipeline and fetch results.
+1. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
+2. **Post-merge geometry checks** — Add tail distance and interface sanity validation before ranking the final merged structure.
+3. **Unified ranking table** — Build one script that collects and ranks outputs across Protenix/Boltz/AFCluster pipelines.
+4. **Run real A5B1 pipeline on PACE** — Use pace_minimal.sh to submit the full staged tagged pipeline and fetch results.
 
 ## Recently Completed
+- [x] Build AVB3 conformer + pseudo-AFM image pipeline (2026-03-18)
 - [x] Add dedicated A5B1 staged pipeline runner + sbatch entrypoint. (obj-001, 2026-03-06)
 - [x] Add deterministic stage-merging utility for final tagged complex export. (obj-002, 2026-03-06)
 - [x] Build PACE minimal remote control script with smoke test validation. (obj-003, 2026-03-09)
