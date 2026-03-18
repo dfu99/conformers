@@ -240,3 +240,9 @@ Before diagnosing new failures, verify in order:
 - Symptom: HuggingFace Space rejects AVB3 (>400 residues).
 - Action: install locally and run on PACE A100 80GB — no hard residue limit in the code, only GPU memory.
 - Note: ProteinTTT fine-tunes ESMFold per-protein via test-time training, reportedly 2x pLDDT improvement on hard targets.
+
+### BoltzGen Design Step OOMs on RTX 6000 for Full A5B1 Integrin
+- Command context: BoltzGen jobs 4963854 and 4963855 on RTX 6000.
+- Symptom: all 64 diffusion batches hit "ran out of memory" warnings. Zero designs produced. Inverse folding then fails with "No designs found".
+- Likely cause: A5B1 heterodimer (~1600+ residues) exceeds RTX 6000 VRAM (~24GB) for BoltzGen's diffusion step, and compute capability 7.5 disables optimized kernels.
+- Action: BoltzGen for full-size integrins must use A100 80GB. Alternatively, run on individual chains/domains.
