@@ -41,15 +41,21 @@ module load cuda
 mkdir -p "$WORK_DIR" "$CONFORMERS_ROOT/logs/avb3-conformers"
 
 # Set up ProteinTTT environment
+# Use Python 3.12 from the spack module (3.9 default is too old for fair-esm)
+module load python/3.12 2>/dev/null || true
+
 VENV_DIR="$HOME/scratch/venv_proteinttt"
-if [[ ! -d "$VENV_DIR" ]]; then
-    echo "Creating ProteinTTT venv..."
+SETUP_MARKER="$VENV_DIR/.setup_complete"
+if [[ ! -f "$SETUP_MARKER" ]]; then
+    echo "Creating/repairing ProteinTTT venv..."
+    rm -rf "$VENV_DIR"
     python3 -m venv "$VENV_DIR"
     source "$VENV_DIR/bin/activate"
     pip install --upgrade pip
     pip install torch --index-url https://download.pytorch.org/whl/cu121
-    pip install fair-esm omegaconf pandas biopython
+    pip install fair-esm omegaconf pandas biopython requests
     pip install -e "$PROTEINTTT_ROOT"
+    touch "$SETUP_MARKER"
 else
     source "$VENV_DIR/bin/activate"
 fi
