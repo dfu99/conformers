@@ -246,3 +246,10 @@ Before diagnosing new failures, verify in order:
 - Symptom: all 64 diffusion batches hit "ran out of memory" warnings. Zero designs produced. Inverse folding then fails with "No designs found".
 - Likely cause: A5B1 heterodimer (~1600+ residues) exceeds RTX 6000 VRAM (~24GB) for BoltzGen's diffusion step, and compute capability 7.5 disables optimized kernels.
 - Action: BoltzGen for full-size integrins must use A100 80GB. Alternatively, run on individual chains/domains.
+
+### BoltzGen cuBLAS Crash on A100 for Full Integrin — Not Just an OOM Issue
+- Command context: BoltzGen A100 jobs 5043221 and 5043229.
+- Symptom: `RuntimeError: CUDA error: CUBLAS_STATUS_INVALID_VALUE` in `boltzgen/model/modules/masker.py:58` at `torch.bmm()`. Crashes on the very first batch, not OOM.
+- Likely cause: full A5B1 integrin (~1600+ residues) produces token/pair tensors that exceed cuBLAS matrix dimension limits for bf16 batched matrix multiply. A100 uses optimized kernels (capability 8.0) and batch_size=10, but the tensor dimensions are too large.
+- Key observation: RTX 6000 failed with OOM (didn't even attempt computation); A100 got further (kernels=True, batch_size=10) but hit a cuBLAS numerical limit.
+- Action: BoltzGen cannot handle full-size integrins in its current form. Options: (1) run on individual chains/domains, (2) check if BoltzGen has a `--max_tokens` or chunking option, (3) file a bug report with BoltzGen team.
