@@ -53,7 +53,7 @@ if [[ ! -f "$SETUP_MARKER" ]]; then
     source "$VENV_DIR/bin/activate"
     pip install --upgrade pip
     pip install torch --index-url https://download.pytorch.org/whl/cu121
-    pip install fair-esm omegaconf pandas biopython requests
+    pip install fair-esm omegaconf pandas biopython requests tqdm
     pip install -e "$PROTEINTTT_ROOT"
     touch "$SETUP_MARKER"
 else
