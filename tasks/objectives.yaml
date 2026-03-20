@@ -89,5 +89,42 @@ objectives:
     End-to-end pipeline automates the manual workflow of pull→split→relax→collect→AFM.
     Pseudo-AFM images with CV labels can serve as training data for the afmfold CNN
     even without real HS-AFM data.
-  connects_to: null
+  connects_to: obj-006
   completed_date: '2026-03-18'
+- id: obj-006
+  status: completed
+  statement: MSA-subsampled Protenix validation shows conformer validity filter works.
+  methodology: >
+    Ran Protenix at full MSA (100%) and 5% subsample on AVB3 integrin via PACE A100.
+    Scored 19 pulled MD frames (0-300) against predictions using Kabsch CA-RMSD and
+    approximate TM-score. Tested whether MSA depth diversifies predicted conformations.
+  metrics:
+    frames_scored: 19
+    msa_depths_tested: 2
+    tm_score_frame_0: 0.962
+    tm_score_frame_300: 0.057
+    rmsd_frame_0_angstrom: 3.2
+    rmsd_frame_300_angstrom: 164.2
+    protenix_msa_sensitivity: "none (full vs 5% differ by <0.001 TM)"
+  figures:
+  - figures/msa_validation_test.png
+  conclusions: >
+    TM-score drops monotonically from 0.96 (bent, frame 0) to 0.06 (impossible,
+    frame 300), validating the conformer scoring methodology. However, Protenix is
+    MSA-depth-invariant for AVB3 — full and 5% MSA produce identical predictions.
+    AF2 may show the MSA-depth sensitivity reported in literature. Pivoting to AF2.
+  connects_to: obj-007
+  completed_date: '2026-03-20'
+- id: obj-007
+  status: in_progress
+  statement: Test AF2 MSA-depth sensitivity and install ProteinTTT with OpenFold.
+  methodology: >
+    Submitted AF2 2.3.2 multimer with full vs reduced MSA databases on PACE A100
+    (job 5139051). Submitted OpenFold+ProteinTTT GPU install (job 5139050) to build
+    openfold from source with nvcc on A100.
+  metrics:
+    pace_jobs: [5139050, 5139051]
+  figures: []
+  conclusions: Pending PACE job completion.
+  connects_to: null
+  completed_date: null

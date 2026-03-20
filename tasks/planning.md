@@ -61,14 +61,14 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **MSA-subsampled conformer validation** — Prototype a script that runs AF2/Protenix with progressively shallower MSA subsamples against pulled PDB frames. Valid conformers should achieve decent pLDDT at some MSA depth; invalid ones should not. Based on Wayment-Steele et al. (Nature Comms 2024).
-2. **Evaluate ProteinTTT for AVB3** — Clone anton-bushuiev/ProteinTTT, install locally, test ESMFold customization on AVB3 sequence on PACE A100 (bypasses HuggingFace <400 residue limit).
+1. **Fetch AF2 MSA validation results** — Job 5139051 on PACE. Score AF2 full vs reduced MSA predictions against pulled frames. Test whether AF2 shows MSA-depth sensitivity (unlike Protenix).
+2. **Complete ProteinTTT install + first run** — Job 5139050 installs OpenFold+ProteinTTT. After success, submit actual ESMFold TTT run on AVB3 chains.
 3. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
-4. **Post-merge geometry checks** — Add tail distance and interface sanity validation before ranking the final merged structure.
-5. **Run real A5B1 pipeline on PACE** — Use pace_minimal.sh to submit the full staged tagged pipeline and fetch results.
+4. **Run real A5B1 pipeline on PACE** — Use pace_minimal.sh to submit the full staged tagged pipeline and fetch results.
 
 ## Recently Completed
-- [x] Build AVB3 conformer + pseudo-AFM image pipeline (2026-03-18)
+- [x] MSA-subsampled Protenix conformer validation (obj-006, 2026-03-20) — TM-score validates frame realism but Protenix is MSA-depth-invariant for AVB3.
+- [x] Build AVB3 conformer + pseudo-AFM image pipeline (obj-005, 2026-03-18)
 - [x] Add dedicated A5B1 staged pipeline runner + sbatch entrypoint. (obj-001, 2026-03-06)
 - [x] Add deterministic stage-merging utility for final tagged complex export. (obj-002, 2026-03-06)
 - [x] Build PACE minimal remote control script with smoke test validation. (obj-003, 2026-03-09)

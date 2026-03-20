@@ -253,3 +253,20 @@ Before diagnosing new failures, verify in order:
 - Likely cause: full A5B1 integrin (~1600+ residues) produces token/pair tensors that exceed cuBLAS matrix dimension limits for bf16 batched matrix multiply. A100 uses optimized kernels (capability 8.0) and batch_size=10, but the tensor dimensions are too large.
 - Key observation: RTX 6000 failed with OOM (didn't even attempt computation); A100 got further (kernels=True, batch_size=10) but hit a cuBLAS numerical limit.
 - Action: BoltzGen cannot handle full-size integrins in its current form. Options: (1) run on individual chains/domains, (2) check if BoltzGen has a `--max_tokens` or chunking option, (3) file a bug report with BoltzGen team.
+
+### Protenix Is MSA-Depth-Invariant for AVB3 Conformational Diversity
+- Command context: MSA validation test job 5073313, full MSA (7425+2068 seqs) vs 5% subsample (371+103 seqs).
+- Symptom: full and 5% MSA produce identical predictions — TM-score between any frame and either depth's prediction differs by <0.001.
+- Likely cause: Protenix's architecture may collapse MSA information more aggressively than AF2's evoformer, or the AVB3 bent conformation is so dominant in training data that MSA depth doesn't matter.
+- Action: use AF2 (which showed MSA-depth sensitivity in Wayment-Steele et al.) instead of Protenix for conformational diversity via MSA subsampling.
+- Practical implication: Protenix TM-score still works as a conformer validity filter (monotonic 0.96→0.06), just not as a conformational diversity generator.
+
+### OpenFold Requires GPU Node Install (nvcc)
+- Command context: ProteinTTT venv setup on PACE login node.
+- Symptom: `pip install openfold` fails with `FileNotFoundError: No such file or directory: '/usr/local/cuda/bin/nvcc'`.
+- Action: install OpenFold from a SLURM GPU job with `module load cuda`, not from the login node.
+
+### Protenix components.cif Download Can Corrupt on PACE
+- Command context: MSA test job 5060745.
+- Symptom: Protenix tried to download 490MB `components.cif` from Chinese CDN; got only 12MB due to network interruption. Corrupted file then blocked subsequent runs.
+- Action: if Protenix fails with `ContentTooShortError`, delete `~/common/components.cif` and retry.
