@@ -68,32 +68,95 @@ queue:
     too much, thus becoming realistic, then I would expect that there is no msa pool
     that agrees with the structure.
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-03-18 00:17
   source: slack
   channel_id: C0AKR3VPKJS
   started: 2026-03-18 00:22
+  completed: 2026-03-18 13:03
+  commits: 3
+  notes: 'Addressed conformer validation question: researched ProteinTTT (anton-bushuiev/ProteinTTT,
+    ICLR 2026 - test-time training for ESMFold) and MSA-subsampled AF2 validation
+    (Wayment-Steele et al. Nature Comms 2024). Committed pipeline, checkpoint artifacts,
+    updated planning/lessons. Slack response staged with pipeline diagram.'
 - objective: check on PACE boltzgen jobs `4963854 and 4963855` to see if we have new
     heterodimer frames to work with
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-18 00:19
   source: slack
   channel_id: C0AKR3VPKJS
+  started: 2026-03-18 13:03
+  completed: 2026-03-18 13:19
+  commits: 2
+  notes: 'Built MSA-subsampled conformer validation prototype: subsample_msa.py, build_msa_sweep_inputs.py,
+    score_conformers.py (with heatmap/TM-score plots), submit_msa_sweep_slurm.sh,
+    run_msa_validation.sh orchestrator. Targets frames 0-300 at 6 MSA depths. All
+    committed.'
 - objective: Submit the run_conformer_pipeline.sh to PACE if and only if we can develop
     the previously mentioned validation for the steered conformers.
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-18 00:23
   source: slack
   channel_id: C0AKR3VPKJS
+  started: 2026-03-18 13:19
+  completed: 2026-03-18 13:44
+  commits: 1
+  notes: 'Checked PACE jobs 4963854/4963855: both FAILED. BoltzGen design step OOMed
+    on all 64 batches on RTX 6000 — A5B1 is too large. Schema and cache fixes worked
+    but GPU memory is insufficient. Need A100 80GB for BoltzGen on full integrin.
+    Updated lessons.md.'
 - objective: Were you able to check out ProteinTTT? And not infer, but rather, evaluate
     whether a steered PDB generated via MD has any subset of MSA that validates high
     confidence (thus, a potentially valid structure, even if MSA inference cannot
     forward pass infer it), or if no subset of MSA validates it at high confidence
     (thus, identifying impossible structures).
   priority: 3
-  status: pending
+  status: completed
   added: 2026-03-18 12:36
   source: slack
   channel_id: C0AKR3VPKJS
+  started: 2026-03-18 13:44
+  completed: 2026-03-18 13:49
+  notes: Resubmitted BoltzGen jobs on A100 80GB. Job 5043221 (direct BoltzGen) and
+    5043229 (AFCluster→BoltzGen, dependent). Both PENDING. Synced full repo to PACE.
+- objective: Check on jobs 5043221 and 5043229
+  priority: 3
+  status: completed
+  added: 2026-03-18 20:00
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-18 20:02
+  completed: 2026-03-18 20:05
+  commits: 1
+  notes: 'Re-reported PACE jobs 5043221/5043229 status: both FAILED on A100 with cuBLAS
+    dimension overflow. BoltzGen cannot handle full integrin. Recommended pivoting
+    to MSA validation and ProteinTTT.'
+- objective: Revise the Git README to not expose private plans. Focus on just what
+    is done. Do not use the README as a outlet for all methodology, all intuition,
+    nor all results. Organize into the single most succinct and direct message, purpose,
+    usage method, result, and example. Then push.
+  priority: 3
+  status: completed
+  added: 2026-03-19 00:47
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-19 00:49
+  completed: 2026-03-19 00:50
+  commits: 1
+  notes: 'Revised README.md to minimal public-facing summary: pipeline table, data
+    layout, requirements. Stripped all internal plans/methodology/results. Committed
+    and pushed.'
+- objective: Check on how the MSA-subsampled conformer validation did and attach figures
+  priority: 3
+  status: completed
+  added: 2026-03-19 00:58
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-19 00:59
+  completed: 2026-03-19 01:01
+  commits: 1
+  notes: MSA validation not yet run — only inputs prepared. ProteinTTT job 5054383
+    failed (missing requests dep), fixed and resubmitted as 5060532. Attached progression
+    grid and pipeline diagram.
