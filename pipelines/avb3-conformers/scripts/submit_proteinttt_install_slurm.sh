@@ -18,21 +18,27 @@ set -euo pipefail
 # After this completes, submit submit_proteinttt_slurm.sh for actual runs.
 
 module load cuda
+module load python/3.12.5
 
 PROTEINTTT_ROOT="$HOME/scratch/ProteinTTT"
 VENV_DIR="$HOME/scratch/venv_proteinttt"
 
 echo "=== Installing OpenFold + ProteinTTT ==="
+echo "Python: $(python3 --version)"
+echo "nvcc: $(nvcc --version | tail -1)"
 
-# Rebuild venv from scratch
+# Rebuild venv from scratch with Python 3.12
 rm -rf "$VENV_DIR"
 python3 -m venv "$VENV_DIR"
 source "$VENV_DIR/bin/activate"
 
-pip install --upgrade pip
+pip install --upgrade pip setuptools wheel numpy
 
 echo "--- Installing PyTorch ---"
 pip install torch --index-url https://download.pytorch.org/whl/cu121
+
+echo "--- Installing ninja (for faster OpenFold build) ---"
+pip install ninja
 
 echo "--- Installing OpenFold ---"
 pip install --no-build-isolation git+https://github.com/aqlaboratory/openfold.git

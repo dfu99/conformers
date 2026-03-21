@@ -34,43 +34,8 @@ mkdir -p "$WORK_DIR/fasta" "$WORK_DIR/predictions" "$CONFORMERS_ROOT/logs/avb3-c
 echo "=== AF2 MSA-Subsampled Validation Test ==="
 
 # Step 1: Extract AVB3 sequence and write FASTA
-python3 << 'PYEOF'
-import sys
-from pathlib import Path
-
-pdb_path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("ref.pdb")
-fasta_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("fasta")
-
-aa3to1 = {
-    "ALA":"A","ARG":"R","ASN":"N","ASP":"D","CYS":"C","GLN":"Q","GLU":"E",
-    "GLY":"G","HIS":"H","ILE":"I","LEU":"L","LYS":"K","MET":"M","PHE":"F",
-    "PRO":"P","SER":"S","THR":"T","TRP":"W","TYR":"Y","VAL":"V","MSE":"M",
-    "HSD":"H","HSE":"H","HSP":"H",
-}
-chains = {}
-seen = set()
-for line in pdb_path.read_text().splitlines():
-    if not line.startswith("ATOM") or line[12:16].strip() != "CA":
-        continue
-    cid = line[21]
-    resseq = int(line[22:26])
-    key = (cid, resseq)
-    if key in seen:
-        continue
-    seen.add(key)
-    chains.setdefault(cid, []).append((resseq, aa3to1.get(line[17:20].strip(), "X")))
-
-# Write multimer FASTA (chains joined by :)
-seqs = {c: "".join(aa for _, aa in sorted(res)) for c, res in sorted(chains.items())}
-fasta_path = fasta_dir / "avb3_multimer.fasta"
-with open(fasta_path, "w") as f:
-    for c, s in sorted(seqs.items()):
-        f.write(f">chain_{c}\n{s}\n")
-print(f"Wrote {fasta_path}")
-for c, s in sorted(seqs.items()):
-    print(f"  Chain {c}: {len(s)} residues")
-PYEOF
-python3 /dev/stdin "$REF_PDB" "$WORK_DIR/fasta"
+python3 "$CONFORMERS_ROOT/pipelines/avb3-conformers/scripts/extract_avb3_fasta.py" \
+    "$REF_PDB" "$WORK_DIR/fasta"
 
 # Step 2: Run AF2 with full database (default)
 echo ""
