@@ -25,6 +25,9 @@ module load alphafold/2.3.2
 export DOWNLOAD_DIR=/storage/coda1/d-pace_community/0/alphafold/alphafold_2.3.2_data
 export NSLOTS=${SLURM_CPUS_PER_TASK:-8}
 
+# Prevent user-installed protobuf from conflicting with the AF2 container
+export PYTHONNOUSERSITE=1
+
 CONFORMERS_ROOT="$HOME/scratch/conformers"
 WORK_DIR="$CONFORMERS_ROOT/data/runs/avb3/af2_msa_validation"
 REF_PDB="$CONFORMERS_ROOT/data/avb3/template_example/seed_090_frame_000.pdb"
