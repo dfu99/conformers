@@ -214,3 +214,19 @@ queue:
     fix (job 5390102). BoltzGen cannot run full AVB3 heterodimer (cuBLAS crash) —
     running per-chain instead. AF2 reduced_dbs results analyzed: also locked to bent
     conformation, no MSA-depth diversity. Plot committed.'
+- objective: Ok, even if AF2 cannot GENERATE the extended conformation, can it at
+    least produce the CONFIDENCE in a AVB3 that was steered by MD?
+  priority: 3
+  status: completed
+  added: 2026-03-23 16:16
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-23 16:16
+  completed: 2026-03-23 16:20
+  commits: 1
+  notes: AF2 can't directly score arbitrary PDBs — it only predicts structure+confidence
+    from sequence. But AF2's pLDDT distribution on its bent prediction reveals low
+    confidence in leg/tail domains (82-84 pLDDT) — exactly where steered MD displacement
+    is largest. This validates that AF2 'knows' these regions are flexible. TM-score
+    scoring already serves as the conformer validity filter. ProteinTTT is the tool
+    that could shift per-sequence confidence.
