@@ -44,7 +44,7 @@ echo "--- Installing OpenFold ---"
 pip install --no-build-isolation git+https://github.com/aqlaboratory/openfold.git
 
 echo "--- Installing ESM + ProteinTTT deps ---"
-pip install fair-esm omegaconf pandas biopython requests tqdm ml_collections
+pip install fair-esm omegaconf pandas biopython requests tqdm ml_collections dm-tree
 
 echo "--- Installing ProteinTTT ---"
 pip install -e "$PROTEINTTT_ROOT"
