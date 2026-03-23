@@ -277,3 +277,12 @@ Before diagnosing new failures, verify in order:
 - Likely cause: AVB3 integrin bent conformation is overwhelmingly dominant in PDB training data. Unlike the proteins in Wayment-Steele et al. (which had comparable populations of open/closed states), AVB3's extended state is extremely rare in crystallography, so neither AF2 nor Protenix can sample it via MSA subsampling.
 - Action: MSA subsampling for conformational diversity is unlikely to work for AVB3 specifically. Need physics-based approaches (steered MD) or test-time training (ProteinTTT) instead.
 - Practical implication: the TM-score scoring methodology works perfectly as a conformer validity filter, but MSA-based conformer generation is not viable for mechanobiologically sensitive proteins with rare extended states.
+
+### Standard AF2/Protenix Cannot Predict Unseen Conformations — Use Perturbation Methods
+- Context: Literature review for alternative conformation prediction (March 2026).
+- Key insight: AF2 reproduces PDB training data conformations. For rare states (like extended integrin), need specialized methods:
+  1. AlphaFold-RandomWalk (AF-RW): noise injection into model weights, published 2026 Scripps Research.
+  2. AFsample3: random MSA column masking for AF3, published Jan 2026.
+  3. Energetic frustration + AF2: identifies where to "push" AF2 (PNAS 2024).
+  4. Finite temperature string method: Dasetty et al. (bioRxiv 2025) solved bent→extended for αIIbβ3 integrin specifically.
+- Action: prioritize AF-RW and the αIIbβ3 string method paper as most directly applicable to AVB3.

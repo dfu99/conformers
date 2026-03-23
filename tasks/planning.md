@@ -61,10 +61,11 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Complete ProteinTTT install + first run** — Job 5385929 installs OpenFold+ProteinTTT (dm-tree fix). After success, submit actual ESMFold TTT run on AVB3 chains. ProteinTTT test-time training may produce conformational diversity that AF2/Protenix standard inference cannot.
-2. **Fetch AF2 full_dbs results** — Job 5357284 still running (reduced_dbs done, full_dbs in progress). Compare reduced vs full MSA predicted structures to quantify AF2 MSA-depth sensitivity.
-3. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
-4. **Run real A5B1 pipeline on PACE** — Use pace_minimal.sh to submit the full staged tagged pipeline and fetch results.
+1. **Set up AlphaFold-RandomWalk (AF-RW) on PACE** — Weight-perturbation method for sampling alternative conformations (published 2026, Scripps). Most promising approach for generating extended integrin states that standard AF2 cannot reach.
+2. **Evaluate αIIbβ3 string method paper** — Dasetty et al. (bioRxiv 2025) resolved bent→extended pathway for αIIbβ3 integrin using finite temperature string method. Directly applicable to αVβ3.
+3. **Complete ProteinTTT install + first run** — Job 5390102 on PACE. Test-time training could shift ESMFold toward extended states.
+4. **Fetch AF2 full_dbs results** — Job 5357284 (reduced_dbs done, full_dbs in progress). Compare reduced vs full MSA structures.
+5. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
 
 ## Recently Completed
 - [x] AF2 pLDDT vs displacement analysis (obj-009, 2026-03-23) — AF2 can't score arbitrary PDBs but pLDDT identifies flexible leg/tail domains (82-84). TM-score is the practical conformer filter.
