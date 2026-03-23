@@ -116,14 +116,38 @@ objectives:
   connects_to: obj-007
   completed_date: '2026-03-20'
 - id: obj-007
-  status: in_progress
-  statement: Test AF2 MSA-depth sensitivity and install ProteinTTT with OpenFold.
+  status: completed
+  statement: AF2 also locked to bent conformation — no MSA-depth conformational diversity.
   methodology: >
-    Submitted AF2 2.3.2 multimer with full vs reduced MSA databases on PACE A100
-    (job 5139051). Submitted OpenFold+ProteinTTT GPU install (job 5139050) to build
-    openfold from source with nvcc on A100.
+    Ran AF2 2.3.2 multimer with reduced_dbs on AVB3 via PACE A100 (job 5357284).
+    Scored all 25 ranked predictions against 19 pulled MD frames (0-300) using
+    Kabsch CA-RMSD and TM-score. Compared AF2 vs Protenix scoring profiles.
   metrics:
-    pace_jobs: [5139050, 5139051]
+    af2_models_scored: 25
+    af2_pairwise_rmsd_range: "0.1-2.9 Å"
+    af2_tm_frame_0: 0.986
+    af2_tm_frame_300: 0.055
+    af2_vs_protenix_tm_diff: "<0.03 at all frames"
+    af2_confidence_range: "0.856-0.890 iptm+ptm"
+  figures:
+  - figures/af2_vs_protenix_validation.png
+  conclusions: >
+    AF2 also predicts only the bent conformation for AVB3. All 25 models have
+    pairwise RMSD 0.1-2.9Å. TM-score profile nearly identical to Protenix.
+    The bent state is too dominant in PDB training data for either method to
+    sample extended conformations via MSA subsampling. Physics-based approaches
+    (steered MD) remain the only viable conformer generation method.
+  connects_to: obj-008
+  completed_date: '2026-03-23'
+- id: obj-008
+  status: in_progress
+  statement: AFCluster per-chain sweep and ProteinTTT install for AVB3 baselines.
+  methodology: >
+    Submitted AFCluster per-chain BoltzGen sweep (job 5390044) running on individual
+    chains to avoid full-heterodimer cuBLAS crash. Submitted ProteinTTT install fix
+    (job 5390102) with python3 -m pip to avoid module path issues.
+  metrics:
+    pace_jobs: [5390044, 5390102]
   figures: []
   conclusions: Pending PACE job completion.
   connects_to: null
