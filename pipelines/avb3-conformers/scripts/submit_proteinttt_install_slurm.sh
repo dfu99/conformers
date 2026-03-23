@@ -29,25 +29,27 @@ echo "nvcc: $(nvcc --version | tail -1)"
 
 # Rebuild venv from scratch with Python 3.12
 rm -rf "$VENV_DIR"
-python3 -m venv "$VENV_DIR"
+python3 -m venv --upgrade-deps "$VENV_DIR"
 source "$VENV_DIR/bin/activate"
 
-pip install --upgrade pip setuptools wheel numpy
+# Verify pip works
+python3 -m pip --version
+python3 -m pip install setuptools wheel numpy
 
 echo "--- Installing PyTorch ---"
-pip install torch --index-url https://download.pytorch.org/whl/cu121
+python3 -m pip install torch --index-url https://download.pytorch.org/whl/cu121
 
 echo "--- Installing ninja (for faster OpenFold build) ---"
-pip install ninja
+python3 -m pip install ninja
 
 echo "--- Installing OpenFold ---"
-pip install --no-build-isolation git+https://github.com/aqlaboratory/openfold.git
+python3 -m pip install --no-build-isolation git+https://github.com/aqlaboratory/openfold.git
 
 echo "--- Installing ESM + ProteinTTT deps ---"
-pip install fair-esm omegaconf pandas biopython requests tqdm ml_collections dm-tree
+python3 -m pip install fair-esm omegaconf pandas biopython requests tqdm ml_collections dm-tree
 
 echo "--- Installing ProteinTTT ---"
-pip install -e "$PROTEINTTT_ROOT"
+python3 -m pip install -e "$PROTEINTTT_ROOT"
 
 # Mark setup complete
 touch "$VENV_DIR/.setup_complete"
