@@ -160,3 +160,57 @@ queue:
   notes: MSA validation not yet run — only inputs prepared. ProteinTTT job 5054383
     failed (missing requests dep), fixed and resubmitted as 5060532. Attached progression
     grid and pipeline diagram.
+- objective: Has RoyalMD been folded into this repository, or do you actually have
+    no problem using it as part of your pipeline by accessing RoyalMD in its own project
+    directory?
+  priority: 3
+  status: completed
+  added: 2026-03-20 15:48
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-20 15:50
+  completed: 2026-03-20 15:51
+  notes: RoyalMD is NOT folded in — referenced as sibling directory via ROYALMD_ROOT
+    env var. Scripts use ../RoyalMD locally and ~/scratch/RoyalMD on PACE. Clean dependency,
+    no duplication.
+- objective: Check on 5264401 and 5264402 progress
+  priority: 3
+  status: completed
+  added: 2026-03-22 15:56
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-03-22 15:58
+  completed: 2026-03-22 16:04
+  commits: 2
+  notes: 'Both current jobs RUNNING on A100. ProteinTTT install (5357137): OpenFold
+    built, now installing ProteinTTT package. AF2 MSA test (5357284): jackhmmer MSA
+    search started, 25 models queued. Both look like they''ll succeed this time.'
+- objective: Your avb3_af2_msa_test PACE job (5357284) is running (~9.5h in, 24h wall).
+    When it completes, fetch results. Analyze AF2 MSA-depth sensitivity — does MSA
+    depth affect predicted conformer diversity? This is the key experiment from the
+    Head Scientist critique. Report via Slack.
+  priority: 2
+  status: completed
+  added: 2026-03-23 01:52
+  source: overnight
+  started: 2026-03-23 01:53
+  completed: 2026-03-23 02:00
+  commits: 2
+  notes: AF2 job 5357284 still RUNNING (~10h in, chain B HHblits in progress). Will
+    likely use most of 24h walltime. ProteinTTT install failed again (missing dm-tree),
+    fixed and resubmitted as 5385929. Will fetch AF2 results when complete.
+- objective: 'PACE TASK: Submit Boltz and AFCluster sweeps as independent branches.
+    Run AFCluster on AVB3 integrin sequence with varying MSA depths. Also run Boltz
+    conformer predictions. These are the comparison baselines needed per the Head
+    Scientist critique. Use the venv_boltz environment. Report job IDs via Slack.'
+  priority: 1
+  status: completed
+  added: 2026-03-23 03:08
+  source: pace-burn
+  started: 2026-03-23 03:13
+  completed: 2026-03-23 03:19
+  commits: 2
+  notes: 'Submitted AFCluster per-chain sweep (job 5390044) and ProteinTTT install
+    fix (job 5390102). BoltzGen cannot run full AVB3 heterodimer (cuBLAS crash) —
+    running per-chain instead. AF2 reduced_dbs results analyzed: also locked to bent
+    conformation, no MSA-depth diversity. Plot committed.'

@@ -270,3 +270,10 @@ Before diagnosing new failures, verify in order:
 - Command context: MSA test job 5060745.
 - Symptom: Protenix tried to download 490MB `components.cif` from Chinese CDN; got only 12MB due to network interruption. Corrupted file then blocked subsequent runs.
 - Action: if Protenix fails with `ContentTooShortError`, delete `~/common/components.cif` and retry.
+
+### AF2 Also Locked to Bent Conformation for AVB3 — No MSA-Depth Diversity
+- Command context: AF2 2.3.2 multimer with reduced_dbs on AVB3 (job 5357284), 25 ranked predictions.
+- Symptom: all 25 AF2 predictions have pairwise RMSD 0.1-2.9Å. TM-score vs pulled frames: 0.99 (frame 0, bent) → 0.06 (frame 300, impossible). Profile nearly identical to Protenix.
+- Likely cause: AVB3 integrin bent conformation is overwhelmingly dominant in PDB training data. Unlike the proteins in Wayment-Steele et al. (which had comparable populations of open/closed states), AVB3's extended state is extremely rare in crystallography, so neither AF2 nor Protenix can sample it via MSA subsampling.
+- Action: MSA subsampling for conformational diversity is unlikely to work for AVB3 specifically. Need physics-based approaches (steered MD) or test-time training (ProteinTTT) instead.
+- Practical implication: the TM-score scoring methodology works perfectly as a conformer validity filter, but MSA-based conformer generation is not viable for mechanobiologically sensitive proteins with rare extended states.

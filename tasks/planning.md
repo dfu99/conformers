@@ -61,12 +61,13 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Fetch AF2 MSA validation results** — Job 5139051 on PACE. Score AF2 full vs reduced MSA predictions against pulled frames. Test whether AF2 shows MSA-depth sensitivity (unlike Protenix).
-2. **Complete ProteinTTT install + first run** — Job 5139050 installs OpenFold+ProteinTTT. After success, submit actual ESMFold TTT run on AVB3 chains.
+1. **Complete ProteinTTT install + first run** — Job 5385929 installs OpenFold+ProteinTTT (dm-tree fix). After success, submit actual ESMFold TTT run on AVB3 chains. ProteinTTT test-time training may produce conformational diversity that AF2/Protenix standard inference cannot.
+2. **Fetch AF2 full_dbs results** — Job 5357284 still running (reduced_dbs done, full_dbs in progress). Compare reduced vs full MSA predicted structures to quantify AF2 MSA-depth sensitivity.
 3. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
 4. **Run real A5B1 pipeline on PACE** — Use pace_minimal.sh to submit the full staged tagged pipeline and fetch results.
 
 ## Recently Completed
+- [x] AF2 reduced_dbs conformer validation (obj-007 partial, 2026-03-23) — AF2 also locked to bent conformation. 25 predictions have pairwise RMSD 0.1-2.9Å. Neither AF2 nor Protenix show MSA-depth conformational diversity for AVB3.
 - [x] MSA-subsampled Protenix conformer validation (obj-006, 2026-03-20) — TM-score validates frame realism but Protenix is MSA-depth-invariant for AVB3.
 - [x] Build AVB3 conformer + pseudo-AFM image pipeline (obj-005, 2026-03-18)
 - [x] Add dedicated A5B1 staged pipeline runner + sbatch entrypoint. (obj-001, 2026-03-06)
