@@ -150,5 +150,30 @@ objectives:
     pace_jobs: [5390044, 5390102]
   figures: []
   conclusions: Pending PACE job completion.
-  connects_to: null
+  connects_to: obj-009
   completed_date: null
+- id: obj-009
+  status: completed
+  statement: AF2 pLDDT identifies flexible leg/tail domains that move most during pulling.
+  methodology: >
+    Extracted per-residue pLDDT from AF2 ranked_0 prediction and overlaid with
+    per-residue CA displacement between AF2 bent prediction and each pulled MD
+    frame (0, 30, 60, 90, 120, 180, 300). Analyzed per-domain confidence.
+  metrics:
+    overall_plddt: 90.5
+    chain_a_plddt: 91.4
+    chain_b_plddt: 89.2
+    head_thigh_plddt: 96.8
+    legs_tail_plddt_a: 82.8
+    egf_tail_plddt_b: 83.6
+    low_confidence_residues_pct: 5.6
+  figures:
+  - figures/af2_plddt_vs_displacement.png
+  conclusions: >
+    AF2 cannot score arbitrary PDBs directly, but its pLDDT distribution on the
+    bent prediction identifies leg/tail domains as least confident (82-84),
+    matching the regions with largest steered MD displacement. AF2 already
+    "knows" these regions are flexible. TM-score serves as practical conformer
+    validity filter. ProteinTTT is needed for per-sequence confidence shifts.
+  connects_to: null
+  completed_date: '2026-03-23'
