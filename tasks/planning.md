@@ -61,10 +61,10 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Set up AlphaFold-RandomWalk (AF-RW) on PACE** — Weight-perturbation method for sampling alternative conformations (published 2026, Scripps). Most promising approach for generating extended integrin states that standard AF2 cannot reach.
-2. **Evaluate αIIbβ3 string method paper** — Dasetty et al. (bioRxiv 2025) resolved bent→extended pathway for αIIbβ3 integrin using finite temperature string method. Directly applicable to αVβ3.
-3. **Complete ProteinTTT install + first run** — Job 5390102 on PACE. Test-time training could shift ESMFold toward extended states.
-4. **Fetch AF2 full_dbs results** — Job 5357284 (reduced_dbs done, full_dbs in progress). Compare reduced vs full MSA structures.
+1. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures (bent→extended) from Ferg-Lab/principalcurve_integrin_structures cloned on PACE. Use domain-wise homology alignment to generate αVβ3 extended conformers from αIIbβ3 pathway.
+2. **Implement AF-RW weight perturbation** — No public code exists. Implement ~50-line wrapper that adds Gaussian noise to AF2 model weights and runs inference N times on PACE. Conceptually simple.
+3. **Debug AFCluster clustering failure** — Job 5390044 produced 0 clusters. cluster_chain_msa.py failed silently.
+4. **Complete ProteinTTT install + first run** — Multiple install attempts failed (pip path, dm-tree, ml_collections). Need clean install on GPU node.
 5. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
 
 ## Recently Completed
