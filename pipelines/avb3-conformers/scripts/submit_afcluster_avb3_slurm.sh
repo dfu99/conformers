@@ -51,15 +51,15 @@ echo "BoltzGen budget: $BUDGET, designs: $NUM_DESIGNS"
 echo ""
 echo "--- Clustering chain A MSA ---"
 python3 "$CONFORMERS_ROOT/pipelines/afcluster/scripts/cluster_chain_msa.py" \
-    --msa "$MSA_A" \
-    --output-dir "$WORK_DIR/clusters/A" \
+    --input-a3m "$MSA_A" \
+    --outdir "$WORK_DIR/clusters/A" \
     2>&1 || echo "WARNING: Chain A clustering failed"
 
 echo ""
 echo "--- Clustering chain B MSA ---"
 python3 "$CONFORMERS_ROOT/pipelines/afcluster/scripts/cluster_chain_msa.py" \
-    --msa "$MSA_B" \
-    --output-dir "$WORK_DIR/clusters/B" \
+    --input-a3m "$MSA_B" \
+    --outdir "$WORK_DIR/clusters/B" \
     2>&1 || echo "WARNING: Chain B clustering failed"
 
 echo ""

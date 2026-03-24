@@ -1,232 +1,71 @@
 max_chain: 10
 queue:
-- objective: pull. codex has been working on getting the a5b1 geometry correct. it
-    has also tried getting conformers for avb3, but no success so far. it has been
-    working on PACE.
-  priority: 3
-  status: completed
-  added: 2026-03-17 23:52
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-17 23:53
-  completed: 2026-03-17 23:56
-  commits: 1
-  notes: 'Pulled latest from origin (2 commits: 439077f, 12bfc98). Reviewed Codex
-    progress on A5B1 geometry, BoltzGen infrastructure fixes, and AVB3 status. Staged
-    Slack summary. No code changes needed — this was a status pull and review.'
-- objective: codex prefers the method of building the a5b1 geometry by first inferring
-    on a5-AviTag-Streptavidin complex and the b1-SpyCatcher-SpyTag complex separately,
-    and then combining them. do you agree that is the best method?
-  priority: 3
-  status: completed
-  added: 2026-03-17 23:54
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-17 23:56
-  completed: 2026-03-18 00:03
-  notes: 'Reviewed conjugates-first vs staged approach for A5B1. Provided analysis
-    via Slack: conjugates-first is worth trying but the dominant lever is heterodimer
-    frame diversity, not tag staging strategy. No code changes needed.'
-- objective: 'I need a streamlined workflow with ../afmfold/notebooks/Protenix.ipynb
-    and ../RoyalMD that will generate conformers and their pseudo-AFM images. That
-    seems as far as we can get for now without getting our own HS-AFM data. This what
-    I was previously doing: 1. Used RoyalMD with a pulling force on an avb3 pdb to
-    steer the bent conformation into extended conformations. This created a .nc trajectory.
-    I used a script to convert it into a pdb trajectory and then split it into individual
-    frames, each saved as PDB. I didn''t have to save every same because as it pulled
-    more and more, obviously, those conformations were not realistic. 2. I sampled
-    different frames, e.g., 30, 60, 90, 120 and ran them through RoyalMD again without
-    pulling. This created some wiggling of the atoms, slightly diversifying, but it
-    did not help me actually relax any pulled conformers back closer to realistic
-    states. Each of those runs then generated their own trajectory, which I could
-    then process for individual frames. I fed those frames into the notebook script,
-    which could generate the psuedo-AFM images. That script is primarily section 5
-    of the notebook. The other sections above are other attempted workflows that haven''t
-    worked well.'
-  priority: 3
-  status: completed
-  added: 2026-03-18 00:12
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-18 00:13
-  completed: 2026-03-18 00:22
-  notes: 'Built AVB3 conformer + pseudo-AFM image pipeline under pipelines/avb3-conformers/.
-    5 scripts: master orchestrator, SLURM pull/relax jobs, batch relax submitter,
-    and PDB→AFM processing script. Updated planning.md.'
-- objective: I need to find a way, perhaps with the steered RoyalMD frames, to discern
-    what is realistic and what is not. All the template fitting for protenix, afcluster,
-    and boltzgen so far has failed. it seems none are really good at fitting this
-    mechanobiologically sensitive protein. You are welcome to keep trying. What about
-    something else? Can you find ProteinTTT on github by anton-bushuiev? What did
-    they do that might help? I haven't really been able to try it yet. They hosted
-    it on huggingface spaces but our integrin avb3 is too large for their residue
-    limit (less than 400). I was also thinking, is there any way we can simply validate
-    whether a pulled conformer is valid or not? e.g., let there be a smallest MSA
-    pool that achieves a certain confidence number on the structure, without inferring
-    the structure. basically, if i infer with full msa history, it will prefer the
-    bent conformation. eventually, once i get into conformers that are stretched way
-    too much, thus becoming realistic, then I would expect that there is no msa pool
-    that agrees with the structure.
-  priority: 3
-  status: completed
-  added: 2026-03-18 00:17
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-18 00:22
-  completed: 2026-03-18 13:03
-  commits: 3
-  notes: 'Addressed conformer validation question: researched ProteinTTT (anton-bushuiev/ProteinTTT,
-    ICLR 2026 - test-time training for ESMFold) and MSA-subsampled AF2 validation
-    (Wayment-Steele et al. Nature Comms 2024). Committed pipeline, checkpoint artifacts,
-    updated planning/lessons. Slack response staged with pipeline diagram.'
-- objective: check on PACE boltzgen jobs `4963854 and 4963855` to see if we have new
-    heterodimer frames to work with
-  priority: 3
-  status: completed
-  added: 2026-03-18 00:19
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-18 13:03
-  completed: 2026-03-18 13:19
-  commits: 2
-  notes: 'Built MSA-subsampled conformer validation prototype: subsample_msa.py, build_msa_sweep_inputs.py,
-    score_conformers.py (with heatmap/TM-score plots), submit_msa_sweep_slurm.sh,
-    run_msa_validation.sh orchestrator. Targets frames 0-300 at 6 MSA depths. All
-    committed.'
-- objective: Submit the run_conformer_pipeline.sh to PACE if and only if we can develop
-    the previously mentioned validation for the steered conformers.
-  priority: 3
-  status: completed
-  added: 2026-03-18 00:23
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-18 13:19
-  completed: 2026-03-18 13:44
-  commits: 1
-  notes: 'Checked PACE jobs 4963854/4963855: both FAILED. BoltzGen design step OOMed
-    on all 64 batches on RTX 6000 — A5B1 is too large. Schema and cache fixes worked
-    but GPU memory is insufficient. Need A100 80GB for BoltzGen on full integrin.
-    Updated lessons.md.'
-- objective: Were you able to check out ProteinTTT? And not infer, but rather, evaluate
-    whether a steered PDB generated via MD has any subset of MSA that validates high
-    confidence (thus, a potentially valid structure, even if MSA inference cannot
-    forward pass infer it), or if no subset of MSA validates it at high confidence
-    (thus, identifying impossible structures).
-  priority: 3
-  status: completed
-  added: 2026-03-18 12:36
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-18 13:44
-  completed: 2026-03-18 13:49
-  notes: Resubmitted BoltzGen jobs on A100 80GB. Job 5043221 (direct BoltzGen) and
-    5043229 (AFCluster→BoltzGen, dependent). Both PENDING. Synced full repo to PACE.
-- objective: Check on jobs 5043221 and 5043229
-  priority: 3
-  status: completed
-  added: 2026-03-18 20:00
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-18 20:02
-  completed: 2026-03-18 20:05
-  commits: 1
-  notes: 'Re-reported PACE jobs 5043221/5043229 status: both FAILED on A100 with cuBLAS
-    dimension overflow. BoltzGen cannot handle full integrin. Recommended pivoting
-    to MSA validation and ProteinTTT.'
-- objective: Revise the Git README to not expose private plans. Focus on just what
-    is done. Do not use the README as a outlet for all methodology, all intuition,
-    nor all results. Organize into the single most succinct and direct message, purpose,
-    usage method, result, and example. Then push.
-  priority: 3
-  status: completed
-  added: 2026-03-19 00:47
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-19 00:49
-  completed: 2026-03-19 00:50
-  commits: 1
-  notes: 'Revised README.md to minimal public-facing summary: pipeline table, data
-    layout, requirements. Stripped all internal plans/methodology/results. Committed
-    and pushed.'
-- objective: Check on how the MSA-subsampled conformer validation did and attach figures
-  priority: 3
-  status: completed
-  added: 2026-03-19 00:58
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-19 00:59
-  completed: 2026-03-19 01:01
-  commits: 1
-  notes: MSA validation not yet run — only inputs prepared. ProteinTTT job 5054383
-    failed (missing requests dep), fixed and resubmitted as 5060532. Attached progression
-    grid and pipeline diagram.
-- objective: Has RoyalMD been folded into this repository, or do you actually have
-    no problem using it as part of your pipeline by accessing RoyalMD in its own project
-    directory?
-  priority: 3
-  status: completed
-  added: 2026-03-20 15:48
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-20 15:50
-  completed: 2026-03-20 15:51
-  notes: RoyalMD is NOT folded in — referenced as sibling directory via ROYALMD_ROOT
-    env var. Scripts use ../RoyalMD locally and ~/scratch/RoyalMD on PACE. Clean dependency,
-    no duplication.
-- objective: Check on 5264401 and 5264402 progress
-  priority: 3
-  status: completed
-  added: 2026-03-22 15:56
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-22 15:58
-  completed: 2026-03-22 16:04
-  commits: 2
-  notes: 'Both current jobs RUNNING on A100. ProteinTTT install (5357137): OpenFold
-    built, now installing ProteinTTT package. AF2 MSA test (5357284): jackhmmer MSA
-    search started, 25 models queued. Both look like they''ll succeed this time.'
-- objective: Your avb3_af2_msa_test PACE job (5357284) is running (~9.5h in, 24h wall).
-    When it completes, fetch results. Analyze AF2 MSA-depth sensitivity — does MSA
-    depth affect predicted conformer diversity? This is the key experiment from the
-    Head Scientist critique. Report via Slack.
+- objective: Fix and resubmit domain-by-domain αIIbβ3→αVβ3 mapping. Job 5429832 only
+    processed 6/19 images before walltime. Increase --time to 1:00:00 and resubmit.
+    Fetch all 19 mapped PDBs when done. Score against pulled MD frames for comparison
+    with per-chain mapping.
   priority: 2
-  status: completed
-  added: 2026-03-23 01:52
-  source: overnight
-  started: 2026-03-23 01:53
-  completed: 2026-03-23 02:00
-  commits: 2
-  notes: AF2 job 5357284 still RUNNING (~10h in, chain B HHblits in progress). Will
-    likely use most of 24h walltime. ProteinTTT install failed again (missing dm-tree),
-    fixed and resubmitted as 5385929. Will fetch AF2 results when complete.
-- objective: 'PACE TASK: Submit Boltz and AFCluster sweeps as independent branches.
-    Run AFCluster on AVB3 integrin sequence with varying MSA depths. Also run Boltz
-    conformer predictions. These are the comparison baselines needed per the Head
-    Scientist critique. Use the venv_boltz environment. Report job IDs via Slack.'
-  priority: 1
-  status: completed
-  added: 2026-03-23 03:08
-  source: pace-burn
-  started: 2026-03-23 03:13
-  completed: 2026-03-23 03:19
-  commits: 2
-  notes: 'Submitted AFCluster per-chain sweep (job 5390044) and ProteinTTT install
-    fix (job 5390102). BoltzGen cannot run full AVB3 heterodimer (cuBLAS crash) —
-    running per-chain instead. AF2 reduced_dbs results analyzed: also locked to bent
-    conformation, no MSA-depth diversity. Plot committed.'
-- objective: Ok, even if AF2 cannot GENERATE the extended conformation, can it at
-    least produce the CONFIDENCE in a AVB3 that was steered by MD?
+  status: in_progress
+  added: 2026-03-24 04:30
+  source: afk-plan
+  success_criteria: 19 domain-mapped PDBs fetched locally, scored against pulled frames
+  started: 2026-03-24 04:32
+- objective: Fetch and analyze AF2-RandomWalk results (job 5428971, PENDING on A100).
+    Check if weight perturbation produces conformational diversity for AVB3. Compute
+    pairwise RMSD among perturbed predictions and compare to baseline AF2 (0.1-2.9Å).
+    Generate diversity comparison plot.
+  priority: 2
+  status: pending
+  added: 2026-03-24 04:30
+  source: afk-plan
+  success_criteria: AF2-RW diversity quantified, comparison plot in figures/
+- objective: Debug AFCluster clustering failure (job 5390044 produced 0 clusters).
+    SSH to PACE, run cluster_chain_msa.py manually on AVB3 MSAs with verbose output.
+    Fix the bug and resubmit the AFCluster per-chain sweep.
+  priority: 2
+  status: pending
+  added: 2026-03-24 04:30
+  source: afk-plan
+  success_criteria: AFCluster produces >0 clusters for AVB3 MSAs
+- objective: Fix ProteinTTT install (job 5390102 failed with pip path issue). The
+    venv creation must happen AFTER module load python/3.12.5, and use python3 -m
+    pip throughout. Resubmit the install job and verify all imports pass.
+  priority: 2
+  status: pending
+  added: 2026-03-24 04:30
+  source: afk-plan
+  success_criteria: ProteinTTT install job completes with 'All imports successful!'
+- objective: 'Score all conformer generation approaches against pulled MD frames.
+    Compare: (1) per-chain αIIbβ3 mapping, (2) domain-by-domain mapping, (3) AF2-RW
+    perturbed predictions, (4) baseline AF2, (5) baseline Protenix. Generate a comprehensive
+    comparison figure showing TM-score vs frame index for all methods.'
+  priority: 2
+  status: pending
+  added: 2026-03-24 04:30
+  source: afk-plan
+  success_criteria: Multi-method comparison figure in figures/, scores in data/runs/
+- objective: Run ProteinTTT on AVB3 after successful install. Submit ESMFold TTT on
+    chain A (962 res) and chain B (692 res) individually. Compare baseline vs post-TTT
+    pLDDT and predicted structures.
+  priority: 2
+  status: pending
+  added: 2026-03-24 04:30
+  source: afk-plan
+  success_criteria: 'ProteinTTT results: baseline + TTT PDBs with pLDDT comparison'
+- objective: 'Research and evaluate additional methods for integrin extended conformations.
+    Search for: (1) targeted MD / metadynamics approaches, (2) coarse-grained models
+    that can sample large conformational changes, (3) string method implementations
+    compatible with αVβ3. Update lessons.md with findings.'
   priority: 3
-  status: completed
-  added: 2026-03-23 16:16
-  source: slack
-  channel_id: C0AKR3VPKJS
-  started: 2026-03-23 16:16
-  completed: 2026-03-23 16:20
-  commits: 1
-  notes: AF2 can't directly score arbitrary PDBs — it only predicts structure+confidence
-    from sequence. But AF2's pLDDT distribution on its bent prediction reveals low
-    confidence in leg/tail domains (82-84 pLDDT) — exactly where steered MD displacement
-    is largest. This validates that AF2 'knows' these regions are flexible. TM-score
-    scoring already serves as the conformer validity filter. ProteinTTT is the tool
-    that could shift per-sequence confidence.
+  status: pending
+  added: 2026-03-24 04:30
+  source: afk-plan
+  success_criteria: At least 2 new methods identified with feasibility assessment
+- objective: Generate pseudo-AFM images from all conformer sources (pulled MD frames,
+    αIIbβ3 mapped pathway, AF2-RW predictions if diverse). Run the process_frames_to_afm.py
+    pipeline on collected frames. This produces training data for the afmfold CNN.
+  priority: 3
+  status: pending
+  added: 2026-03-24 04:30
+  source: afk-plan
+  success_criteria: pseudo_afm/ directory with image_*.npy and label_*.npy batches
