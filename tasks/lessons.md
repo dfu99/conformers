@@ -286,3 +286,32 @@ Before diagnosing new failures, verify in order:
   3. Energetic frustration + AF2: identifies where to "push" AF2 (PNAS 2024).
   4. Finite temperature string method: Dasetty et al. (bioRxiv 2025) solved bent→extended for αIIbβ3 integrin specifically.
 - Action: prioritize AF-RW and the αIIbβ3 string method paper as most directly applicable to AVB3.
+
+### Additional Methods for Integrin Extended Conformations (Literature Review March 2026)
+
+#### Targeted MD / Metadynamics for Integrins
+- **Funnel Metadynamics on αIIbβ3** (PMC 2024): FM applied to αIIbβ3 + RGD peptide. Does not require a priori information about interactions. Could be applied to αVβ3 for enhanced sampling of activation pathway.
+- **Force-Regulated Conformational Changes of αVβ3** (ACS Nano 2024): SMD simulations on αVβ3 found hexa-stable intermediate states with ~7 hydrogen bonds disrupted consecutively during unbending. Energy landscape mapped with intermediate barriers. Directly applicable — uses the same αVβ3 we're studying.
+- **Conformational response of αIIbβ3 and αVβ3 to force** (Biophysj 2023): Equilibrium and enhanced MD simulations comparing both integrins. Provides reference force profiles.
+- Action: the ACS Nano 2024 paper's intermediate states could serve as targets for our steered MD frames — validating which pulled frames correspond to known intermediates.
+
+#### Coarse-Grained Models
+- **GōMartini 3** (Nature Comms 2025): Combines Go-model structure-based potentials with MARTINI 3 coarse-grained force field. Demonstrated for large conformational changes, protein-membrane binding, and AFM force profile calculations. Directly relevant for integrin bent→extended transitions.
+- **Switching Gō-Martini** (JCTC 2024): Simulates large-scale protein conformational transitions between different states. Uses switching between Go-model contacts for two endpoint structures. Could model bent↔extended integrin transition.
+- **SBMOpenMM** (JCIM 2021): Structure-based model builder for OpenMM. Could implement Go-like models for integrin with our existing OpenMM installation on PACE.
+- Action: GōMartini 3 is the most promising CG approach. It would require GROMACS (not OpenMM) but could sample the bent→extended transition orders of magnitude faster than all-atom MD.
+
+#### String Method Implementations
+- **Ferg-Lab/principalcurve_integrin_structures** (already cloned on PACE): The αIIbβ3 string method uses OpenMM + SEEKR2. Their code is available but requires significant adaptation for αVβ3 (different membrane setup, force field parameterization, collective variables).
+- **SBMOpenMM** could be used to build a simplified string method for integrin using structure-based models, avoiding the full membrane embedding.
+- Action: adapting the Ferg-Lab string method to αVβ3 is a major project (weeks). For near-term, continue with homology mapping from their αIIbβ3 results.
+
+#### Feasibility Summary
+| Method | Feasibility | Timeline | Value |
+|--------|------------|----------|-------|
+| αIIbβ3 homology mapping | Done | Immediate | Medium — different α subunit |
+| AF2-RW weight perturbation | Submitted | Days | Unknown — may not escape bent |
+| GōMartini 3 CG MD | Needs GROMACS | 1-2 weeks | High — can sample transition |
+| Metadynamics on αVβ3 | Needs setup | 1-2 weeks | High — enhanced sampling |
+| Full string method for αVβ3 | Major project | Weeks | Very high — MFE pathway |
+| ProteinTTT | Install pending | Days | Unknown — single-sequence |
