@@ -71,7 +71,8 @@ def run_af2_with_params(fasta_path: Path, output_dir: Path,
                         model_preset: str = "multimer",
                         db_preset: str = "reduced_dbs",
                         max_template_date: str = "2020-05-14",
-                        n_cpus: int = 8) -> int:
+                        n_cpus: int = 8,
+                        precomputed_msas_dir: Path | None = None) -> int:
     """Run AF2 inference using a specific params directory."""
     cmd = [
         "alphafold",
@@ -92,10 +93,14 @@ def run_af2_with_params(fasta_path: Path, output_dir: Path,
         f"--num_multimer_predictions_per_model=1",  # 1 pred per model (5 total)
     ]
 
+    # Use precomputed MSAs if available (skip 8h MSA search)
+    if precomputed_msas_dir and precomputed_msas_dir.exists():
+        cmd.append(f"--use_precomputed_msas=true")
+
     env = os.environ.copy()
     env["PYTHONNOUSERSITE"] = "1"
 
-    result = subprocess.run(cmd, env=env, timeout=7200)  # 2h timeout per run
+    result = subprocess.run(cmd, env=env, timeout=72000)  # 20h timeout per run
     return result.returncode
 
 
@@ -185,10 +190,33 @@ def main() -> int:
                 else:
                     link.symlink_to(item)
 
+        # Copy precomputed MSAs from baseline AF2 run if available
+        # This avoids re-running 8h MSA search for each perturbation
+        precomputed = None
+        baseline_msas = args.output_dir / "baseline" / "msas"
+        if not baseline_msas.exists():
+            # Check if there's a previous AF2 run with MSAs we can reuse
+            for candidate in [
+                args.output_dir.parent / "af2_msa_validation" / "predictions" / "reduced_dbs" / "avb3_multimer" / "msas",
+                args.output_dir.parent / "af2_msa_validation" / "predictions" / "full_dbs" / "avb3_multimer" / "msas",
+            ]:
+                if candidate.exists():
+                    baseline_msas = candidate
+                    break
+        if baseline_msas.exists():
+            # Symlink MSAs into the output dir so AF2 finds them
+            msa_dst = run_dir / "avb3_multimer" / "msas"
+            msa_dst.parent.mkdir(parents=True, exist_ok=True)
+            if not msa_dst.exists():
+                msa_dst.symlink_to(baseline_msas)
+            precomputed = msa_dst
+            print(f"  Using precomputed MSAs from {baseline_msas}")
+
         # Run AF2 with perturbed params
         rc = run_af2_with_params(args.fasta, run_dir, perturbed_data,
                                  perturbed_params_dir,
-                                 args.model_preset, args.db_preset)
+                                 args.model_preset, args.db_preset,
+                                 precomputed_msas_dir=precomputed)
 
         status = "completed" if rc == 0 else f"failed_exit_{rc}"
         manifest.append({"index": i, "seed": seed, "dir": str(run_dir),
