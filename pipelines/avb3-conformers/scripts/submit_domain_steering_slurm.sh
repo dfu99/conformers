@@ -1,8 +1,9 @@
 #!/bin/bash
 #SBATCH -J avb3_domain_steer
 #SBATCH -A gts-yke8
-#SBATCH --partition=gpu-rtx6000
-#SBATCH --gres=gpu:RTX_6000:1
+#SBATCH --partition=gpu-v100
+#SBATCH --gres=gpu:V100:1
+#SBATCH -C V100-16GB
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
@@ -22,7 +23,7 @@ set -euo pipefail
 #   sbatch --export=ALL,STEERING_PRESET=restrained_pull submit_domain_steering_slurm.sh
 #   sbatch --export=ALL,STEERING_PRESET=cv_distance_extend submit_domain_steering_slurm.sh
 
-module load cuda
+module load cuda anaconda3
 
 CONFORMERS_ROOT="${CONFORMERS_ROOT:-$HOME/scratch/conformers}"
 ROYALMD_ROOT="${ROYALMD_ROOT:-$HOME/scratch/RoyalMD}"
@@ -33,8 +34,8 @@ INPUT_PDB="${INPUT_PDB:-$ROYALMD_ROOT/test_systems/AVB3_clean.pdb}"
 
 mkdir -p "$WORK_DIR" "$CONFORMERS_ROOT/logs/avb3-conformers"
 
-# Activate RoyalMD environment
-source "$ROYALMD_ROOT/venv/bin/activate" 2>/dev/null || true
+# Activate OpenMM conda environment
+conda activate "$CONFORMERS_ROOT/venv_openmm"
 
 echo "=== Domain-Preserving Steering ==="
 echo "Preset: $STEERING_PRESET"
