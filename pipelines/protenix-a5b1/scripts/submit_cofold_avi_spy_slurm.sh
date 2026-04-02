@@ -28,8 +28,8 @@ NUM_SAMPLES="${NUM_SAMPLES:-5}"
 mkdir -p "$OUTPUT_DIR" "$CONFORMERS_ROOT/logs/protenix-a5b1"
 
 # Activate Protenix environment
-source "$PROTENIX_ROOT/venv_protenix/bin/activate" 2>/dev/null || \
-    source "$CONFORMERS_ROOT/venv_protenix/bin/activate" 2>/dev/null || true
+source "$HOME/scratch/venv_protenix/bin/activate" 2>/dev/null || \
+    source "$PROTENIX_ROOT/venv_protenix/bin/activate" 2>/dev/null || true
 
 echo "=== A5B1 Avi-SpyCatcher Co-fold ==="
 echo "Input: $INPUT_JSON"
