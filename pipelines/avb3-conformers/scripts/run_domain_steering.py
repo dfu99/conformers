@@ -89,6 +89,10 @@ def main() -> int:
     forcefield = ForceField("amber14-all.xml", "amber14/tip3pfb.xml")
     modeller = Modeller(pdb.topology, pdb.positions)
 
+    # Add missing hydrogens (PDB often lacks them; Amber14 requires them)
+    print("\nAdding hydrogens...")
+    modeller.addHydrogens(forcefield, pH=7.0)
+
     # Solvate
     print("\nSolvating...")
     modeller.addSolvent(
