@@ -37,6 +37,10 @@ def main() -> int:
     parser.add_argument("--temperature", type=float, default=310.0)
     parser.add_argument("--timestep", type=float, default=0.002)
     parser.add_argument("--report-interval", type=int, default=1500)
+    parser.add_argument("--save-frames", action="store_true", default=False,
+                        help="Save PDB frames during production for AFMFold training")
+    parser.add_argument("--frame-interval", type=int, default=5000,
+                        help="Steps between saved PDB frames (default: 5000 → ~300 frames/ns)")
     args = parser.parse_args()
 
     # Add conformers scripts to path for domain_steering module
@@ -64,7 +68,7 @@ def main() -> int:
         )
         from openmm.unit import (
             kelvin, picoseconds, atmospheres, nanometers,
-            kilojoules_per_mole,
+            kilojoules_per_mole, molar,
         )
     except ImportError:
         from simtk.openmm.app import (
@@ -76,7 +80,7 @@ def main() -> int:
         )
         from simtk.unit import (
             kelvin, picoseconds, atmospheres, nanometers,
-            kilojoules_per_mole,
+            kilojoules_per_mole, molar,
         )
 
     print(f"=== Domain-Preserving Steering ===")
@@ -99,7 +103,7 @@ def main() -> int:
         forcefield,
         model="tip3p",
         padding=1.0 * nanometers,
-        ionicStrength=0.15 * kilojoules_per_mole / kilojoules_per_mole,
+        ionicStrength=0.15 * molar,
     )
 
     # Create system
@@ -196,7 +200,35 @@ def main() -> int:
     ))
 
     t0 = time.time()
-    simulation.step(prod_steps)
+
+    if args.save_frames:
+        # Save PDB frames at intervals for AFMFold training
+        frames_dir = args.output_dir / "frames"
+        frames_dir.mkdir(exist_ok=True)
+        frame_idx = 0
+        steps_done = 0
+
+        # Save initial frame (equilibrated state)
+        state = simulation.context.getState(getPositions=True)
+        with open(frames_dir / f"frame_{frame_idx:04d}.pdb", "w") as f:
+            PDBFile.writeFile(simulation.topology, state.getPositions(), f)
+        frame_idx += 1
+
+        while steps_done < prod_steps:
+            chunk = min(args.frame_interval, prod_steps - steps_done)
+            simulation.step(chunk)
+            steps_done += chunk
+            state = simulation.context.getState(getPositions=True)
+            with open(frames_dir / f"frame_{frame_idx:04d}.pdb", "w") as f:
+                PDBFile.writeFile(simulation.topology, state.getPositions(), f)
+            frame_idx += 1
+            if frame_idx % 50 == 0:
+                print(f"  Saved {frame_idx} frames ({steps_done}/{prod_steps} steps)")
+
+        print(f"  Saved {frame_idx} frames to {frames_dir}")
+    else:
+        simulation.step(prod_steps)
+
     elapsed = time.time() - t0
 
     print(f"Production complete ({elapsed:.1f}s)")

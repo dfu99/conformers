@@ -390,8 +390,8 @@ STEERING_PRESETS = {
     "restrained_pull": {
         "method": "domain_restrained",
         "description": "Pull centroids apart while restraining internal domain structure",
-        "restraint_k": 500.0,
-        "pull_force_pn": 1.0,
+        "restraint_k": 200.0,
+        "pull_force_pn": 0.5,
     },
     "cv_distance_extend": {
         "method": "cv_bias",
