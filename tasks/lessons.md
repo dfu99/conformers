@@ -261,6 +261,29 @@ Before diagnosing new failures, verify in order:
 - Action: use AF2 (which showed MSA-depth sensitivity in Wayment-Steele et al.) instead of Protenix for conformational diversity via MSA subsampling.
 - Practical implication: Protenix TM-score still works as a conformer validity filter (monotonic 0.96→0.06), just not as a conformational diversity generator.
 
+### OpenMM ionicStrength Must Use Unit-Bearing Quantity
+- Command context: domain steering solvation step on PACE (jobs 6195166-6195169).
+- Symptom: `AttributeError: 'float' object has no attribute 'value_in_unit'` in `modeller.addSolvent()`.
+- Likely cause: `ionicStrength=0.15 * kJ/mol / kJ/mol` evaluates to a bare float (0.15), not a Quantity with molar units.
+- Action: use `ionicStrength=0.15 * molar` and import `molar` from `openmm.unit`.
+
+### OpenMM Position Restraints + Centroid Pulling Is Numerically Unstable
+- Command context: domain steering `restrained_pull` preset on RunPod A5000.
+- Symptom: `OpenMMException: Particle coordinate is NaN` during equilibration, even after reducing k from 500→200 and pull force from 1.0→0.5 pN.
+- Likely cause: harmonic position restraints on all CA atoms create competing forces with inter-domain pulling, causing the integrator to diverge.
+- Action: this steering method needs gradual force ramping during equilibration, or should be replaced by the CV distance bias method which is stable.
+
+### CV Distance Bias Is the Effective Steering Method for Integrin Opening
+- Command context: comparison of 4 domain steering presets on AVB3 (RunPod A5000, 2026-04-07).
+- Key result: gentle_open and moderate_open (centroid angle torques, k=50-200) produced negligible change (<5° angles, <4Å distances). cv_distance_extend (flat-bottom distance biases, k=200, targets 16-20nm) produced +88° leg opening and +113Å head-tail extension.
+- Action: use `cv_distance_extend` preset for all future steering runs. Angle torques at these force constants are too weak to overcome integrin hinge stiffness in 1ns.
+
+### AFMFold Pipeline: Steered MD Frames Can Replace Protenix Conditional Generation
+- Command context: building AFMFold CNN pipeline for AVB3 (2026-04-08).
+- Key insight: AFMFold's step 1 (candidate generation) uses Protenix guided inference to populate a CV grid. Our steered MD trajectory already covers the CV space continuously.
+- Action: feed steering PDB frames directly into AFMFold's image generation (step 2) and CNN training (step 3), skipping the expensive Protenix generation step entirely.
+- Bridge script: `process_frames_to_afm.py` already connects steering outputs to afmfold's `generate_images()`.
+
 ### OpenFold Requires GPU Node Install (nvcc)
 - Command context: ProteinTTT venv setup on PACE login node.
 - Symptom: `pip install openfold` fails with `FileNotFoundError: No such file or directory: '/usr/local/cuda/bin/nvcc'`.

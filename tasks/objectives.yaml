@@ -177,3 +177,52 @@ objectives:
     validity filter. ProteinTTT is needed for per-sequence confidence shifts.
   connects_to: null
   completed_date: '2026-03-23'
+- id: obj-010
+  status: completed
+  statement: Domain steering identifies CV distance bias as the effective conformer generation method.
+  methodology: >
+    Ran 4 domain-preserving steering presets on AVB3 integrin (RunPod A5000, OpenMM):
+    gentle_open (angle torque k=50), moderate_open (k=200), restrained_pull (position
+    restraints + centroid pulling), cv_distance_extend (flat-bottom distance biases k=200,
+    targets 16-20nm). 1ns production each. Compared inter-domain angles and distances
+    pre/post steering.
+  metrics:
+    presets_completed: 3
+    presets_failed: 1
+    gentle_open_delta_angle: -4.5
+    moderate_open_delta_angle: -0.2
+    cv_distance_extend_delta_angle: +88.2
+    cv_distance_extend_delta_distance_A: +112.7
+    simulation_speed_nsday: 27.9
+    gpu: RTX_A5000
+  figures:
+  - figures/domain_steering_comparison.png
+  - figures/steering_renders/avb3_starting_yaw.mp4
+  - figures/steering_renders/avb3_cv_extend_yaw.mp4
+  conclusions: >
+    CV distance biasing is the only effective steering method for AVB3 integrin
+    opening in 1ns. Angle torques at k=50-200 produce negligible change. Position
+    restraints + pulling is numerically unstable (NaN). The CV method opened the
+    alpha-leg by 88 degrees and extended head-tail distance by 113 Angstroms.
+  connects_to: obj-011
+  completed_date: '2026-04-08'
+- id: obj-011
+  status: in_progress
+  statement: Build AFMFold CNN pipeline for HS-AFM to integrin conformer prediction.
+  methodology: >
+    Built end-to-end pipeline: train_afmfold_cnn.py (steering frames → AFM images →
+    CNN training) and predict_from_afm_gif.py (HS-AFM GIF → CV prediction → conformer
+    matching). Uses afmfold's C8-equivariant CNN and simulated AFM image generator.
+    Steering re-run with frame saving launched on CPU for training data generation.
+  metrics:
+    scripts_created: 2
+    domain_pairs: 3
+    cnn_architecture: C8_equivariant
+    image_size: 35x35
+  figures: []
+  conclusions: >
+    Pipeline scripts complete. Awaiting steering frame generation (~300 frames from
+    1ns trajectory) to train CNN. Once trained, user can provide HS-AFM GIF and get
+    conformational state predictions per frame.
+  connects_to: null
+  completed_date: null

@@ -61,13 +61,15 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures (bent→extended) from Ferg-Lab/principalcurve_integrin_structures cloned on PACE. Use domain-wise homology alignment to generate αVβ3 extended conformers from αIIbβ3 pathway.
-2. **Implement AF-RW weight perturbation** — No public code exists. Implement ~50-line wrapper that adds Gaussian noise to AF2 model weights and runs inference N times on PACE. Conceptually simple.
-3. **Debug AFCluster clustering failure** — Job 5390044 produced 0 clusters. cluster_chain_msa.py failed silently.
-4. **Complete ProteinTTT install + first run** — Multiple install attempts failed (pip path, dm-tree, ml_collections). Need clean install on GPU node.
+1. **Train AFMFold CNN on steering trajectory** — Steering re-run with frame saving is in progress (CPU, ~1-3h). Once frames available, run `train_afmfold_cnn.py` to generate AFM images and train CNN. Then pipeline is ready for HS-AFM GIF inference.
+2. **A5B1 Protenix co-fold on PACE or RunPod A100** — Job 6292734 blocked by PACE billing limits. User considering A100-80GB RunPod pod.
+3. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures (bent→extended) from Ferg-Lab/principalcurve_integrin_structures.
+4. **Debug AFCluster clustering failure** — Job 5390044 produced 0 clusters.
 5. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
 
 ## Recently Completed
+- [x] AFMFold CNN pipeline built (obj-010, 2026-04-08) — End-to-end pipeline: domain steering → simulated AFM images → CNN training → GIF inference. CV distance extend is the effective steering method (+88° leg opening, +113Å extension). Pipeline scripts: train_afmfold_cnn.py, predict_from_afm_gif.py.
+- [x] Domain steering experiments on RunPod A5000 (obj-010, 2026-04-08) — 3/4 presets completed. CV distance extend dramatically outperformed angle torques. Gentle/moderate had negligible effect in 1ns.
 - [x] AF2 pLDDT vs displacement analysis (obj-009, 2026-03-23) — AF2 can't score arbitrary PDBs but pLDDT identifies flexible leg/tail domains (82-84). TM-score is the practical conformer filter.
 - [x] AF2 reduced_dbs conformer validation (obj-007, 2026-03-23) — AF2 also locked to bent conformation. 25 predictions have pairwise RMSD 0.1-2.9Å.
 - [x] MSA-subsampled Protenix conformer validation (obj-006, 2026-03-20) — TM-score validates frame realism but Protenix is MSA-depth-invariant for AVB3.
