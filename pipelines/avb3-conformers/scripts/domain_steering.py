@@ -453,6 +453,57 @@ def apply_steering_preset(
         raise ValueError(f"Unknown method: {method}")
 
 
+def apply_custom_cv_steering(
+    system: "System",
+    topology: "Topology",
+    target_distances_nm: list[float],
+    distance_pairs: list[tuple[str, str]] | None = None,
+    force_constant: float = 200.0,
+    bias_type: str = "flat_bottom",
+    flat_bottom_width: float = 2.0,
+) -> "CustomCentroidBondForce":
+    """Apply CV distance steering with arbitrary target distances.
+
+    This is the entry point for AFMFold inference: the CNN predicts
+    inter-domain distances, and this function creates the corresponding
+    steering forces to generate a PDB matching those distances.
+
+    Args:
+        system: OpenMM System
+        topology: OpenMM Topology
+        target_distances_nm: Target inter-domain distances in nm.
+            Must match the number of distance_pairs.
+        distance_pairs: Domain pair names. Defaults to AVB3_HINGE_DISTANCES.
+        force_constant: Bias spring constant (kJ/mol/nm²)
+        bias_type: "harmonic" or "flat_bottom"
+        flat_bottom_width: Width of flat region (nm)
+
+    Returns:
+        The CustomCentroidBondForce added to the system.
+    """
+    if distance_pairs is None:
+        distance_pairs = AVB3_HINGE_DISTANCES
+
+    if len(target_distances_nm) != len(distance_pairs):
+        raise ValueError(
+            f"Got {len(target_distances_nm)} target distances but "
+            f"{len(distance_pairs)} domain pairs"
+        )
+
+    print(f"\n=== Custom CV Steering ===")
+    print(f"  Targets (nm): {target_distances_nm}")
+
+    return add_cv_bias(
+        system, topology,
+        cv_type="distance",
+        cv_pairs=distance_pairs,
+        target_values=target_distances_nm,
+        force_constant=force_constant,
+        bias_type=bias_type,
+        flat_bottom_width=flat_bottom_width,
+    )
+
+
 if __name__ == "__main__":
     print("Domain-preserving steering methods for integrin αVβ3")
     print("\nAvailable presets:")

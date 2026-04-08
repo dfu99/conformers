@@ -32,6 +32,10 @@ def main() -> int:
     parser.add_argument("--steering-preset", default="gentle_open",
                         help="Steering preset name (gentle_open, moderate_open, "
                              "restrained_pull, cv_distance_extend)")
+    parser.add_argument("--target-distances", type=str, default=None,
+                        help="Custom CV target distances in nm (comma-separated). "
+                             "Overrides --steering-preset with custom CV steering. "
+                             "E.g. '15.0,12.0,10.0' for 3 domain pair targets.")
     parser.add_argument("--production-time", type=float, default=1000.0,
                         help="Production time in ps")
     parser.add_argument("--temperature", type=float, default=310.0)
@@ -48,9 +52,13 @@ def main() -> int:
     if str(scripts_dir) not in sys.path:
         sys.path.insert(0, str(scripts_dir))
 
-    from domain_steering import apply_steering_preset, STEERING_PRESETS
+    from domain_steering import (
+        apply_steering_preset, apply_custom_cv_steering, STEERING_PRESETS,
+    )
 
-    if args.steering_preset not in STEERING_PRESETS:
+    # Validate args: either custom targets or a known preset
+    use_custom_targets = args.target_distances is not None
+    if not use_custom_targets and args.steering_preset not in STEERING_PRESETS:
         print(f"ERROR: Unknown preset '{args.steering_preset}'")
         print(f"Available: {', '.join(STEERING_PRESETS.keys())}")
         return 1
@@ -125,8 +133,13 @@ def main() -> int:
     ])
 
     # Apply domain-preserving steering forces (instead of head/tail pulling)
-    apply_steering_preset(system, modeller.topology, positions_nm,
-                          args.steering_preset)
+    if use_custom_targets:
+        target_dists = [float(x) for x in args.target_distances.split(",")]
+        print(f"Custom CV targets (nm): {target_dists}")
+        apply_custom_cv_steering(system, modeller.topology, target_dists)
+    else:
+        apply_steering_preset(system, modeller.topology, positions_nm,
+                              args.steering_preset)
 
     # Add barostat
     system.addForce(MonteCarloBarostat(
