@@ -261,6 +261,13 @@ Before diagnosing new failures, verify in order:
 - Action: use AF2 (which showed MSA-depth sensitivity in Wayment-Steele et al.) instead of Protenix for conformational diversity via MSA subsampling.
 - Practical implication: Protenix TM-score still works as a conformer validity filter (monotonic 0.96→0.06), just not as a conformational diversity generator.
 
+### OpenMM pip CUDA Requires Matched openmm + openmm-cuda + numpy<2
+- Command context: RunPod A5000, pip-installed OpenMM 8.5.0 with numpy 2.4.4.
+- Symptom: `openmm-cuda` package installs OpenMM 8.1.1 but system has numpy 2.x, causing `ImportError: numpy.core.multiarray failed to import`.
+- Likely cause: `openmm-cuda` pins to older OpenMM which was compiled against numpy 1.x.
+- Action: for pip-based OpenMM with CUDA, install `openmm-cuda` first (which pulls matching openmm), then `pip install "numpy<2"`. Verify with `Platform.getPlatformByName('CUDA')`.
+- Conda avoids this entirely but isn't always available on RunPod.
+
 ### OpenMM ionicStrength Must Use Unit-Bearing Quantity
 - Command context: domain steering solvation step on PACE (jobs 6195166-6195169).
 - Symptom: `AttributeError: 'float' object has no attribute 'value_in_unit'` in `modeller.addSolvent()`.

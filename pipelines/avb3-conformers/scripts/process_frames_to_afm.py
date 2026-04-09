@@ -72,11 +72,17 @@ def load_frames(frames_dir: Path, strip_water: bool = True) -> md.Trajectory:
                       f"(expected {ref.n_atoms}), skipping.")
                 skipped += 1
                 continue
+            # Clear unitcell to avoid join errors from mixed CRYST1 records
+            t.unitcell_lengths = None
+            t.unitcell_angles = None
             frames.append(t)
         except Exception as e:
             print(f"  WARNING: Failed to load {pf.name}: {e}")
             skipped += 1
 
+    # Clear unitcell on reference too
+    frames[0].unitcell_lengths = None
+    frames[0].unitcell_angles = None
     traj = md.join(frames)
     print(f"  Loaded {traj.n_frames} frames ({skipped} skipped)")
     return traj

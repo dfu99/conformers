@@ -221,8 +221,9 @@ objectives:
     image_size: 35x35
   figures: []
   conclusions: >
-    Pipeline scripts complete. Awaiting steering frame generation (~300 frames from
-    1ns trajectory) to train CNN. Once trained, user can provide HS-AFM GIF and get
-    conformational state predictions per frame.
+    Pipeline corrected per PI feedback: inference step 4 now uses MD+CV steering
+    (not NN matching or Protenix conditional generation). Steering frame generation
+    on RunPod A5000 GPU is near completion (~300 frames). Next: train CNN, then
+    pipeline ready for HS-AFM GIF inference.
   connects_to: null
   completed_date: null
