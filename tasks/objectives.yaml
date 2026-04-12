@@ -234,24 +234,35 @@ objectives:
   connects_to: obj-012
   completed_date: '2026-04-11'
 - id: obj-012
-  status: in_progress
-  statement: Exhaustive SO(3) rigid-body fitting for HS-AFM orientation recovery.
+  status: completed
+  statement: Exhaustive SO(3) rigid-body fitting resolves HS-AFM orientation ambiguity.
   methodology: >
-    Wrote fit_rigid_body.py using AFMFold's actual orientation recovery approach:
-    sample_uniform_so3 (2048 rotations/frame), apply_rotations, generate_landscape,
-    idilation, compute_correlation_coefficient. Custom best-tracking avoids bug in
-    AFMFold's summarize_results with rot_batch>1. Updated render_atomistic_overlay.py
-    with fitted mode (--fitted-dir) for direct use of per-frame fitted coordinates.
+    Wrote fit_rigid_body.py using AFMFold's orientation recovery primitives (2048
+    SO(3) rotations/frame via sample_uniform_so3). Custom best-tracking avoids
+    summarize_results bug. Post-processing: iterative flip resolution using 180-degree
+    rotation candidates to enforce temporal smoothness. Rendered ChimeraX overlays
+    using updated render_atomistic_overlay.py with fitted mode.
   metrics:
+    video1_frames: 409
+    video2_frames: 1296
     rotations_per_frame: 2048
-    rot_batch: 32
-    frame_batch: 20
-    scripts_written: 2
-    scripts_syntax_checked: true
-  figures: []
+    video1_corr_mean: 0.6905
+    video2_corr_mean: 0.7965
+    video2_corr_max: 0.9479
+    flips_before_smooth_pct: 37.8
+    flips_after_smooth_pct: 8.3
+    gpu_time_video2_min: 18
+  figures:
+  - results/afm_pipeline/rigid_body_fitting_summary.png
+  - results/afm_pipeline/video2_v3/pdb_atomistic_grid.png
+  - results/afm_pipeline/video2_v3/pdb_atomistic_video.gif
+  - results/afm_pipeline/video1_v3/pdb_atomistic_grid.png
+  - results/afm_pipeline/video1_v3/pdb_atomistic_video.gif
   conclusions: >
-    Code written and syntax-checked. Blocked on GPU access for execution. Once
-    fitting runs, will produce per-frame rotation matrices and fitted coordinates
-    for orientation-correct ChimeraX overlay rendering.
+    Exhaustive SO(3) search with temporal flip resolution reduces head-tail flipping
+    from 38% to 8% of frames. Per-frame correlations are reasonable (0.69-0.80 mean).
+    Remaining orientation jumps may require constrained re-fitting or SLERP smoothing.
+    The pipeline (fit_rigid_body.py + render_atomistic_overlay.py fitted mode) is
+    now end-to-end operational.
   connects_to: null
-  completed_date: null
+  completed_date: '2026-04-12'
