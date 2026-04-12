@@ -61,13 +61,16 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Train AFMFold CNN on steering trajectory** — Steering re-run with frame saving is in progress (CPU, ~1-3h). Once frames available, run `train_afmfold_cnn.py` to generate AFM images and train CNN. Then pipeline is ready for HS-AFM GIF inference.
-2. **A5B1 Protenix co-fold on PACE or RunPod A100** — Job 6292734 blocked by PACE billing limits. User considering A100-80GB RunPod pod.
-3. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures (bent→extended) from Ferg-Lab/principalcurve_integrin_structures.
-4. **Debug AFCluster clustering failure** — Job 5390044 produced 0 clusters.
-5. **Run AVB3 conformer pipeline on PACE** — Submit pull job, split frames, submit relax jobs, collect, generate pseudo-AFM images.
+1. **CNN retraining with corrected tip size (1-2 nm)** — Training running on RunPod A4500 (epoch ~15-20 of 50, val_loss=2.690 Å). Partial model already pulled and tested: predictions now within training range (mean 69 Å vs old 82 Å) but still near-constant (std=0.2 Å). Correlation matching (std=8.5 Å) remains the better inference method.
+2. **Close sim→real domain gap for CNN** — CNN predicts near-mean despite correct tip. Needs histogram matching, noise augmentation, or real-AFM fine-tuning to discriminate conformational states.
+3. **Create PDB overlay animated GIF** — User requested fitted PDB overlaid on each AFM frame. Need proper rigid body fitting or pseudo-AFM overlay approach.
+4. **A5B1 Protenix co-fold on PACE or RunPod A100** — Job 6292734 blocked by PACE billing limits.
+5. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures from Ferg-Lab.
 
 ## Recently Completed
+- [x] Corrected-tip pseudo-AFM correlation matching (2026-04-11) — Regenerated 13,200 pseudo-AFM images with tip 1-2 nm (was 6-12 nm). Correlation matching on both GIFs shows improved state detection: video1 extended 11%→47%, video2 extended 29%→60%.
+- [x] Tip size investigation (2026-04-11) — Identified that pseudo-AFM tip radius was 6-12 nm (3-6x too large vs experimental 1-2 nm). Generated comparison grids showing structural detail at each tip size.
+- [x] Initial HS-AFM pipeline application (2026-04-10) — Applied AFMFold pipeline to two Linz HS-AFM GIFs (409 + 1296 frames). CNN predictions near-constant due to domain gap, but correlation matching found real conformational dynamics.
 - [x] AFMFold CNN pipeline built (obj-010, 2026-04-08) — End-to-end pipeline: domain steering → simulated AFM images → CNN training → GIF inference. CV distance extend is the effective steering method (+88° leg opening, +113Å extension). Pipeline scripts: train_afmfold_cnn.py, predict_from_afm_gif.py.
 - [x] Domain steering experiments on RunPod A5000 (obj-010, 2026-04-08) — 3/4 presets completed. CV distance extend dramatically outperformed angle torques. Gentle/moderate had negligible effect in 1ns.
 - [x] AF2 pLDDT vs displacement analysis (obj-009, 2026-03-23) — AF2 can't score arbitrary PDBs but pLDDT identifies flexible leg/tail domains (82-84). TM-score is the practical conformer filter.

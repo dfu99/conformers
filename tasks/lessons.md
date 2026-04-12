@@ -345,3 +345,18 @@ Before diagnosing new failures, verify in order:
 | Metadynamics on αVβ3 | Needs setup | 1-2 weeks | High — enhanced sampling |
 | Full string method for αVβ3 | Major project | Weeks | Very high — MFE pathway |
 | ProteinTTT | Install pending | Days | Unknown — single-sequence |
+
+### AFMFold Pseudo-AFM Tip Radius Must Match Experimental HS-AFM
+- Command context: CNN training with `min_tip_radius=6.0, max_tip_radius=12.0` (pixels at 0.98 nm/px = 5.9–11.8 nm).
+- Symptom: CNN predicted near-constant CVs (std=0.04 Å) extrapolating outside training range (82 Å vs max 79 Å).
+- Root cause: experimental HS-AFM tip is 1–2 nm; our pseudo-AFM tip was 3–6× too large, producing featureless blobs.
+- Fix: set `min_tip_radius=1.0, max_tip_radius=2.0` (≈1–2 nm). afmfold defaults (1–3 px) were actually correct.
+- Result: corrected-tip CNN predicts within training range (mean 69 Å) but still near-constant (std=0.2 Å). Correlation matching with corrected-tip pseudo-AFM library is the better inference method (std=8.5 Å).
+- Action: always match tip parameters to the experimental setup. For Linz HS-AFM: tip 1–2 nm.
+
+### CNN Domain Gap Persists Even With Correct Tip — Use Correlation Matching
+- Command context: corrected-tip CNN (val_loss=2.69 Å) inference on Linz HS-AFM GIFs.
+- Symptom: predictions within training range but near-constant; no conformational discrimination.
+- Likely cause: sim→real domain gap in noise, contrast, background. Pseudo-AFM images are clean height maps; real HS-AFM has substrate noise, scanning artifacts, variable contrast.
+- Workaround: direct image correlation matching against the pseudo-AFM library captures real conformational dynamics (r up to 0.967).
+- Next step to close gap: histogram matching during training, noise augmentation matching real HS-AFM characteristics, or fine-tuning with labeled real AFM data.
