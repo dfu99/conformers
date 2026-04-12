@@ -360,3 +360,21 @@ Before diagnosing new failures, verify in order:
 - Likely cause: sim→real domain gap in noise, contrast, background. Pseudo-AFM images are clean height maps; real HS-AFM has substrate noise, scanning artifacts, variable contrast.
 - Workaround: direct image correlation matching against the pseudo-AFM library captures real conformational dynamics (r up to 0.967).
 - Next step to close gap: histogram matching during training, noise augmentation matching real HS-AFM characteristics, or fine-tuning with labeled real AFM data.
+
+### 50 Pre-Saved SO(3) Rotations Are Too Sparse for Orientation Recovery
+- Command context: rendering atomistic PDB overlays using 50 epoch rotations from pseudo-AFM library training.
+- Symptom: persistent head-tail orientation flipping between adjacent frames, producing visually jarring GIFs.
+- Root cause: 50 rotations cover ~2.4% of SO(3) uniformly — insufficient to find the orientation that best matches each frame. AFMFold's paper uses exhaustive sampling (2048+ per frame).
+- Action: use `fit_rigid_body.py` with `--n-rotations 2048` for per-frame SO(3) search using AFMFold's correlation-based fitting.
+
+### AFMFold `summarize_results` Bug With rot_batch > 1
+- Command context: investigating `afmfold/src/afmfold/rigid_body_fitting.py` line 283.
+- Symptom: `if i == best_rot_idx` compares step index `i` against flat rotation index `best_rot_idx` (which spans all steps × rot_batch).
+- Likely cause: code assumes rot_batch=1 where step index equals flat rotation index.
+- Action: wrote custom `fit_orientations()` in `fit_rigid_body.py` that tracks best rotations manually per frame instead of using the buggy `RigidBodyFitting.summarize_results()`.
+
+### Piping Long-Running Python Through `head` Causes Silent SIGPIPE Kill
+- Command context: launching `fit_rigid_body.py 2>&1 | head -30` as a background task.
+- Symptom: output directory empty, process silently killed after producing >30 lines of output.
+- Root cause: `head -30` closes the pipe after 30 lines, sending SIGPIPE to the Python process.
+- Action: never pipe long-running GPU processes through `head`. Use `2>&1` only, or redirect to a log file.

@@ -207,23 +207,51 @@ objectives:
   connects_to: obj-011
   completed_date: '2026-04-08'
 - id: obj-011
-  status: in_progress
+  status: completed
   statement: Build AFMFold CNN pipeline for HS-AFM to integrin conformer prediction.
   methodology: >
     Built end-to-end pipeline: train_afmfold_cnn.py (steering frames → AFM images →
     CNN training) and predict_from_afm_gif.py (HS-AFM GIF → CV prediction → conformer
-    matching). Uses afmfold's C8-equivariant CNN and simulated AFM image generator.
-    Steering re-run with frame saving launched on CPU for training data generation.
+    matching). Applied to two Linz HS-AFM GIFs (video1: 409 frames, video2: 1296 frames).
+    CNN predictions near-constant due to domain gap; correlation matching is the
+    effective inference method (r up to 0.967).
   metrics:
-    scripts_created: 2
+    scripts_created: 5
     domain_pairs: 3
     cnn_architecture: C8_equivariant
     image_size: 35x35
+    video1_frames: 409
+    video2_frames: 1296
+    correlation_mean_video1: 0.874
+    correlation_mean_video2: 0.746
+  figures:
+  - results/afm_pipeline/video2_v2/cv_trajectory.png
+  - results/afm_pipeline/video2_v2/state_summary.png
+  conclusions: >
+    Correlation matching against corrected-tip pseudo-AFM library successfully captures
+    real conformational dynamics in HS-AFM videos. CNN has sim→real domain gap.
+    50-rotation approach causes head-tail orientation flipping in overlays.
+  connects_to: obj-012
+  completed_date: '2026-04-11'
+- id: obj-012
+  status: in_progress
+  statement: Exhaustive SO(3) rigid-body fitting for HS-AFM orientation recovery.
+  methodology: >
+    Wrote fit_rigid_body.py using AFMFold's actual orientation recovery approach:
+    sample_uniform_so3 (2048 rotations/frame), apply_rotations, generate_landscape,
+    idilation, compute_correlation_coefficient. Custom best-tracking avoids bug in
+    AFMFold's summarize_results with rot_batch>1. Updated render_atomistic_overlay.py
+    with fitted mode (--fitted-dir) for direct use of per-frame fitted coordinates.
+  metrics:
+    rotations_per_frame: 2048
+    rot_batch: 32
+    frame_batch: 20
+    scripts_written: 2
+    scripts_syntax_checked: true
   figures: []
   conclusions: >
-    Pipeline corrected per PI feedback: inference step 4 now uses MD+CV steering
-    (not NN matching or Protenix conditional generation). Steering frame generation
-    on RunPod A5000 GPU is near completion (~300 frames). Next: train CNN, then
-    pipeline ready for HS-AFM GIF inference.
+    Code written and syntax-checked. Blocked on GPU access for execution. Once
+    fitting runs, will produce per-frame rotation matrices and fitted coordinates
+    for orientation-correct ChimeraX overlay rendering.
   connects_to: null
   completed_date: null

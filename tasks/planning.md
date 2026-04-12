@@ -61,13 +61,15 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **CNN retraining with corrected tip size (1-2 nm)** — Training running on RunPod A4500 (epoch ~15-20 of 50, val_loss=2.690 Å). Partial model already pulled and tested: predictions now within training range (mean 69 Å vs old 82 Å) but still near-constant (std=0.2 Å). Correlation matching (std=8.5 Å) remains the better inference method.
-2. **Close sim→real domain gap for CNN** — CNN predicts near-mean despite correct tip. Needs histogram matching, noise augmentation, or real-AFM fine-tuning to discriminate conformational states.
-3. **Create PDB overlay animated GIF** — User requested fitted PDB overlaid on each AFM frame. Need proper rigid body fitting or pseudo-AFM overlay approach.
-4. **A5B1 Protenix co-fold on PACE or RunPod A100** — Job 6292734 blocked by PACE billing limits.
-5. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures from Ferg-Lab.
+1. **Run rigid-body fitting on GPU** — `fit_rigid_body.py` written and syntax-checked. Needs GPU access to run exhaustive SO(3) search (2048 rotations/frame) on video2 (1296 frames) then video1 (409 frames). Blocked on local GPU scheduler grant.
+2. **Render fitted overlays** — Once fitting produces `fitted_coords.npy`, run updated `render_atomistic_overlay.py --fitted-dir` to generate ChimeraX overlays + animated GIFs. Code is ready.
+3. **CNN retraining with corrected tip size (1-2 nm)** — Training running on RunPod A4500 (epoch ~15-20 of 50, val_loss=2.690 Å). Correlation matching (std=8.5 Å) remains the better inference method.
+4. **Close sim→real domain gap for CNN** — CNN predicts near-mean despite correct tip. Needs histogram matching, noise augmentation, or real-AFM fine-tuning.
+5. **A5B1 Protenix co-fold on PACE or RunPod A100** — Job 6292734 blocked by PACE billing limits.
+6. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures from Ferg-Lab.
 
 ## Recently Completed
+- [x] Exhaustive SO(3) rigid-body fitting pipeline (2026-04-12) — Wrote `fit_rigid_body.py` using AFMFold's actual orientation recovery (2048 rotations/frame). Updated `render_atomistic_overlay.py` with fitted mode. Blocked on GPU access for execution.
 - [x] Corrected-tip pseudo-AFM correlation matching (2026-04-11) — Regenerated 13,200 pseudo-AFM images with tip 1-2 nm (was 6-12 nm). Correlation matching on both GIFs shows improved state detection: video1 extended 11%→47%, video2 extended 29%→60%.
 - [x] Tip size investigation (2026-04-11) — Identified that pseudo-AFM tip radius was 6-12 nm (3-6x too large vs experimental 1-2 nm). Generated comparison grids showing structural detail at each tip size.
 - [x] Initial HS-AFM pipeline application (2026-04-10) — Applied AFMFold pipeline to two Linz HS-AFM GIFs (409 + 1296 frames). CNN predictions near-constant due to domain gap, but correlation matching found real conformational dynamics.
