@@ -503,7 +503,15 @@ def main():
 
     if use_fitted:
         # Fitted mode: per-frame coordinates from exhaustive SO(3) fitting
-        fitted_coords = np.load(str(args.fitted_dir / "fitted_coords.npy"))
+        # Prefer smoothed coordinates (flip-resolved) if available
+        smooth_path = args.fitted_dir / "fitted_coords_smooth.npy"
+        raw_path = args.fitted_dir / "fitted_coords.npy"
+        if smooth_path.exists():
+            fitted_coords = np.load(str(smooth_path))
+            print("Using smoothed (flip-resolved) coordinates")
+        else:
+            fitted_coords = np.load(str(raw_path))
+            print("Using raw fitted coordinates (no smoothing)")
         correlations = np.load(str(args.fitted_dir / "fitted_correlations.npy"))
         topology_path = args.fitted_dir / "topology.pdb"
         n_frames = len(fitted_coords)
