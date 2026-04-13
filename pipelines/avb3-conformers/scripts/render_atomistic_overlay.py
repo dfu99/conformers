@@ -58,6 +58,9 @@ def parse_args():
                    help="ChimeraX representation style")
     p.add_argument("--n-conformers", type=int, default=264,
                    help="Number of conformer frames in PDB library")
+    p.add_argument("--skip-frames", type=int, default=0,
+                   help="Number of initial GIF frames skipped during fitting "
+                        "(auto-detected from fitting_metadata.json if present)")
     return p.parse_args()
 
 
@@ -416,7 +419,8 @@ def create_atomistic_gif(real_frames: list[np.ndarray],
                          render_key_fn,
                          output_path: Path,
                          render_size: int = 400,
-                         fps: int = 8):
+                         fps: int = 8,
+                         frame_offset: int = 0):
     """Animated GIF: real AFM | atomistic overlay | CV bar chart per frame."""
     n_all = len(real_frames)
     cv_names = ["\u03b1H\u2194\u03b1T", "\u03b2H\u2194\u03b1T", "\u03b1H\u2194\u03b2T"]
@@ -470,7 +474,8 @@ def create_atomistic_gif(real_frames: list[np.ndarray],
                      f"{v:.1f}", va="center", fontsize=7)
         ax3.tick_params(labelsize=7)
 
-        fig.suptitle(f"Frame {frame_i}/{n_all}  |  \u03b1v\u03b23 Integrin Conformer",
+        display_frame = frame_i + frame_offset
+        fig.suptitle(f"Frame {display_frame}/{n_all + frame_offset}  |  \u03b1v\u03b23 Integrin Conformer",
                      fontsize=10, fontweight="bold", y=0.98)
         fig.tight_layout(rect=[0, 0, 1, 0.93])
 
@@ -500,8 +505,19 @@ def main():
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
     use_fitted = args.fitted_dir is not None
+    skip_frames = args.skip_frames
 
     if use_fitted:
+        # Auto-detect skip_frames from fitting metadata if not specified
+        meta_path = args.fitted_dir / "fitting_metadata.json"
+        if meta_path.exists() and skip_frames == 0:
+            import json
+            with open(meta_path) as f:
+                meta = json.load(f)
+            skip_frames = meta.get("skip_frames", 0)
+            if skip_frames > 0:
+                print(f"Auto-detected skip_frames={skip_frames} from metadata")
+
         # Fitted mode: per-frame coordinates from exhaustive SO(3) fitting
         # Prefer smoothed coordinates (flip-resolved) if available
         smooth_path = args.fitted_dir / "fitted_coords_smooth.npy"
@@ -516,6 +532,8 @@ def main():
         topology_path = args.fitted_dir / "topology.pdb"
         n_frames = len(fitted_coords)
         print(f"Fitted mode: {n_frames} frames with per-frame SO(3) orientations")
+        if skip_frames > 0:
+            print(f"  Skipped first {skip_frames} GIF frames during fitting")
         print(f"  Correlation: mean={correlations.mean():.4f} "
               f"min={correlations.min():.4f} max={correlations.max():.4f}")
     else:
@@ -529,10 +547,22 @@ def main():
         print(f"Legacy mode: {n_frames} frame matches, "
               f"{len(rotations)} rotation matrices")
 
-    matched_cvs = np.load(str(args.matched_cvs))
+    matched_cvs_all = np.load(str(args.matched_cvs))
+    # If frames were skipped, slice CVs to match fitted data
+    if use_fitted and skip_frames > 0:
+        matched_cvs = matched_cvs_all[skip_frames:]
+    else:
+        matched_cvs = matched_cvs_all
 
     # Extract GIF frames
-    real_frames = extract_gif_frames(args.gif)
+    all_real_frames = extract_gif_frames(args.gif)
+    # If frames were skipped, slice real frames to match fitted data
+    if use_fitted and skip_frames > 0:
+        real_frames = all_real_frames[skip_frames:]
+        print(f"  Using GIF frames {skip_frames}..{len(all_real_frames)-1} "
+              f"({len(real_frames)} frames)")
+    else:
+        real_frames = all_real_frames
 
     # Select frames for GIF
     step = max(1, n_frames // args.max_gif_frames)
@@ -573,7 +603,8 @@ def main():
         real_frames, matched_cvs, correlations,
         rendered, gif_frame_indices, render_key_fn,
         args.output_dir / "pdb_atomistic_video.gif",
-        render_size=args.render_size, fps=args.fps
+        render_size=args.render_size, fps=args.fps,
+        frame_offset=skip_frames,
     )
 
     print("\n" + "=" * 60)
