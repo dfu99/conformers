@@ -61,13 +61,14 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Improve overlay registration** — Current overlays show correct conformers but spatial alignment needs work: PDB models sometimes offset from AFM features due to COM-based centering. Could improve with 2D translation optimization.
+1. **Evaluate overlay accuracy visually** — v4 overlays use head tracking + optimal tip (2-3nm). Check if PDB now visually aligns with AFM features. If still off, try 2D translation optimization on top of head centering.
 2. **CNN retraining with corrected tip size (1-2 nm)** — Training running on RunPod A4500 (epoch ~15-20 of 50, val_loss=2.690 Å). Correlation matching (std=8.5 Å) remains the better inference method.
 3. **Close sim→real domain gap for CNN** — CNN predicts near-mean despite correct tip. Needs histogram matching, noise augmentation, or real-AFM fine-tuning.
 4. **A5B1 Protenix co-fold on PACE or RunPod A100** — Job 6292734 blocked by PACE billing limits.
 5. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures from Ferg-Lab.
 
 ## Recently Completed
+- [x] Head-tracked fitting + tip comparison (2026-04-12) — `fit_with_head_tracking.py`: head-based centering (not COM), skip first 30 frames, tip comparison (2-3nm optimal). Correlation: video1 0.69→0.97, video2 0.80→0.94.
 - [x] Exhaustive SO(3) rigid-body fitting + rendering (2026-04-12) — `fit_rigid_body.py` (2048 rotations/frame), temporal flip resolution (38%→8% flips), updated `render_atomistic_overlay.py`. Both videos fitted and overlays rendered. Video2 corr=0.80, Video1 corr=0.69.
 - [x] Corrected-tip pseudo-AFM correlation matching (2026-04-11) — Regenerated 13,200 pseudo-AFM images with tip 1-2 nm (was 6-12 nm). Correlation matching on both GIFs shows improved state detection: video1 extended 11%→47%, video2 extended 29%→60%.
 - [x] Tip size investigation (2026-04-11) — Identified that pseudo-AFM tip radius was 6-12 nm (3-6x too large vs experimental 1-2 nm). Generated comparison grids showing structural detail at each tip size.

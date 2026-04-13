@@ -266,3 +266,36 @@ objectives:
     now end-to-end operational.
   connects_to: null
   completed_date: '2026-04-12'
+
+- id: obj-013
+  status: completed
+  statement: Head-tracked rigid-body fitting with tip radius comparison
+  methodology: >
+    Implemented fit_with_head_tracking.py: (1) skip first 30 frames (scan window),
+    (2) track integrin head position in AFM via Gaussian smoothing + largest connected
+    component centroid, (3) align PDB head domain (αV res 1-440, β3 res 1-350) to
+    tracked position instead of COM centering, (4) compare tip radii 1,2,3,5nm on
+    subsets of both videos. Used best tip per video for full SO(3) fitting.
+  metrics:
+    video1_corr_v3: 0.691
+    video1_corr_v4: 0.969
+    video1_improvement: "+40%"
+    video1_best_tip: "3 nm"
+    video2_corr_v3: 0.797
+    video2_corr_v4: 0.941
+    video2_improvement: "+18%"
+    video2_best_tip: "2 nm"
+    head_drift_mean: "0.13 nm/frame"
+    tip_ranking: "2nm ≈ 3nm > 1nm > 5nm"
+  figures:
+    - results/afm_pipeline/video2_v4/tip_comparison.png
+    - results/afm_pipeline/video2_v4/head_tracking.png
+    - results/afm_pipeline/video2_v4/pdb_atomistic_video_opt.gif
+    - results/afm_pipeline/video1_v4/pdb_atomistic_video_opt.gif
+  conclusions: >
+    Head-based centering is the dominant improvement — COM centering offset
+    the PDB by 2+ nm because legs shift the COM away from the head. Tip radius
+    matters less (all between 0.93-0.98) but 2-3nm is optimal. The head position
+    is very stable (0.13nm drift/frame), confirming the PI's intuition.
+  connects_to: null
+  completed_date: '2026-04-12'

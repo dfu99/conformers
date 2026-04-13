@@ -378,3 +378,20 @@ Before diagnosing new failures, verify in order:
 - Symptom: output directory empty, process silently killed after producing >30 lines of output.
 - Root cause: `head -30` closes the pipe after 30 lines, sending SIGPIPE to the Python process.
 - Action: never pipe long-running GPU processes through `head`. Use `2>&1` only, or redirect to a log file.
+
+### COM-Based Centering Offsets PDB From AFM Head
+- Command context: `fit_rigid_body.py` v3 overlays.
+- Symptom: PDB overlay visually offset from AFM features despite high per-frame correlations. Head domain displaced from brightest AFM feature.
+- Likely cause: center-of-mass includes the entire molecule (head + legs). Extended legs shift the COM away from the globular head, causing 2+ nm offset.
+- Action: track the head position in AFM frames (brightest topographic feature) and align PDB head domain to that position instead of full-structure COM. This improved correlations from 0.69→0.97 (video1) and 0.80→0.94 (video2).
+
+### Optimal AFM Tip Radius is 2-3 nm
+- Command context: `fit_with_head_tracking.py --compare-tips` on both Linz GIFs.
+- Symptom: needed to determine which simulated tip radius best matches experimental data.
+- Result: 2nm best for video2 (0.944), 3nm best for video1 (0.976). 1nm and 5nm both worse but close. All between 0.93-0.98 — tip radius is a secondary factor compared to centering.
+- Action: default to 2-3nm tip for future rigid-body fitting against these Linz GIFs.
+
+### First 30 HS-AFM Frames Are Scan Window Adjustment
+- Command context: Linz AVB3 HS-AFM GIFs.
+- Symptom: early frames show imaging artifacts as the scan window stabilizes on the specimen.
+- Action: always skip the first 30 frames when fitting or analyzing these GIFs. Use `--skip-frames 30`.
