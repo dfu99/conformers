@@ -177,6 +177,12 @@ Before diagnosing new failures, verify in order:
 - Likely cause: the pseudo-AFM library used only 66/264 conformers, all below CV0=79A. No extended states existed to match against.
 - Action: before running the full pipeline on new AFM data, verify that the conformer library spans the expected CV range. Use the CV distribution histogram to check coverage.
 
+### RunPod Workspace Disk Quotas Kill Long MD Runs Silently
+- Command context: 3ns OpenMM steering MD on RunPod A4500 with `--save-frames`.
+- Symptom: process died silently after ~40 PDB frames (5.2 GB), with "Disk quota exceeded" on subsequent writes. No error message in the log, no OOM signal.
+- Likely cause: each solvated PDB frame is 131 MB (430K atoms). 40 frames = 5.2 GB. Full 3ns = 400 frames = 52 GB — far exceeds RunPod per-pod volume limits (~20 GB network storage).
+- Action: never use `--save-frames` for solvated systems on RunPod. Rely on `production.nc` trajectory (compressed, ~5 GB for 3ns) and extract protein-only frames post-hoc with mdtraj. Add disk monitoring to cron watchdog.
+
 ### Strict Passing 4-Chain Structure Achieved via Base-2 + Seed-404 Best Samples
 - Command context: forced merge of stage1 `seed_404 sample_2` + stage2 `seed_404 sample_4` onto base `integrin_alpha5_beta1_sample_2`.
 - Outcome: 4 chains present, strict check passed (`alpha=16.06 A`, `beta=6.73 A`, threshold `<=25 A`).
