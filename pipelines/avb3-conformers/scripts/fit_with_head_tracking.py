@@ -399,6 +399,68 @@ def resolve_flips(rotations: np.ndarray, coords: np.ndarray,
     return smooth_rot, smooth_coords
 
 
+def resolve_flips_head_anchored(
+    rotations: np.ndarray,
+    coords: np.ndarray,
+    head_indices: np.ndarray,
+    head_positions_nm: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Resolve flips using tracked AFM head positions as anchor.
+
+    Unlike resolve_flips (which compares to the previous frame and can drift),
+    this version compares each frame's head centroid to the tracked AFM head
+    position, then re-centers to eliminate any residual XY offset.
+    """
+    from scipy.spatial.transform import Rotation as R
+
+    N = len(rotations)
+    smooth_rot = rotations.copy()
+    smooth_coords = coords.copy()
+
+    flip_axes = [
+        R.from_rotvec([np.pi, 0, 0]).as_matrix(),
+        R.from_rotvec([0, np.pi, 0]).as_matrix(),
+        R.from_rotvec([0, 0, np.pi]).as_matrix(),
+    ]
+
+    n_flips = 0
+    for i in range(N):
+        target_xy = head_positions_nm[i, :2]
+        curr_head = smooth_coords[i, head_indices].mean(axis=0)
+        best_dist = np.linalg.norm(curr_head[:2] - target_xy)
+        best_rot = smooth_rot[i]
+        best_coords = smooth_coords[i]
+
+        for flip in flip_axes:
+            flipped_rot = flip @ smooth_rot[i]
+            flipped_coords = smooth_coords[i].copy()
+            com = flipped_coords.mean(axis=0)
+            flipped_coords = (flipped_coords - com) @ flip.T + com
+            flipped_coords[:, 2] -= flipped_coords[:, 2].min()
+
+            flipped_head = flipped_coords[head_indices].mean(axis=0)
+            dist = np.linalg.norm(flipped_head[:2] - target_xy)
+            if dist < best_dist:
+                best_dist = dist
+                best_rot = flipped_rot
+                best_coords = flipped_coords
+
+        if not np.array_equal(best_rot, smooth_rot[i]):
+            n_flips += 1
+        smooth_rot[i] = best_rot
+        smooth_coords[i] = best_coords
+
+        # Re-center head to tracked position
+        head_com = smooth_coords[i, head_indices].mean(axis=0)
+        smooth_coords[i, :, 0] += target_xy[0] - head_com[0]
+        smooth_coords[i, :, 1] += target_xy[1] - head_com[1]
+        smooth_coords[i, :, 2] -= smooth_coords[i, :, 2].min()
+
+    pct = 100 * n_flips / max(1, N)
+    print(f"  Flip resolution (head-anchored): {n_flips}/{N} frames flipped ({pct:.1f}%)")
+    return smooth_rot, smooth_coords
+
+
 # ---------------------------------------------------------------------------
 # Visualization
 # ---------------------------------------------------------------------------
@@ -674,9 +736,9 @@ def main():
               f"elapsed={elapsed:.0f}s, ETA={eta:.0f}s")
 
     # --- Temporal smoothing ---
-    print("\nApplying temporal flip resolution...")
-    smooth_rot, smooth_coords = resolve_flips(
-        fitted_rotations, fitted_coords, head_atom_indices
+    print("\nApplying head-anchored flip resolution...")
+    smooth_rot, smooth_coords = resolve_flips_head_anchored(
+        fitted_rotations, fitted_coords, head_atom_indices, head_positions_nm
     )
 
     # --- Save results ---
