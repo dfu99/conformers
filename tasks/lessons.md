@@ -153,6 +153,30 @@ Before diagnosing new failures, verify in order:
 - Likely cause: receptor frame choice shifts aligned ligand placement enough to determine whether strict tail-distance gates are feasible.
 - Action: include base heterodimer sample/frame sweep in the automation before launching expensive new-seed inference.
 
+### Temporal Flip Resolution Must Anchor to Global Targets, Not Previous Frames
+- Command context: `resolve_flips()` in `fit_with_head_tracking.py` for HS-AFM overlay post-processing.
+- Symptom: head positions in smoothed coordinates drifted up to 10.4nm from where SO(3) fitting placed them. 399/1266 frames drifted >1nm. Visible as overlay misalignment at frames 174, 606, 678, 750.
+- Likely cause: comparing each frame to the previous frame propagates small errors, creating cumulative drift.
+- Action: use `resolve_flips_head_anchored()` which compares to the tracked AFM head position (a global anchor), then re-centers. Result: zero drift.
+
+### Pip-Installed OpenMM May Lack CUDA Platform
+- Command context: running OpenMM steering MD on RunPod A4500.
+- Symptom: `Platform.getNumPlatforms()` returned only Reference and CPU — no CUDA despite `nvidia-smi` showing a working GPU. Simulation silently fell back to CPU (would take months).
+- Likely cause: `pip install openmm` gives the CPU-only build; CUDA kernels are a separate package.
+- Action: always `pip install openmm-cuda` after installing OpenMM on GPU machines. Verify with `Platform.getPlatformByName("CUDA")` before launching long runs.
+
+### Scipy NetCDF Writer Has 2GB File Size Limit
+- Command context: mdtraj NetCDFReporter writing `production.nc` during OpenMM steering MD.
+- Symptom: process died silently at exactly step 199,500 (same point on two independent runs). The production.nc file was 1.9 GB when it crashed.
+- Likely cause: scipy's NetCDF implementation uses int32 file offsets, causing a crash near the 2 GB limit.
+- Action: `pip install netCDF4` before running MD. The mdtraj warning about missing netCDF4 is not cosmetic — scipy's fallback breaks on large trajectories.
+
+### Conformer Library Must Be Validated Against Target CV Range Before Fitting
+- Command context: HS-AFM overlay showing bent conformers at frames where AFM shows extension.
+- Symptom: at frame 1110, correlation matching selected a compact conformer (CV0=53A) with r=0.72. AFM clearly shows extended features.
+- Likely cause: the pseudo-AFM library used only 66/264 conformers, all below CV0=79A. No extended states existed to match against.
+- Action: before running the full pipeline on new AFM data, verify that the conformer library spans the expected CV range. Use the CV distribution histogram to check coverage.
+
 ### Strict Passing 4-Chain Structure Achieved via Base-2 + Seed-404 Best Samples
 - Command context: forced merge of stage1 `seed_404 sample_2` + stage2 `seed_404 sample_4` onto base `integrin_alpha5_beta1_sample_2`.
 - Outcome: 4 chains present, strict check passed (`alpha=16.06 A`, `beta=6.73 A`, threshold `<=25 A`).

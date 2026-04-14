@@ -61,13 +61,14 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Evaluate overlay accuracy visually** — v4 overlays use head tracking + optimal tip (2-3nm). Check if PDB now visually aligns with AFM features. If still off, try 2D translation optimization on top of head centering.
-2. **CNN retraining with corrected tip size (1-2 nm)** — Training running on RunPod A4500 (epoch ~15-20 of 50, val_loss=2.690 Å). Correlation matching (std=8.5 Å) remains the better inference method.
-3. **Close sim→real domain gap for CNN** — CNN predicts near-mean despite correct tip. Needs histogram matching, noise augmentation, or real-AFM fine-tuning.
-4. **A5B1 Protenix co-fold on PACE or RunPod A100** — Job 6292734 blocked by PACE billing limits.
-5. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures from Ferg-Lab.
+1. **Collect extended steering frames from RunPod** — 3ns CV-distance steering running on A4500 at 5 ns/day (ETA ~18:00 UTC Apr 14). When done: strip water, merge with existing 264 frames, regenerate pseudo-AFM library with 1-2nm tip, rerun correlation matching on both videos.
+2. **Rerun full AFM pipeline with expanded conformer library** — After new frames arrive: process_frames_to_afm.py → visualize_afm_conformers.py → fit_with_head_tracking.py → render_projection_overlay.py for both videos.
+3. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures from Ferg-Lab provide full bent→extended pathway. Can supplement steering-derived conformers.
+4. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
+5. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
 
 ## Recently Completed
+- [x] Fix head-alignment drift + diagnose conformer coverage gap (obj-014/015, 2026-04-14) — `resolve_flips_head_anchored()` eliminates all position drift (was up to 10.4nm). Diagnosed conformer library gap: 66 conformers span CV0 53-79A, no extended states. Launched 3ns steering extension on RunPod A4500.
 - [x] Head-tracked fitting + tip comparison (2026-04-12) — `fit_with_head_tracking.py`: head-based centering (not COM), skip first 30 frames, tip comparison (2-3nm optimal). Correlation: video1 0.69→0.97, video2 0.80→0.94.
 - [x] Exhaustive SO(3) rigid-body fitting + rendering (2026-04-12) — `fit_rigid_body.py` (2048 rotations/frame), temporal flip resolution (38%→8% flips), updated `render_atomistic_overlay.py`. Both videos fitted and overlays rendered. Video2 corr=0.80, Video1 corr=0.69.
 - [x] Corrected-tip pseudo-AFM correlation matching (2026-04-11) — Regenerated 13,200 pseudo-AFM images with tip 1-2 nm (was 6-12 nm). Correlation matching on both GIFs shows improved state detection: video1 extended 11%→47%, video2 extended 29%→60%.

@@ -297,5 +297,63 @@ objectives:
     the PDB by 2+ nm because legs shift the COM away from the head. Tip radius
     matters less (all between 0.93-0.98) but 2-3nm is optimal. The head position
     is very stable (0.13nm drift/frame), confirming the PI's intuition.
-  connects_to: null
+  connects_to: obj-014
   completed_date: '2026-04-12'
+
+- id: obj-014
+  status: completed
+  statement: Fix head-alignment drift in flip resolution for HS-AFM overlays
+  methodology: >
+    Diagnosed that resolve_flips() compared each frame to the previous frame,
+    causing cumulative head position drift up to 10.4nm (399/1266 frames >1nm
+    drift). Wrote resolve_flips_head_anchored() which anchors to tracked AFM
+    head positions and re-centers after flip selection. Reprocessed video2_v4
+    smooth coordinates and regenerated projection overlay (v5).
+  metrics:
+    old_drift_mean_nm: 1.01
+    old_drift_max_nm: 10.44
+    old_frames_above_1nm: 399
+    new_drift_mean_nm: 0.00
+    new_drift_max_nm: 0.00
+    new_frames_above_1nm: 0
+    flips_needed: 0
+  figures:
+    - results/afm_pipeline/video2_v4/head_drift_comparison.png
+    - results/afm_pipeline/video2_v4/problem_frames_comparison.png
+    - results/afm_pipeline/video2_v4/flip_resolution_diagnostic.png
+    - results/afm_pipeline/video2_v5/pdb_projection_video_opt.gif
+  conclusions: >
+    The old flip resolution was introducing errors on already-correct coordinates.
+    Zero flips were actually needed — the SO(3) fitting was consistent. Head
+    anchoring eliminates all position drift. The remaining overlay issues are
+    conformer library coverage gaps, not alignment errors.
+  connects_to: obj-015
+  completed_date: '2026-04-13'
+
+- id: obj-015
+  status: completed
+  statement: Diagnose conformer library coverage gap for extended HS-AFM states
+  methodology: >
+    Analyzed correlation matching at specific frames (534, 1110) where AFM
+    shows extension but overlay shows bent structures. Found the pseudo-AFM
+    library uses only 66/264 conformers spanning CV0 53-79A (all compact/early
+    intermediate). No conformers above 79A exist. The 1ns CV-distance steering
+    trajectory was still extending at cutoff (slope +0.047 A/frame). Need ~2.5x
+    more trajectory (~670 frames) to reach full extension (~110A).
+  metrics:
+    library_conformers: 66
+    cv0_range_A: "53-79"
+    cv0_max_A: 78.7
+    extended_conformers: 0
+    steering_slope_at_cutoff: "0.047 A/frame"
+    frames_needed_to_110A: 670
+    runpod_speed_ns_day: 5.0
+  figures:
+    - results/afm_pipeline/video2_v4/frame1110_coverage_gap.png
+    - results/afm_pipeline/video2_v4/steering_trajectory_analysis.png
+  conclusions: >
+    The conformer library has zero extended states. The steering trajectory was
+    cut short before reaching full extension. Extended MD steering (3ns more)
+    launched on RunPod A4500 at 5 ns/day, ETA ~14h.
+  connects_to: null
+  completed_date: '2026-04-14'
