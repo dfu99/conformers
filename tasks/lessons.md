@@ -425,3 +425,19 @@ Before diagnosing new failures, verify in order:
 - Command context: Linz AVB3 HS-AFM GIFs.
 - Symptom: early frames show imaging artifacts as the scan window stabilizes on the specimen.
 - Action: always skip the first 30 frames when fitting or analyzing these GIFs. Use `--skip-frames 30`.
+
+### generate_images batch_size Truncation Bug
+- Command context: `afmfold.images.generate_images()` via `process_frames_to_afm.py`.
+- Symptom: pseudo-AFM library labels had narrow CV range [78.6, 80.8] Å despite conformer library spanning [52.9, 85.0] Å. Only first ~31 conformers were sampled.
+- Root cause: with `batch_size=16` and `dataset_size=500`, each step generates `len(xyz) × batch_size = 309 × 16 = 4944` images, then truncates to 500. Since frame order is sequential, only conformers 0-30 survive truncation.
+- Action: use `batch_size=1` so each step generates 309 images (one rotation per conformer). `ceil(500/309) = 2` steps per epoch ensures all conformers are covered. Also dramatically faster (1.1s vs 26s/epoch) and uses minimal memory.
+
+### RunPod Disk Quota Silently Truncates np.save
+- Command context: `fit_with_head_tracking.py` running on RunPod workspace.
+- Symptom: script completed fitting and flip resolution but crashed without error during file save. `fitted_coords.npy` truncated to exactly 256 MiB (of expected 365 MiB).
+- Root cause: RunPod workspace disk quota exceeded. Old steering backup files (12.5 GB) consumed the pod's quota. `np.save` gets an `OSError: Disk quota exceeded` during write but the error wasn't visible in the nohup log because Python crashed.
+- Action: always clean up old data on RunPod before running jobs that produce large output. Check `du -sh /workspace/conformers/*` before starting.
+
+### RunPod GPU vs CPU for SO(3) Fitting
+- Command context: `fit_with_head_tracking.py` with 1266 frames × 2048 rotations.
+- Result: A4500 GPU completed in 10 min vs ~4 hours on RunPod CPU (same machine). Always use `--device cuda` when GPU is available for fitting.

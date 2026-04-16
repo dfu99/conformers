@@ -309,7 +309,21 @@ queue:
     5. Pulled partial'
 - objective: do you have gpu access yet? Do the rigid body fitting
   priority: 3
-  status: pending
+  status: completed
   added: 2026-04-12 09:15
   source: slack
   channel_id: C0AKR3VPKJS
+  started: 2026-04-12 13:12
+  completed: 2026-04-12 13:25
+  commits: 6
+  notes: Recovered completion from staged Slack response after stale session.
+- objective: Done rebuilding the pseudo AFM library and rerunning the overlay pipeline
+    yet?
+  priority: 3
+  status: completed
+  added: 2026-04-15 18:42
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-04-15 18:42
+  completed: 2026-04-15 20:20
+  notes: Auto-completed via slack_staged.
