@@ -89,7 +89,8 @@ def resolve_tail_flips(coords: np.ndarray, head_idx: np.ndarray,
 
     # Iteratively resolve: flip frames whose tail direction conflicts with
     # the median of their neighbors. Repeat until stable.
-    for iteration in range(5):
+    # Lower hysteresis + more iterations to catch subtle flips.
+    for iteration in range(20):
         any_change = False
         # Compute current tail vectors
         tail_vecs = np.zeros((n, 2))
@@ -103,6 +104,7 @@ def resolve_tail_flips(coords: np.ndarray, head_idx: np.ndarray,
         norms[norms < 1e-9] = 1.0
         unit_vecs = tail_vecs / norms
 
+        # Use circular median (via vector mean of unit vectors)
         for i in range(n):
             lo = max(0, i - half)
             hi = min(n, i + half + 1)
@@ -117,10 +119,10 @@ def resolve_tail_flips(coords: np.ndarray, head_idx: np.ndarray,
             neighbor_mean /= nm_norm
 
             curr_dot = np.dot(unit_vecs[i], neighbor_mean)
-            # Flipping inverts tail direction
             flipped_dot = -curr_dot
 
-            if flipped_dot > curr_dot + 0.2:  # Hysteresis to prevent oscillation
+            # Lower hysteresis for more aggressive flipping
+            if flipped_dot > curr_dot + 0.05:
                 out_coords[i] = flip_around_head_z(out_coords[i], head_idx)
                 flipped[i] = not flipped[i]
                 any_change = True
@@ -129,7 +131,7 @@ def resolve_tail_flips(coords: np.ndarray, head_idx: np.ndarray,
             print(f"  Converged after {iteration + 1} iteration(s)")
             break
     else:
-        print(f"  Did not fully converge in 5 iterations")
+        print(f"  Did not fully converge in 20 iterations")
 
     n_flipped = int(flipped.sum())
     pct = 100 * n_flipped / max(1, n)
