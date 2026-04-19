@@ -132,27 +132,18 @@ def main() -> int:
         for p in positions
     ])
 
-    # Apply domain-preserving steering forces (instead of head/tail pulling)
-    if use_custom_targets:
-        target_dists = [float(x) for x in args.target_distances.split(",")]
-        print(f"Custom CV targets (nm): {target_dists}")
-        apply_custom_cv_steering(system, modeller.topology, target_dists)
-    else:
-        apply_steering_preset(system, modeller.topology, positions_nm,
-                              args.steering_preset)
-
-    # Add barostat
+    # Add barostat FIRST (doesn't interfere with minimization)
     system.addForce(MonteCarloBarostat(
         1.0 * atmospheres, args.temperature * kelvin, 25))
 
-    # Create integrator and simulation
+    # Create integrator and simulation WITHOUT steering forces first —
+    # minimization converges much faster without pulling forces.
     integrator = LangevinMiddleIntegrator(
         args.temperature * kelvin,
         1.0 / picoseconds,
         args.timestep * picoseconds,
     )
 
-    # Try GPU platform
     try:
         platform = Platform.getPlatformByName("CUDA")
         simulation = Simulation(modeller.topology, system, integrator, platform)
@@ -162,9 +153,30 @@ def main() -> int:
 
     simulation.context.setPositions(modeller.positions)
 
-    # Minimize
-    print("\nMinimizing...")
+    # Minimize (without steering forces — converges in seconds instead of hours)
+    print("\nMinimizing (pre-steering)...")
     simulation.minimizeEnergy()
+
+    # Now add steering forces and rebuild simulation with steered system
+    print("Applying steering forces...")
+    if use_custom_targets:
+        target_dists = [float(x) for x in args.target_distances.split(",")]
+        print(f"  Custom CV targets (nm): {target_dists}")
+        apply_custom_cv_steering(system, modeller.topology, target_dists)
+    else:
+        apply_steering_preset(system, modeller.topology, positions_nm,
+                              args.steering_preset)
+
+    # Preserve minimized positions, then reinitialize with updated system
+    min_state = simulation.context.getState(getPositions=True,
+                                              getVelocities=True)
+    new_integrator = LangevinMiddleIntegrator(
+        args.temperature * kelvin,
+        1.0 / picoseconds,
+        args.timestep * picoseconds,
+    )
+    simulation = Simulation(modeller.topology, system, new_integrator, platform)
+    simulation.context.setPositions(min_state.getPositions())
 
     # Save minimized structure
     state = simulation.context.getState(getPositions=True)

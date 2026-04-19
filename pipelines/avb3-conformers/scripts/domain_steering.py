@@ -402,6 +402,15 @@ STEERING_PRESETS = {
         "bias_type": "flat_bottom",
         "flat_bottom_width": 2.0,
     },
+    "cv_distance_bent": {
+        "method": "cv_bias",
+        "cv_type": "distance",
+        "description": "Bias inter-domain distances toward bent (headpiece folded back) targets",
+        "force_constant": 200.0,
+        "target_values": [4.0, 3.5, 2.0],  # nm — α-head/calf ~40Å, β-head/tail ~35Å, head-head ~20Å
+        "bias_type": "flat_bottom",
+        "flat_bottom_width": 2.0,
+    },
 }
 
 
