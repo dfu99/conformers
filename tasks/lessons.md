@@ -441,3 +441,18 @@ Before diagnosing new failures, verify in order:
 ### RunPod GPU vs CPU for SO(3) Fitting
 - Command context: `fit_with_head_tracking.py` with 1266 frames × 2048 rotations.
 - Result: A4500 GPU completed in 10 min vs ~4 hours on RunPod CPU (same machine). Always use `--device cuda` when GPU is available for fitting.
+
+### Steering Forces Cause Minimization Hang
+- Command context: `run_domain_steering.py` on RunPod A4500 / RTX 2000 Ada.
+- Symptom: `simulation.minimizeEnergy()` hangs 30+ minutes at 100% CPU with no progress when steering forces are applied before minimization.
+- Root cause: LBFGS minimization has to resolve the strong steering forces (k=200, targets 4-5nm from current state) simultaneously with the standard forcefield. The two force systems create overdetermined constraints.
+- Action: always minimize the system BEFORE adding steering forces. Create initial system with just forcefield, run `minimizeEnergy()`, then add CV-bias forces and reinitialize the Simulation with the updated System. See `run_domain_steering.py` commit 266f3c6.
+
+### pyparsing Breaks mdtraj.reporters Silently
+- Command context: fresh RunPod pod, `pip install openmm-cuda mdtraj netCDF4`.
+- Symptom: MD simulation runs for hours producing no `production.nc` trajectory file. Script doesn't error because it catches `ImportError` silently.
+- Root cause: Ubuntu's system pyparsing (in /usr/lib/python3/dist-packages) is too old for mdtraj. mdtraj.reporters fails with `cannot import name 'OpAssoc' from 'pyparsing'`.
+- Action: on fresh RunPod, always run `pip install --upgrade pyparsing` along with `pip install 'numpy<2' openmm-cuda mdtraj netCDF4`. Test with `python3 -c 'import mdtraj.reporters; print("OK")'` before launching MD.
+
+### generate_images batch_size Truncates Conformer Sampling
+- Already documented above, re-emphasizing: with `dataset_size=500, batch_size=16, N_frames=309`, `ceil(500/(309*16))=1` step produces 309*16=4944 images truncated to first 500 — only the first ~31 conformers are represented. Use `batch_size=1` and any `dataset_size >= N_frames` to get full coverage.

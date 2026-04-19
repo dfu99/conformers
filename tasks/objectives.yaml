@@ -357,3 +357,92 @@ objectives:
     launched on RunPod A4500 at 5 ns/day, ETA ~14h.
   connects_to: null
   completed_date: '2026-04-14'
+
+- id: obj-016
+  status: completed
+  statement: Fix pseudo-AFM library conformer sampling bug + rebuild with full CV coverage
+  methodology: >
+    Diagnosed that `generate_images(batch_size=16, dataset_size=500)` truncates
+    to the first 31 conformers out of 309 — only extended-range frames sampled,
+    extended-library conformers completely missing from labels. Switched to
+    batch_size=1 so each step processes all 309 conformers with 1 rotation;
+    ceil(500/309)=2 steps per epoch ensures every conformer is represented.
+    Verified label CV range now spans full library range. Re-ran correlation
+    matching + SO(3) fitting on both videos using the corrected library.
+  metrics:
+    old_label_range_A: "78.6-80.8"
+    new_label_range_A: "52.9-85.0"
+    library_size: 309
+    pseudo_afm_images: 25000
+    video1_correlation: 0.966
+    video2_correlation: 0.939
+    video1_extended_frames: 67
+    video2_extended_frames: 179
+  figures:
+    - results/afm_pipeline/library_bias_analysis.png
+    - results/afm_pipeline/video2_v6/pdb_projection_video_opt.gif
+  conclusions: >
+    Sampling bug was silently invalidating the entire pipeline — only 10% of
+    the library's CV range was being used. After fix, SO(3) fitting quality
+    improved dramatically and state classification became meaningful. Also
+    discovered the library itself is biased (0 conformers below CV0=52.9Å),
+    motivating the bent-state steering run.
+  connects_to: obj-017
+  completed_date: '2026-04-18'
+
+- id: obj-017
+  status: completed
+  statement: Resolve head-anchored tail flipping in fitted overlays
+  methodology: >
+    After head-anchored alignment locks the head centroid to the tracked AFM
+    head, the remaining DoF is a 180° rotation around the z-axis through head.
+    Wrote `resolve_tail_flips.py` that computes tail-vector direction per
+    frame and compares to a rolling 21-frame median. Frames whose tail
+    direction disagrees with the neighborhood get flipped 180° around the
+    head z-axis. Iterates to convergence with 0.05 hysteresis.
+  metrics:
+    window_frames: 21
+    hysteresis: 0.05
+    max_iterations: 20
+    video1_flips_corrected: 108
+    video2_flips_corrected: 229
+    video1_flip_pct: 28.5
+    video2_flip_pct: 18.1
+  figures:
+    - results/afm_pipeline/video1_v6/pdb_projection_video_opt.gif
+    - results/afm_pipeline/video2_v6/pdb_projection_video_opt.gif
+  conclusions: >
+    The initial conservative pass (hysteresis 0.2, 5 iters) missed too many
+    flips. Stronger settings (wider window, lower hysteresis, more iters)
+    cleaned up the residual tail jitter. The integrin overlays now show
+    stable tail orientation consistent with temporal smoothness.
+  connects_to: obj-018
+  completed_date: '2026-04-18'
+
+- id: obj-018
+  status: in_progress
+  statement: Extend conformer library toward bent state via CV-distance steering
+  methodology: >
+    Added `cv_distance_bent` preset to domain_steering.py with targets
+    [4.0, 3.5, 2.0] nm (α-head↔tail, β-head↔α-tail, α-head↔β-tail) and
+    force constant 200. Fixed a separate bug where adding steering forces
+    before minimization caused LBFGS hang; now minimize first, then apply
+    steering. Running 3ns production on RunPod A4500 at 5.47 ns/day.
+    Confirmed bending is occurring: CV0 dropped 78.5→51.4Å in first 148
+    frames of production.
+  metrics:
+    production_time_ps: 3000
+    a4500_speed_ns_day: 5.47
+    starting_cv0_A: 78.5
+    current_cv0_A: 51.4
+    target_cv0_A: 40.0
+    progress_pct: 79
+  figures:
+    - figures/checkpoint_2026-04-19.png
+  conclusions: >
+    Steering is progressing toward target. Next: extract protein frames
+    (PBC unwrap required), merge with existing 309 conformers, rebuild
+    pseudo-AFM library, and re-fit both videos. Expected BC% to jump
+    significantly (~12% → ~40%+) once bent conformers are in the library.
+  connects_to: null
+  completed_date: null

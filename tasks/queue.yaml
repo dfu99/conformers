@@ -327,3 +327,15 @@ queue:
   started: 2026-04-15 18:42
   completed: 2026-04-15 20:20
   notes: Auto-completed via slack_staged.
+- objective: Ok, and video? Also kinetics chart of time spent in BC, EC, EO, Intermediate
+    states? Also percentage of time spent in each state?
+  priority: 3
+  status: completed
+  added: 2026-04-16 09:30
+  source: slack
+  channel_id: C0AKR3VPKJS
+  started: 2026-04-16 09:31
+  completed: 2026-04-16 09:35
+  commits: 1
+  notes: State kinetics analysis complete for both videos. Charts and overlay GIFs
+    staged to Slack.
