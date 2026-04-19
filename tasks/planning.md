@@ -61,8 +61,9 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Review v6 overlay quality** — PI review of video1_v6 and video2_v6 overlays. Check if extended conformers now appear at formerly-missing frames (534, 1110). Check head alignment at frames 606, 678, 750.
-2. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures from Ferg-Lab provide full bent→extended pathway. Can supplement steering-derived conformers.
+1. **Bent steering running on RunPod A4500 (obj-018)** — PID 552, ~79% done, ETA ~2.5h. 3 ns CV-distance-bent production targeting CV0=4nm (bent state). Verified: CV0 already dropped 78.5→51.4 Å. After: extract protein frames (PBC unwrap required), merge with existing 309, rebuild pseudo-AFM library, re-fit both videos. Expected BC% to rise from ~12% → ~40%+ once true bent conformers are in library.
+2. **Review v6 overlay quality** — PI review of video1_v6 and video2_v6 overlays with tail-flip correction. Check if head alignment is stable and tail flipping is resolved.
+3. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures from Ferg-Lab provide full bent→extended pathway. Can supplement steering-derived conformers.
 3. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
 4. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
 
