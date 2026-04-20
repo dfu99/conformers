@@ -61,13 +61,16 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Bent steering running on RunPod A4500 (obj-018)** — PID 552, ~79% done, ETA ~2.5h. 3 ns CV-distance-bent production targeting CV0=4nm (bent state). Verified: CV0 already dropped 78.5→51.4 Å. After: extract protein frames (PBC unwrap required), merge with existing 309, rebuild pseudo-AFM library, re-fit both videos. Expected BC% to rise from ~12% → ~40%+ once true bent conformers are in library.
-2. **Review v6 overlay quality** — PI review of video1_v6 and video2_v6 overlays with tail-flip correction. Check if head alignment is stable and tail flipping is resolved.
-3. **Map αIIbβ3 string method structures onto αVβ3** — 19 PDB structures from Ferg-Lab provide full bent→extended pathway. Can supplement steering-derived conformers.
+1. **Random-conformer baseline** — falsifiability check pre-registered in intuition.md. Assign each AFM frame to a uniformly random conformer from the 615-frame library and recompute correlation. Expected corr < 0.4 if the claim holds. Quick to run locally.
+2. **EC vs EO steering** — current library has constant CV2 ~35Å (head-head). Extend the steering library with a CV2-targeted run to finally distinguish EC from EO.
+3. **αIIbβ3 string method structures** — 19 PDB structures from Ferg-Lab provide full bent→extended→open pathway. Can supplement steering-derived conformers and add the missing EO states.
+4. **AF2-Multimer ablation** — reviewer B push. Estimated 50 GPU-hours (see docs/pipeline_rationale.md). Blocked on PACE access or RunPod budget.
+5. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
 3. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
 4. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
 
 ## Recently Completed
+- [x] v7 pipeline with bent steering library (2026-04-20) — ran `cv_distance_bent` steering on RunPod A4500 (3ns, 5.47 ns/day), extracted 306 bent protein frames, merged with existing 309 extend frames → 615-frame library spanning CV0 [47.3, 85.0]Å. v7 fits: video1 BC 12.4%→43.5%, video2 BC 12.5%→18.6%. Library is discriminatingly sensitive to the data. Also: AFK tasks completed — updated intuition.md, generated library coverage, 1JV2 comparison, tip calibration, steering manifold figures; wrote docs/pipeline_rationale.md and results/paper_draft_v1.md.
 - [x] Rebuild pseudo-AFM library + rerun overlay pipeline (v6, 2026-04-16) — Fixed critical batch_size=16 sampling bug (only first 31/309 conformers sampled). Rebuilt with batch_size=1 covering full CV range [52.9, 85.0] Å. SO(3) fitting on RunPod GPU (10 min vs 4h CPU). Video1: 379 frames, corr=0.966, 67 extended. Video2: 1266 frames, corr=0.939, 179 extended.
 - [x] Fix head-alignment drift + diagnose conformer coverage gap (obj-014/015, 2026-04-14) — `resolve_flips_head_anchored()` eliminates all position drift (was up to 10.4nm). Diagnosed conformer library gap: 66 conformers span CV0 53-79A, no extended states. Launched 3ns steering extension on RunPod A4500.
 - [x] Head-tracked fitting + tip comparison (2026-04-12) — `fit_with_head_tracking.py`: head-based centering (not COM), skip first 30 frames, tip comparison (2-3nm optimal). Correlation: video1 0.69→0.97, video2 0.80→0.94.
