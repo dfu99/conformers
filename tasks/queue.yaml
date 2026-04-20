@@ -339,3 +339,194 @@ queue:
   commits: 1
   notes: State kinetics analysis complete for both videos. Charts and overlay GIFs
     staged to Slack.
+- objective: '[AFK PLAN] Read tasks/afk-policy.yaml. Your AFK goal is: Read tasks/intuition.md
+    (your logged intuition — the single claim this project exists to prove) and tasks/review-panel.yaml
+    (the 5 expert reviewers who will judge the work). If this project carries the
+    gpu tag in projects.conf, the team has a shared RunPod A4500 node available for
+    unattended GPU work — connect via `mc runpod` (host root@213.173.102.219:12447,
+    key ~/.ssh/runpod_key). Use `mc runpod sync <project>` to push your code, run
+    training/eval there, then `mc runpod fetch <project>` to pull results back. Prefer
+    it over local desktop GPU for anything longer than 10 minutes. Then break this
+    into 5-10 concrete queue tasks that move the work toward publishable evidence
+    at the target venue:
+
+    (1) Run or re-analyze an experiment that produces evidence directly bearing on
+    the intuition; if the most recent result is ambiguous, design a discriminating
+    experiment;
+
+    (2) Anticipate each reviewer in tasks/review-panel.yaml — for each one, identify
+    the single weakness they would flag, then queue a task that addresses it (ablation,
+    baseline comparison, theoretical derivation, additional figure, etc.);
+
+    (3) Update the working draft (paper section / progress memo) with the latest evidence
+    and a clear claim-to-evidence mapping;
+
+    (4) Literature sweep (WebSearch) for any new prior work that strengthens or threatens
+    the intuition; if found, integrate or rebut explicitly;
+
+    (5) Make sure tasks/intuition.md still accurately reflects the project — if recent
+    results have refined or shifted the claim, update the intuition file before writing
+    more.
+
+    Respect project conventions in tasks/planning.md and tasks/lessons.md. Every completed
+    objective must produce at least one new figure (saved to figures/ or results/)..
+    Read CLAUDE.md, tasks/planning.md, tasks/lessons.md, and recent objectives to
+    understand current project state. Then break this goal into 8 concrete tasks and
+    add each to your queue using this exact format in tasks/queue.yaml: each task
+    should be 15-60 minutes of work, have clear success criteria, and be suitable
+    for unattended chaining. After writing the plan, start working on the first task
+    immediately.'
+  priority: 3
+  status: skipped
+  added: 2026-04-19 13:19
+  source: afk
+  started: 2026-04-19 13:19
+  completed: 2026-04-19 14:19
+  notes: Recovered stale in_progress item after newer queued work arrived.
+- objective: 'AFK-1: Update tasks/intuition.md to reflect v7 results. Bent conformers
+    now in library (615 total, CV0 range 47.3-85.0Å), but state distribution for video
+    2 still ~78% extended. Consider whether the claim needs to shift from "full bent-extended
+    dynamics" to "conformer fitting for predominantly extended HS-AFM data".'
+  priority: 3
+  status: skipped
+  added: 2026-04-19 13:30
+  source: afk
+  success_criteria: 'intuition.md updated with v7 findings; claim sharpened; at least
+    one new open question added re: why video 2 is predominantly extended.'
+  started: 2026-04-19 14:19
+  completed: 2026-04-19 15:20
+  notes: Recovered stale in_progress item after newer queued work arrived.
+- objective: 'AFK-2: Complete V1 v7 pipeline — wait for RunPod fitting to finish,
+    pull results, run tail-flip resolution, render overlay GIF, run state kinetics.
+    Compare V1 v6 vs V1 v7 state distributions side-by-side.'
+  priority: 3
+  status: skipped
+  added: 2026-04-19 13:30
+  source: afk
+  success_criteria: results/afm_pipeline/video1_v7/ has fitted_coords_smooth.npy,
+    pdb_projection_video_opt.gif, state_kinetics.png. Side-by-side comparison figure
+    saved to figures/.
+  started: 2026-04-19 15:20
+  completed: 2026-04-19 16:20
+  notes: Recovered stale in_progress item after newer queued work arrived.
+- objective: 'AFK-3: Generate library coverage before/after figure. Plot CV0 histogram
+    for (a) original 309-frame library, (b) new 615-frame merged library with bent
+    frames, and (c) matched frames from both videos (v6 vs v7). Show PDB 1JV2 target
+    CV0 reference line. Save to figures/library_coverage_v6_v7.png.'
+  priority: 3
+  status: skipped
+  added: 2026-04-19 13:30
+  source: afk
+  success_criteria: figures/library_coverage_v6_v7.png exists with clear 4-panel layout
+    showing library bias and matching outcome.
+  started: 2026-04-19 16:20
+  completed: 2026-04-19 17:20
+  notes: Recovered stale in_progress item after newer queued work arrived.
+- objective: 'AFK-4: Reviewer A (integrin biologist) - download PDB 1JV2 (bent αVβ3)
+    from RCSB, strip water, compute CVs using our domain definitions, and show where
+    it sits vs our bent library. If CV0 < 47Å gap, document that our steering did
+    not reach fully-bent PDB-experimental state and quantify the gap.'
+  priority: 3
+  status: skipped
+  added: 2026-04-19 13:30
+  source: afk
+  success_criteria: figures/pdb_1jv2_vs_library.png shows 1JV2 CV0 as reference line
+    on library distribution. Gap to our bent min quantified in caption.
+  started: 2026-04-19 17:20
+  completed: 2026-04-19 18:20
+  notes: Recovered stale in_progress item after newer queued work arrived.
+- objective: 'AFK-5: Reviewer C (HS-AFM specialist) - pseudo-AFM tip calibration sanity
+    check. Generate pseudo-AFM for a small spherical test case (e.g. a glycine dodecamer
+    folded into a compact ball) with the 1-2nm tip and verify the resulting image
+    width matches 2*(tip_radius + particle_radius). If off, document the systematic
+    bias.'
+  priority: 3
+  status: skipped
+  added: 2026-04-19 13:30
+  source: afk
+  success_criteria: figures/tip_calibration_sphere.png shows pseudo-AFM of spherical
+    control, measured width, expected width, and difference.
+  started: 2026-04-19 18:20
+  completed: 2026-04-19 19:20
+  notes: Recovered stale in_progress item after newer queued work arrived.
+- objective: 'AFK-6: Reviewer B (AlphaFold) — document pipeline rationale in docs/pipeline_rationale.md.
+    Explain why Protenix + Boltz + AFCluster + MD steering (not AlphaFold-Multimer
+    alone). Note that an ablation study against AlphaFold-Multimer is future work
+    and estimate compute cost.'
+  priority: 3
+  status: skipped
+  added: 2026-04-19 13:30
+  source: afk
+  success_criteria: docs/pipeline_rationale.md exists with clear justification for
+    each pipeline component and explicit compute budget for AF2 ablation.
+  started: 2026-04-19 19:20
+  completed: 2026-04-19 20:20
+  notes: Recovered stale in_progress item after newer queued work arrived.
+- objective: 'AFK-7: Reviewer D (steered MD) — generate a free-energy-like plot from
+    the two steering trajectories. Use the production.nc logs to plot CV0 vs time
+    (bent run + extend run concatenated) and overlay the steering target and flat-bottom
+    width. Note: not a true ΔG but shows the accessible CV manifold. Save to figures/steering_cv_trajectory.png.'
+  priority: 3
+  status: skipped
+  added: 2026-04-19 13:30
+  source: afk
+  success_criteria: figures/steering_cv_trajectory.png shows CV0 time series for both
+    runs with targets marked. Caption notes limitations (not a true committor or ΔG).
+  started: 2026-04-19 20:20
+  completed: 2026-04-19 21:20
+  notes: Recovered stale in_progress item after newer queued work arrived.
+- objective: 'AFK-8: Write results/paper_draft_v1.md with claim-to-evidence mapping.
+    List each claim from intuition.md and link to specific figures / result files
+    that support it. Flag claims that are currently unsupported (EC vs EO differentiation,
+    AF2 baseline, contact mechanics). 300-500 words.'
+  priority: 3
+  status: skipped
+  added: 2026-04-19 13:30
+  source: afk
+  success_criteria: results/paper_draft_v1.md exists, ~300-500 words, with clear claim
+    bullets each linked to specific evidence files or marked as "pending".
+  started: 2026-04-19 21:20
+  completed: 2026-04-19 22:20
+  notes: Recovered stale in_progress item after newer queued work arrived.
+- objective: "[AFK PLAN] Read tasks/afk-policy.yaml. Your AFK goal is: Read tasks/intuition.md\
+    \ (your logged intuition — the single claim this project exists to prove) and\
+    \ tasks/review-panel.yaml (the 5 expert reviewers who will judge the work).\n\n\
+    If this project carries the gpu tag in projects.conf, the team has a SHARED RunPod\
+    \ A4500 node — there is NO scheduler on RunPod, so YOU must gate every GPU job\
+    \ on memory availability or risk OOM-ing whatever else is running. Mandatory protocol\
+    \ before any training/eval task:\n  (1) Estimate your jobs peak VRAM. Heuristic:\
+    \ model_params * 4 bytes (fp32) or * 2 (fp16/bf16), plus 2-4x for optimizer states\
+    \ (Adam = +8 bytes/param fp32), plus activations ~ batch * seq * hidden * layers\
+    \ * 4 bytes. Round up. If unsure, run a dry-run forward pass locally and read\
+    \ torch.cuda.max_memory_allocated().\n  (2) Run `mc runpod check` to read the\
+    \ live JSON snapshot of free VRAM and current processes.\n  (3) Run `mc runpod\
+    \ fits <required_gb>` (exit 0 = safe to launch). If it returns non-zero, do NOT\
+    \ launch the job — instead `mc runpod await <required_gb> --timeout 60` to block\
+    \ until memory frees, OR queue a smaller variant (smaller batch, gradient accumulation).\n\
+    \  (4) Use `mc runpod sync <project>` to push code, then run there. `mc runpod\
+    \ fetch <project>` pulls results/figures back.\n  (5) Prefer the A4500 over local\
+    \ desktop GPU for any job longer than 10 minutes.\n\nNow break this into 5-10\
+    \ concrete queue tasks that move the work toward publishable evidence at the target\
+    \ venue:\n(1) Run or re-analyze an experiment that produces evidence directly\
+    \ bearing on the intuition; if the most recent result is ambiguous, design a discriminating\
+    \ experiment;\n(2) Anticipate each reviewer in tasks/review-panel.yaml — for each\
+    \ one, identify the single weakness they would flag, then queue a task that addresses\
+    \ it (ablation, baseline comparison, theoretical derivation, additional figure,\
+    \ etc.);\n(3) Update the working draft (paper section / progress memo) with the\
+    \ latest evidence and a clear claim-to-evidence mapping;\n(4) Literature sweep\
+    \ (WebSearch) for any new prior work that strengthens or threatens the intuition;\
+    \ if found, integrate or rebut explicitly;\n(5) Make sure tasks/intuition.md still\
+    \ accurately reflects the project — if recent results have refined or shifted\
+    \ the claim, update the intuition file before writing more.\nRespect project conventions\
+    \ in tasks/planning.md and tasks/lessons.md. Every completed objective must produce\
+    \ at least one new figure (saved to figures/ or results/).. Read CLAUDE.md, tasks/planning.md,\
+    \ tasks/lessons.md, and recent objectives to understand current project state.\
+    \ Then break this goal into 8 concrete tasks and add each to your queue using\
+    \ this exact format in tasks/queue.yaml: each task should be 15-60 minutes of\
+    \ work, have clear success criteria, and be suitable for unattended chaining.\
+    \ After writing the plan, start working on the first task immediately."
+  priority: 3
+  status: in_progress
+  added: 2026-04-19 19:41
+  source: afk
+  started: 2026-04-19 22:20
