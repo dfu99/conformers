@@ -48,9 +48,15 @@ data — confirming a sim-real domain gap that template matching sidesteps.
 
 1. *Generalization failure.* A third independent HS-AFM dataset gives
    corr < 0.7 — the pipeline doesn't transfer beyond Linz data.
-2. *Random baseline equivalence.* A uniform random conformer baseline
-   reaches corr ≥ 0.4 on our videos — the correlation matching is not
-   structurally meaningful. Pre-registered prediction: random corr < 0.4.
+2. *Random baseline beats matching by <Δ0.1.* My original pre-registered
+   threshold was "random corr < 0.4", but the random baseline on our own
+   library (see `figures/random_baseline_v7.png`) is 0.65 (video1) and
+   0.43 (video2). The pre-reg was wrong: mean-subtracted correlation on
+   AFM-shaped images is naturally high because the gross shape matches.
+   *Revised falsification*: matching corr − random corr < 0.1 would
+   indicate no discriminating signal. Observed gaps: V1 0.86 − 0.65 =
+   *+0.21*, V2 0.72 − 0.43 = *+0.29*. Gap is real but smaller than the
+   raw numbers suggest.
 3. *Population mismatch.* An independent biochemical measurement (FRET,
    cryo-EM class fractions) of the same sample disagrees with our v7
    state fractions by >30% absolute. For video2 we predict >70% extended.
