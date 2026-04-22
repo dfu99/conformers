@@ -6,10 +6,11 @@ of just AlphaFold-Multimer with MSA subsampling?"
 ## The short answer
 
 Because single-model structure predictors collapse onto one preferred
-conformation — for αVβ3 that's the extended state. We needed a
-conformational *ensemble* spanning bent ↔ extended, and no single predictor
-gives that. Each of the four components contributes something the others
-lack:
+conformation — for αVβ3 that's the *bent* state (matching the majority
+of crystal structures that the training set was built from). We needed
+a conformational *ensemble* spanning bent ↔ extended, and no single
+predictor gives that. Each of the four components contributes something
+the others lack:
 
 | Component | Role | What it gives |
 |-----------|------|---------------|
