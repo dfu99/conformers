@@ -61,11 +61,13 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Random-conformer baseline** — falsifiability check pre-registered in intuition.md. Assign each AFM frame to a uniformly random conformer from the 615-frame library and recompute correlation. Expected corr < 0.4 if the claim holds. Quick to run locally.
-2. **EC vs EO steering** — current library has constant CV2 ~35Å (head-head). Extend the steering library with a CV2-targeted run to finally distinguish EC from EO.
-3. **αIIbβ3 string method structures** — 19 PDB structures from Ferg-Lab provide full bent→extended→open pathway. Can supplement steering-derived conformers and add the missing EO states.
-4. **AF2-Multimer ablation** — reviewer B push. Estimated 50 GPU-hours (see docs/pipeline_rationale.md). Blocked on PACE access or RunPod budget.
-5. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
+1. **Sliding-window temporal fit for both videos** — implemented `sliding_window_fit.py`. 27.7% of V2 frames re-assigned after median-CV smoothing in ±15 window. Pending: re-render V1 and V2 overlays and compare against v7 for jitter reduction.
+2. **ConforNets feasibility DECISION NEEDED** — setup partial on new A4500 pod but the README states 80GB GPU only fits 600aa; αVβ3 is 1600 residues. Without tensor parallelism or chain-splitting, this path is infeasible on our hardware. Flagged to PI in done.txt.
+3. **Random-conformer baseline** — DONE. Random corr 0.65 (V1), 0.43 (V2) vs matching 0.86/0.72. Pre-reg (<0.4) failed but revised gap-criterion (matching-random>0.1) holds. See `figures/random_baseline_v7.png`.
+4. **EC vs EO steering** — current library has constant CV2 ~35Å (head-head). Extend the steering library with a CV2-targeted run to finally distinguish EC from EO.
+5. **αIIbβ3 string method structures** — 19 PDB structures from Ferg-Lab provide full bent→extended→open pathway.
+6. **AF2-Multimer ablation** — reviewer B push. Estimated 50 GPU-hours.
+7. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
 3. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
 4. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
 

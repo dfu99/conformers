@@ -526,7 +526,43 @@ queue:
     \ work, have clear success criteria, and be suitable for unattended chaining.\
     \ After writing the plan, start working on the first task immediately."
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-04-19 19:41
   source: afk
   started: 2026-04-19 22:20
+  completed: 2026-04-20 00:14
+  commits: 11
+  notes: Recovered stale in_progress item via 11 commit(s).
+- objective: 'AFK-CNF-1: Set up OpenFold3 preview (OF3p) on new RunPod A4500 node
+    213.173.99.18:18086. Clone github.com/aqlaboratory/openfold3 and confornets. Install
+    dependencies (openfold3, torch, jax if needed). Verify inference pipeline with
+    a small test protein (~200 res).'
+  priority: 3
+  status: in_progress
+  added: 2026-04-22 13:00
+  source: afk
+  success_criteria: OF3p installed on /workspace/confornets pod. Default inference
+    produces a valid AFDB-like mmCIF for a test protein. GPU memory baseline documented.
+  started: 2026-04-22 22:06
+- objective: 'AFK-CNF-2: Run unsupervised k=2 ConforNets on αVβ3. Input: αVβ3 sequence
+    from our Protenix inputs. Output: 2 maximally distinct structures. Measure CV0/CV1/CV2
+    for both. Expect one near the AF3-default bent state, hope the other is more extended.
+    Mandatory: estimate VRAM before launch (1600-res AF3 ~ 15-18 GB).'
+  priority: 3
+  status: in_progress
+  added: 2026-04-22 13:00
+  source: afk
+  success_criteria: Two αVβ3 structures generated. CV0 difference ≥ 20Å between the
+    two. Figures saved showing both structures overlaid and the CV scatter vs our
+    615-frame library.
+  started: 2026-04-22 22:06
+- objective: 'AFK-CNF-3 (conditional): Supervised transfer from αIIbβ3 bent/extended
+    pair. Source: αIIbβ3 with PDB 3FCS (extended) as target. Train one ConforNet (300
+    steps) on αIIbβ3 to induce extended state, then apply to αVβ3 without retraining.
+    Compare resulting αVβ3 structure to our 615-frame steered-MD library (CV scatter).'
+  priority: 3
+  status: pending
+  added: 2026-04-22 13:00
+  source: afk
+  success_criteria: ConforNet trained. Applied to αVβ3 produces an extended structure
+    with CV0 ≥ 70Å. Compare to v7 library CVs in figure.
