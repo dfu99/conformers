@@ -411,6 +411,23 @@ STEERING_PRESETS = {
         "bias_type": "flat_bottom",
         "flat_bottom_width": 2.0,
     },
+    "cv_distance_headopen": {
+        "method": "cv_bias",
+        "cv_type": "distance",
+        "description": "Push headpiece CV2 (α-head ↔ β-head) toward open state; leave legs free",
+        "force_constant": 200.0,
+        # Pairs order in AVB3_HINGE_DISTANCES:
+        # (α-head-thigh, α-tail), (β-head, α-tail), (α-head-thigh, β-tail)
+        # For EO we want to open the head-head distance. In our
+        # domain_steering the #3 pair (α-head ↔ β-tail) is cross-chain and
+        # pushing it larger drags the heads apart in an indirect way. Also
+        # bias the β-head ↔ α-tail (#2) wider so the chains splay.
+        # Keep target #1 (α-head ↔ α-tail) at current extended value to
+        # not collapse legs.
+        "target_values": [8.0, 8.0, 8.0],   # nm — all three pairs to 80 Å
+        "bias_type": "flat_bottom",
+        "flat_bottom_width": 2.0,
+    },
 }
 
 
