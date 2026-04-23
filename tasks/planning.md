@@ -62,7 +62,7 @@ Final outputs:
 
 ## Next Priority
 1. **Sliding-window temporal fit for both videos** — implemented `sliding_window_fit.py`. 27.7% of V2 frames re-assigned after median-CV smoothing in ±15 window. Pending: re-render V1 and V2 overlays and compare against v7 for jitter reduction.
-2. **ConforNets feasibility DECISION NEEDED** — setup partial on new A4500 pod but the README states 80GB GPU only fits 600aa; αVβ3 is 1600 residues. Without tensor parallelism or chain-splitting, this path is infeasible on our hardware. Flagged to PI in done.txt.
+2. **ConforNets feasibility DECISION NEEDED** — setup partial on new A4500 pod but the README states 80GB GPU only fits 600aa; αVβ3 is 1600 residues. Without tensor parallelism or chain-splitting, this path is infeasible on our hardware. Flagged to PI in done.txt. CNF-2 and CNF-3 autochain tasks skipped for same reason.
 3. **Random-conformer baseline** — DONE. Random corr 0.65 (V1), 0.43 (V2) vs matching 0.86/0.72. Pre-reg (<0.4) failed but revised gap-criterion (matching-random>0.1) holds. See `figures/random_baseline_v7.png`.
 4. **EC vs EO steering** — current library has constant CV2 ~35Å (head-head). Extend the steering library with a CV2-targeted run to finally distinguish EC from EO.
 5. **αIIbβ3 string method structures** — 19 PDB structures from Ferg-Lab provide full bent→extended→open pathway.
