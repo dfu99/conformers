@@ -70,6 +70,30 @@ data — confirming a sim-real domain gap that template matching sidesteps.
 - *Venue*: Nature Structural & Molecular Biology (for the integrin biology
   + pipeline) or PNAS (for the broader methods contribution)
 
+## Mechanical-sensitivity extension (2026-04-23)
+
+The v7 fitted overlays + 615-frame library also yield per-residue
+flexibility fingerprints. Three independent metrics (RMSF, cross-conformer
+CA std, CA-CA-CA angle σ) combine into a mechanical-sensitivity
+composite (`figures/mechanical_sensitivity_composite.png`) that:
+
+1. *Validates canonical biology*: β-knee (B:353) is the #1 hinge by
+   angular variance, exactly as pre-registered. α-genu at A:420
+   is in the top-20.
+2. *Reveals C-terminal coil dominance*: the top-5 triple-agreement
+   residues (B:689, A:864, A:958, A:861, B:652) are all C-terminal
+   coils — potentially a unique strength of HS-AFM-informed
+   flexibility analysis versus classical NMA, because HS-AFM
+   directly senses vertical height of mobile coils.
+3. *Suggests an α-calf flexibility cluster* (A:592-595, A:732-741)
+   that is not a classical hinge and bears validation against
+   Matsumoto 2008's ENM switch residue list.
+
+Self-consistency: forward-rendering v7 fitted PDBs through the
+afmfold imaging pipeline gives sim-vs-real corr 0.82 (V1), 0.72 (V2),
+well above random (0.65 / 0.43) — confirming the library + imaging
+model jointly reproduce the experimental data.
+
 ## Open questions
 
 - *Why is video1 ~50/50 bent/extended while video2 is ~80% extended?*

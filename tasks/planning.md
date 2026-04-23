@@ -61,17 +61,19 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Sliding-window temporal fit for both videos** — implemented `sliding_window_fit.py`. 27.7% of V2 frames re-assigned after median-CV smoothing in ±15 window. Pending: re-render V1 and V2 overlays and compare against v7 for jitter reduction.
-2. **ConforNets feasibility DECISION NEEDED** — setup partial on new A4500 pod but the README states 80GB GPU only fits 600aa; αVβ3 is 1600 residues. Without tensor parallelism or chain-splitting, this path is infeasible on our hardware. Flagged to PI in done.txt. CNF-2 and CNF-3 autochain tasks skipped for same reason.
-3. **Random-conformer baseline** — DONE. Random corr 0.65 (V1), 0.43 (V2) vs matching 0.86/0.72. Pre-reg (<0.4) failed but revised gap-criterion (matching-random>0.1) holds. See `figures/random_baseline_v7.png`.
-4. **EC vs EO steering** — current library has constant CV2 ~35Å (head-head). Extend the steering library with a CV2-targeted run to finally distinguish EC from EO.
-5. **αIIbβ3 string method structures** — 19 PDB structures from Ferg-Lab provide full bent→extended→open pathway.
+1. **Matsumoto 2008 switch-residue overlay** — explicit per-residue comparison between our top-20 hinge candidates and Matsumoto's ENM NMA switch residues on αVβ3 ectodomain. Agreement validates, disagreement is a finding. ~1 hour.
+2. **Rotation-corrected RMSF** — the current RMSF is dominated by rigid-body rotation of the whole molecule. Align each frame internally to the head domain before RMSF. Small code change in residue_rmsf.py. ~1 hour.
+3. **EC vs EO steering** — current library has constant CV2 ~35Å (head-head). Extend the steering library with a CV2-targeted run to finally distinguish EC from EO.
+4. **αIIbβ3 string method structures** — 19 PDB structures from Ferg-Lab provide full bent→extended→open pathway.
+5. **ConforNets feasibility DECISION** — flagged to PI. αVβ3 at 1600 residues exceeds even 80GB GPU. Awaiting PI input.
 6. **AF2-Multimer ablation** — reviewer B push. Estimated 50 GPU-hours.
 7. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
 3. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
 4. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
 
 ## Recently Completed
+- [x] AFK overnight: sim-HS-AFM + mechanical sensitivity analysis (2026-04-23) — forward-rendering the v7 fitted trajectory gives sim-vs-real corr 0.82 (V1), 0.72 (V2), validating pipeline self-consistency. Three flexibility metrics (RMSF, cross-conformer CA std, CA-CA-CA angle σ) combined into composite figure. Top hinge match: β-knee B:353 (σ=25.4°) pre-registered at ~352. Top triple-agreement hotspots: C-terminal coils B:689, A:864, A:958, A:861, B:652. Scripts: simulate_afm_video.py, residue_rmsf.py, cross_conformer_rmsd.py, hinge_angles.py. Report: results/mechanical_sensitivity_report_v1.md.
+- [x] Rolling-median coordinate smoothing (2026-04-22/23) — 77% jitter reduction (V1 45→10Å, V2 38→9Å) vs per-frame fit. Plus per-frame head re-anchor to fix V2 drift. Saved to results/afm_pipeline/v7_smoothed_final/{v1,v2}/.
 - [x] v7 pipeline with bent steering library (2026-04-20) — ran `cv_distance_bent` steering on RunPod A4500 (3ns, 5.47 ns/day), extracted 306 bent protein frames, merged with existing 309 extend frames → 615-frame library spanning CV0 [47.3, 85.0]Å. v7 fits: video1 BC 12.4%→43.5%, video2 BC 12.5%→18.6%. Library is discriminatingly sensitive to the data. Also: AFK tasks completed — updated intuition.md, generated library coverage, 1JV2 comparison, tip calibration, steering manifold figures; wrote docs/pipeline_rationale.md and results/paper_draft_v1.md.
 - [x] Rebuild pseudo-AFM library + rerun overlay pipeline (v6, 2026-04-16) — Fixed critical batch_size=16 sampling bug (only first 31/309 conformers sampled). Rebuilt with batch_size=1 covering full CV range [52.9, 85.0] Å. SO(3) fitting on RunPod GPU (10 min vs 4h CPU). Video1: 379 frames, corr=0.966, 67 extended. Video2: 1266 frames, corr=0.939, 179 extended.
 - [x] Fix head-alignment drift + diagnose conformer coverage gap (obj-014/015, 2026-04-14) — `resolve_flips_head_anchored()` eliminates all position drift (was up to 10.4nm). Diagnosed conformer library gap: 66 conformers span CV0 53-79A, no extended states. Launched 3ns steering extension on RunPod A4500.
