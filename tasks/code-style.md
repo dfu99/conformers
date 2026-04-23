@@ -2,12 +2,9 @@
 
 **Canonical source:** `/home/dan/Documents/code/development/global/code-style.md`
 
-All code style rules live there. This file is a pointer. **Do not edit it.**
+All code-style rules live there. This file is a pointer; do not edit it. Edit the canonical and the change propagates on next read.
 
-When this project discovers a rule worth sharing system-wide, edit the canonical file (not this stub). That update propagates to every project on next read.
+For **conformers**, apply:
 
-### For conformers, apply:
-
-- Core Rules apply. **Project Overlay:** research project with GPU compute. Default CPU-only: no accidental `torch.cuda.is_available()` gates that silently grab the workstation GPU. PACE SLURM scripts follow `PACE.md` (account `gts-yke8`, pick the cheapest fitting GPU, always `module load cuda`). Training or evaluation scripts must emit a greppable final metrics summary; silent exit is not acceptable.
-
-See the canonical file for full rule text, language-specific subsections, and the current changelog.
+- All Core Rules from the canonical file.
+- the **research-gpu** overlay (CPU-only by default, PACE SLURM rules, greppable training output, `mc runpod` for RunPod node discovery).
