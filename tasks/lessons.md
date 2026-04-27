@@ -456,3 +456,24 @@ Before diagnosing new failures, verify in order:
 
 ### generate_images batch_size Truncates Conformer Sampling
 - Already documented above, re-emphasizing: with `dataset_size=500, batch_size=16, N_frames=309`, `ceil(500/(309*16))=1` step produces 309*16=4944 images truncated to first 500 — only the first ~31 conformers are represented. Use `batch_size=1` and any `dataset_size >= N_frames` to get full coverage.
+
+### RunPod Cleanup: Check Both Locations
+- Command context: cleaning up after a project's work on a shared RunPod node.
+- Symptom: PI audit caught 23 GB still on the pod after I reported it cleared.
+- Root cause: I cleared `/workspace/<proj>` (where I had launched MD) but `mc runpod sync` had also pushed the entire repo to `/root/projects/<proj>` earlier. Two separate locations.
+- Action: when cleaning up, check both `/workspace/<proj>` AND `/root/projects/<proj>`. `find / -maxdepth 6 -type d -path '*<proj>*'` catches anything else that snuck in.
+
+### Sim AFM Realism Requires Multiple Low-Pass Stages
+- Command context: forward-rendering fitted PDB trajectories to simulated HS-AFM.
+- Symptom: sim AFM looked too sharp and too detailed compared to real Linz GIFs even with `idilation` (tip dilation) applied.
+- Root cause: `idilation` is morphological-max — preserves edges sharply. Real HS-AFM has additional low-passes from cantilever bandwidth, feedback PID time constant, and tip-sample force response.
+- Action: post-dilation anisotropic Gaussian blur (σ_y ≈ 0.7, σ_x ≈ 1.2 — wider along scan direction). Plus Gaussian sensor noise σ ~0.08. Plus soft-clip at ~0.92 (real AFM never saturates fully white). All three combine in the sim_afm_v11 renderer.
+
+### Surface-Adsorbed Molecules Should Lie Flat (PCA-Constrained)
+- Command context: HS-AFM specimens are physisorbed on mica/glass — they LIE on a side, head/knee/tail all in surface contact.
+- Symptom: per-frame SO(3)-fitted PDBs sometimes had the molecule oriented with one domain up and another on the surface.
+- Action: per-frame PCA of CA coords. Rotate so smallest principal axis (thinnest direction) is +Z. Sign-align PCA axes between consecutive frames (or you get 180° flips when SVD picks opposite signs). The remaining DoF is yaw around Z.
+
+### Step-wise Yaw Beats Continuous for Surface-Bound Molecules
+- Command context: real HS-AFM shows molecules holding an orientation for seconds, then snapping to a new one — never spinning smoothly.
+- Action: hysteresis-based step detector on the raw yaw signal. Threshold ~50°, min dwell 20 frames, cap each step magnitude at ~30°. Gives "prefers an orientation, occasionally re-orients" behavior. Smooth (Gaussian) yaw produces visually-wrong continuous tumbling.

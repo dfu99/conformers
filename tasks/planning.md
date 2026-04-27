@@ -61,17 +61,18 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Matsumoto 2008 switch-residue overlay** — explicit per-residue comparison between our top-20 hinge candidates and Matsumoto's ENM NMA switch residues on αVβ3 ectodomain. Agreement validates, disagreement is a finding. ~1 hour.
-2. **Rotation-corrected RMSF** — the current RMSF is dominated by rigid-body rotation of the whole molecule. Align each frame internally to the head domain before RMSF. Small code change in residue_rmsf.py. ~1 hour.
-3. **EC vs EO steering** — current library has constant CV2 ~35Å (head-head). Extend the steering library with a CV2-targeted run to finally distinguish EC from EO.
-4. **αIIbβ3 string method structures** — 19 PDB structures from Ferg-Lab provide full bent→extended→open pathway.
-5. **ConforNets feasibility DECISION** — flagged to PI. αVβ3 at 1600 residues exceeds even 80GB GPU. Awaiting PI input.
-6. **AF2-Multimer ablation** — reviewer B push. Estimated 50 GPU-hours.
-7. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
+1. **EC vs EO steering** — RunPod A40 launch was yielded to halulujah. Resubscribe via `mc runpod subscribe` when needed; the queued experiment is the headpiece-opening (cv_distance_headopen) steering for EC vs EO library coverage.
+2. **Multi-integrin pipeline** — αIIbβ3 (3FCS) + α5β1 (3VI4) + αVβ6 (4UM9) + αVβ8 (6OM2) etc. First-principles bent/extended distribution prediction. Plan in `docs/integrin_heterodimer_plan.md`.
+3. **Matsumoto 2008 switch-residue overlay** — quick ~1h CPU job, mechanical-sensitivity validation against the literature.
+4. **Rotation-corrected RMSF** — align each frame internally to the head before RMSF. Small code change in `residue_rmsf.py`. ~1h.
+5. **AF2-Multimer ablation** — reviewer B push. ~50 GPU-hours; can run on A40 once free.
+6. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
 3. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
 4. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
 
 ## Recently Completed
+- [x] Sim HS-AFM realism iteration v3-v11 (2026-04-23 to 2026-04-25, obj-022) — 11-version refinement loop on the forward-renderer with PI feedback at each step. Final settings: copper colormap, zoom-out 35→49 px, substrate noise std 0.022 baseline 0.15, tail-direction surface slant ±4.5%, row-jitter σ=0.008, partial-width flash streaks (2% freq), localized horizontal distortions on molecule rows, PCA-aligned flat-on-surface orientation, step-wise yaw via hysteresis (50° threshold, 20-frame dwell, 30° cap), Gaussian σ=16 head smoothing, post-dilation anisotropic blur σx=1.2/σy=0.7, soft-clip 0.92. Tip R=3 nm.
+- [x] RunPod yield + cleanup (2026-04-23 to 2026-04-25, obj-023) — switched from busy-poll to event-driven `mc runpod subscribe` after new infra rolled out. Yielded to halulujah. Cleaned up both `/workspace/conformers/` (12 MB) and `/root/projects/conformers/` (23 GB) on the A40 after PI audit caught the second one. WD_BLACK mirror discipline maintained (15 GB results + 561 MB figures + 5.8 GB MD trajectories).
 - [x] AFK overnight: sim-HS-AFM + mechanical sensitivity analysis (2026-04-23) — forward-rendering the v7 fitted trajectory gives sim-vs-real corr 0.82 (V1), 0.72 (V2), validating pipeline self-consistency. Three flexibility metrics (RMSF, cross-conformer CA std, CA-CA-CA angle σ) combined into composite figure. Top hinge match: β-knee B:353 (σ=25.4°) pre-registered at ~352. Top triple-agreement hotspots: C-terminal coils B:689, A:864, A:958, A:861, B:652. Scripts: simulate_afm_video.py, residue_rmsf.py, cross_conformer_rmsd.py, hinge_angles.py. Report: results/mechanical_sensitivity_report_v1.md.
 - [x] Rolling-median coordinate smoothing (2026-04-22/23) — 77% jitter reduction (V1 45→10Å, V2 38→9Å) vs per-frame fit. Plus per-frame head re-anchor to fix V2 drift. Saved to results/afm_pipeline/v7_smoothed_final/{v1,v2}/.
 - [x] v7 pipeline with bent steering library (2026-04-20) — ran `cv_distance_bent` steering on RunPod A4500 (3ns, 5.47 ns/day), extracted 306 bent protein frames, merged with existing 309 extend frames → 615-frame library spanning CV0 [47.3, 85.0]Å. v7 fits: video1 BC 12.4%→43.5%, video2 BC 12.5%→18.6%. Library is discriminatingly sensitive to the data. Also: AFK tasks completed — updated intuition.md, generated library coverage, 1JV2 comparison, tip calibration, steering manifold figures; wrote docs/pipeline_rationale.md and results/paper_draft_v1.md.

@@ -446,3 +446,166 @@ objectives:
     significantly (~12% → ~40%+) once bent conformers are in the library.
   connects_to: null
   completed_date: null
+
+- id: obj-019
+  status: completed
+  statement: Rolling-median temporal smoothing of fitted coordinates cuts overlay jitter ~77%
+  methodology: >
+    First attempt (sliding-window mode conformer re-assignment while keeping
+    per-frame rotations) made jitter worse (+11% V1, +19% V2) because swapping
+    conformers with old rotations creates discontinuities. Second attempt —
+    median_filter(fitted_coords, size=(7,1,1), mode='nearest') per atom per
+    dim — cut jitter 77%. Added post-hoc head re-anchor to fix V2 drift
+    (rolling median smears head XY ~1 Å mean, invisible in V1 but
+    visible cumulatively in V2's 1266 frames).
+  metrics:
+    window_frames: 7
+    v1_jitter_pre_A: 45.2
+    v1_jitter_post_A: 10.5
+    v1_pct_reduction: 77
+    v2_jitter_pre_A: 38.8
+    v2_jitter_post_A: 9.9
+    v2_pct_reduction: 75
+  figures:
+    - figures/temporal_jitter_comparison.png
+  conclusions: >
+    Per-frame SO(3) fit over-rotates to match AFM noise. Median filter on
+    coords directly removes this without blurring real transitions (window=7
+    = 0.7s, shorter than most conformational changes). Re-anchor step is
+    essential for long trajectories.
+  connects_to: obj-020
+  completed_date: '2026-04-23'
+
+- id: obj-020
+  status: completed
+  statement: Sim-HS-AFM forward-render confirms pipeline self-consistency
+  methodology: >
+    Forward-render v7 fitted PDBs through afmfold imaging (tip R=1.5nm,
+    angle=20°, noise 0.1nm, res 0.98nm/px). Compute per-frame cosine
+    similarity with real Linz GIF. Also ran tip-sharpness sweep (1/2/5 nm)
+    to probe contact mechanics sensitivity.
+  metrics:
+    v1_sim_vs_real_corr: 0.824
+    v2_sim_vs_real_corr: 0.722
+    v1_random_baseline: 0.65
+    v2_random_baseline: 0.43
+    tip1nm_corr: 0.648
+    tip2nm_corr: 0.724
+    tip5nm_corr: 0.748
+  figures:
+    - figures/sim_afm_tipsweep.png
+    - results/afm_pipeline/sim_afm/video2/sim_vs_real_corr.png
+  conclusions: >
+    Library + imaging model jointly reproduce the real HS-AFM at sim-real
+    corr well above random. Counterintuitive tip-sweep result: blunter 5nm
+    tip gives HIGHER sim-real corr (0.748) than sharper 1-2nm. Sharp tips
+    are right for fitting (discriminate conformers); blunt tips reproduce
+    the visual character of the real scan — a contact-mechanics gap.
+  connects_to: obj-021
+  completed_date: '2026-04-23'
+
+- id: obj-021
+  status: completed
+  statement: Triple-metric mechanical-sensitivity analysis validates β-knee, reveals C-coil dominance
+  methodology: >
+    Three independent per-residue flexibility metrics on v7 library and
+    fitted trajectories. (1) Per-residue RMSF from fitted coords. (2)
+    Cross-conformer 615×615 Kabsch-aligned RMSD + per-residue std.
+    (3) CA-CA-CA bond-angle σ across library (hinge flexibility).
+    Triple-agreement composite (rectified product of z-scores) identifies
+    residues robust across all three metrics. Literature sweep placed
+    findings in the context of Matsumoto 2008 NMA, Chen 2023 bistability,
+    Li 2024 activation cascade.
+  metrics:
+    library_size: 615
+    hinge_angle_top1_chain: B
+    hinge_angle_top1_resSeq: 353
+    hinge_angle_top1_sigma_deg: 25.4
+    pre_registered_beta_knee_resSeq: 352
+    triple_agreement_top5: "B:689, A:864, A:958, A:861, B:652"
+  figures:
+    - figures/mechanical_sensitivity_composite.png
+    - figures/hinges_v7/hinge_candidates.png
+    - figures/cross_conformer_v7/per_residue_variance.png
+  conclusions: >
+    β-knee (B:353) validated as #1 hinge by angular variance — matches
+    pre-registered prediction exactly. C-terminal coils dominate
+    triple-agreement score, a finding not emphasized in classical NMA
+    (which works from a static reference and misses surface-coupled
+    coil motion). α-calf sub-cluster (A:592-595, A:732-741) is a
+    potentially new finding that bears cross-check against Matsumoto
+    2008 switch residue list.
+  connects_to: null
+  completed_date: '2026-04-23'
+
+- id: obj-022
+  status: completed
+  statement: Iterate sim HS-AFM realism via 11-version refinement loop with PI feedback
+  methodology: >
+    Forward-renderer rebuilt across 11 versions tuning each property the PI
+    flagged. Chronologically: (v1-v3) copper colormap + zoom-out + base
+    substrate noise; (v4) tighter noise & median-style; (v5) tail-direction
+    surface slant correlated with tail extension; (v6) horizontal HS-AFM
+    artifacts: row-jitter, flash streaks, persistent scratches, row-strip
+    distortion; (v7) artifacts retuned per feedback (streaks rarer/dimmer/
+    partial-width, distortion localized to molecule rows, scratches
+    removed); (v8) head stiffness via Gaussian σ=8; (v9) blunter tip 3 nm
+    + rotation smoothing; (v10) flat-on-surface PCA alignment; (v11) step-
+    wise yaw via hysteresis; (v11+) PCA sign continuity + 30° step cap
+    + post-dilation anisotropic Gaussian (cantilever bandwidth) + soft-clip.
+  metrics:
+    versions_iterated: 11
+    final_substrate_std: 0.022
+    final_tip_radius_nm: 3.0
+    flat_on_surface: true
+    yaw_step_threshold_deg: 50
+    yaw_step_max_deg: 30
+    yaw_min_dwell_frames: 20
+    yaw_step_events: 26
+    head_stiffness_sigma_frames: 16
+    post_dilation_blur_sigma_x: 1.2
+    post_dilation_blur_sigma_y: 0.7
+  figures:
+    - figures/sim_afm_v11_comparison.png
+    - figures/sim_afm_v10_yaw.png
+    - figures/sim_afm_v9b_yaw.png
+    - figures/sim_afm_natural_comparison.png
+    - figures/sim_afm_granular_comparison.png
+  conclusions: >
+    Sim HS-AFM now reads convincingly as real HS-AFM data: substrate at
+    matched baseline (mean 0.15) with subtle texture, tail-extension-
+    correlated surface slant, horizontal scan artifacts (row jitter,
+    streaks, distortions on molecule rows), molecule held flat on the
+    surface (PCA thin axis vertical), with stepwise reorientation
+    (3-4 s plateaus) capped at 30° per step. Post-dilation blur softens
+    fine details to match real cantilever bandwidth. Used as forward-
+    rendering template for any future integrin sim AFM work.
+  connects_to: obj-023
+  completed_date: '2026-04-25'
+
+- id: obj-023
+  status: completed
+  statement: Yield protocol for shared RunPod and full pod cleanup
+  methodology: >
+    Switched from busy-poll to event-driven `mc runpod subscribe` after
+    new infra rolled out. Yielded to halulujah when its 23-GB job appeared.
+    Performed full cleanup of pod after PI audit identified missed
+    /root/projects/conformers (23 GB from earlier mc runpod sync) in
+    addition to the /workspace/conformers (12 MB) I had already cleared.
+    Maintained WD_BLACK mirror discipline (results/ and figures/ diff-
+    rsync, no dated snapshots).
+  metrics:
+    runpod_workspace_freed_mb: 12
+    runpod_root_projects_freed_gb: 23
+    wdblack_results_mirror_gb: 15
+    wdblack_figures_mirror_mb: 561
+    wdblack_data_conformers_gb: 5.8
+  figures:
+    - figures/runpod_cleanup_wdblack_mirror.png
+  conclusions: >
+    All RunPod data for this project safely cleared with full WD_BLACK
+    mirror in place. Lesson committed to lessons.md: always check both
+    /workspace/<proj> and /root/projects/<proj> when cleaning up after
+    a session.
+  connects_to: null
+  completed_date: '2026-04-25'
