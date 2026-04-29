@@ -61,14 +61,16 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **EC vs EO steering** — RunPod A40 launch was yielded to halulujah. Resubscribe via `mc runpod subscribe` when needed; the queued experiment is the headpiece-opening (cv_distance_headopen) steering for EC vs EO library coverage.
-2. **Multi-integrin pipeline** — αIIbβ3 (3FCS) + α5β1 (3VI4) + αVβ6 (4UM9) + αVβ8 (6OM2) etc. First-principles bent/extended distribution prediction. Plan in `docs/integrin_heterodimer_plan.md`.
-3. **Matsumoto 2008 switch-residue overlay** — quick ~1h CPU job, mechanical-sensitivity validation against the literature.
-4. **Rotation-corrected RMSF** — align each frame internally to the head before RMSF. Small code change in `residue_rmsf.py`. ~1h.
-5. **AF2-Multimer ablation** — reviewer B push. ~50 GPU-hours; can run on A40 once free.
-6. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
-3. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
-4. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
+1. **Matsumoto 2008 switch-residue overlay** — quick ~1h CPU job, mechanical-sensitivity validation against the literature. Direct overlay of our top-10 hinges against their ENM switch-residue list.
+2. **Rotation-corrected RMSF** — align each frame internally to the head before RMSF. Small code change in `residue_rmsf.py`. ~1h.
+3. **Multi-integrin pipeline** — αIIbβ3 (3FCS) + α5β1 (3VI4) + αVβ6 (4UM9) + αVβ8 (6OM2) etc. First-principles bent/extended distribution prediction. Plan in `docs/integrin_heterodimer_plan.md`. αIIbβ3 carries dual value: also yields EO templates (string-method structures from Ferg-Lab).
+4. **AF2-Multimer ablation** — reviewer B push. ~50 GPU-hours; can run on A40 once free.
+5. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
+6. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
+7. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
+
+## Confirmed Negative Results
+- **EC vs EO SMD steering (obj-025, 2026-04-29)** — Two iterations (k=250, k=1000) on RunPod A40 with corrected (α-head, β-head) pair list. Even k=1000 only opens CV2 by 0.9 Å in 620 ps (~0.07 Å/ps). Reaching the 60 Å EO target would need ~320 ns wall-clock, an order of magnitude beyond the 3-ns budget. Both runs disk-quota-bounded at ~620 ps regardless of force constant. **EO coverage now flagged as a hard pipeline limitation in `intuition.md` falsifiability section.** To recover EO state space, alternative routes are (a) αIIbβ3 string-method structures, (b) metadynamics with CV2 as collective variable, (c) replica exchange. Any of those is at least 2× the current MD budget.
 
 ## Recently Completed
 - [x] Fix `cv_distance_headopen` preset (2026-04-29, obj-024) — first run (v3) showed CV2 flat at 34 Å despite the preset name. Cause: preset used default AVB3_HINGE_DISTANCES (head-tail pairs only). Added AVB3_HEADOPEN_DISTANCES with explicit (α-head, β-head) pair, target 6 nm. Routed via preset name in apply_steering_preset. v4 launched with disk-pressure mitigations: --report-interval 5000, watchdog cleanup of equilibration files, 30-min WD_BLACK backup loop.

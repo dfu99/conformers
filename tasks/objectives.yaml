@@ -647,3 +647,39 @@ objectives:
     intermediate files, (c) periodic backup to WD_BLACK as a safety net.
   connects_to: null
   completed_date: '2026-04-29'
+
+- id: obj-025
+  status: completed
+  statement: SMD cannot open αVβ3 headpiece in 3 ns even with k=1000 force constant
+  methodology: >
+    Iterated cv_distance_headopen preset twice with corrected (α-head,
+    β-head) pair. v4 (k=250, target 6 nm) ran 620 ps: CV2 stayed at
+    34.6→34.9 Å. v5 (k=1000, narrower flat-bottom 0.5 nm, leg targets
+    set to current 7.8 nm so they don't fight): 620 ps, CV2 went 35.7→36.6
+    Å. Both runs hit the pod's 1.5 GB disk quota at ~620 ps independent
+    of force constant. Net opening: 0.9 Å in 620 ps with k=1000
+    (~0.07 Å/ps).
+  metrics:
+    v4_force_constant: 250
+    v4_cv2_start: 34.6
+    v4_cv2_end: 34.9
+    v4_production_ps: 620
+    v5_force_constant: 1000
+    v5_cv2_start: 35.7
+    v5_cv2_end: 36.6
+    v5_production_ps: 620
+    target_cv2_A: 60
+    extrapolated_time_to_target_ns: 320
+  figures:
+    - figures/headopen_v5_cv2_failed.png
+  conclusions: >
+    The αVβ3 headpiece interface is too energetically stable to be
+    opened by classical SMD with a head-head distance bias on a 3 ns
+    timescale, even at k=1000 kJ/mol/nm². At observed rate of 0.07
+    Å/ps, reaching the 60 Å EO target would need ~320 ns. To cover
+    EO state space, we need either metadynamics, replica exchange,
+    or external EO templates (e.g., αIIbβ3 string-method structures
+    from Ferg-Lab). EO coverage is now flagged as a hard limitation
+    in `intuition.md` falsifiability section.
+  connects_to: null
+  completed_date: '2026-04-29'
