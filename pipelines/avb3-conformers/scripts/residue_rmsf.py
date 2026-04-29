@@ -27,7 +27,72 @@ def parse_args():
     p.add_argument("--output-dir", type=Path, required=True)
     p.add_argument("--n-windows", type=int, default=8,
                    help="Number of time windows for heatmap")
+    p.add_argument("--head-align", action="store_true",
+                   help="Kabsch-align each frame to frame-0 using only the "
+                        "rigid headpiece CAs before computing RMSF, removing "
+                        "the global rotation that dominates head-anchored RMSF")
+    p.add_argument("--head-residues-a", type=str, default="1-440",
+                   help="α-chain head residue range for alignment")
+    p.add_argument("--head-residues-b", type=str, default="1-350",
+                   help="β-chain head residue range for alignment")
+    p.add_argument("--coord-file", type=str, default="fitted_coords_smooth.npy",
+                   help="Coordinate file inside fitted-dir")
     return p.parse_args()
+
+
+def kabsch_align(P, Q):
+    """Optimal rotation U such that U @ P best matches Q (least squares).
+
+    P, Q: [N, 3] arrays. Returns the rotation matrix [3, 3].
+    """
+    P_c = P - P.mean(axis=0)
+    Q_c = Q - Q.mean(axis=0)
+    H = P_c.T @ Q_c
+    U_svd, _, Vt = np.linalg.svd(H)
+    d = np.sign(np.linalg.det(Vt.T @ U_svd.T))
+    D = np.diag([1.0, 1.0, d])
+    U = Vt.T @ D @ U_svd.T
+    return U
+
+
+def head_align_trajectory(coords, ca_idx, ca_chain, ca_resseq,
+                          head_a, head_b):
+    """Kabsch-align every frame to frame 0 using only head-domain CAs.
+
+    coords: [T, N_atoms, 3] full trajectory.
+    ca_idx, ca_chain, ca_resseq: per-CA bookkeeping.
+    head_a/head_b: (lo, hi) inclusive resSeq ranges for chains A/B.
+
+    Returns aligned coords (full atom set), copying input shape.
+    """
+    a_lo, a_hi = head_a
+    b_lo, b_hi = head_b
+    head_mask = (
+        ((ca_chain == 0) & (ca_resseq >= a_lo) & (ca_resseq <= a_hi))
+        | ((ca_chain == 1) & (ca_resseq >= b_lo) & (ca_resseq <= b_hi))
+    )
+    head_ca_idx = ca_idx[head_mask]
+    if len(head_ca_idx) < 10:
+        raise RuntimeError(
+            f"Only {len(head_ca_idx)} head CAs found — check "
+            f"head residue ranges A:{head_a}, B:{head_b}"
+        )
+    print(f"Head-aligning on {len(head_ca_idx)} headpiece CAs")
+
+    ref = coords[0, head_ca_idx]   # [N_head, 3]
+    ref_centroid = ref.mean(axis=0)
+    aligned = np.zeros_like(coords)
+    aligned[0] = coords[0]
+    for t in range(1, coords.shape[0]):
+        moving = coords[t, head_ca_idx]
+        moving_centroid = moving.mean(axis=0)
+        U = kabsch_align(moving - moving_centroid, ref - ref_centroid)
+        # Rotate the entire frame about the moving centroid, then
+        # translate so the head centroid matches the reference.
+        translated = coords[t] - moving_centroid
+        rotated = translated @ U.T
+        aligned[t] = rotated + ref_centroid
+    return aligned
 
 
 DOMAIN_RANGES = {
@@ -52,11 +117,22 @@ def main():
     args = parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
-    fitted = np.load(str(args.fitted_dir / "fitted_coords_smooth.npy"))
+    fitted = np.load(str(args.fitted_dir / args.coord_file))
     topo = md.load(str(args.fitted_dir / "topology.pdb")).topology
     ca_idx = np.array([a.index for a in topo.atoms if a.name == "CA"])
     n_frames = fitted.shape[0]
     print(f"{n_frames} frames, {len(ca_idx)} CA atoms")
+
+    ca_chain = np.array([topo.atom(i).residue.chain.index for i in ca_idx])
+    ca_resseq = np.array([topo.atom(i).residue.resSeq for i in ca_idx])
+
+    if args.head_align:
+        head_a = tuple(int(x) for x in args.head_residues_a.split("-"))
+        head_b = tuple(int(x) for x in args.head_residues_b.split("-"))
+        fitted = head_align_trajectory(
+            fitted, ca_idx, ca_chain, ca_resseq, head_a, head_b
+        )
+        print("Head-aligned trajectory ready")
 
     ca_traj = fitted[:, ca_idx, :]  # [T, N_ca, 3]
     # RMSF = sqrt(mean over t of |r(t) - r_mean|^2)
@@ -66,10 +142,6 @@ def main():
     print(f"RMSF: mean={rmsf_per_res.mean():.2f}Å, "
           f"min={rmsf_per_res.min():.2f}, max={rmsf_per_res.max():.2f}")
     np.save(str(args.output_dir / "rmsf_per_residue.npy"), rmsf_per_res)
-
-    # Tag each CA with its chain and residue
-    ca_chain = np.array([topo.atom(i).residue.chain.index for i in ca_idx])
-    ca_resseq = np.array([topo.atom(i).residue.resSeq for i in ca_idx])
 
     # Per-domain mean RMSF
     domain_means = {}

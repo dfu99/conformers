@@ -1,0 +1,164 @@
+{
+  "total_with_sigma": 1652,
+  "rows": [
+    {
+      "chain": "B",
+      "resSeq": 633,
+      "name": "Arg633",
+      "role": "primary_snap",
+      "ca_idx": 1594,
+      "sigma_deg": 7.554544744548247,
+      "rank": 286,
+      "percentile": 82.74818401937047,
+      "classification": "near_hit",
+      "nearest_top20_in_window": null
+    },
+    {
+      "chain": "B",
+      "resSeq": 375,
+      "name": "Leu375",
+      "role": "snap_sandwich",
+      "ca_idx": 1336,
+      "sigma_deg": 12.15604166100946,
+      "rank": 47,
+      "percentile": 97.21549636803874,
+      "classification": "direct_hit",
+      "nearest_top20_in_window": {
+        "chain": "B",
+        "resSeq": 374,
+        "delta": 1,
+        "sigma_deg": 18.030363860278708
+      }
+    },
+    {
+      "chain": "B",
+      "resSeq": 389,
+      "name": "Leu389",
+      "role": "snap_sandwich",
+      "ca_idx": 1350,
+      "sigma_deg": 7.014811586095862,
+      "rank": 383,
+      "percentile": 76.87651331719128,
+      "classification": "miss",
+      "nearest_top20_in_window": null
+    },
+    {
+      "chain": "B",
+      "resSeq": 374,
+      "name": "Cys374",
+      "role": "interaction_A",
+      "ca_idx": 1335,
+      "sigma_deg": 18.030363860278708,
+      "rank": 11,
+      "percentile": 99.39467312348668,
+      "classification": "direct_hit",
+      "nearest_top20_in_window": {
+        "chain": "B",
+        "resSeq": 374,
+        "delta": 0,
+        "sigma_deg": 18.030363860278708
+      }
+    },
+    {
+      "chain": "B",
+      "resSeq": 388,
+      "name": "Gly388",
+      "role": "interaction_A",
+      "ca_idx": 1349,
+      "sigma_deg": 4.817265405650331,
+      "rank": 1013,
+      "percentile": 38.74092009685231,
+      "classification": "miss",
+      "nearest_top20_in_window": null
+    },
+    {
+      "chain": "B",
+      "resSeq": 404,
+      "name": "Arg404",
+      "role": "hybrid_egf",
+      "ca_idx": 1365,
+      "sigma_deg": 7.954172217846495,
+      "rank": 240,
+      "percentile": 85.53268765133171,
+      "classification": "near_hit",
+      "nearest_top20_in_window": null
+    },
+    {
+      "chain": "B",
+      "resSeq": 364,
+      "name": "Glu364",
+      "role": "hybrid_egf",
+      "ca_idx": 1325,
+      "sigma_deg": 4.489003795147273,
+      "rank": 1141,
+      "percentile": 30.99273607748184,
+      "classification": "neighborhood_hit",
+      "nearest_top20_in_window": {
+        "chain": "B",
+        "resSeq": 374,
+        "delta": 10,
+        "sigma_deg": 18.030363860278708
+      }
+    },
+    {
+      "chain": "B",
+      "resSeq": 543,
+      "name": "Ser543",
+      "role": "interaction_B",
+      "ca_idx": 1504,
+      "sigma_deg": 9.455661923211276,
+      "rank": 127,
+      "percentile": 92.37288135593221,
+      "classification": "near_hit",
+      "nearest_top20_in_window": null
+    },
+    {
+      "chain": "B",
+      "resSeq": 548,
+      "name": "Leu548",
+      "role": "interaction_B",
+      "ca_idx": 1509,
+      "sigma_deg": 5.747584007279889,
+      "rank": 706,
+      "percentile": 57.324455205811134,
+      "classification": "miss",
+      "nearest_top20_in_window": null
+    },
+    {
+      "chain": "B",
+      "resSeq": 549,
+      "name": "Cys549",
+      "role": "interaction_B",
+      "ca_idx": 1510,
+      "sigma_deg": 5.71316965919758,
+      "rank": 714,
+      "percentile": 56.84019370460048,
+      "classification": "miss",
+      "nearest_top20_in_window": null
+    },
+    {
+      "chain": "B",
+      "resSeq": 550,
+      "name": "Asp550",
+      "role": "interaction_B",
+      "ca_idx": 1511,
+      "sigma_deg": 4.906737896329168,
+      "rank": 979,
+      "percentile": 40.799031476997584,
+      "classification": "miss",
+      "nearest_top20_in_window": null
+    },
+    {
+      "chain": "A",
+      "resSeq": 305,
+      "name": "Ser305",
+      "role": "alpha_constraint",
+      "ca_idx": 304,
+      "sigma_deg": 4.794095836670235,
+      "rank": 1022,
+      "percentile": 38.19612590799032,
+      "classification": "miss",
+      "nearest_top20_in_window": null
+    }
+  ]
+}
