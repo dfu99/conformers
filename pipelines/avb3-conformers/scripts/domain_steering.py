@@ -77,6 +77,13 @@ AVB3_HINGE_DISTANCES = [
     ("alpha_head_thigh", "beta_tail"),    # head-β-tail distance
 ]
 
+# Pairs for headpiece-opening: include direct (α-head, β-head) head-head distance
+AVB3_HEADOPEN_DISTANCES = [
+    ("alpha_head_thigh", "beta_head"),    # head-head separation (CV2)
+    ("alpha_head_thigh", "alpha_tail"),   # keep α-leg extended
+    ("beta_head",        "alpha_tail"),   # keep β cross-chain
+]
+
 
 def _select_atoms_by_range(topology, chain_id: str, start: int, end: int) -> list[int]:
     """Select atom indices for a chain/residue range."""
@@ -414,19 +421,15 @@ STEERING_PRESETS = {
     "cv_distance_headopen": {
         "method": "cv_bias",
         "cv_type": "distance",
-        "description": "Push headpiece CV2 (α-head ↔ β-head) toward open state; leave legs free",
-        "force_constant": 200.0,
-        # Pairs order in AVB3_HINGE_DISTANCES:
-        # (α-head-thigh, α-tail), (β-head, α-tail), (α-head-thigh, β-tail)
-        # For EO we want to open the head-head distance. In our
-        # domain_steering the #3 pair (α-head ↔ β-tail) is cross-chain and
-        # pushing it larger drags the heads apart in an indirect way. Also
-        # bias the β-head ↔ α-tail (#2) wider so the chains splay.
-        # Keep target #1 (α-head ↔ α-tail) at current extended value to
-        # not collapse legs.
-        "target_values": [8.0, 8.0, 8.0],   # nm — all three pairs to 80 Å
+        "description": "Push headpiece CV2 (α-head ↔ β-head) toward open state; legs stay extended",
+        "force_constant": 250.0,
+        # Uses AVB3_HEADOPEN_DISTANCES:
+        # 0: (α-head-thigh, β-head)   — head-head separation = CV2
+        # 1: (α-head-thigh, α-tail)   — keep α-leg extended
+        # 2: (β-head, α-tail)         — keep β cross-chain
+        "target_values": [6.0, 8.0, 8.0],   # head-head 6 nm (open!), legs 8 nm
         "bias_type": "flat_bottom",
-        "flat_bottom_width": 2.0,
+        "flat_bottom_width": 1.0,
     },
 }
 
@@ -467,6 +470,11 @@ def apply_steering_preset(
             pull_force_pn=preset.get("pull_force_pn", 1.0),
         )
     elif method == "cv_bias":
+        # Pick the right CV pair list per preset name
+        if preset_name == "cv_distance_headopen":
+            cv_pairs = AVB3_HEADOPEN_DISTANCES
+        else:
+            cv_pairs = None  # default to AVB3_HINGE_DISTANCES inside add_cv_bias
         add_cv_bias(
             system, topology,
             cv_type=preset.get("cv_type", "distance"),
@@ -474,6 +482,7 @@ def apply_steering_preset(
             force_constant=preset.get("force_constant", 200.0),
             bias_type=preset.get("bias_type", "harmonic"),
             flat_bottom_width=preset.get("flat_bottom_width", 0.5),
+            cv_pairs=cv_pairs,
         )
     else:
         raise ValueError(f"Unknown method: {method}")
