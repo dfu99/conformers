@@ -477,3 +477,14 @@ Before diagnosing new failures, verify in order:
 ### Step-wise Yaw Beats Continuous for Surface-Bound Molecules
 - Command context: real HS-AFM shows molecules holding an orientation for seconds, then snapping to a new one — never spinning smoothly.
 - Action: hysteresis-based step detector on the raw yaw signal. Threshold ~50°, min dwell 20 frames, cap each step magnitude at ~30°. Gives "prefers an orientation, occasionally re-orients" behavior. Smooth (Gaussian) yaw produces visually-wrong continuous tumbling.
+
+### Steering Presets Need Explicit Pair Lists
+- Command context: `cv_distance_headopen` preset on `domain_steering.py`.
+- Symptom: 790 ps run, target name says "head-head opening", but CV2 (α-head ↔ β-head separation) stayed at 34 ± 0.4 Å throughout.
+- Root cause: the preset's `target_values` list was applied to AVB3_HINGE_DISTANCES (the DEFAULT pair list) which contains only head-tail pairs — no head-head pair. The preset's *name* claimed head-head opening but the underlying pairs didn't include head-head.
+- Action: define a parallel pair list (`AVB3_HEADOPEN_DISTANCES`) with the (α-head, β-head) pair at index 0. Update `apply_steering_preset` to route preset name → correct pair list.
+
+### RunPod A4500 Pod Quota Hits at ~1.6 GB Cumulative
+- Command context: 3 ns OpenMM MD on solvated αVβ3 with `--report-interval 1500`.
+- Symptom: process dies silently with no error after ~1.5 hours of production. production.nc plateaus at ~1.4 GB. Total project dir ~1.6 GB.
+- Action: (a) use `--report-interval 5000` or higher (3× smaller .nc), (b) deploy a watchdog that deletes equilibration.nc and minimized.pdb once production starts (saves ~800 MB), (c) run a local backup loop that pulls production.nc to WD_BLACK every 30 min — as insurance, not as the primary fix.

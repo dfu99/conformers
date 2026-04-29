@@ -609,3 +609,41 @@ objectives:
     a session.
   connects_to: null
   completed_date: '2026-04-25'
+
+- id: obj-024
+  status: completed
+  statement: Diagnose and fix cv_distance_headopen preset that didn't open the headpiece
+  methodology: >
+    Ran cv_distance_headopen on RunPod A4500. Process repeatedly died at
+    ~190 ps and ~790 ps due to pod-level disk quota when trajectory hit
+    ~1.5 GB. Backed up partial output to WD_BLACK each time and continued.
+    Analyzed the 790 ps partial: CV2 (head-head separation) stayed at
+    34±0.4 Å throughout — preset wasn't doing what its name claimed.
+    Root cause: preset used the default AVB3_HINGE_DISTANCES list (which
+    only contains head-tail pairs, no head-head pair). Fix: added
+    AVB3_HEADOPEN_DISTANCES with explicit (alpha_head_thigh, beta_head)
+    pair as item 0, target 6 nm. Updated apply_steering_preset to select
+    HEADOPEN_DISTANCES for the cv_distance_headopen preset name.
+    Relaunched (v4) with disk-pressure mitigations: report_interval 1500
+    → 5000 (3× smaller .nc), watchdog deletes equilibration.nc and
+    minimized.pdb after production starts, periodic local backup loop
+    pulls production.nc to WD_BLACK every 30 min as insurance.
+  metrics:
+    v3_cv2_range_A: "34.1 to 34.9"
+    v3_cv2_target_set: 80
+    v3_died_at_ps: 790
+    v3_died_due_to: "pod disk quota at ~1.5 GB total"
+    v4_cv2_target_set: 60
+    v4_report_interval: 5000
+    pod_quota_observed_gb: 1.6
+  figures:
+    - figures/headopen_v3_broken.png
+  conclusions: >
+    Steering CVs must be specified as explicit pair lists. The "preset"
+    abstraction was pulling default pairs that didn't match the preset's
+    name/intent. Adding a parallel HEADOPEN_DISTANCES list and routing
+    via preset name fixed it. Pod-level quota limits write to ~1.6 GB
+    so always need (a) low report frequency, (b) inflight cleanup of
+    intermediate files, (c) periodic backup to WD_BLACK as a safety net.
+  connects_to: null
+  completed_date: '2026-04-29'
