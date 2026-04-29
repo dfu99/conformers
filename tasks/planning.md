@@ -61,17 +61,17 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
 ## Next Priority
-1. **Refresh mechanical-sensitivity composite** — replace rotation-dominated RMSF panel with corrected version (`figures/rmsf_v7_corrected/`). One-line script change. Republish `figures/mechanical_sensitivity_composite.png` and update `results/mechanical_sensitivity_report_v1.md`.
-2. **Multi-integrin pipeline** — αIIbβ3 (3FCS) + α5β1 (3VI4) + αVβ6 (4UM9) + αVβ8 (6OM2) etc. First-principles bent/extended distribution prediction. Plan in `docs/integrin_heterodimer_plan.md`. αIIbβ3 carries dual value: also yields EO templates (string-method structures from Ferg-Lab).
-3. **AF2-Multimer ablation** — reviewer B push. ~50 GPU-hours; can run on A40 once free.
-4. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
-5. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
-6. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
+1. **Multi-integrin pipeline** — αIIbβ3 (3FCS) + α5β1 (3VI4) + αVβ6 (4UM9) + αVβ8 (6OM2) etc. First-principles bent/extended distribution prediction. Plan in `docs/integrin_heterodimer_plan.md`. αIIbβ3 carries dual value: also yields EO templates (string-method structures from Ferg-Lab).
+2. **AF2-Multimer ablation** — reviewer B push. ~50 GPU-hours; can run on A40 once free.
+3. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
+4. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
+5. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
 
 ## Confirmed Negative Results
 - **EC vs EO SMD steering (obj-025, 2026-04-29)** — Two iterations (k=250, k=1000) on RunPod A40 with corrected (α-head, β-head) pair list. Even k=1000 only opens CV2 by 0.9 Å in 620 ps (~0.07 Å/ps). Reaching the 60 Å EO target would need ~320 ns wall-clock, an order of magnitude beyond the 3-ns budget. Both runs disk-quota-bounded at ~620 ps regardless of force constant. **EO coverage now flagged as a hard pipeline limitation in `intuition.md` falsifiability section.** To recover EO state space, alternative routes are (a) αIIbβ3 string-method structures, (b) metadynamics with CV2 as collective variable, (c) replica exchange. Any of those is at least 2× the current MD budget.
 
 ## Recently Completed
+- [x] Mechanical-sensitivity composite v2 (2026-04-29, obj-028) — `figures/mechanical_sensitivity_composite_v2.png` rebuilt with rotation-corrected RMSF + cross-conformer std + angular σ. v1 top-5 hotspots all in v2 top-10. β-coil cluster (B:649, B:652) and α-coil-1 doublet (A:842, A:843) sharpen to top. Matsumoto residues overlaid by classification. Report: `results/mechanical_sensitivity_report_v2.md`.
 - [x] Rotation-corrected RMSF (2026-04-29, obj-027) — added `--head-align` flag to `residue_rmsf.py` doing per-frame Kabsch alignment on 790 headpiece CAs (αV:1-440 + β3:1-350). Reduced V1 mean RMSF 53.5→19.3 Å (64%) and V2 71.2→19.3 Å (73%). Headpiece now near-rigid (7-10 Å) as expected; legs and coils retain real 20-47 Å motion. C-terminal coil ranking preserved → robust pipeline finding. Two-video consistency improves dramatically (was 53/71 Å, now 19.29/19.30 Å).
 - [x] Matsumoto 2008 switch-residue overlay (2026-04-29, obj-026) — 5/5 backbone-hinge-relevant Matsumoto residues at ≥80th percentile in our v7 angular-σ. Cys374 (rank 11) + Leu375 (rank 47) direct hits; primary snap β3:Arg633 at 82.7th percentile. The 6 misses are Interaction-B partners or α-constraint Ser305 that stabilize via non-bonded networks rather than backbone hinging — a meaningful methodological distinction. Cross-method concordance with foundational ENM-NMA paper at residue level. Report: `results/matsumoto_overlay_v1.md`.
 - [x] EC vs EO SMD steering — confirmed negative (2026-04-29, obj-025) — Two iterations (k=250 v4, k=1000 v5) on RunPod A40. Even at k=1000 only 0.9 Å of CV2 opening in 620 ps (~0.07 Å/ps). Reaching the 60 Å EO target would need ~320 ns. Both runs disk-quota-bounded at ~620 ps regardless of force constant. **EO coverage is now a confirmed pipeline limitation**; alternative routes are αIIbβ3 string-method structures, metadynamics, REMD.
