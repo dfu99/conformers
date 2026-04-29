@@ -758,3 +758,37 @@ objectives:
     correction removes a length-of-trajectory bias.
   connects_to: obj-028
   completed_date: '2026-04-29'
+
+- id: obj-028
+  status: completed
+  statement: Mechanical-sensitivity composite v2 with rotation-corrected RMSF + Matsumoto overlay
+  methodology: >
+    Wrote `mechanical_sensitivity_composite.py` to combine three
+    independent per-residue metrics (V1+V2 mean rotation-corrected
+    RMSF, cross-conformer CA std, CA-CA-CA bond-angle σ) into a
+    rectified-z-score product. Overlaid 12 Matsumoto 2008 switch
+    residues colored by classification (direct_hit/near_hit/
+    neighborhood_hit/miss). Marked top-10 triple-agreement hotspots
+    on the composite panel.
+  metrics:
+    top_1_residue: B:689
+    top_1_composite: 10.47
+    top_2_residue: B:652
+    top_2_composite: 10.14
+    top_3_residue: A:842
+    top_3_composite: 10.03
+    matsumoto_b3_arg633_z_angle_rank_pct: 82.7
+    v1_top5_persisted_in_v2_top10: 5
+  figures:
+    - figures/mechanical_sensitivity_composite_v2.png
+  conclusions: >
+    Rotation correction preserves the v1 top-5 hotspots (all in
+    v2 top-10) while sharpening the β-coil cluster (B:649, B:652)
+    and revealing the α-coil-1 doublet (A:842, A:843) at very high
+    composite scores. C-terminal coil dominance is now an interpretable
+    finding rather than an RMSF artifact. The Matsumoto overlay shows
+    the snap-sandwich neighborhood (Cys374, Leu375) is in the top-50
+    by σ while the Interaction-B partners (Asp550, Cys549, Leu548)
+    are not — the two methods are complementary, not duplicative.
+  connects_to: null
+  completed_date: '2026-04-29'
