@@ -792,3 +792,39 @@ objectives:
     are not — the two methods are complementary, not duplicative.
   connects_to: null
   completed_date: '2026-04-29'
+
+- id: obj-029
+  status: completed
+  statement: First-principles bent-state geometry predicts αIIbβ3 more bent than αVβ3
+  methodology: >
+    Downloaded 7 integrin heterodimer PDBs from RCSB (1JV2, 3FCS,
+    3VI4, 4UM9, 5FFG, 6OM2, 6UJC). Wrote
+    `multi_integrin_first_principles.py` to extract bent-state
+    structural features without consulting kinetics literature: (1)
+    head-leg buried SASA via shrake-rupley; (2) head-tail centroid
+    distance; (3) long-axis extent + Rg. Pre-registered prediction
+    rule: more head-leg buried SASA + smaller head-tail = more bent
+    in solution. Then post-hoc compared to the Li 2024 + platelet
+    activation hierarchy.
+  metrics:
+    avb3_1jv2_head_leg_buried_sasa_A2: 13442
+    avb3_1jv2_head_tail_distance_A: 42.6
+    aiibb3_3fcs_head_leg_buried_sasa_A2: 15298
+    aiibb3_3fcs_head_tail_distance_A: 37.2
+    aiibb3_vs_avb3_buried_sasa_relative_increase: 0.138
+    aiibb3_vs_avb3_head_tail_relative_decrease: 0.127
+    headpiece_only_structures_count: 5
+  figures:
+    - results/multi_integrin/bent_state_features.png
+  conclusions: >
+    αIIbβ3 (3FCS) is predicted *more bent* than αVβ3 (1JV2) by both
+    metrics (14% more head-leg buried SASA, 13% smaller head-tail
+    distance). Post-hoc literature agrees: αIIbβ3 has the lowest
+    spontaneous activation rate of any integrin (Li 2024), while
+    αVβ3 is bistable in solution (Chen 2023). Pre-registered
+    first-principles prediction validates against published
+    activation hierarchy. αIIbβ3 is the right second integrin to
+    validate the AFMFold pipeline against; its full ectodomain
+    bent crystal also makes it the cleanest target for steering MD.
+  connects_to: null
+  completed_date: '2026-04-29'
