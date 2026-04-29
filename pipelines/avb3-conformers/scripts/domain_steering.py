@@ -421,15 +421,14 @@ STEERING_PRESETS = {
     "cv_distance_headopen": {
         "method": "cv_bias",
         "cv_type": "distance",
-        "description": "Push headpiece CV2 (α-head ↔ β-head) toward open state; legs stay extended",
-        "force_constant": 250.0,
-        # Uses AVB3_HEADOPEN_DISTANCES:
-        # 0: (α-head-thigh, β-head)   — head-head separation = CV2
-        # 1: (α-head-thigh, α-tail)   — keep α-leg extended
-        # 2: (β-head, α-tail)         — keep β cross-chain
-        "target_values": [6.0, 8.0, 8.0],   # head-head 6 nm (open!), legs 8 nm
+        "description": "Force-open headpiece (α-head ↔ β-head) with strong head-only bias",
+        "force_constant": 1000.0,   # 4x stronger than before
+        # Uses AVB3_HEADOPEN_DISTANCES (head-head + leg-extension)
+        # Headpiece opening must overcome a tight interface; large k needed.
+        # Set leg targets where they ALREADY ARE (~7.8 nm) so they don't fight.
+        "target_values": [6.0, 7.8, 7.8],
         "bias_type": "flat_bottom",
-        "flat_bottom_width": 1.0,
+        "flat_bottom_width": 0.5,   # narrower so force engages more strongly off-target
     },
 }
 
