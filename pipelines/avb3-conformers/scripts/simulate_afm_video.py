@@ -41,6 +41,7 @@ def parse_args():
     p.add_argument("--max-frames", type=int, default=0, help="0 = all")
     p.add_argument("--device", default="cpu")
     p.add_argument("--n-grid-frames", type=int, default=16)
+    p.add_argument("--coord-file", type=str, default="fitted_coords_smooth.npy")
     return p.parse_args()
 
 
@@ -77,7 +78,7 @@ def main():
     from afmfold.images import generate_landscape, idilation, generate_tip_shape
 
     # Load fitted trajectory
-    fitted = np.load(str(args.fitted_dir / "fitted_coords_smooth.npy"))
+    fitted = np.load(str(args.fitted_dir / args.coord_file))
     import json
     with open(args.fitted_dir / "fitting_metadata.json") as f:
         meta = json.load(f)
