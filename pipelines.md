@@ -8,6 +8,28 @@ than reinventing them.
 
 ## PRIMARY PIPELINES
 
+The framework has *three* PRIMARY pipelines, forming a complete
+forward + inverse workflow:
+
+```
+                   pipelines/conformer-library/
+                       (steered MD)
+                            │
+                            ▼
+                       library/
+                  (PDBs + library.json)
+                          ╱  ╲
+                         ╱    ╲
+                        ▼      ▼
+        pipelines/         pipelines/
+        sim-afm-video/     afm-overlay/
+        (forward model)    (template-match real video)
+              │                  │
+              ▼                  ▼
+         sim_afm.gif       pdb_projection_video.gif
+                           + state kinetics
+```
+
 ### `pipelines/sim-afm-video/` — sim HS-AFM video generator
 **Status:** validated 2026-04-30 (V2 αVβ3, conformer library v7).
 **Purpose:** Convert a conformer library (PDBs + metadata) into a
@@ -36,6 +58,37 @@ intermediate npy artifacts for audit.
 `results/afm_pipeline/sim_afm/video2_stable_zblur/sim_afm_copper_v15.gif`
 
 **Master entry:** `bash pipelines/sim-afm-video/run_pipeline.sh <library_dir> <output_dir>`
+
+### `pipelines/afm-overlay/` — fit real HS-AFM video + render overlay
+**Status:** validated 2026-04-22 (V1+V2 αVβ3 with v7 conformer library).
+**Purpose:** Inference arm of AFMFold — match a real HS-AFM video
+against the conformer library, fit per-frame rigid-body orientation,
+render the fitted PDB overlay on top of the real video, and produce
+state-kinetics analyses (BC/EC/EO/Intermediate occupancy).
+
+**Input contract:** Same `library.json` schema as sim-afm-video,
+plus a `.gif` of real HS-AFM data. See
+`pipelines/afm-overlay/README.md` § Input Contract.
+
+**Pipeline stages:**
+1. Ingest conformer library
+2. Build pseudo-AFM library for correlation matching (`process_frames_to_afm.py`)
+3. Per-frame fit: correlation + SO(3) refinement + head tracking
+   (`fit_with_head_tracking.py`)
+4. Tail-flip resolution (`resolve_tail_flips.py`)
+5. Temporal smoothing — rolling median + head re-anchor
+   (`smooth_coords_temporal.py`, `reprocess_smooth_coords.py`)
+6. State kinetics classification + plots (`analyze_state_kinetics.py`)
+7. Overlay rendering (`render_projection_overlay.py`)
+
+**Output:** PDB-overlay GIF + state-kinetics PNG + per-frame fitted
+coords + correlation arrays.
+
+**Validated reference fits:**
+- `results/afm_pipeline/v7_smoothed_final/video1/` (379 frames, mean corr 0.97, BC 43.5%)
+- `results/afm_pipeline/v7_smoothed_final/video2/` (1266 frames, mean corr 0.94, BC 18.6%)
+
+**Master entry:** `bash pipelines/afm-overlay/run_pipeline.sh <afm_gif> <library_dir> <output_dir>`
 
 ### `pipelines/conformer-library/` — steered-MD conformer library
 **Status:** validated 2026-04-22 (αVβ3 v7 library, 615 frames).
