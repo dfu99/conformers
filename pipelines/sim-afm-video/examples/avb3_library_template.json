@@ -1,0 +1,22 @@
+{
+  "_comment_": "Template library.json for an αVβ3 conformer library. Replace `conformers` with your actual frame list. CV column names follow the αVβ3 domain convention; see pipelines/avb3-conformers/scripts/domain_steering.py for definitions.",
+  "topology_pdb": "frame_0000.pdb",
+  "conformers": [
+    {"file": "frame_0000.pdb", "cv0_A": 52.3, "cv1_A": 42.1, "cv2_A": 35.0, "state": "BC", "source_steering": "cv_distance_bent"},
+    {"file": "frame_0001.pdb", "cv0_A": 53.1, "cv1_A": 42.5, "cv2_A": 34.9, "state": "BC", "source_steering": "cv_distance_bent"},
+    {"file": "frame_0002.pdb", "cv0_A": 54.0, "cv1_A": 43.0, "cv2_A": 34.8, "state": "BC", "source_steering": "cv_distance_bent"}
+  ],
+  "trajectory_order": [0, 1, 2],
+  "adjacency": [[0, 1], [1, 2]],
+  "cv_definitions": {
+    "cv0_A": "alpha_head_thigh ↔ alpha_calf domain centroid distance (Å) — α-leg extension",
+    "cv1_A": "beta_head_hybrid_egf1 ↔ beta_tail_egf2_3_4_btail centroid distance (Å) — β-leg extension",
+    "cv2_A": "alpha_head_thigh ↔ beta_head centroid distance (Å) — headpiece separation"
+  },
+  "states": {
+    "BC": "bent closed (CV0 < 60 Å, CV1 < 50 Å)",
+    "EC": "extended closed (CV0 > 65 Å, CV1 > 55 Å, CV2 < 40 Å)",
+    "EO": "extended open (CV0 > 65 Å, CV1 > 55 Å, CV2 > 50 Å)",
+    "Intermediate": "anything else"
+  }
+}
