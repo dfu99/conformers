@@ -37,7 +37,14 @@ def parse_args():
     p.add_argument("--resolution-nm", type=float, default=0.98)
     p.add_argument("--tip-radius", type=float, default=1.5, help="nm")
     p.add_argument("--tip-angle", type=float, default=20.0, help="deg")
-    p.add_argument("--noise-nm", type=float, default=0.1)
+    p.add_argument("--noise-nm", type=float, default=0.1,
+                   help="Per-pixel z-noise post-dilation (nm). Real HS-AFM "
+                        "has 0.3-0.5 nm RMS — bump above 0.3 to match.")
+    p.add_argument("--z-blur-nm", type=float, default=0.0,
+                   help="Gaussian σ in nm applied to the height map after "
+                        "dilation. Simulates cantilever-oscillation "
+                        "averaging (real cantilever amplitude 1-2 nm). "
+                        "0.6-1.0 nm gives realistic blob-like z fields.")
     p.add_argument("--max-frames", type=int, default=0, help="0 = all")
     p.add_argument("--device", default="cpu")
     p.add_argument("--n-grid-frames", type=int, default=16)
@@ -140,15 +147,21 @@ def main():
         pure, _, _ = generate_landscape(xyz, xedges, yedges)
         pure = pure.reshape((-1, args.height, args.width))
         afm_img = idilation(pure, tip)
+        arr_nm = afm_img[0].detach().cpu().numpy()  # height map in nm
+        # z-domain Gaussian to simulate cantilever-oscillation averaging.
+        # Larger σ ⇒ more blob-like, less "every residue distinct" feel.
+        if args.z_blur_nm > 0:
+            from scipy.ndimage import gaussian_filter as _gf
+            sigma_px = args.z_blur_nm / args.resolution_nm
+            arr_nm = _gf(arr_nm, sigma=sigma_px)
+        # Per-pixel z-noise. 0.3-0.5 nm matches typical HS-AFM RMS.
         if args.noise_nm > 0:
-            noise = torch.from_numpy(
-                np.random.normal(0, args.noise_nm, afm_img.shape).astype(np.float32)
-            ).to(device)
-            afm_img = afm_img + noise
-        arr = afm_img[0].detach().cpu().numpy()
-        arr -= arr.min()
+            arr_nm = arr_nm + np.random.normal(0, args.noise_nm,
+                                               arr_nm.shape).astype(np.float32)
+        # Per-frame normalize for downstream (stylize) compatibility.
+        arr = arr_nm - arr_nm.min()
         if arr.max() > 0:
-            arr /= arr.max()
+            arr = arr / arr.max()
         sim_images[i] = arr
 
         if (i + 1) % 100 == 0:
