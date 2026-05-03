@@ -39,10 +39,13 @@ def parse_args() -> argparse.Namespace:
                    help="Bilinear upscale factor for the working canvas")
     p.add_argument("--substrate-noise-std", type=float, default=0.022)
     p.add_argument("--substrate-baseline", type=float, default=0.15)
-    p.add_argument("--blur-sigma-x", type=float, default=1.2,
-                   help="Anisotropic blur σ_x (working pixels)")
-    p.add_argument("--blur-sigma-y", type=float, default=0.7,
-                   help="Anisotropic blur σ_y (working pixels)")
+    p.add_argument("--blur-sigma-x", type=float, default=1.0,
+                   help="Blur σ_x (working pixels). Default isotropic "
+                        "(σx=σy=1.0). The earlier σx=1.2/σy=0.7 squashed "
+                        "the molecule in x once orientation was locked.")
+    p.add_argument("--blur-sigma-y", type=float, default=1.0,
+                   help="Blur σ_y (working pixels). Set isotropic with "
+                        "blur-sigma-x by default.")
     p.add_argument("--slant-amplitude", type=float, default=0.045)
     p.add_argument("--row-jitter-std", type=float, default=0.008)
     p.add_argument("--flash-streak-prob", type=float, default=0.02)
