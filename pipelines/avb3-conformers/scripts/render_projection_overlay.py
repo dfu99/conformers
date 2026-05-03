@@ -280,9 +280,26 @@ def main():
     print(f"Saved grid: {grid_path}")
 
     # --- Create animated GIF ---
-    cv_names = ["\u03b1H\u2194\u03b1T", "\u03b2H\u2194\u03b1T", "\u03b1H\u2194\u03b2T"]
-    state_colors = {"Compact": "#3366CC", "Intermediate": "#FF9900",
-                    "Extended": "#CC3333"}
+    # State bands per CV: BC (compact) up to ~65, Intermediate 65-78,
+    # Extended \u226578 for cv0; cv1 thresholds slightly different; cv2 mostly
+    # constant in current library so just a single label.
+    cv_names = [
+        "CV0: \u03b1-head \u2194 \u03b1-calf (\u00c5)",
+        "CV1: \u03b2-head \u2194 \u03b2-tail (\u00c5)",
+        "CV2: \u03b1-head \u2194 \u03b2-head (\u00c5)",
+    ]
+    cv_state_bands = [
+        # (lo, hi, label, color)
+        [(40, 65, "BC", "#fee090"),
+         (65, 78, "Intermediate", "#fdae61"),
+         (78, 95, "EC", "#d7191c")],
+        [(40, 60, "BC", "#fee090"),
+         (60, 73, "Intermediate", "#fdae61"),
+         (73, 95, "EC", "#d7191c")],
+        [(20, 42, "Closed", "#a1d99b"),
+         (42, 60, "Open (EO)", "#1b7837")],
+    ]
+    cv_traces = matched_cvs[:, :3]  # full trajectory of CVs (T, 3)
 
     pil_frames = []
     for i, fi in enumerate(gif_indices):
@@ -297,41 +314,65 @@ def main():
 
         cvs = matched_cvs[fi]
         cc = correlations[fi]
-        state = classify_state(cvs)
+        state_label = "BC" if cvs[0] < 65 and cvs[1] < 60 else (
+            "EC" if cvs[0] >= 78 and cvs[1] >= 73 else "I")
+        state_color = {"BC": "#fee090", "I": "#fdae61",
+                       "EC": "#d7191c"}[state_label]
 
-        fig = plt.figure(figsize=(10, 3.5))
-        gs = fig.add_gridspec(1, 3, width_ratios=[1, 1, 0.6], wspace=0.15)
+        # Layout: AFM | overlay | CV-trajectory panel (3 stacked rows)
+        fig = plt.figure(figsize=(13, 4.2))
+        gs_outer = fig.add_gridspec(1, 3, width_ratios=[1, 1, 1.5], wspace=0.18)
 
-        # Panel 1: Real AFM
-        ax1 = fig.add_subplot(gs[0])
-        ax1.imshow(afm, interpolation="bilinear")
-        ax1.set_title("HS-AFM", fontsize=9, fontweight="bold")
-        ax1.axis("off")
+        # Panel 1: Real AFM (square aspect locked).
+        ax1 = fig.add_subplot(gs_outer[0])
+        ax1.imshow(afm, interpolation="bilinear", aspect="equal")
+        ax1.set_title("HS-AFM", fontsize=10, fontweight="bold")
+        ax1.set_xticks([]); ax1.set_yticks([])
+        ax1.set_aspect("equal", adjustable="box")
 
-        # Panel 2: Projection overlay
-        ax2 = fig.add_subplot(gs[1])
-        ax2.imshow(comp, interpolation="bilinear")
-        ax2.set_title(f"PDB Overlay (r={cc:.2f})", fontsize=9, fontweight="bold")
-        ax2.axis("off")
+        # Panel 2: Projection overlay (square aspect locked).
+        ax2 = fig.add_subplot(gs_outer[1])
+        ax2.imshow(comp, interpolation="bilinear", aspect="equal")
+        ax2.set_title(f"PDB Overlay (r={cc:.2f})", fontsize=10,
+                      fontweight="bold")
+        ax2.set_xticks([]); ax2.set_yticks([])
+        ax2.set_aspect("equal", adjustable="box")
 
-        # Panel 3: CV bar chart
-        ax3 = fig.add_subplot(gs[2])
-        bars = ax3.barh(cv_names, cvs, color=state_colors[state], height=0.6)
-        ax3.set_xlim(45, 85)
-        ax3.set_xlabel("Distance (\u00c5)", fontsize=8)
-        ax3.set_title(state, fontsize=10, fontweight="bold",
-                      color=state_colors[state])
-        for bar, v in zip(bars, cvs):
-            ax3.text(v + 0.3, bar.get_y() + bar.get_height() / 2,
-                     f"{v:.1f}", va="center", fontsize=7)
-        ax3.tick_params(labelsize=7)
+        # Panel 3: CV trajectory line plot \u2014 three stacked rows
+        gs_inner = gs_outer[2].subgridspec(3, 1, hspace=0.18)
+        n_total_traj = len(cv_traces)
+        x_traj = np.arange(n_total_traj)
+        for k in range(3):
+            ax = fig.add_subplot(gs_inner[k])
+            for lo, hi, label, color in cv_state_bands[k]:
+                ax.axhspan(lo, hi, color=color, alpha=0.18, linewidth=0)
+                ax.text(0.005, (lo + hi) / 2, label,
+                        transform=ax.get_yaxis_transform(),
+                        ha="left", va="center", fontsize=7,
+                        color="#444", alpha=0.85)
+            ax.plot(x_traj, cv_traces[:, k], color="#222", linewidth=0.7)
+            # Vertical playhead at current frame.
+            ax.axvline(fi, color="#cc3333", linewidth=1.6)
+            ax.scatter([fi], [cvs[k]], color="#cc3333", s=24, zorder=6)
+            ax.set_ylabel(cv_names[k], fontsize=7)
+            ax.tick_params(axis="both", labelsize=6)
+            ymin = min(b[0] for b in cv_state_bands[k])
+            ymax = max(b[1] for b in cv_state_bands[k])
+            ax.set_ylim(ymin, ymax)
+            ax.set_xlim(0, n_total_traj)
+            if k < 2:
+                ax.set_xticklabels([])
+            else:
+                ax.set_xlabel("frame", fontsize=8)
 
         display_frame = fi + skip_frames
         n_total = len(real_frames) + skip_frames
         fig.suptitle(f"Frame {display_frame}/{n_total}  |  "
-                     f"\u03b1v\u03b23 Integrin Conformer",
-                     fontsize=10, fontweight="bold", y=0.98)
-        fig.tight_layout(rect=[0, 0, 1, 0.93])
+                     f"\u03b1V\u03b23 integrin \u2014 state: "
+                     f"{ {'BC':'Bent-Closed','I':'Intermediate','EC':'Extended-Closed'}[state_label]}",
+                     fontsize=11, fontweight="bold",
+                     color=state_color, y=0.99)
+        fig.tight_layout(rect=[0, 0, 1, 0.94])
 
         buf = io.BytesIO()
         fig.savefig(buf, format="png", dpi=120, bbox_inches="tight",
