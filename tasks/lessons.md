@@ -484,6 +484,34 @@ Before diagnosing new failures, verify in order:
 - Root cause: the preset's `target_values` list was applied to AVB3_HINGE_DISTANCES (the DEFAULT pair list) which contains only head-tail pairs — no head-head pair. The preset's *name* claimed head-head opening but the underlying pairs didn't include head-head.
 - Action: define a parallel pair list (`AVB3_HEADOPEN_DISTANCES`) with the (α-head, β-head) pair at index 0. Update `apply_steering_preset` to route preset name → correct pair list.
 
+### Single-Canvas Stylization: No Inset Paste Between Mismatched Sizes
+- Command context: forward-rendering pseudo-AFM with substrate noise + molecule render.
+- Symptom: v11 produced visible rectangular border around the inner molecule whenever the molecule extended past its inset edge — clearly an internal cutoff artifact in supposedly natural-looking output.
+- Root cause: noise was generated on a larger canvas and the molecule render was pasted into a smaller inner inset. Pasted boundaries always show.
+- Action: do EVERY stylization step (zoom, substrate noise, anisotropic blur, slant, row jitter, flash streaks, soft-clip, colormap) on ONE canvas at ONE resolution. See `pipelines/sim-afm-video/scripts/stylize_sim_afm.py`. Never composite via paste-into-larger-canvas.
+- Practical implication: any future image stylization that has both noise field + signal must keep them on the same array from the start.
+
+### Matplotlib Image Subplots Need Explicit Aspect Lock
+- Command context: 3-panel figure with figsize=(13, 4.2) showing AFM frame + fitted PDB overlay + CV trajectory at width_ratios=[1, 1, 1.5].
+- Symptom: AFM and overlay panels rendered horizontally squished — visibly non-square despite displaying square arrays.
+- Root cause: matplotlib's default sizing fills the available axes box per subplot, so the first two panels get stretched horizontally to match the figure's aspect.
+- Action: call `ax.set_aspect('equal', adjustable='box')` on every panel that displays an image. The 'box' adjustable shrinks the axes box to match the data aspect; without it the data gets stretched to fill the box.
+- Practical implication: any image-display panel inside a wide figure needs the explicit aspect lock — the default behavior is wrong for this case.
+
+### Sim AFM Z-Axis Needs Explicit Blur + Noise to Match Real HS-AFM
+- Command context: forward-render of fitted PDB through `simulate_afm_video.py`.
+- Symptom: sim AFM had crisp, precise z-resolution that no real HS-AFM has — molecule features looked like a digital height map rather than a measurement.
+- Root cause: pipeline was applying only xy blur (~0.1 nm) and minimal z-noise (0.05 nm). Real HS-AFM has cantilever-oscillation averaging plus 0.3-0.5 nm RMS z-noise from feedback loop dynamics.
+- Action: apply Gaussian σ in nm to the dilated height map BEFORE per-frame normalize (new `--z-blur-nm` flag) AND increase z-noise floor to match the real instrument (`--noise-nm 0.35`). Validated config: `--z-blur-nm 0.8 --noise-nm 0.35`. Documented in `pipelines/sim-afm-video/README.md`.
+- Practical implication: forward-render fidelity depends on modelling z-axis bandwidth limits, not just xy tip dilation.
+
+### Anisotropic Blur Is a Workaround for Unstable Yaw — Not a Default
+- Command context: sim AFM stylization v11 used σx=1.2 / σy=0.7 to compensate for free-tumbling renders.
+- Symptom: after PCA-flatten + side-lock + stepwise yaw landed (v13+), the long axis is consistently along x; anisotropic blur visibly squashed the molecule horizontally.
+- Root cause: the asymmetric blur was tuned for unstabilized frames where molecule could lie at any angle. Once orientation is locked, the asymmetry becomes a directional artifact.
+- Action: default to isotropic σx=σy=1.0 once orientation is locked. The earlier defaults are only justified for non-locked rendering.
+- Practical implication: parameters tuned for one stage of a pipeline can become bugs after a downstream stage changes assumptions; revisit defaults after each meaningful upstream change.
+
 ### RunPod A4500 Pod Quota Hits at ~1.6 GB Cumulative
 - Command context: 3 ns OpenMM MD on solvated αVβ3 with `--report-interval 1500`.
 - Symptom: process dies silently with no error after ~1.5 hours of production. production.nc plateaus at ~1.4 GB. Total project dir ~1.6 GB.

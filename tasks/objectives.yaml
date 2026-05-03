@@ -793,6 +793,213 @@ objectives:
   connects_to: null
   completed_date: '2026-04-29'
 
+- id: obj-030
+  status: completed
+  statement: Fix sim AFM v11 inset-border crop with single-canvas stylize_sim_afm.py
+  methodology: >
+    Diagnosed that v11 generated noise on a larger canvas and pasted the
+    molecule render into a smaller inset, producing a visible rectangular
+    border whenever the molecule extended past the inset edge. Built
+    `pipelines/sim-afm-video/scripts/stylize_sim_afm.py` that performs ALL
+    operations (zoom → substrate noise → blur → slant → row jitter → flash
+    streaks → soft-clip → copper colormap) on one canvas at one resolution.
+  metrics:
+    inset_border_visible: false
+    canvas_resolution_px: 280x280
+    stages: 8
+  figures:
+    - figures/sim_afm_v12_border_fix.png
+  conclusions: >
+    Single-canvas composition removes the v11 visible cutoff completely.
+    Lesson: never paste between a smaller inset and a larger noise canvas;
+    keep all rendering operations on a single matched canvas.
+  connects_to: obj-031
+  completed_date: '2026-04-30'
+
+- id: obj-031
+  status: completed
+  statement: Restore head + side anchoring + stepwise yaw via stabilize_orientation.py
+  methodology: >
+    Wrote `pipelines/sim-afm-video/scripts/stabilize_orientation.py` with a
+    5-stage orientation lock: PCA-flatten (smallest principal axis vertical)
+    → side-lock (chain A side stays down) → long-axis sign-align between
+    consecutive frames → stepwise yaw with hysteresis (50° threshold,
+    20-frame dwell, 30° step cap) → head xy Gaussian smoothing (σ=8). V2
+    yaw on video2 committed 3 discrete 30° steps over 1266 frames.
+  metrics:
+    yaw_step_threshold_deg: 50
+    yaw_min_dwell_frames: 20
+    yaw_step_cap_deg: 30
+    yaw_step_events_video2: 3
+    head_anchor_sigma: 8
+  figures:
+    - figures/sim_afm_v13_stable.png
+  conclusions: >
+    Surface-bound molecule no longer rolls to opposite side or spins
+    smoothly; orientation is anchored on a consistent face with rare
+    discrete reorientation steps, matching real HS-AFM specimens.
+  connects_to: obj-032
+  completed_date: '2026-04-30'
+
+- id: obj-032
+  status: completed
+  statement: Enlarge sim AFM canvas to 60 px so molecule fits at full extension
+  methodology: >
+    V2 stable coords have per-frame xy span up to 26 nm; the 35-px (34 nm)
+    canvas was clipping extended frames. Increased canvas to 60 px (~59 nm
+    at 0.98 nm/px). Re-rendered video2 stable_big with new dimensions.
+  metrics:
+    canvas_old_px: 35
+    canvas_new_px: 60
+    canvas_new_nm: 58.8
+    max_xy_span_nm: 26
+  figures:
+    - figures/sim_afm_v14_big_canvas.png
+  conclusions: >
+    Molecule now fits the canvas across all frames including most-extended
+    states; no more edge clipping.
+  connects_to: obj-033
+  completed_date: '2026-04-30'
+
+- id: obj-033
+  status: completed
+  statement: Add z-axis blur + realistic z-noise to forward AFM render
+  methodology: >
+    Pipeline previously had only xy blur (~0.1 nm) and very low z-noise
+    (0.05 nm) — too sharp vertically vs real HS-AFM which has cantilever-
+    oscillation averaging plus 0.3-0.5 nm RMS z-noise. Added `--z-blur-nm`
+    flag to `simulate_afm_video.py` applying Gaussian σ in nm to dilated
+    height map BEFORE per-frame normalize. Validated config:
+    `--z-blur-nm 0.8 --noise-nm 0.35`.
+  metrics:
+    z_blur_nm_default: 0.8
+    z_noise_nm_default: 0.35
+    real_hs_afm_rms_z_noise_nm_range: "0.3-0.5"
+  figures:
+    - figures/sim_afm_v15_zblur.png
+  conclusions: >
+    Sim z-axis now reads as blob-like rather than precision height map,
+    matching real HS-AFM cantilever-bandwidth-limited z resolution.
+  connects_to: obj-034
+  completed_date: '2026-04-30'
+
+- id: obj-034
+  status: completed
+  statement: Promote sim-afm-video and conformer-library to PRIMARY pipelines
+  methodology: >
+    Created `pipelines/sim-afm-video/` and `pipelines/conformer-library/`
+    standalone modules each with: README documenting input contract +
+    validated defaults + provenance, `scripts/` containing all ingest +
+    stabilize + render + stylize code, `examples/` with template
+    `library.json`, and (for sim-afm-video) `run_pipeline.sh` master
+    entry. Wrote top-level `pipelines.md` indexing the two pipelines.
+    Locked input contract: folder of PDBs + `library.json` with conformers
+    list, CV definitions, state labels, trajectory_order, and adjacency.
+  metrics:
+    pipelines_promoted: 2
+    readmes_added: 2
+    contract_fields:
+      - conformers
+      - cv_definitions
+      - states
+      - trajectory_order
+      - adjacency
+      - topology_pdb
+  figures:
+    - results/afm_pipeline/sim_afm/video2_stable_zblur/sim_afm_copper_v15.gif
+  conclusions: >
+    Two-pipeline forward modelling stack now reproducible from a folder
+    of PDBs. Future heterodimers (αIIbβ3 next) plug directly into
+    sim-afm-video by overriding head residue ranges + side-lock chain.
+  connects_to: obj-035
+  completed_date: '2026-04-30'
+
+- id: obj-035
+  status: completed
+  statement: Promote afm-overlay to PRIMARY pipeline (3rd of three)
+  methodology: >
+    Built `pipelines/afm-overlay/` standalone module — the inverse arm of
+    AFMFold (real HS-AFM video → fitted PDB overlay). 7-stage workflow:
+    ingest real GIF → build pseudo-AFM library → exhaustive SO(3) fit
+    with head tracking → tail-flip resolution (21-frame median, 0.05
+    hysteresis) → temporal median smoothing (window 7) → kinetics state
+    classification → ChimeraX/projection overlay render. Reference fits at
+    `results/afm_pipeline/v7_smoothed_final/{video1,video2}/`.
+  metrics:
+    stages: 7
+    tip_radius_nm_default: 2
+    skip_frames_default: 30
+    head_residues_alpha: "1-440"
+    head_residues_beta: "1-350"
+    temporal_window: 7
+    tail_flip_window_frames: 21
+    tail_flip_hysteresis: 0.05
+    video1_frames: 379
+    video2_frames: 1266
+  figures:
+    - results/afm_pipeline/v7_smoothed_final/video2/pdb_atomistic_video.gif
+  conclusions: >
+    Three PRIMARY pipelines now form a complete forward + inverse AFMFold
+    workflow. conformer-library → library/ → sim-afm-video (forward) and
+    → afm-overlay (inverse / template match). All three labeled in memory
+    and indexed in `pipelines.md`.
+  connects_to: obj-036
+  completed_date: '2026-04-30'
+
+- id: obj-036
+  status: completed
+  statement: Make sim AFM stylize blur isotropic (σx=σy=1.0) to fix horizontal squish
+  methodology: >
+    Earlier σx=1.2 / σy=0.7 was tuned for non-orientation-locked frames
+    where the molecule could lie at any angle. After PCA-flatten + side-
+    lock, the long axis is consistently along x and the anisotropic blur
+    visibly squashed the molecule horizontally. Defaults updated to
+    σx=σy=1.0 across the canvas. Re-rendered video2 stable.
+  metrics:
+    blur_sigma_x_old: 1.2
+    blur_sigma_y_old: 0.7
+    blur_sigma_x_new: 1.0
+    blur_sigma_y_new: 1.0
+  figures:
+    - figures/sim_afm_v16_isotropic_blur.png
+  conclusions: >
+    Isotropic blur is the right default for orientation-locked rendering.
+    The previous anisotropic setting was a workaround for unstable yaw
+    that no longer applies after the side-lock + stepwise-yaw stage.
+  connects_to: obj-037
+  completed_date: '2026-05-03'
+
+- id: obj-037
+  status: completed
+  statement: Redesign overlay panel — locked-square AFM + CV-trajectory line plot
+  methodology: >
+    Two fixes to `pipelines/afm-overlay/scripts/render_projection_overlay.py`.
+    (1) Aspect-lock: added `set_aspect('equal', adjustable='box')` on the
+    AFM and overlay panels so they render as proper squares instead of the
+    13:4.2 figure ratio squishing them. (2) Replaced the moving bar chart
+    with a stacked 3-row CV trajectory line plot via gridspec subgridspec.
+    Each row shows: full CV trajectory (black line), horizontal `axhspan`
+    state bands with inline labels (BC/Intermediate/EC for CV0/CV1, Closed/
+    EO for CV2), vertical red `axvline` playhead + scatter dot at current
+    frame. Generated 1233×508 px, 150 frames, 14 MB GIF.
+  metrics:
+    figsize_inches: "13 x 4.2"
+    width_ratios: "1:1:1.5"
+    cv_rows: 3
+    output_resolution_px: "1233 x 508"
+    output_frames: 150
+    output_size_mb: 14
+  figures:
+    - figures/overlay_v2_sample_frame.png
+  conclusions: >
+    The overlay viewer now matches the praised `cv_trajectory + state_summary`
+    composite format: trajectory line + horizontal bands + playhead replaces
+    the noisy bar chart, and locked-square AFM panels eliminate the visual
+    horizontal squish. Final render in
+    `results/afm_pipeline/v7_smoothed_final/video2/overlay_v2/`.
+  connects_to: null
+  completed_date: '2026-05-03'
+
 - id: obj-029
   status: completed
   statement: First-principles bent-state geometry predicts αIIbβ3 more bent than αVβ3
