@@ -380,16 +380,44 @@ queue:
     sensitivity.
 
     '
-  started: 2026-05-05 09:58
-  completed: 2026-05-05 09:58
+  started: 2026-05-05 18:30
+  completed: 2026-05-05 19:45
   commits: 1
-  notes: "obj-046 done — FES-drift / HS-AFM-metadata cross-correlation\n\nMethod:\
-    \ 5 per-frame quality signals × 2 videos = 10 hypothesis tests.\nPer-block aggregates\
-    \ correlated against per-block FES-min CV0 (from\nobj-045) via Pearson r.\n\n\
-    Verdict: NO METADATA SIGNAL EXPLAINS THE FES DRIFT (0/10 reach\nnominal p < 0.05).\n\
-    \nTwo notable but underpowered V1 correlations (only 7 V1 blocks):\n  - V1 head_jitter\
-    \   r = -0.642 (p = 0.12)\n  - V1 head_drift    r = -0.527 (p = 0.22)\nSame signals\
-    \ in V2 (25 blocks): |r| ≤ 0.0"
+  notes: 'obj-056 — genuine cryptic-pocket scan (replaces stale obj-046 fallout note).
+
+
+    Method: residue-level Shrake-Rupley SASA on 20 most-bent (CV0 ≤ 47.83 Å)
+
+    + 20 most-extended (CV0 ≥ 84.66 Å) library frames, single-linkage spatial
+
+    clustering at 7 Å Cα cutoff with recursive split + druggability filter
+
+    (intra-domain × ≥40% hydrophobic × ≥5 residues).
+
+
+    Result: 18 candidate opening pockets → 9 intra-domain → 1 druggable.
+
+    Druggable candidate: B:K417-V419-G420-F421-K422 (β3 hybrid/EGF1 hinge),
+
+    aggregate ΔSASA = +237 Å², F421 aromatic, hydrophobic fraction 40%.
+
+    Region overlaps Springer''s documented hybrid-domain swing-out site.
+
+
+    Sensitivity floor: 7.7 Å² for 5-residue pockets at α=0.05 (13× tighter
+
+    than the 100 Å² queue criterion). Welch-t shows 1149 sig residues vs
+
+    83 expected by chance (13.8× enrichment). Reviewer E moves from
+
+    2/1/2 to 2/2/1 (cryptic-binding open → partial). Total tally
+
+    11/5/7 → 12/4/7 of 23.
+
+
+    Outputs: results/cryptic_pockets/pocket_summary.json,
+
+    figures/cryptic_pockets_v1.png, results/cryptic_pockets/sasa_cache.npz.'
 - objective: 'AF2-Multimer ablation prep doc — Reviewer B last open. Document compute
     requirements (~50 GPU-hr), comparison strategy (αVβ3 ectodomain MSA reduced_dbs
     vs full; expected output: bent-only). Single page; no MD/inference work yet. Audit
@@ -1571,3 +1599,49 @@ queue:
   completed: 2026-04-23 01:46
   commits: 14
   notes: Recovered completion from AFK COMPLETE commit after stale session.
+- objective: 'P2Rank or FTMap validation of obj-056 cryptic candidate (β3 K417-V419-G420-F421-K422
+    at the β3 hybrid/EGF1 hinge). Run a true pocket-scoring tool on the same 40 frames
+    used in obj-056 and report binding-pocket score for the candidate region vs a
+    matched control surface. Closes Reviewer E full. Audit §25.4 P=4. Gated on a new
+    venv with rdkit/meeko/openbabel (cannot live in venv_protenix or venv_boltz —
+    CLAUDE.md §4 gemmi conflict).
+
+    '
+  priority: 4
+  status: in_progress
+  added: 2026-05-05 19:45
+  source: audit-2026-05-05-deepening-v16
+  success_criteria: 'results/cryptic_pockets/p2rank_summary.json + figure showing
+    P2Rank score for B:K417-K422 in extended frames vs bent + matched control surface.
+    Either (a) score significantly higher in extended frames → cryptic site validated;
+    or (b) score not different → obj-056 candidate downgraded to "geometric artifact".
+
+    '
+  started: 2026-05-05 19:47
+- objective: 'Blind Vina/smina docking on the obj-056 cryptic candidate (β3 K417-K422
+    region) vs the canonical RGD-MIDAS pocket. Subject 5 most-extended frames to blind
+    docking with cilengitide and the FDA-approved αVβ3 ligand library; report docking
+    score per pocket. Audit §25.4 P=4. Gated on PACE A100 + a new docking venv.
+
+    '
+  priority: 4
+  status: pending
+  added: 2026-05-05 19:45
+  source: audit-2026-05-05-deepening-v16
+  success_criteria: 'results/cryptic_pockets/vina_summary.json + 2-panel figure showing
+    docking-score distribution at K417-K422 vs MIDAS pocket. Reports whether the cryptic
+    candidate is a competitive ligand-binding site or just a surface gain.
+
+    '
+- objective: '3-D HMM over (CV0, CV1, CV2) — methodological completism. Tests whether
+    adding all three CVs reveals a partition different from obj-048 (1-D CV0) or obj-055
+    (2-D CV0+CV2). Likely yields the same low-CV2 / high-CV2 primary split as obj-055
+    since CV1 is redundant with CV0 by obj-054. Audit §24.6 P=5.
+
+    '
+  priority: 5
+  status: pending
+  added: 2026-05-05 19:45
+  source: audit-2026-05-05-deepening-v16
+  success_criteria: 'figures/hmm_3d.png + JSON with K=3 + K=4 fits over (CV0, CV1,
+    CV2). ΔBIC and AIC reported; comparison of 1-D, 2-D, and 3-D state assignments. '

@@ -1049,6 +1049,105 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-056
+  status: completed
+  statement: Cryptic-pocket scan v7 αVβ3 library — 1 druggable candidate at β3 hybrid/EGF1 hinge (Reviewer E)
+  methodology: >
+    Audit §13.5 + §24.6 P=3 follow-up. Reviewer E's open concern was
+    "any cryptic site that opens > 100 Å² between BC and EC?" The earlier
+    queue entry was auto-marked completed via obj-046 fallout but no
+    actual analysis existed on disk. This pass delivers the genuine scan.
+
+    From-scratch implementation (no P2Rank/FTMap/fpocket dependency):
+      1. Reused obj-039 CV0 cache to pick 20 most-bent (CV0 ≤ 47.83 Å)
+         + 20 most-extended (CV0 ≥ 84.66 Å) library frames.
+      2. Per-frame Shrake-Rupley residue-level SASA (1654 residues × 40
+         frames). 96.8 s on the local box; cached to sasa_cache.npz.
+      3. Per-residue ΔSASA = mean_ext − mean_bent, Welch-t with pooled SE.
+         Flagged opening (Δ > +20 Å²) and closing (Δ < −20 Å²) residues.
+      4. Single-linkage spatial clustering (Cα ≤ 7 Å) of opening residues
+         with recursive split for clusters > 25 residues (down to 4 Å
+         floor); separated discrete pockets from "megaclusters" that
+         represent bulk head-leg interface gain during BC→EC extension.
+      5. Druggability filter on each pocket: intra-domain (all member
+         residues within one canonical domain), hydrophobic-residue
+         fraction ≥ 40 %, ≥ 5 residues. Domains: αV propeller-thigh
+         (1-435), αV calf (436-741), αV tail (742-956), β3 PSI-hybrid-βA
+         (1-352), β3 EGF-βtail (353-692).
+      6. Sensitivity bound from per-residue pooled SE: minimum-detectable
+         single-residue ΔSASA at α=0.05 = 1.96·median(SE).
+
+    Script: pipelines/conformer-library/scripts/cryptic_pocket_scan.py
+  metrics:
+    n_frames_bent: 20
+    n_frames_extended: 20
+    mean_cv0_bent_A: 47.66
+    mean_cv0_extended_A: 84.84
+    n_residues_total: 1654
+    n_residues_opening_dsasa_gt_20: 217
+    n_residues_closing_dsasa_lt_minus_20: 103
+    n_candidate_opening_pockets: 18
+    n_intra_domain_opening_pockets: 9
+    n_druggable_opening_pockets: 1
+    n_candidate_closing_pockets: 3
+    druggable_pocket_residues: "B:LYS417, B:VAL419, B:GLY420, B:PHE421, B:LYS422"
+    druggable_pocket_domain: "β3 EGF-βtail (residue 417-422 hybrid/EGF1 hinge)"
+    druggable_pocket_hydrophobic_fraction: 0.40
+    druggable_pocket_aggregate_dsasa_A2: 237.0
+    druggable_pocket_top_residue: "B:GLY420 ΔSASA=+77.7 Å²"
+    welch_t_significant_at_alpha_0p05: 1149
+    welch_t_expected_by_chance: 83
+    enrichment_over_chance: 13.8
+    sensitivity_min_single_residue_dsasa_A2: 3.43
+    sensitivity_min_5res_pocket_dsasa_A2: 7.68
+  figures:
+    - figures/cryptic_pockets_v1.png
+    - results/cryptic_pockets/pocket_summary.json
+    - results/cryptic_pockets/cryptic_pockets_v1.png
+  conclusions: >
+    **Reviewer E partially addressed**. 18 candidate opening pockets
+    found over BC→EC; after filtering to intra-domain (rules out trivial
+    rigid-body head-leg separation as the cause) we keep 9. After the
+    druggability filter (≥ 40 % hydrophobic, ≥ 5 residues): **exactly 1
+    candidate** — β3 K417-V419-G420-F421-K422, a 5-residue cluster at
+    the β3 βA / hybrid / EGF1 hinge with aggregate ΔSASA = +237 Å² and
+    one aromatic (PHE421). This region is biologically reasonable: the
+    β3 hybrid-domain swing-out is a documented allosteric site in
+    integrin activation (Springer 2003, 2014). Finding it via a pure
+    geometric SASA-differential scan independently corroborates the
+    literature.
+
+    **The MIDAS RGD-binding pocket is NOT in the cryptic list** — it
+    appears in the closing pockets (obj-039 already showed MIDAS SASA
+    drops 35 % on extension). The "obvious" answer to "does extension
+    expose new ligand-binding sites?" remains: not the canonical RGD
+    site, but possibly the β3 hybrid hinge.
+
+    **Sensitivity bound**: the design resolves single-residue ΔSASA ≥
+    3.4 Å² and 5-residue aggregate ΔSASA ≥ 7.7 Å² at α=0.05 — well
+    below the 100 Å² aggregate threshold from the success criterion,
+    so any cryptic site that opens > 100 Å² over BC→EC would be
+    detected. Welch-t shows 1149 sig residues vs 83 expected by chance
+    (13.8× enrichment), confirming statistical power.
+
+    **Caveats**:
+      (a) The β3 K417-K422 candidate is at the same general region as
+      the β3 βA / hybrid / EGF1 hinge that physically opens during the
+      hybrid swingout — so even though it's "intra-domain" by my coarse
+      classification (β3 EGF-βtail = 353-692), the opening may still
+      reflect the βA/hybrid/EGF1 multi-subdomain rearrangement rather
+      than a true local cryptic gating event. A finer subdomain split
+      could re-classify it as inter-subdomain.
+      (b) This is a *static* differential SASA scan, not a true pocket-
+      detection algorithm. P2Rank or FTMap on the same frames would
+      score the candidate's binding-pocket likelihood directly. Logged
+      as a follow-up if compute permits.
+      (c) Reviewer E might still ask for blind ligand-docking on the
+      β3 K417-K422 region; that's a downstream P=4 task gated on PI
+      sign-off + compute allocation.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-055
   status: completed
   statement: 2-D HMM over (CV0, CV2) — no EO support, CV2 is primary clustering axis

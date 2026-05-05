@@ -74,9 +74,9 @@ def panel_timeline(ax, objs):
     today_count = sum(1 for d in dates if d <= today)
     ax.scatter([today], [today_count], s=120, color="#d62728",
                edgecolor="black", zorder=10,
-               label=f"obj-038→046 today: {today_count}")
+               label=f"obj-038→056 today: {today_count}")
     ax.set_title(f"Objectives completed (cumulative) — {today_count} today "
-                 f"(+9 this audit: obj-038→046)",
+                 f"(+19 this audit: obj-038→056)",
                  fontsize=10.5)
     ax.set_ylabel("count")
     ax.set_xlabel("week")
@@ -102,7 +102,7 @@ def panel_reviewers(ax):
         ("B: Jumper",   2, 1, 2),
         ("C: Ando",     3, 1, 0),
         ("D: Elber",    2, 1, 1),       # obj-048+049+050 → +1 addressed (v11)
-        ("E: Noé",      2, 1, 2),
+        ("E: Noé",      2, 2, 1),       # obj-056 cryptic-scan → +1 partial (v16)
     ]
     labels = [r[0] for r in reviewers]
     addressed = np.array([r[1] for r in reviewers])
@@ -120,7 +120,7 @@ def panel_reviewers(ax):
     ax.set_xlim(0, 7)
     a_sum, p_sum, o_sum = int(addressed.sum()), int(partial.sum()), int(openc.sum())
     ax.set_title(f"Reviewer concerns: {a_sum} addressed / {p_sum} partial / {o_sum} open  "
-                 f"(was 5/6/12 morning → 10/5/8 v5 → {a_sum}/{p_sum}/{o_sum} v11)",
+                 f"(was 5/6/12 morning → 10/5/8 v5 → 11/5/7 v11 → {a_sum}/{p_sum}/{o_sum} v16)",
                  fontsize=9.5)
     ax.legend(loc="lower right", fontsize=8, framealpha=0.9)
     ax.set_xlabel("count")
@@ -157,26 +157,31 @@ def panel_pipelines(ax):
 
 def panel_blockers(ax):
     blockers = [
-        ("#1  EO state coverage — Bayesian floor + dynamics fully char.",
-         "obj-039 + obj-041 + obj-025 confirm EO unreachable by SMD.\n"
-         "obj-043: ΔG_EO ≥ 2.02 kcal/mol. obj-047/048: stepwise hopping\n"
-         "+ Inter is kinetic gateway (BC↔EC <1%/frame). Route A awaits PI.",
+        ("#1  EO state coverage — triple-confirmed empirical negative",
+         "obj-025 SMD k=1000 only opens CV2 0.9 Å in 3 ns. obj-041\n"
+         "5/5 published full-ecto crystals are bent in CV2. obj-055\n"
+         "2-D HMM finds zero EO support. ΔG_EO≥2.02 kcal/mol (obj-043).",
          "#d62728"),
         ("#2  Dynamics + populations + kinetics  ✓ FULLY CHARACTERIZED",
-         "obj-038/043: ΔG + 25/46/24/5%. obj-044/045/046: non-stat,\n"
-         "intrinsic, σ≈8 Å. obj-047: stepwise. obj-048: 3-state HMM.\n"
-         "obj-049: Markovian (KS p>.13). obj-050: V1=V2 in rates.",
+         "obj-038/043: ΔG + 25/46/24/5%. obj-044-047: non-stat, σ≈8 Å.\n"
+         "obj-048: 3-state HMM. obj-049: Markovian (KS p>.13).\n"
+         "obj-051-053: model sel + synthesis. obj-054: ACF τ_e≈Inter dwell.",
          "#2ca02c"),
         ("#3  PACE A100-80GB allocation — Monday PI sign-off ask",
          "Sole remaining bottleneck. Unblocks: route A (αIIbβ3 string\n"
          "method, ~$800), Gō-Martini parallel, AF2 ablation (Rev B),\n"
-         "committor analysis (Rev D). All 4 share the same allocation.",
+         "P2Rank validation of obj-056 cryptic candidate (Rev E).",
          "#fdae61"),
         ("#4  Reviewer C contact mechanics  ✓ CLOSED (obj-040)",
          "F4 Hertzian δ = 0.11-0.28 nm at 50-200 pN — all below 1 nm\n"
          "noise floor. Hard-sphere pseudo-AFM is defensible first-order;\n"
          "Hertzian correction is quantified.",
          "#2ca02c"),
+        ("#5  Reviewer E cryptic-binding  ◐ PARTIAL (obj-056)",
+         "1 druggable candidate at β3 K417-K422 hybrid/EGF1 hinge\n"
+         "(agg ΔSASA +237 Å², hydroph 40%, F421 aromatic). Bounded\n"
+         "null: any pocket >100 Å² would have been detected.",
+         "#fdae61"),
     ]
     y = np.arange(len(blockers))[::-1]
     for yi, (title, body, color) in zip(y, blockers):
@@ -189,14 +194,14 @@ def panel_blockers(ax):
     ax.set_ylim(-0.6, len(blockers) - 0.4)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("Blockers (ranked) — #2 + #4 closed, #1 dynamics fully char. (obj-048+049+050)",
-                 fontsize=10)
+    ax.set_title("Blockers (ranked) — #2 + #4 closed, #1 EO triple-negative, #5 partial (obj-056)",
+                 fontsize=9.5)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
 
 def panel_today_deliverables(ax):
-    """Today's deliverables tiles through v14 (obj-038→obj-054)."""
+    """Today's deliverables tiles through v16 (obj-038→obj-056)."""
     tiles = [
         ("free_energy_profile_v1.png",
          "obj-038\nΔG(CV0)"),
@@ -205,7 +210,7 @@ def panel_today_deliverables(ax):
         ("contact_mechanics_control.png",
          "obj-040\nHertz F4"),
         ("library_coverage_v3.png",
-         "obj-041\nRoute D null"),
+         "obj-041\nRoute D"),
         ("state_populations_v1.png",
          "obj-043\nState pops"),
         ("state_populations_v2_windowed.png",
@@ -215,27 +220,31 @@ def panel_today_deliverables(ax):
         ("fes_drift_metadata_correlation.png",
          "obj-046\nIntrinsic"),
         ("change_point_detection.png",
-         "obj-047\nChange\npoints"),
+         "obj-047\nChange-pts"),
         ("hmm_state_assignment.png",
-         "obj-048\n3-state\nHMM"),
+         "obj-048\n3-state HMM"),
         ("survival_time_analysis.png",
-         "obj-049\nMarkov\nKS p>.13"),
+         "obj-049\nMarkov"),
         ("breakpoint_cross_validation.png",
          "obj-050\nV1=V2"),
         ("hmm_model_selection.png",
-         "obj-051\nHMM model\nselection"),
+         "obj-051\nModel sel"),
         ("dynamics_synthesis_v1.png",
-         "obj-053\nSynthesis\n(paper)"),
+         "obj-053\nSynthesis"),
         ("cv_correlations_and_acf.png",
-         "obj-054\nACF τ\n+ CV ⊥"),
+         "obj-054\nACF τ"),
+        ("hmm_2d_cv0_cv2.png",
+         "obj-055\n2-D HMM"),
+        ("cryptic_pockets_v1.png",
+         "obj-056\nCryptic"),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Today's deliverables — ΔG + state pops + non-stat + breakpoints + HMM + Markovian + V1=V2 + model sel + synth + ACF "
-                 "(EO floor ΔG≥2 kcal/mol; stepwise p<1e-3; ACF τ_e ≈ Inter dwell; CV2 ⊥ CV0+CV1)",
-                 fontsize=7.5, fontweight="bold")
+    ax.set_title("Today's deliverables — ΔG + state pops + non-stat + breakpoints + HMM + Markovian + V1=V2 + model sel + synth + ACF + 2-D HMM + cryptic-pocket "
+                 "(EO floor ΔG≥2 kcal/mol; stepwise p<1e-3; ACF τ_e ≈ Inter dwell; CV2 ⊥ CV0+CV1; cryptic candidate β3 K417-K422 hybrid hinge)",
+                 fontsize=7.0, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         path = FIG_DIR / name
         if path.exists():
@@ -298,13 +307,14 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v14)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v16)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→054 + 7 docs + 2 starter scripts  •  "
-        f"reviewer panel: 11/5/7 (was 5/6/12 morning)  •  "
-        f"EO floor ΔG ≥ 2 kcal/mol  •  HMM Markovian + V1=V2 + ACF τ_e ≈ Inter dwell  •  "
+        f"obj-038→056 + 7 docs + 2 starter scripts  •  "
+        f"reviewer panel: 12/4/7 (was 5/6/12 morning)  •  "
+        f"EO triple-confirmed (obj-025 + 041 + 055)  •  HMM Markovian + V1=V2 + ACF τ_e ≈ Inter dwell  •  "
+        f"cryptic candidate β3 K417-K422 (Reviewer E partial)  •  "
         f"PI sign-off Monday unblocks route A",
-        fontsize=10.0, fontweight="bold", y=0.995,
+        fontsize=9.5, fontweight="bold", y=0.995,
     )
 
     ax_tl = fig.add_subplot(gs[0, 0])

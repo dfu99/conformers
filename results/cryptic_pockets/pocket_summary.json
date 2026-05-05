@@ -1,0 +1,787 @@
+{
+  "library_dir": "data/runs/avb3/conformers/all_frames_bent_extended",
+  "n_frames_bent": 20,
+  "n_frames_extended": 20,
+  "mean_cv0_bent_A": 47.672135734558104,
+  "mean_cv0_extended_A": 84.79906921386718,
+  "n_residues_total": 1654,
+  "n_residues_opening_dsasa_gt_20": 217,
+  "n_residues_closing_dsasa_lt_minus_20": 103,
+  "n_candidate_opening_pockets": 18,
+  "n_candidate_closing_pockets": 3,
+  "n_intra_domain_opening_pockets": 9,
+  "n_druggable_opening_pockets": 1,
+  "opening_pockets": [
+    {
+      "pocket_id": 0,
+      "n_residues": 20,
+      "chain_a_count": 12,
+      "chain_b_count": 8,
+      "aggregate_delta_sasa_A2": 868.4999276161193,
+      "centroid_A": [
+        293.0783981323242,
+        229.8944519042969,
+        283.3437042236328
+      ],
+      "top_residues": [
+        "A:PRO959  \u0394SASA=+97.5 \u00c5\u00b2",
+        "B:LYS658  \u0394SASA=+95.4 \u00c5\u00b2",
+        "B:GLU686  \u0394SASA=+70.6 \u00c5\u00b2",
+        "A:PRO758  \u0394SASA=+65.5 \u00c5\u00b2",
+        "A:GLU770  \u0394SASA=+57.3 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:PRO959",
+        "B:LYS658",
+        "B:GLU686",
+        "A:PRO758",
+        "A:GLU770",
+        "B:THR656",
+        "A:ILE955",
+        "A:PRO961",
+        "B:VAL664",
+        "B:ASP662",
+        "B:GLU660",
+        "A:GLN956",
+        "B:CYS687",
+        "A:TRP760",
+        "A:PRO774",
+        "A:LYS763",
+        "B:PRO688",
+        "A:GLU761",
+        "A:PHE754",
+        "A:VAL775"
+      ],
+      "domain_counts": {
+        "alpha_tail": 10,
+        "unknown": 2,
+        "beta_egf_betatail": 8
+      },
+      "intra_domain": false,
+      "primary_domain": "alpha_tail",
+      "hydrophobic_fraction": 0.25,
+      "aromatic_count": 2,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 1,
+      "n_residues": 19,
+      "chain_a_count": 10,
+      "chain_b_count": 9,
+      "aggregate_delta_sasa_A2": 800.248464716971,
+      "centroid_A": [
+        281.50062962582234,
+        239.95952485737047,
+        270.0998936703331
+      ],
+      "top_residues": [
+        "A:ILE857  \u0394SASA=+78.0 \u00c5\u00b2",
+        "A:LYS859  \u0394SASA=+63.7 \u00c5\u00b2",
+        "B:ILE589  \u0394SASA=+62.3 \u00c5\u00b2",
+        "A:ARG860  \u0394SASA=+58.1 \u00c5\u00b2",
+        "B:THR603  \u0394SASA=+55.0 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:ILE857",
+        "A:LYS859",
+        "B:ILE589",
+        "A:ARG860",
+        "B:THR603",
+        "A:PRO750",
+        "A:HIS752",
+        "A:SER749",
+        "A:THR858",
+        "B:ASP606",
+        "A:ASP751",
+        "B:GLN590",
+        "A:VAL747",
+        "B:LYS612",
+        "A:LYS843",
+        "B:PRO591",
+        "B:LYS611",
+        "B:THR609",
+        "B:PRO605"
+      ],
+      "domain_counts": {
+        "alpha_tail": 10,
+        "beta_egf_betatail": 9
+      },
+      "intra_domain": false,
+      "primary_domain": "alpha_tail",
+      "hydrophobic_fraction": 0.15789473684210525,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 2,
+      "n_residues": 13,
+      "chain_a_count": 13,
+      "chain_b_count": 0,
+      "aggregate_delta_sasa_A2": 668.5040324538945,
+      "centroid_A": [
+        246.69607543945312,
+        242.35576805701623,
+        243.5459982065054
+      ],
+      "top_residues": [
+        "A:GLN704  \u0394SASA=+102.2 \u00c5\u00b2",
+        "A:ARG321  \u0394SASA=+79.7 \u00c5\u00b2",
+        "A:ALA322  \u0394SASA=+65.6 \u00c5\u00b2",
+        "A:LEU649  \u0394SASA=+62.3 \u00c5\u00b2",
+        "A:ASP288  \u0394SASA=+58.4 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:GLN704",
+        "A:ARG321",
+        "A:ALA322",
+        "A:LEU649",
+        "A:ASP288",
+        "A:THR709",
+        "A:SER323",
+        "A:GLY324",
+        "A:ASP284",
+        "A:SER705",
+        "A:GLN650",
+        "A:ASN286",
+        "A:GLN320"
+      ],
+      "domain_counts": {
+        "alpha_propeller_thigh": 8,
+        "alpha_calf": 5
+      },
+      "intra_domain": false,
+      "primary_domain": "alpha_propeller_thigh",
+      "hydrophobic_fraction": 0.15384615384615385,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 3,
+      "n_residues": 14,
+      "chain_a_count": 14,
+      "chain_b_count": 0,
+      "aggregate_delta_sasa_A2": 575.3857730865478,
+      "centroid_A": [
+        259.2492196219308,
+        261.1886433192662,
+        206.4616437639509
+      ],
+      "top_residues": [
+        "A:ILE453  \u0394SASA=+93.2 \u00c5\u00b2",
+        "A:GLN589  \u0394SASA=+64.8 \u00c5\u00b2",
+        "A:TYR450  \u0394SASA=+47.3 \u00c5\u00b2",
+        "A:VAL601  \u0394SASA=+45.8 \u00c5\u00b2",
+        "A:LEU593  \u0394SASA=+44.0 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:ILE453",
+        "A:GLN589",
+        "A:TYR450",
+        "A:VAL601",
+        "A:LEU593",
+        "A:GLU448",
+        "A:SER452",
+        "A:CYS602",
+        "A:CYS596",
+        "A:ARG588",
+        "A:HIS591",
+        "A:ASP599",
+        "A:LYS603",
+        "A:PHE558"
+      ],
+      "domain_counts": {
+        "alpha_calf": 14
+      },
+      "intra_domain": true,
+      "primary_domain": "alpha_calf",
+      "hydrophobic_fraction": 0.35714285714285715,
+      "aromatic_count": 2,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 4,
+      "n_residues": 12,
+      "chain_a_count": 12,
+      "chain_b_count": 0,
+      "aggregate_delta_sasa_A2": 482.76866108402606,
+      "centroid_A": [
+        240.37375005086264,
+        260.0836639404297,
+        234.42350133260092
+      ],
+      "top_residues": [
+        "A:ARG379  \u0394SASA=+90.1 \u00c5\u00b2",
+        "A:PHE355  \u0394SASA=+64.5 \u00c5\u00b2",
+        "A:ASP353  \u0394SASA=+52.0 \u00c5\u00b2",
+        "A:THR672  \u0394SASA=+47.8 \u00c5\u00b2",
+        "A:GLN580  \u0394SASA=+45.3 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:ARG379",
+        "A:PHE355",
+        "A:ASP353",
+        "A:THR672",
+        "A:GLN580",
+        "A:PHE581",
+        "A:ASP351",
+        "A:THR381",
+        "A:ASN579",
+        "A:ASN356",
+        "A:VAL440",
+        "A:PHE1"
+      ],
+      "domain_counts": {
+        "alpha_propeller_thigh": 7,
+        "alpha_calf": 5
+      },
+      "intra_domain": false,
+      "primary_domain": "alpha_propeller_thigh",
+      "hydrophobic_fraction": 0.3333333333333333,
+      "aromatic_count": 3,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 5,
+      "n_residues": 8,
+      "chain_a_count": 4,
+      "chain_b_count": 4,
+      "aggregate_delta_sasa_A2": 441.2704292774201,
+      "centroid_A": [
+        254.1404972076416,
+        278.4153747558594,
+        264.3985023498535
+      ],
+      "top_residues": [
+        "A:LYS308  \u0394SASA=+76.1 \u00c5\u00b2",
+        "B:ARG360  \u0394SASA=+66.5 \u00c5\u00b2",
+        "B:GLU364  \u0394SASA=+66.1 \u00c5\u00b2",
+        "A:ASP306  \u0394SASA=+65.4 \u00c5\u00b2",
+        "A:SER305  \u0394SASA=+59.3 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:LYS308",
+        "B:ARG360",
+        "B:GLU364",
+        "A:ASP306",
+        "A:SER305",
+        "B:LEU362",
+        "B:ASP361",
+        "A:ARG303"
+      ],
+      "domain_counts": {
+        "alpha_propeller_thigh": 4,
+        "beta_egf_betatail": 4
+      },
+      "intra_domain": false,
+      "primary_domain": "alpha_propeller_thigh",
+      "hydrophobic_fraction": 0.125,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 6,
+      "n_residues": 8,
+      "chain_a_count": 0,
+      "chain_b_count": 8,
+      "aggregate_delta_sasa_A2": 396.99788697957996,
+      "centroid_A": [
+        262.632625579834,
+        265.0435028076172,
+        260.6649932861328
+      ],
+      "top_residues": [
+        "B:SER551  \u0394SASA=+95.3 \u00c5\u00b2",
+        "B:ARG563  \u0394SASA=+75.6 \u00c5\u00b2",
+        "B:GLU582  \u0394SASA=+71.1 \u00c5\u00b2",
+        "B:ASP552  \u0394SASA=+46.0 \u00c5\u00b2",
+        "B:ASP550  \u0394SASA=+31.6 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "B:SER551",
+        "B:ARG563",
+        "B:GLU582",
+        "B:ASP552",
+        "B:ASP550",
+        "B:CYS583",
+        "B:THR562",
+        "B:CYS581"
+      ],
+      "domain_counts": {
+        "beta_egf_betatail": 8
+      },
+      "intra_domain": true,
+      "primary_domain": "beta_egf_betatail",
+      "hydrophobic_fraction": 0.0,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 7,
+      "n_residues": 7,
+      "chain_a_count": 0,
+      "chain_b_count": 7,
+      "aggregate_delta_sasa_A2": 347.06453887224194,
+      "centroid_A": [
+        264.5127214704241,
+        272.7412894112723,
+        289.1062796456473
+      ],
+      "top_residues": [
+        "B:LYS350  \u0394SASA=+96.6 \u00c5\u00b2",
+        "B:ILE351  \u0394SASA=+60.8 \u00c5\u00b2",
+        "B:ARG352  \u0394SASA=+48.9 \u00c5\u00b2",
+        "B:LYS354  \u0394SASA=+48.6 \u00c5\u00b2",
+        "B:SER353  \u0394SASA=+37.6 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "B:LYS350",
+        "B:ILE351",
+        "B:ARG352",
+        "B:LYS354",
+        "B:SER353",
+        "B:GLY388",
+        "B:LEU389"
+      ],
+      "domain_counts": {
+        "beta_psi_hybrid_betaA": 3,
+        "beta_egf_betatail": 4
+      },
+      "intra_domain": false,
+      "primary_domain": "beta_egf_betatail",
+      "hydrophobic_fraction": 0.2857142857142857,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 8,
+      "n_residues": 5,
+      "chain_a_count": 0,
+      "chain_b_count": 5,
+      "aggregate_delta_sasa_A2": 236.95841049402952,
+      "centroid_A": [
+        258.56679077148436,
+        281.381396484375,
+        281.01539306640626
+      ],
+      "top_residues": [
+        "B:GLY420  \u0394SASA=+77.7 \u00c5\u00b2",
+        "B:LYS422  \u0394SASA=+51.0 \u00c5\u00b2",
+        "B:VAL419  \u0394SASA=+36.7 \u00c5\u00b2",
+        "B:PHE421  \u0394SASA=+36.0 \u00c5\u00b2",
+        "B:LYS417  \u0394SASA=+35.6 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "B:GLY420",
+        "B:LYS422",
+        "B:VAL419",
+        "B:PHE421",
+        "B:LYS417"
+      ],
+      "domain_counts": {
+        "beta_egf_betatail": 5
+      },
+      "intra_domain": true,
+      "primary_domain": "beta_egf_betatail",
+      "hydrophobic_fraction": 0.4,
+      "aromatic_count": 1,
+      "druggable_candidate": true
+    },
+    {
+      "pocket_id": 9,
+      "n_residues": 6,
+      "chain_a_count": 6,
+      "chain_b_count": 0,
+      "aggregate_delta_sasa_A2": 225.79015844799576,
+      "centroid_A": [
+        263.9499969482422,
+        234.9229990641276,
+        251.0431696573893
+      ],
+      "top_residues": [
+        "A:LEU739  \u0394SASA=+71.2 \u00c5\u00b2",
+        "A:TYR618  \u0394SASA=+40.2 \u00c5\u00b2",
+        "A:ASP621  \u0394SASA=+35.5 \u00c5\u00b2",
+        "A:ALA741  \u0394SASA=+31.9 \u00c5\u00b2",
+        "A:GLY620  \u0394SASA=+26.1 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:LEU739",
+        "A:TYR618",
+        "A:ASP621",
+        "A:ALA741",
+        "A:GLY620",
+        "A:GLU743"
+      ],
+      "domain_counts": {
+        "alpha_calf": 5,
+        "alpha_tail": 1
+      },
+      "intra_domain": false,
+      "primary_domain": "alpha_calf",
+      "hydrophobic_fraction": 0.5,
+      "aromatic_count": 1,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 11,
+      "n_residues": 3,
+      "chain_a_count": 2,
+      "chain_b_count": 1,
+      "aggregate_delta_sasa_A2": 178.85762424468993,
+      "centroid_A": [
+        262.68833414713544,
+        281.2923278808594,
+        217.52200317382812
+      ],
+      "top_residues": [
+        "A:GLN504  \u0394SASA=+85.1 \u00c5\u00b2",
+        "B:PRO464  \u0394SASA=+63.3 \u00c5\u00b2",
+        "A:LYS503  \u0394SASA=+30.4 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:GLN504",
+        "B:PRO464",
+        "A:LYS503"
+      ],
+      "domain_counts": {
+        "alpha_calf": 2,
+        "beta_egf_betatail": 1
+      },
+      "intra_domain": false,
+      "primary_domain": "alpha_calf",
+      "hydrophobic_fraction": 0.0,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 12,
+      "n_residues": 3,
+      "chain_a_count": 0,
+      "chain_b_count": 3,
+      "aggregate_delta_sasa_A2": 177.58559950590134,
+      "centroid_A": [
+        250.17733764648438,
+        278.44432576497394,
+        280.55567423502606
+      ],
+      "top_residues": [
+        "B:ASN303  \u0394SASA=+89.0 \u00c5\u00b2",
+        "B:LYS302  \u0394SASA=+68.5 \u00c5\u00b2",
+        "B:ASN305  \u0394SASA=+20.1 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "B:ASN303",
+        "B:LYS302",
+        "B:ASN305"
+      ],
+      "domain_counts": {
+        "beta_psi_hybrid_betaA": 3
+      },
+      "intra_domain": true,
+      "primary_domain": "beta_psi_hybrid_betaA",
+      "hydrophobic_fraction": 0.0,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 13,
+      "n_residues": 5,
+      "chain_a_count": 5,
+      "chain_b_count": 0,
+      "aggregate_delta_sasa_A2": 162.71126324832443,
+      "centroid_A": [
+        224.37019958496094,
+        262.14459228515625,
+        231.44700317382814
+      ],
+      "top_residues": [
+        "A:ASN417  \u0394SASA=+43.7 \u00c5\u00b2",
+        "A:GLY418  \u0394SASA=+34.2 \u00c5\u00b2",
+        "A:GLY485  \u0394SASA=+34.0 \u00c5\u00b2",
+        "A:TYR419  \u0394SASA=+25.6 \u00c5\u00b2",
+        "A:LYS416  \u0394SASA=+25.2 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:ASN417",
+        "A:GLY418",
+        "A:GLY485",
+        "A:TYR419",
+        "A:LYS416"
+      ],
+      "domain_counts": {
+        "alpha_propeller_thigh": 4,
+        "alpha_calf": 1
+      },
+      "intra_domain": false,
+      "primary_domain": "alpha_propeller_thigh",
+      "hydrophobic_fraction": 0.2,
+      "aromatic_count": 1,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 14,
+      "n_residues": 3,
+      "chain_a_count": 0,
+      "chain_b_count": 3,
+      "aggregate_delta_sasa_A2": 155.94981689453124,
+      "centroid_A": [
+        276.732666015625,
+        276.3210042317708,
+        213.2646738688151
+      ],
+      "top_residues": [
+        "B:GLU476  \u0394SASA=+59.7 \u00c5\u00b2",
+        "B:ASP477  \u0394SASA=+49.3 \u00c5\u00b2",
+        "B:GLU475  \u0394SASA=+47.0 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "B:GLU476",
+        "B:ASP477",
+        "B:GLU475"
+      ],
+      "domain_counts": {
+        "beta_egf_betatail": 3
+      },
+      "intra_domain": true,
+      "primary_domain": "beta_egf_betatail",
+      "hydrophobic_fraction": 0.0,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 15,
+      "n_residues": 3,
+      "chain_a_count": 3,
+      "chain_b_count": 0,
+      "aggregate_delta_sasa_A2": 154.14534626007077,
+      "centroid_A": [
+        268.9820048014323,
+        275.6543375651042,
+        207.43267313639322
+      ],
+      "top_residues": [
+        "A:LEU552  \u0394SASA=+66.0 \u00c5\u00b2",
+        "A:ARG549  \u0394SASA=+57.0 \u00c5\u00b2",
+        "A:ASP550  \u0394SASA=+31.2 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:LEU552",
+        "A:ARG549",
+        "A:ASP550"
+      ],
+      "domain_counts": {
+        "alpha_calf": 3
+      },
+      "intra_domain": true,
+      "primary_domain": "alpha_calf",
+      "hydrophobic_fraction": 0.3333333333333333,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 16,
+      "n_residues": 3,
+      "chain_a_count": 0,
+      "chain_b_count": 3,
+      "aggregate_delta_sasa_A2": 145.11945753097532,
+      "centroid_A": [
+        274.2403259277344,
+        270.64366658528644,
+        232.30699666341147
+      ],
+      "top_residues": [
+        "B:LYS519  \u0394SASA=+79.5 \u00c5\u00b2",
+        "B:THR517  \u0394SASA=+44.3 \u00c5\u00b2",
+        "B:GLY518  \u0394SASA=+21.3 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "B:LYS519",
+        "B:THR517",
+        "B:GLY518"
+      ],
+      "domain_counts": {
+        "beta_egf_betatail": 3
+      },
+      "intra_domain": true,
+      "primary_domain": "beta_egf_betatail",
+      "hydrophobic_fraction": 0.0,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 17,
+      "n_residues": 3,
+      "chain_a_count": 0,
+      "chain_b_count": 3,
+      "aggregate_delta_sasa_A2": 125.88322355747225,
+      "centroid_A": [
+        277.0243428548177,
+        253.03699747721353,
+        276.3383382161458
+      ],
+      "top_residues": [
+        "B:ARG633  \u0394SASA=+55.9 \u00c5\u00b2",
+        "B:TYR634  \u0394SASA=+37.8 \u00c5\u00b2",
+        "B:ARG636  \u0394SASA=+32.2 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "B:ARG633",
+        "B:TYR634",
+        "B:ARG636"
+      ],
+      "domain_counts": {
+        "beta_egf_betatail": 3
+      },
+      "intra_domain": true,
+      "primary_domain": "beta_egf_betatail",
+      "hydrophobic_fraction": 0.3333333333333333,
+      "aromatic_count": 1,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 18,
+      "n_residues": 4,
+      "chain_a_count": 0,
+      "chain_b_count": 4,
+      "aggregate_delta_sasa_A2": 114.78979253768921,
+      "centroid_A": [
+        266.56300354003906,
+        253.71799850463867,
+        274.97625732421875
+      ],
+      "top_residues": [
+        "B:LEU573  \u0394SASA=+44.5 \u00c5\u00b2",
+        "B:LEU574  \u0394SASA=+27.7 \u00c5\u00b2",
+        "B:GLY577  \u0394SASA=+22.3 \u00c5\u00b2",
+        "B:GLY572  \u0394SASA=+20.3 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "B:LEU573",
+        "B:LEU574",
+        "B:GLY577",
+        "B:GLY572"
+      ],
+      "domain_counts": {
+        "beta_egf_betatail": 4
+      },
+      "intra_domain": true,
+      "primary_domain": "beta_egf_betatail",
+      "hydrophobic_fraction": 0.5,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    }
+  ],
+  "closing_pockets": [
+    {
+      "pocket_id": 0,
+      "n_residues": 3,
+      "chain_a_count": 3,
+      "chain_b_count": 0,
+      "aggregate_delta_sasa_A2": 165.33998775482172,
+      "centroid_A": [
+        299.9240010579427,
+        238.49632771809897,
+        265.77667236328125
+      ],
+      "top_residues": [
+        "A:LEU862  \u0394SASA=+88.8 \u00c5\u00b2",
+        "A:ASP861  \u0394SASA=+49.5 \u00c5\u00b2",
+        "A:ALA863  \u0394SASA=+27.0 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:LEU862",
+        "A:ASP861",
+        "A:ALA863"
+      ],
+      "domain_counts": {
+        "alpha_tail": 3
+      },
+      "intra_domain": true,
+      "primary_domain": "alpha_tail",
+      "hydrophobic_fraction": 0.6666666666666666,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 1,
+      "n_residues": 4,
+      "chain_a_count": 0,
+      "chain_b_count": 4,
+      "aggregate_delta_sasa_A2": 136.7002254486084,
+      "centroid_A": [
+        273.0272521972656,
+        288.9679946899414,
+        262.28399658203125
+      ],
+      "top_residues": [
+        "B:GLU60  \u0394SASA=+46.4 \u00c5\u00b2",
+        "B:ARG62  \u0394SASA=+35.6 \u00c5\u00b2",
+        "B:ARG91  \u0394SASA=+34.5 \u00c5\u00b2",
+        "B:ALA61  \u0394SASA=+20.2 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "B:GLU60",
+        "B:ARG62",
+        "B:ARG91",
+        "B:ALA61"
+      ],
+      "domain_counts": {
+        "beta_psi_hybrid_betaA": 4
+      },
+      "intra_domain": true,
+      "primary_domain": "beta_psi_hybrid_betaA",
+      "hydrophobic_fraction": 0.25,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    },
+    {
+      "pocket_id": 2,
+      "n_residues": 3,
+      "chain_a_count": 3,
+      "chain_b_count": 0,
+      "aggregate_delta_sasa_A2": 136.5373555660248,
+      "centroid_A": [
+        251.07766723632812,
+        231.68633015950522,
+        245.7489980061849
+      ],
+      "top_residues": [
+        "A:MET707  \u0394SASA=+51.4 \u00c5\u00b2",
+        "A:GLU706  \u0394SASA=+47.4 \u00c5\u00b2",
+        "A:PRO932  \u0394SASA=+37.8 \u00c5\u00b2"
+      ],
+      "all_member_residues": [
+        "A:MET707",
+        "A:GLU706",
+        "A:PRO932"
+      ],
+      "domain_counts": {
+        "alpha_calf": 2,
+        "alpha_tail": 1
+      },
+      "intra_domain": false,
+      "primary_domain": "alpha_calf",
+      "hydrophobic_fraction": 0.3333333333333333,
+      "aromatic_count": 0,
+      "druggable_candidate": false
+    }
+  ],
+  "opening_megaclusters": [],
+  "closing_megaclusters": [],
+  "sensitivity_bound": {
+    "median_per_residue_se_A2": 1.7521648090271746,
+    "p95_per_residue_se_A2": 3.9232659078058543,
+    "min_detectable_single_residue_dsasa_A2_alpha05": 3.434243025693262,
+    "min_detectable_pocket_dsasa_A2_3res": 5.948283406039799,
+    "min_detectable_pocket_dsasa_A2_5res": 7.679200856704691
+  },
+  "thresholds": {
+    "dsasa_residue_A2": 20.0,
+    "pocket_dsasa_A2": 100.0,
+    "pocket_min_residues": 3,
+    "pocket_max_residues": 25,
+    "spatial_cutoff_A": 7.0,
+    "spatial_resplit_floor_A": 4.0
+  },
+  "interpretation": "With N=20+20 frames, the design resolves single-residue \u0394SASA \u2265 3.4 \u00c5\u00b2 and 5-residue aggregate \u0394SASA \u2265 7.7 \u00c5\u00b2 at \u03b1=0.05. Found 18 pocket(s) opening on extension; of these, 9 are intra-domain (rule out rigid-body inter-domain separation as the cause) and 1 are druggable candidates (intra-domain \u00d7 \u226540% hydrophobic \u00d7 \u22655 residues). Bulk-interface megaclusters (which open trivially during BC\u2192EC head-leg separation) are reported separately and excluded from the cryptic-binding-site count."
+}
