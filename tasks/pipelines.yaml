@@ -1,0 +1,146 @@
+# tasks/pipelines.yaml — automation registry for `conformers`.
+# Edit and run `mc pipelines render` (in development/) to refresh the global view.
+
+pipelines:
+
+  - name: sim-afm-video
+    status: active
+    added: 2026-04-30
+    purpose: Render stylized HS-AFM forward-model videos from a conformer library
+    trigger: manual
+    components:
+      - pipelines/sim-afm-video/run_pipeline.sh
+      - pipelines/sim-afm-video/scripts/load_conformer_library.py
+      - pipelines/sim-afm-video/scripts/stabilize_orientation.py
+      - pipelines/sim-afm-video/scripts/simulate_afm_video.py
+      - pipelines/sim-afm-video/scripts/stylize_sim_afm.py
+    inputs: conformer library directory (PDBs + library.json with CV + state metadata)
+    outputs: sim_afm.gif (stylized HS-AFM video) + intermediate npy arrays under ingest/, stable/, render/
+    notes: |
+      PRIMARY pipeline. Validated 2026-04-30 on V2 αVβ3.
+      Entry point: `bash run_pipeline.sh <library_dir> <output_dir>`.
+      All parameters env-overridable: WIDTH, HEIGHT, RES_NM, TIP_RADIUS_NM, Z_BLUR_NM, Z_NOISE_NM, etc.
+      Requires AFMFOLD_ROOT for the forward-model package.
+
+  - name: afm-overlay
+    status: active
+    added: 2026-04-22
+    purpose: Fit a real HS-AFM video against a conformer library and render the PDB-projection overlay
+    trigger: manual
+    components:
+      - pipelines/afm-overlay/run_pipeline.sh
+      - pipelines/afm-overlay/scripts/process_frames_to_afm.py
+      - pipelines/afm-overlay/scripts/fit_with_head_tracking.py
+      - pipelines/afm-overlay/scripts/resolve_tail_flips.py
+      - pipelines/afm-overlay/scripts/smooth_coords_temporal.py
+      - pipelines/afm-overlay/scripts/reprocess_smooth_coords.py
+      - pipelines/afm-overlay/scripts/analyze_state_kinetics.py
+      - pipelines/afm-overlay/scripts/render_projection_overlay.py
+      - pipelines/sim-afm-video/scripts/load_conformer_library.py    # shared library loader
+    inputs: real HS-AFM .gif video + conformer library
+    outputs: pdb_projection_video.gif (overlay) + state_kinetics.png + fitted_coords*.npy + fitting_metadata.json
+    notes: |
+      PRIMARY pipeline. Validated 2026-04-22 on V1+V2 αVβ3 (template-matching arm of AFMFold).
+      Entry: `bash run_pipeline.sh <afm_gif> <library_dir> <output_dir>`.
+      Skip-frames default 30 (scan stabilization). Tip 2 nm calibrated to Linz HS-AFM.
+      GPU helps SO(3) refinement (4–12 min vs ~4 h on CPU).
+
+  - name: conformer-library
+    status: active
+    added: 2026-04-22
+    purpose: Generate steered-MD conformer ensemble from a starting structure
+    trigger: manual
+    components:
+      - pipelines/conformer-library/scripts/run_domain_steering.py
+      - pipelines/conformer-library/scripts/domain_steering.py
+      - pipelines/conformer-library/scripts/extract_frames_from_nc.py
+      - pipelines/conformer-library/scripts/build_library_metadata.py
+    inputs: starting PDB + domain definitions (chain + resSeq ranges) + steering presets (cv_distance_bent, cv_distance_extend)
+    outputs: data/runs/<heterodimer>/conformers/<library_name>/ — frame PDBs + library.json + steering_metadata.json
+    notes: |
+      PRIMARY pipeline. Validated 2026-04-22 on αVβ3 v7 (615 frames).
+      Steered MD with distance-CV bias via OpenMM. Two passes (bent + extended directions).
+      Production: 3 ns at 310 K, 5000-step frame interval (~6 ps), force constant k=200 kJ/mol/nm².
+      Requires A4500+ GPU (~10 h per direction).
+      Known limitation: classical SMD cannot open headpiece CV2 in 3-ns budget.
+
+  - name: protenix-avb3-template
+    status: active
+    added: 2026-04-22
+    purpose: Template-guided Protenix structure inference for αVβ3
+    trigger: manual
+    schedule: PACE SLURM submit
+    components:
+      - pipelines/protenix-avb3-template/scripts/setup_protenix_template_inputs.py
+      - pipelines/protenix-avb3-template/scripts/register_protenix_template_entry.py
+      - pipelines/protenix-avb3-template/scripts/run_protenix_pred_simple.sh
+      - pipelines/protenix-avb3-template/scripts/submit_slurm.sh
+      - pipelines/protenix-avb3-template/scripts/template_self_sampling_workflow.py
+    inputs: template PDB + MSA from data/avb3/template_example/
+    outputs: data/runs/avb3/protenix_template/ — predicted structures + logs/protenix-avb3/
+    notes: |
+      Supporting pipeline. venv_protenix. Submit: `sbatch pipelines/protenix-avb3-template/scripts/submit_slurm.sh`.
+      A100-80GB on PACE.
+
+  - name: boltz
+    status: active
+    added: 2026-04-22
+    purpose: BoltzGen conformational sampling sweep for extended-state search
+    trigger: manual
+    schedule: PACE SLURM submit
+    components:
+      - pipelines/boltz/scripts/run_boltz_predict_sweep.sh
+      - pipelines/boltz/scripts/submit_boltz_predict_slurm.sh
+      - pipelines/boltz/scripts/build_boltz_predict_sweep.py
+      - pipelines/boltz/scripts/rank_extended.py
+      - pipelines/boltz/scripts/extract_integrin_sequences.py
+      - pipelines/boltz/scripts/run_boltzgen_attempt.sh
+    inputs: seed PDB (data/avb3/template_example/seed_090_frame_000.pdb) + MSA/template
+    outputs: data/runs/boltz/avb3/ — predicted structures
+    notes: |
+      Supporting pipeline (alternative structure-prediction backend).
+      venv_boltz — do NOT share with venv_protenix.
+      Submit: `sbatch pipelines/boltz/scripts/submit_boltz_predict_slurm.sh`. SEED_PDB / OUTDIR overridable.
+      A100-80GB on PACE.
+
+  - name: afcluster
+    status: active
+    added: 2026-04-22
+    purpose: AFCluster MSA clustering with BoltzGen (or legacy Boltz) backend
+    trigger: manual
+    schedule: PACE SLURM submit
+    components:
+      - pipelines/afcluster/scripts/run_afcluster_pipeline.sh
+      - pipelines/afcluster/scripts/submit_afcluster_boltz_slurm.sh
+      - pipelines/afcluster/scripts/cluster_chain_msa.py
+      - pipelines/afcluster/scripts/make_boltz_jobs_from_clusters.py
+      - pipelines/afcluster/scripts/rank_extended.py
+      - pipelines/afcluster/scripts/extract_chain_sequences_from_pdb.py
+    inputs: seed structure + MSA/template from data/avb3/template_example/
+    outputs: data/runs/afcluster/avb3/ — clustered variants + BoltzGen predictions
+    notes: |
+      Supporting pipeline. Selectable backend: boltzgen (default) or legacy boltz. venv_boltz.
+      Auto-generates chain_A.seq + chain_B.seq from seed PDB if missing.
+      Overridable at submit: BACKEND, PROTOCOL, NUM_DESIGNS, BUDGET. A100-80GB on PACE.
+
+  - name: protenix-a5b1
+    status: active
+    added: 2026-04-22
+    purpose: α5β1 heterodimer + tag co-fold workflow (staged Protenix inference)
+    trigger: manual
+    schedule: PACE SLURM submit
+    components:
+      - pipelines/protenix-a5b1/scripts/build_staged_protenix_inputs.py
+      - pipelines/protenix-a5b1/scripts/build_conjugates_first_protenix_inputs.py
+      - pipelines/protenix-a5b1/scripts/run_complete_tagged_pipeline.sh
+      - pipelines/protenix-a5b1/scripts/run_conjugates_first_pipeline.sh
+      - pipelines/protenix-a5b1/scripts/merge_staged_tagged_complex.py
+      - pipelines/protenix-a5b1/scripts/check_tagged_structure_quality.py
+      - pipelines/protenix-a5b1/scripts/submit_complete_tagged_pipeline_slurm.sh
+      - pipelines/protenix-a5b1/scripts/submit_conjugates_first_pipeline_slurm.sh
+    inputs: α5β1 sequences from data/a5b1/ + tag sequences
+    outputs: data/runs/a5b1/ — staged tagged complex predictions + logs/protenix-a5b1/
+    notes: |
+      Supporting pipeline. Staged attachment + conjugates-first strategies via Protenix.
+      venv_protenix. Distinct from AFMFold main framework.
+      A100-80GB on PACE.
