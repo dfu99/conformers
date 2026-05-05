@@ -1,5 +1,58 @@
 max_chain: 10
 queue:
+- objective: 'EO-coverage strategy decision. Choose one of (a) αIIbβ3 string-method
+    structures from Ferg-Lab, (b) metadynamics with CV2 + Plumed (needs GROMACS install),
+    (c) replica exchange (needs 8× A100). Audit §3 + §10.9 priority #1 — gates Reviewer
+    A and the RGD-affinity question (obj-039). Needs PI sign-off; produce a one-pager
+    comparing time/$$/feasibility for each route.
+
+    '
+  priority: 1
+  status: pending
+  added: 2026-05-05 21:30
+  source: audit-2026-05-05-evening
+  success_criteria: 'docs/eo_coverage_strategy.md with three routes scored on time,
+    cost, success probability. PI sign-off requested.
+
+    '
+- objective: 'F4 contact-mechanics control (Reviewer C last open). Render a 2 nm probe
+    sphere under Hertzian compression at known force; compare to hard-sphere geometric
+    pseudo-AFM; report systematic offset. Closes Reviewer C #4 blocker in audit §10.8.
+
+    '
+  priority: 2
+  status: pending
+  added: 2026-05-05 21:30
+  source: audit-2026-05-05-evening
+  success_criteria: 'figures/contact_mechanics_control.png with Hertzian-vs-hard-sphere
+    overlay; absolute height offset reported.
+
+    '
+- objective: 'Bootstrap on per-residue RMSF (obj-027 follow-up). Analogous to F3 ΔG
+    bootstrap, but resample the rotation-corrected RMSF over the 615-frame library
+    + V1+V2 fitted trajectories. Establishes finite-sample noise floor for the mechanical-sensitivity
+    composite v2.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 21:30
+  source: audit-2026-05-05-evening
+  success_criteria: 'figures/rmsf_bootstrap_v1.png with per-residue 95 % bands; top-20
+    flexible-residue ranking annotated with whether ranking survives 95 % CI overlap.
+
+    '
+- objective: 'Library coverage v3 — re-render F1 once any EO frames become available.
+    Aspirational; gated on EO-coverage strategy.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 21:30
+  source: audit-2026-05-05-evening
+  success_criteria: 'figures/library_coverage_v3.png with EO panel populated.
+
+    '
 - objective: 'Free-energy profile v1 from V1+V2 fitted trajectories. Compute CV0 per
     frame on the 1645 unbiased frames in results/afm_pipeline/v7_smoothed_final/{video1,video2}/fitted_coords_median_reanchored.npy.
     Histogram with 1 Å bins, KDE smooth, ΔG = -kT log P(CV0) at 300 K. Plot ΔG curve
