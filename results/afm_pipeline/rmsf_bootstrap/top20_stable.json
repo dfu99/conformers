@@ -1,0 +1,229 @@
+{
+  "top20": [
+    {
+      "rank": 1,
+      "ca_idx": 910,
+      "chain": "A",
+      "resSeq": 911,
+      "rmsf_A": 94.09415435791016,
+      "ci_lo_A": 92.14615516662597,
+      "ci_hi_A": 96.0482370376587,
+      "ci_width_A": 3.9020818710327205,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 2,
+      "ca_idx": 911,
+      "chain": "A",
+      "resSeq": 912,
+      "rmsf_A": 93.11965942382812,
+      "ci_lo_A": 91.1619680404663,
+      "ci_hi_A": 95.07935428619385,
+      "ci_width_A": 3.917386245727542,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 3,
+      "ca_idx": 909,
+      "chain": "A",
+      "resSeq": 910,
+      "rmsf_A": 92.12025451660156,
+      "ci_lo_A": 90.2089012145996,
+      "ci_hi_A": 94.04217586517333,
+      "ci_width_A": 3.8332746505737276,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 4,
+      "ca_idx": 958,
+      "chain": "A",
+      "resSeq": 959,
+      "rmsf_A": 91.17736053466797,
+      "ci_lo_A": 89.21763477325439,
+      "ci_hi_A": 93.04223766326905,
+      "ci_width_A": 3.82460289001466,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 5,
+      "ca_idx": 913,
+      "chain": "A",
+      "resSeq": 914,
+      "rmsf_A": 91.1314697265625,
+      "ci_lo_A": 89.24257144927978,
+      "ci_hi_A": 93.05548477172852,
+      "ci_width_A": 3.812913322448736,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 6,
+      "ca_idx": 763,
+      "chain": "A",
+      "resSeq": 764,
+      "rmsf_A": 90.75389099121094,
+      "ci_lo_A": 88.93250141143798,
+      "ci_hi_A": 92.45400009155273,
+      "ci_width_A": 3.521498680114746,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 7,
+      "ca_idx": 959,
+      "chain": "A",
+      "resSeq": 960,
+      "rmsf_A": 90.52662658691406,
+      "ci_lo_A": 88.5810333251953,
+      "ci_hi_A": 92.37033596038819,
+      "ci_width_A": 3.7893026351928825,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 8,
+      "ca_idx": 912,
+      "chain": "A",
+      "resSeq": 913,
+      "rmsf_A": 90.49999237060547,
+      "ci_lo_A": 88.61188430786133,
+      "ci_hi_A": 92.40115966796876,
+      "ci_width_A": 3.7892753601074247,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 9,
+      "ca_idx": 961,
+      "chain": "A",
+      "resSeq": 962,
+      "rmsf_A": 90.2686767578125,
+      "ci_lo_A": 88.34289627075195,
+      "ci_hi_A": 92.0379207611084,
+      "ci_width_A": 3.6950244903564453,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 10,
+      "ca_idx": 956,
+      "chain": "A",
+      "resSeq": 957,
+      "rmsf_A": 90.1385498046875,
+      "ci_lo_A": 88.23881320953369,
+      "ci_hi_A": 92.05750102996826,
+      "ci_width_A": 3.818687820434576,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 11,
+      "ca_idx": 761,
+      "chain": "A",
+      "resSeq": 762,
+      "rmsf_A": 90.01456451416016,
+      "ci_lo_A": 88.151047706604,
+      "ci_hi_A": 91.77416343688965,
+      "ci_width_A": 3.6231157302856474,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 12,
+      "ca_idx": 914,
+      "chain": "A",
+      "resSeq": 915,
+      "rmsf_A": 89.9677963256836,
+      "ci_lo_A": 88.09349632263184,
+      "ci_hi_A": 91.90859603881836,
+      "ci_width_A": 3.8150997161865234,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 13,
+      "ca_idx": 957,
+      "chain": "A",
+      "resSeq": 958,
+      "rmsf_A": 89.91047668457031,
+      "ci_lo_A": 87.98431797027588,
+      "ci_hi_A": 91.77334728240967,
+      "ci_width_A": 3.789029312133792,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 14,
+      "ca_idx": 908,
+      "chain": "A",
+      "resSeq": 909,
+      "rmsf_A": 89.9068603515625,
+      "ci_lo_A": 88.06037483215331,
+      "ci_hi_A": 91.7864896774292,
+      "ci_width_A": 3.7261148452758874,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 15,
+      "ca_idx": 803,
+      "chain": "A",
+      "resSeq": 804,
+      "rmsf_A": 89.65447235107422,
+      "ci_lo_A": 87.76699504852294,
+      "ci_hi_A": 91.45822811126709,
+      "ci_width_A": 3.6912330627441463,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 16,
+      "ca_idx": 960,
+      "chain": "A",
+      "resSeq": 961,
+      "rmsf_A": 89.46028137207031,
+      "ci_lo_A": 87.51356868743896,
+      "ci_hi_A": 91.26665134429932,
+      "ci_width_A": 3.7530826568603572,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 17,
+      "ca_idx": 762,
+      "chain": "A",
+      "resSeq": 763,
+      "rmsf_A": 89.3894271850586,
+      "ci_lo_A": 87.5632999420166,
+      "ci_hi_A": 91.07883205413819,
+      "ci_width_A": 3.5155321121215906,
+      "top_20_consistency": 1.0
+    },
+    {
+      "rank": 18,
+      "ca_idx": 804,
+      "chain": "A",
+      "resSeq": 805,
+      "rmsf_A": 89.21163940429688,
+      "ci_lo_A": 87.34159889221192,
+      "ci_hi_A": 90.99754543304444,
+      "ci_width_A": 3.6559465408325167,
+      "top_20_consistency": 0.968
+    },
+    {
+      "rank": 19,
+      "ca_idx": 760,
+      "chain": "A",
+      "resSeq": 761,
+      "rmsf_A": 89.2018051147461,
+      "ci_lo_A": 87.3161994934082,
+      "ci_hi_A": 90.93657512664795,
+      "ci_width_A": 3.620375633239746,
+      "top_20_consistency": 0.994
+    },
+    {
+      "rank": 20,
+      "ca_idx": 955,
+      "chain": "A",
+      "resSeq": 956,
+      "rmsf_A": 89.00267791748047,
+      "ci_lo_A": 87.1153133392334,
+      "ci_hi_A": 90.92613563537597,
+      "ci_width_A": 3.8108222961425753,
+      "top_20_consistency": 0.912
+    }
+  ],
+  "rank_separation_stable": false,
+  "cutoff_lo_kth": 87.1153133392334,
+  "cutoff_hi_kplus_first": 90.83533916473388,
+  "n_boot": 500,
+  "method": "Kabsch head-aligned, V1+V2 combined, bootstrap with replacement"
+}

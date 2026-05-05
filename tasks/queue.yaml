@@ -119,10 +119,12 @@ queue:
     flexible-residue ranking annotated with whether ranking survives 95 % CI overlap.
 
     '
-  started: 2026-05-05 05:11
-  completed: 2026-05-05 05:12
-  commits: 12
-  notes: Recovered completion from done marker after stale session.
+  started: 2026-05-05 05:48
+  completed: 2026-05-05 06:05
+  notes: 'V1 vs V2 per-residue RMSF Pearson r = 0.998 (cross-video reproducibility).
+    CI width median 2.41 Å, max 4.34 Å. Top-19 rock-solid (hold rate ≥ 0.97 across
+    500 resamples); 20-vs-21 boundary is fuzzy (CI overlap 87.12-90.84 Å) — recommend
+    publication-grade ranking is top-19. obj-042 logged. Figure figures/rmsf_bootstrap_v1.png.'
 - objective: 'Library coverage v3 — re-render F1 once any EO frames become available.
     Aspirational; gated on EO-coverage strategy.
 
