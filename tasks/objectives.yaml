@@ -1049,6 +1049,68 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-053
+  status: completed
+  statement: Dynamics synthesis figure — 4-panel manuscript figure for ΔG + populations + HMM + survival
+  methodology: >
+    Audit §20.5 v12 P=3 follow-up. Single 4-panel publication figure
+    consolidating obj-038 / 043 / 047 / 048 / 049 / 050 / 051 into one
+    deliverable for the manuscript:
+
+      (a) ΔG(CV0) point estimate with 95 % bootstrap CI band (obj-038
+          + F3) + four state-band shading (BC ≤65, Inter 65-78, EC
+          78-85, EO ≥85) + Bayesian EO floor at ΔG ≥ 2.02 kcal/mol
+          (obj-043).
+      (b) State populations bar chart: Boltzmann (from ΔG) vs
+          empirical (count) vs HMM stationary π, side-by-side per
+          state, with the obj-043 Bayesian EO floor + Jeffreys 95 %
+          upper bound annotation (obj-043 + obj-048).
+      (c) V2 (1266-frame) per-frame CV0 trace with HMM Viterbi
+          state-coloring + obj-047 BinSeg+BIC change-points overlaid
+          + transition-matrix heatmap inset (obj-047 + obj-048).
+      (d) Per-state Kaplan-Meier survival curves with single-
+          exponential overlays + KS p-value annotations (obj-049).
+
+    Script: pipelines/afm-overlay/scripts/dynamics_synthesis_figure.py
+  metrics:
+    n_panels: 4
+    panels:
+      a_delta_g_with_bootstrap_eo_floor: true
+      b_state_populations_three_methods: true
+      c_hmm_viterbi_with_changepoints_and_matrix_inset: true
+      d_survival_curves_with_exp_fits: true
+    consolidates_objectives:
+      - obj-038
+      - obj-043
+      - obj-047
+      - obj-048
+      - obj-049
+      - obj-050
+      - obj-051
+    consolidates_figures: 4   # was 7 separate panels
+  figures:
+    - figures/dynamics_synthesis_v1.png
+  conclusions: >
+    Single publication-grade synthesis figure. Replaces 4-7 separate
+    panels in the supplement with one main-text figure that tells
+    the entire dynamics story:
+
+      (a) ΔG profile with quantitative uncertainty + Bayesian EO floor
+      (b) Three internally-consistent state-population pictures
+          (Boltzmann/empirical/HMM)
+      (c) HMM kinetics with cross-validated change-points
+      (d) Markovian dwell-times across all three states
+
+    The figure is ready for the manuscript's main text. Detailed
+    panels for the supplement are still available as
+    `figures/{free_energy_profile_v2, state_populations_v1,
+    hmm_state_assignment, change_point_detection,
+    survival_time_analysis}.png`.
+
+    No new analysis; this is a deliverable consolidation.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-052
   status: completed
   statement: HMM ↔ obj-043 16-pp BC discrepancy traced to 215-frame transition zone

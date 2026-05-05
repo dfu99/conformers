@@ -56,14 +56,26 @@ queue:
 
     '
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-05-05 13:00
+  completed: 2026-05-05 14:00
   source: audit-2026-05-05-deepening-v12
   success_criteria: 'figures/dynamics_synthesis_v1.png — single 4-panel publication
     figure for the manuscript.
 
     '
-  started: 2026-05-05 15:07
+  started: 2026-05-05 13:35
+  notes: 'EXECUTED 2026-05-05 14:00 as obj-053. 4 panels: (a) ΔG(CV0) point + 95 %
+    bootstrap CI + state-band shading + Bayesian EO floor (obj-038+F3+obj-043). (b)
+    State populations Boltzmann/empirical/HMM-stationary-π side-by-side per state
+    + EO-floor annotation (obj-043+obj-048). (c) V2 1266-frame HMM Viterbi path +
+    obj-047 BinSeg+BIC change-points (4 red dashed) + 3x3 transition matrix inset
+    (obj-047+obj-048). (d) Per-state KM survival curves + single-exp overlays + KS
+    p annotations (obj-049). Replaces 4-7 separate supplement panels with one main-
+    text figure. No new analysis; deliverable consolidation. Audit §22 added. Composite
+    audit figure unchanged from v12.
+
+    '
 - objective: 'HMM state-assignment over per-frame CV0 (V1+V2). The stepwise structure
     detected by obj-047 BinSeg+BIC fits naturally into a 3-state HMM (BC / Intermediate
     / EC) with per-state Gaussian emissions and a transition matrix. Output: trans
