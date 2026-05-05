@@ -1049,6 +1049,47 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-041
+  status: completed
+  statement: Library coverage v3 — published αVβ3 EO PDBs are all bent (route D null result)
+  methodology: >
+    Empirically tested route D from `docs/eo_coverage_strategy.md`
+    ("download published EO αVβ3 PDBs as endpoints"). Downloaded all
+    5 published full-ectodomain αVβ3 crystal structures from RCSB
+    (1JV2 apo, 1L5G + cilengitide, 4G1E coil-coiled tag, 4G1M
+    re-refinement, 4MMX + Fn 10th domain), computed CV0/CV1/CV2
+    using the v7 domain definitions, overlaid as red vertical lines
+    on the F1 library/fitted distribution figure. Script
+    `pipelines/conformer-library/scripts/library_coverage_v3.py`.
+  metrics:
+    n_pdbs_scored: 5
+    n_pdbs_in_eo_cv2_band: 0
+    n_pdbs_in_ec_cv0_band: 0
+    pdb_cv0_range_A: "51.38 - 51.81"
+    pdb_cv1_range_A: "26.15 - 28.41"
+    pdb_cv2_range_A: "36.02 - 36.85"
+    library_max_cv0_A: 85.0
+    library_max_cv2_A: 43.4
+    eo_cv2_threshold_A: 50.0
+  figures:
+    - figures/library_coverage_v3.png
+    - results/afm_pipeline/library_coverage_v3/library_coverage_v3.png
+  conclusions: >
+    All 5 published αVβ3 ectodomain crystal structures cluster
+    tightly in the bent CV0 band (51-52 Å) with CV2 ≈ 36 Å — well
+    below the EO threshold of CV2 ≥ 50 Å. Even cilengitide-bound
+    1L5G (open headpiece internally) crystallizes bent overall —
+    confirming the textbook account that the bent ectodomain is
+    the only crystallographically accessible αVβ3 state. Route D
+    from the EO-strategy doc therefore returns 0 usable EO
+    endpoints; eliminating it as a viable shortcut. EO sampling
+    must come from enhanced-sampling MD (route A: αIIbβ3 string
+    method via Ferg-Lab; B: metadynamics; C: REMD; E: Gō-Martini
+    CG). Strategy doc updated; recommendation revised from "D + A"
+    to "A primary + E parallel backup".
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-040
   status: completed
   statement: F4 Hertzian contact-mechanics control closes Reviewer C blocker

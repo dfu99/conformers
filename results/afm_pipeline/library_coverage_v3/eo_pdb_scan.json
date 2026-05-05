@@ -1,0 +1,50 @@
+{
+  "candidates": [
+    {
+      "pdb": "1JV2",
+      "label": "1JV2 \u03b1V\u03b23 apo (Xiong 2001)",
+      "expected": "bent",
+      "cv0": 51.39716339111328,
+      "cv1": 28.359615325927734,
+      "cv2": 36.37729263305664
+    },
+    {
+      "pdb": "1L5G",
+      "label": "1L5G \u03b1V\u03b23 + cilengitide (2002)",
+      "expected": "bent + open headpiece",
+      "cv0": 51.50037384033203,
+      "cv1": 28.40828514099121,
+      "cv2": 36.189151763916016
+    },
+    {
+      "pdb": "4G1E",
+      "label": "4G1E \u03b1V\u03b23 + coil-coiled tag (2012)",
+      "expected": "bent",
+      "cv0": 51.81337356567383,
+      "cv1": 26.48526954650879,
+      "cv2": 36.016197204589844
+    },
+    {
+      "pdb": "4G1M",
+      "label": "4G1M \u03b1V\u03b23 re-refinement (2012)",
+      "expected": "bent",
+      "cv0": 51.37911605834961,
+      "cv1": 26.288236618041992,
+      "cv2": 36.853023529052734
+    },
+    {
+      "pdb": "4MMX",
+      "label": "4MMX \u03b1V\u03b23 + Fn 10th domain (2013)",
+      "expected": "bent",
+      "cv0": 51.381656646728516,
+      "cv1": 26.149991989135742,
+      "cv2": 36.682655334472656
+    }
+  ],
+  "verdict": "ROUTE D FAIL \u2014 no published \u03b1V\u03b23 EO ectodomain PDB",
+  "library_max_cv0": 85.03016662597656,
+  "library_max_cv2": 43.38443374633789,
+  "fit_max_cv0": 91.51457214355469,
+  "fit_max_cv2": 48.331756591796875,
+  "method": "centroid distance, \u03b1V\u03b23 domain definitions from build_library_metadata.py"
+}

@@ -51,7 +51,7 @@ queue:
 
     '
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-05-05 21:30
   source: audit-2026-05-05-evening
   success_criteria: 'figures/rmsf_bootstrap_v1.png with per-residue 95 % bands; top-20
@@ -59,17 +59,28 @@ queue:
 
     '
   started: 2026-05-05 05:11
+  completed: 2026-05-05 05:12
+  commits: 12
+  notes: Recovered completion from done marker after stale session.
 - objective: 'Library coverage v3 — re-render F1 once any EO frames become available.
     Aspirational; gated on EO-coverage strategy.
 
     '
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05 21:30
   source: audit-2026-05-05-evening
   success_criteria: 'figures/library_coverage_v3.png with EO panel populated.
 
     '
+  started: 2026-05-05 05:12
+  completed: 2026-05-05 05:35
+  notes: 'Implemented as empirical test of EO-strategy route D. All 5 published αVβ3
+    ectodomain crystal PDBs (1JV2, 1L5G, 4G1E, 4G1M, 4MMX) sit in the BC band (CV0
+    ≈ 51-52 Å, CV2 ≈ 36 Å, vs EO threshold CV2 ≥ 50 Å). Route D returns 0/5 usable
+    EO endpoints — empirically invalidated. Strategy doc revised: "A primary + E parallel
+    backup" replaces "D + A". Publishable null result strengthening the EO blocker.
+    obj-041 logged.'
 - objective: 'Free-energy profile v1 from V1+V2 fitted trajectories. Compute CV0 per
     frame on the 1645 unbiased frames in results/afm_pipeline/v7_smoothed_final/{video1,video2}/fitted_coords_median_reanchored.npy.
     Histogram with 1 Å bins, KDE smooth, ΔG = -kT log P(CV0) at 300 K. Plot ΔG curve

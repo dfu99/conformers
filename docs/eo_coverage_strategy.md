@@ -70,20 +70,29 @@ EC→EO transition cheaper than vanilla well-tempered MD.
 
 ### D. Use published EO-state PDBs as templates (1L5G + variants)
 
-αVβ3-RGD complex 1L5G (Xiong 2002, *Science*) is in an extended-open
-configuration with cilengitide bound. Combined with 1JV2 (bent) we
-have an experimental EO endpoint without any new MD.
+**EMPIRICALLY INVALIDATED 2026-05-05 evening (obj-041).** Originally
+proposed: αVβ3-RGD complex 1L5G (Xiong 2002, *Science*) is "extended-
+open with cilengitide bound." Implemented `library_coverage_v3.py` to
+test this: downloaded all 5 published full-ectodomain αVβ3 PDBs
+(1JV2, 1L5G, 4G1E, 4G1M, 4MMX), computed CV0/CV1/CV2 with our domain
+definitions. Result: **all 5 sit in the BC band (CV0 ≈ 51-52 Å,
+CV2 ≈ 36 Å)**. Cilengitide-bound 1L5G has an *open headpiece*
+internally but the legs are still folded over — full-ectodomain
+αVβ3 is only ever crystallized bent.
 
-| dimension | value |
+| dimension | value (post-test) |
 |-----------|-------|
-| compute time | 1 day: download, strip ligand, compute CVs, fit into pipeline |
-| GPU $$ | $0 |
-| feasibility | high — uses existing pipeline (`build_library_metadata.py`) |
-| pre-existing assets | `multi_integrin_first_principles.py` already does this for 7 PDBs |
-| success probability | **>95 %** — structures are crystallographically determined |
-| novel risk | only one EO state, not a trajectory — cannot give ΔG along EC→EO |
-| reviewer A weight | strong — uses canonical experimental reference |
-| limitation | does not produce a *trajectory*; cannot answer reviewer D's "ΔG along EC→EO" |
+| compute time | 1 day  ✓ already executed |
+| GPU $$ | $0  ✓ |
+| feasibility | high  ✓ pipeline runs cleanly |
+| pre-existing assets | scoring script lands as `pipelines/conformer-library/scripts/library_coverage_v3.py` |
+| success probability | **revised: 0 % for full-ectodomain EO** (5/5 PDBs are bent) |
+| novel risk | none — empirical null result |
+| reviewer A weight | weak — confirms the EO crystal gap rather than filling it |
+| limitation | route D **does NOT produce EO endpoints** for αVβ3. Confirms enhanced sampling (A/B/C/E) is necessary, not optional |
+
+This is a publishable null result and strengthens routes A/B/C/E.
+Recommendation revised below.
 
 ### E. Switching Gō-Martini coarse-grained (JCTC 2024)
 
@@ -102,21 +111,20 @@ faster than atomistic, captures large-scale conformational transition.
 
 ---
 
-## Recommendation (with rationale)
+## Recommendation (revised after obj-041 null result)
 
-**D + A in sequence.** Concretely:
+Original recommendation was D → A. After empirically invalidating D,
+the choice narrows. Revised:
 
-1. **Immediate (next week, $0)**: extend the 7-PDB
-   `multi_integrin_first_principles.py` analysis to include 1L5G
-   (αVβ3-cilengitide, EO endpoint), 2VDR (αVβ3-fibronectin), and any
-   other RCSB αVβ3-RGD complex. Compute CV0/CV1/CV2 for each.
-   Fold these as **endpoint EO templates** into the v7 library;
-   regenerate library_coverage_v3.png with the EO panel populated.
-   This closes Reviewer A's geometric coverage concern within a day,
-   $0 compute. Caveat — these are static endpoints with bound
-   cilengitide; we lose the trajectory needed for ΔG.
+**A as the primary route, with E as a parallel backup.** Concretely:
 
-2. **Medium term (next 6-8 weeks, ~$1000)**: port Ferg-Lab's
+1. **Skipped (route D was tested and FAILED)**: 5/5 published αVβ3
+   ectodomain crystal structures sit in the BC band. There is no
+   `download an EO PDB` shortcut for αVβ3 at the full-ectodomain
+   resolution. obj-041 documents this; route D is removed from the
+   active path.
+
+2. **Primary, immediate ramp (4 weeks setup, ~$800)**: port Ferg-Lab's
    αIIbβ3 string method to αVβ3. The repo is cloned on PACE; the
    primary remaining work is residue-mapping the α-subunit
    collective-variable definitions and confirming the membrane
@@ -124,7 +132,14 @@ faster than atomistic, captures large-scale conformational transition.
    carbohydrate decoration than αIIb). Validates obj-029's
    first-principles αIIbβ3-vs-αVβ3 prediction by going in the
    reverse direction: structures-derived for αIIbβ3, MD-derived
-   for αVβ3, and comparing.
+   for αVβ3.
+
+3. **Parallel backup (2 weeks, ~$200)**: build a Switching
+   Gō-Martini coarse-grained model on αVβ3 using existing
+   ectodomain bent state (1JV2) as Gō-A and a homology-mapped
+   αIIbβ3-extended structure as Gō-B. Faster sampling but lower
+   atomistic detail; serves as an independent line of evidence
+   if route A hits a force-field showstopper.
 
 **Why not B (metadynamics) or C (REMD) first.** Both require
 significant infrastructure builds (GROMACS+Plumed for B; tempered
@@ -132,28 +147,30 @@ REMD wrappers for C) that compete with project velocity. The
 existing Ferg-Lab path has working code, validated on the
 biologically-related αIIbβ3, and PI sign-off can fund a single
 PACE A100-80GB block to reproduce + adapt their result. Routes B
-and C remain backups if A hits a force-field showstopper.
+and C remain tertiary backups if both A and E hit a showstopper.
 
-**Why D alone is not enough.** 1L5G gives one EO endpoint structure,
-not the EC→EO trajectory. The ΔG bootstrap (F3) confirmed that the
-1645 unbiased fitted frames give a tight free-energy estimate for
-the *populated* range — but ΔG along EC→EO requires sampling that
-range, which only enhanced sampling (A/B/C/E) can provide.
+**Why D was eliminated.** obj-041's library_coverage_v3 figure
+shows that all 5 published αVβ3 ectodomain crystal structures
+sit in the BC band — there is no shortcut from RCSB to an EO
+endpoint at full-ectodomain resolution. Even cilengitide-bound
+1L5G (open headpiece, 2002 Xiong) crystallizes bent overall.
 
 ---
 
-## Decision request to PI
+## Decision request to PI (revised after obj-041)
 
 | | Route | Time | $$ | Risk | Closes |
 |---|-------|------|----|----|------|
-| ✅ recommended | **D + A** in sequence | 1d + 6-8 wk | ~$1000 total | medium | Reviewer A geometric, Reviewer D ΔG, Reviewer E RGD docking |
-| backup if A stalls | A → B | +4 wk | +$1200 | medium-high | same |
-| fastest feasible-only | D alone | 1d | $0 | low | Reviewer A geometric only |
-| if budget unconstrained | parallel A + B | 6-8 wk | $2000 | low | as above + ΔG cross-validation |
+| ✅ recommended | **A as primary + E as parallel backup** | 6-8 wk + 2 wk parallel | ~$1000 total | medium | Reviewer A geometric, D ΔG, E RGD docking |
+| if A stalls | A → B (metadynamics) | +4 wk | +$1200 | medium-high | same |
+| budget-constrained | E (Gō-Martini) alone | 2 wk | $200 | medium | partial — atomistic still needed downstream |
+| budget-unlimited | parallel A + B + E | 6-8 wk | $2200 | low | as above + cross-validation |
+| ❌ tested + failed | D (download EO PDBs) | 1 day | $0 | n/a | n/a — empirical null (obj-041) |
 
-PI sign-off needed on: (1) approve D immediately for the next
-working day; (2) approve A start once D ships, with a 4-week PACE
-A100-80GB block (~80 GPU-hr × $10 = $800).
+PI sign-off needed on: (1) approve A: 4-week PACE A100-80GB block
+(~80 GPU-hr × $10 = $800) starting next week; (2) optionally approve
+parallel E (Gō-Martini, ~$200 in CG MD compute) as cross-validation
+if R&D-budget allows.
 
 ---
 
