@@ -7,13 +7,20 @@ queue:
 
     '
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05 23:30
   source: audit-2026-05-05-evening-v4
   success_criteria: 'docs/af2_multimer_ablation_prep.md with compute budget + comparison
     plan + expected outcome.
 
     '
+  started: 2026-05-05 06:08
+  completed: 2026-05-05 06:15
+  notes: '125-prediction grid (5 MSA depths × 5 seeds × 5 weights), 50 GPU-hr A100-40GB.
+    Pre-registered prediction: all 125 cluster at CV0≈51 Å (bent), no MSA-depth sensitivity
+    for αVβ3. Falsifying: >5 % predictions in CV0 ≥ 78 Å. Either way, decisively drops
+    the three-predictor framing. Submit script reuses obj-007 template. Activate after
+    route-A kickoff completes.'
 - objective: 'Committor analysis prep doc — Reviewer D last open. Seed unbiased MD
     from ΔG-saddle CV0 ≈ 67 Å (per obj-038). Count which side of BC↔EC barrier each
     trajectory commits to in 5 ns. Plan only; document seeds + script outline. Audit
@@ -21,13 +28,19 @@ queue:
 
     '
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05 23:30
   source: audit-2026-05-05-evening-v4
   success_criteria: 'docs/committor_analysis_prep.md with seed selection rule + 5 ns
     budget + expected committor histogram shape.
 
     '
+  started: 2026-05-05 06:15
+  completed: 2026-05-05 06:25
+  notes: '50 trajectories (10 saddle seeds × 5 vel-seeds), 5 ns each → ~80 GPU-hr A100-80GB.
+    Pre-reg: committor ∈ [0.40, 0.65] supports obj-038 ΔG; outside [0.30, 0.75] falsifies
+    and pivots to "HS-AFM surface biases population". Both outcomes publishable. Submit
+    script outline given. Same PACE allocation as route-A.'
 - objective: 'PI sign-off + αIIbβ3 string-method port kickoff. Strategy doc requests
     a 4-week PACE A100-80GB block (~80 GPU-hr × $10) to port the Ferg-Lab principalcurve_integrin_structures
     repo from αIIbβ3 to αVβ3. Once PI approves, produce a 1-page issues list of αV
