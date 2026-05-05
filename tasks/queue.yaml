@@ -29,7 +29,7 @@ queue:
 
     '
   priority: 2
-  status: in_progress
+  status: completed
   added: 2026-05-05 22:30
   source: audit-2026-05-05-evening-v3
   success_criteria: 'figures/go_martini_eo_trajectory.png shows the EC→EO CV0/CV2
@@ -37,6 +37,9 @@ queue:
 
     '
   started: 2026-05-05 05:38
+  completed: 2026-05-05 05:39
+  commits: 22
+  notes: Recovered completion from done marker after stale session.
 - objective: 'Route-A risk register. Single doc listing the 5 highest-probability
     failure modes for the αIIbβ3→αVβ3 string-method port (force-field carbohydrate
     decoration, β-propeller blade numbering, membrane lipid composition, CV-definition
@@ -44,13 +47,14 @@ queue:
 
     '
   priority: 3
-  status: pending
+  status: in_progress
   added: 2026-05-05 22:30
   source: audit-2026-05-05-evening-v3
   success_criteria: 'docs/route_a_risk_register.md with 5 named risks + mitigation
     strategies.
 
     '
+  started: 2026-05-05 05:39
 - objective: 'EO-coverage strategy decision. Choose one of (a) αIIbβ3 string-method
     structures from Ferg-Lab, (b) metadynamics with CV2 + Plumed (needs GROMACS install),
     (c) replica exchange (needs 8× A100). Audit §3 + §10.9 priority #1 — gates Reviewer
