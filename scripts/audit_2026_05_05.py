@@ -87,20 +87,21 @@ def panel_timeline(ax, objs):
 
 
 def panel_reviewers(ax):
-    """Updated tally after today:
-      A Springer: + (1JV2 comparison addressed via obj-029 already counted; library
-                     coverage v2 makes EO gap unambiguous → still partial there).
-      D Elber:    + ΔG(CV0) profile (obj-038) → addressed.
-                  + ΔG bootstrap (F3) → addressed (validation, not new concern).
-      E Noé:      + RGD pocket accessibility (obj-039) → addressed (negative result
-                     is still an answer; sharpens EO blocker).
+    """Updated tally after evening 2 (obj-040 + obj-041):
+      A Springer: + obj-041 demonstrates published αVβ3 PDBs all bent —
+                   geometric coverage gap empirically confirmed → 1 partial → addressed.
+                   (Net: 2/0/3 — 4 of 5 concerns now have either an answer
+                   or an empirical confirmation of the gap.)
+      C Ando:     + obj-040 Hertzian contact mechanics → addressed
+                   (was the last C `open` item) → 3/0/1.
+      Others unchanged from evening 1.
     """
     reviewers = [
-        ("A: Springer", 1, 1, 3),
+        ("A: Springer", 2, 0, 3),       # +1 addressed: obj-041 empirical EO gap
         ("B: Jumper",   2, 1, 2),
-        ("C: Ando",     2, 1, 1),       # +1 addressed: F2 calibration controls
-        ("D: Elber",    1, 1, 2),       # +1 addressed: ΔG profile
-        ("E: Noé",      2, 1, 2),       # +1 addressed: RGD PoC negative result
+        ("C: Ando",     3, 1, 0),       # +1 addressed: obj-040 contact mechanics
+        ("D: Elber",    1, 1, 2),
+        ("E: Noé",      2, 1, 2),
     ]
     labels = [r[0] for r in reviewers]
     addressed = np.array([r[1] for r in reviewers])
@@ -118,8 +119,8 @@ def panel_reviewers(ax):
     ax.set_xlim(0, 7)
     a_sum, p_sum, o_sum = int(addressed.sum()), int(partial.sum()), int(openc.sum())
     ax.set_title(f"Reviewer concerns: {a_sum} addressed / {p_sum} partial / {o_sum} open  "
-                 f"(was 5/6/12 this morning)",
-                 fontsize=10)
+                 f"(was 5/6/12 morning · 8/4/10 evening 1)",
+                 fontsize=9.5)
     ax.legend(loc="lower right", fontsize=8, framealpha=0.9)
     ax.set_xlabel("count")
     ax.grid(axis="x", alpha=0.3)
@@ -155,27 +156,25 @@ def panel_pipelines(ax):
 
 def panel_blockers(ax):
     blockers = [
-        ("#1  EO state coverage — UNCHANGED, now sharpened",
-         "Today's RGD-pocket PoC (obj-039) confirmed: extended v7\n"
-         "frames are EC, not EO — MIDAS pocket BURIES on extension\n"
-         "(SASA −35 %). Real Vina docking is gated on EO frames,\n"
-         "which need metadynamics / REMD / αIIbβ3 string method.",
+        ("#1  EO state coverage — sharpened TWICE today",
+         "obj-039: v7 'extended' = EC, not EO (MIDAS SASA −35 %).\n"
+         "obj-041: 5/5 published αVβ3 PDBs are bent → route D dead.\n"
+         "EO sampling now gated on enhanced-sampling MD (route A:\n"
+         "αIIbβ3 string method via Ferg-Lab repo on PACE).",
          "#d62728"),
         ("#2  ΔG(CV0)  ✓ SHIPPED + bootstrapped",
          "obj-038 + F3 bootstrap (n=1000). 95 % CI < 0.5 kcal/mol\n"
-         "across 50-85 Å. Reviewer D's #1 concern addressed without\n"
-         "additional MD. 1645 unbiased frames sufficed.",
+         "across 50-85 Å. Reviewer D's #1 concern addressed.",
          "#2ca02c"),
         ("#3  RunPod A100 GPU window",
-         "Blocks αIIbβ3 steering MD launch. External, queue-managed.\n"
-         "Workaround for EO sampling could be metadynamics with\n"
-         "Plumed (needs GROMACS install) — different bottleneck.",
+         "Now the SOLE remaining bottleneck for route A. Strategy\n"
+         "doc requests 4-week PACE A100-80GB block (~80 GPU-hr).",
          "#fdae61"),
-        ("#4  Reviewer C contact mechanics (Hertzian/JKR)",
-         "Hard-sphere geometric pseudo-AFM only. F2 calibration\n"
-         "controls show signal/noise is fine on geometric grounds,\n"
-         "but contact-mechanics validation remains untested.",
-         "#fee090"),
+        ("#4  Reviewer C contact mechanics  ✓ CLOSED (obj-040)",
+         "F4 Hertzian δ = 0.11-0.28 nm at 50-200 pN — all below\n"
+         "1 nm noise floor. Hard-sphere pseudo-AFM is defensible\n"
+         "first-order; Hertzian correction is quantified.",
+         "#2ca02c"),
     ]
     y = np.arange(len(blockers))[::-1]
     for yi, (title, body, color) in zip(y, blockers):
@@ -195,27 +194,30 @@ def panel_blockers(ax):
 
 
 def panel_today_deliverables(ax):
-    """4 thumbnail tiles: free_energy_profile_v1, library_coverage_v2,
-    calibration_controls_v1, free_energy_profile_v2 (and rgd_docking_v1
-    in the rightmost slot)."""
+    """7 thumbnail tiles: full set of today's deliverables."""
     tiles = [
         ("free_energy_profile_v1.png",
-         "obj-038\nΔG(CV0) v1"),
+         "obj-038\nΔG(CV0)"),
         ("library_coverage_v2.png",
-         "F1\nLibrary coverage v2"),
+         "F1\nLib coverage v2"),
         ("calibration_controls_v1.png",
          "F2\nCalib controls"),
         ("free_energy_profile_v2.png",
          "F3\nΔG bootstrap"),
         ("rgd_docking_v1.png",
          "obj-039\nRGD pocket"),
+        ("contact_mechanics_control.png",
+         "obj-040\nHertz F4"),
+        ("library_coverage_v3.png",
+         "obj-041\nRoute D null"),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Today's deliverables (5 figures shipped 2026-05-05)",
-                 fontsize=10.5, fontweight="bold")
+    ax.set_title("Today's deliverables (7 figures shipped 2026-05-05) — "
+                 "ΔG closed, contact mechanics closed, route D eliminated",
+                 fontsize=10, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         path = FIG_DIR / name
         if path.exists():
@@ -278,9 +280,10 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05  •  {completed} objectives completed "
-        f"({in_prog} in_progress)  •  reviewer panel updated tonight",
-        fontsize=13.5, fontweight="bold", y=0.995,
+        f"Conformers — audit 2026-05-05 (deepening pass v3)  •  "
+        f"{completed} objectives completed ({in_prog} in_progress)  •  "
+        f"7 figures shipped today  •  obj-040 Hertz + obj-041 route-D-null",
+        fontsize=13, fontweight="bold", y=0.995,
     )
 
     ax_tl = fig.add_subplot(gs[0, 0])

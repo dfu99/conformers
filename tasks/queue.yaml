@@ -1,5 +1,45 @@
 max_chain: 10
 queue:
+- objective: 'PI sign-off + αIIbβ3 string-method port kickoff. Strategy doc requests
+    a 4-week PACE A100-80GB block (~80 GPU-hr × $10) to port the Ferg-Lab principalcurve_integrin_structures
+    repo from αIIbβ3 to αVβ3. Once PI approves, produce a 1-page issues list of αV
+    vs αIIb residue offsets and force-field gotchas.
+
+    '
+  priority: 1
+  status: pending
+  added: 2026-05-05 22:30
+  source: audit-2026-05-05-evening-v3
+  success_criteria: 'PI sign-off captured (Slack acknowledgement or planning.md note).
+    docs/route_a_kickoff.md with αV/αIIb residue mapping + force-field gotchas.
+
+    '
+- objective: 'Switching Gō-Martini parallel track. Start after route-A kickoff. 2-week
+    cross-validation track using 1JV2 (bent) + a homology-mapped αIIbβ3-extended structure
+    as Gō-A and Gō-B endpoints. Independent line of evidence for the EC→EO transition.
+
+    '
+  priority: 2
+  status: pending
+  added: 2026-05-05 22:30
+  source: audit-2026-05-05-evening-v3
+  success_criteria: 'figures/go_martini_eo_trajectory.png shows the EC→EO CV0/CV2 progression.
+    Cross-validates route A.
+
+    '
+- objective: 'Route-A risk register. Single doc listing the 5 highest-probability failure
+    modes for the αIIbβ3→αVβ3 string-method port (force-field carbohydrate decoration,
+    β-propeller blade numbering, membrane lipid composition, CV-definition mismatch,
+    string convergence). Mitigation per each.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 22:30
+  source: audit-2026-05-05-evening-v3
+  success_criteria: 'docs/route_a_risk_register.md with 5 named risks + mitigation strategies.
+
+    '
 - objective: 'EO-coverage strategy decision. Choose one of (a) αIIbβ3 string-method
     structures from Ferg-Lab, (b) metadynamics with CV2 + Plumed (needs GROMACS install),
     (c) replica exchange (needs 8× A100). Audit §3 + §10.9 priority #1 — gates Reviewer
