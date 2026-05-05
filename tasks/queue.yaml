@@ -47,14 +47,20 @@ queue:
 
     '
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-05-05 22:30
   source: audit-2026-05-05-evening-v3
   success_criteria: 'docs/route_a_risk_register.md with 5 named risks + mitigation
     strategies.
 
     '
-  started: 2026-05-05 05:39
+  started: 2026-05-05 05:30
+  completed: 2026-05-05 05:35
+  commits: 1
+  notes: '5 risks scored: residue mismatch (P_fail 30%), membrane lipid (25%), string
+    convergence (30%), αV glycosylation (15%), force-field choice (10%). Each with
+    mitigation + gate to next stage. Cumulative ~28% independent / ~40% correlated
+    joint pass. Commit aa14708.'
 - objective: 'EO-coverage strategy decision. Choose one of (a) αIIbβ3 string-method
     structures from Ferg-Lab, (b) metadynamics with CV2 + Plumed (needs GROMACS install),
     (c) replica exchange (needs 8× A100). Audit §3 + §10.9 priority #1 — gates Reviewer
