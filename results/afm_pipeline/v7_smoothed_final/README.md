@@ -16,5 +16,5 @@ Canonical final overlays with:
 python3 pipelines/avb3-conformers/scripts/fit_with_head_tracking.py ... --device cuda
 python3 pipelines/avb3-conformers/scripts/resolve_tail_flips.py --fitted-dir ... --window 21
 python3 pipelines/avb3-conformers/scripts/smooth_coords_temporal.py --fitted-dir ... --overwrite
-python3 pipelines/avb3-conformers/scripts/render_projection_overlay.py ...
+python3 pipelines/afm-overlay/scripts/render_projection_overlay.py ...
 ```
