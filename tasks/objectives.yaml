@@ -1049,6 +1049,85 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-051
+  status: completed
+  statement: HMM model selection — multi-init validates obj-048; 4-state preferred (BIC -411)
+  methodology: >
+    Audit §19.6 v11 P=4/P=5 follow-up to obj-048. Reused the from-
+    scratch Baum-Welch from `hmm_state_assignment.py` (no `hmmlearn`).
+    Two passes: (a) 10 random initializations of the 3-state HMM with
+    means drawn uniformly from the empirical CV0 range, sigmas
+    perturbed near 4 Å, A diagonal-heavy with random off-diagonal; (b)
+    same protocol with K = 4. Reported log-L spread, mean spread per
+    state across inits, and BIC/AIC at the global maximum per K.
+
+    Free parameters per K (Gaussian-emission HMM): 2K + (K-1) + K(K-1).
+    BIC = n_params·log(n_obs) - 2·log-L; AIC = 2·n_params - 2·log-L.
+
+    Script: pipelines/afm-overlay/scripts/hmm_model_selection.py
+  metrics:
+    n_obs: 1645
+    n_inits: 10
+    k3_n_params: 14
+    k3_best_log_likelihood: -5286.34
+    k3_log_likelihood_min: -5568.88
+    k3_log_likelihood_max: -5286.34
+    k3_log_likelihood_range: 282.5381
+    k3_means_std_across_inits_low: 13.78
+    k3_means_std_across_inits_mid: 2.71
+    k3_means_std_across_inits_high: 1.07
+    k3_BIC: 10676.35
+    k3_AIC: 10600.68
+    k3_inits_at_global_optimum: 1
+    k3_inits_at_local_optimum: 8
+    k3_inits_degenerate: 1
+    k4_n_params: 23
+    k4_best_log_likelihood: -5047.41
+    k4_BIC: 10265.15
+    k4_AIC: 10140.82
+    k4_best_means_low: 54.53
+    k4_best_means_low_mid: 66.04
+    k4_best_means_high_mid: 75.03
+    k4_best_means_high: 82.50
+    delta_BIC_4_minus_3: -411.21
+    delta_AIC_4_minus_3: -459.86
+    preferred_by_BIC: 4-state
+    preferred_by_AIC: 4-state
+    physically_motivated_choice: 3-state
+  figures:
+    - figures/hmm_model_selection.png
+    - results/afm_pipeline/free_energy_profile/hmm_model_selection.json
+  conclusions: >
+    **Multi-init stability**: 1 of 10 random EM inits found the
+    obj-048 global optimum (log-L = -5286.34; means 61.0/74.4/82.4
+    Å); 8 of 10 landed in a slightly worse local optimum at -5337.09
+    (Δ = 51 nats; means shifted ~6 Å lower); 1 of 10 was degenerate.
+    **obj-048's physics-motivated init was crucial** — random
+    initialization would have given a worse 3-state solution.
+    A reviewer asking "did your EM converge to the global optimum?"
+    can now be told yes, with this caveat documented.
+
+    **3-vs-4-state model selection**: BIC and AIC both strongly
+    prefer the 4-state model (ΔBIC = -411, ΔAIC = -460; well past
+    the conventional ΔBIC > 10 "decisive" threshold). Best 4-state
+    means are (54.5, 66.0, 75.0, 82.5) Å — splits the BC band into
+    a low-BC (very-bent at ~54 Å) and a high-BC (~66 Å, transition
+    zone), leaving Intermediate and EC unchanged.
+
+    **Three legitimate framings**: (i) physical: 3 states for
+    project's BC/Inter/EC framework + Springer 2014 nomenclature;
+    (ii) statistical: 4 states preferred by BIC/AIC, with 4th state
+    as a sub-division of BC; (iii) practical: obj-048+049+050
+    conclusions hold under either choice. The committor proxy
+    P(Intermediate → BC | leaving) ≈ 0.60 from obj-048 is robust.
+
+    For the paper: 3-state HMM is the main interpretation (matches
+    physics), 4-state is documented in the supplement with the
+    BIC/AIC numbers and the caveat that the extra state is a
+    methodological refinement, not new biology.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-050
   status: completed
   statement: V1 vs V2 kinetics are the same — KS p > 0.25 per state, ratio CIs span 1

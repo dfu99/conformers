@@ -88,20 +88,20 @@ def panel_timeline(ax, objs):
 
 
 def panel_reviewers(ax):
-    """Updated tally after deepening v9 (obj-047):
+    """Updated tally after deepening v11 (obj-048+049+050):
       A Springer: 2/1/2 (obj-043 Bayesian EO floor; unchanged from v5).
       C Ando:     fully cleared from evening 2 (3/1/0).
-      D Elber:    obj-047 change-point detection moves "committor analysis"
-                   open → partial via the experimental-side analog (true
-                   committor still requires saddle-seeded unbiased MD).
-                   Net 1/2/1 (was 1/1/2 v8).
+      D Elber:    obj-047 partial (committor proxy) → obj-048+049+050
+                   triple promotes to ADDRESSED. HMM state assignment +
+                   Markovianity validation + V1/V2 cross-validation.
+                   Net 2/1/1 (was 1/2/1 v9).
       Others unchanged.
     """
     reviewers = [
         ("A: Springer", 2, 1, 2),       # obj-043 EO Bayesian floor (v5)
         ("B: Jumper",   2, 1, 2),
         ("C: Ando",     3, 1, 0),
-        ("D: Elber",    1, 2, 1),       # +1 partial from obj-047 (committor proxy)
+        ("D: Elber",    2, 1, 1),       # obj-048+049+050 → +1 addressed (v11)
         ("E: Noé",      2, 1, 2),
     ]
     labels = [r[0] for r in reviewers]
@@ -120,7 +120,7 @@ def panel_reviewers(ax):
     ax.set_xlim(0, 7)
     a_sum, p_sum, o_sum = int(addressed.sum()), int(partial.sum()), int(openc.sum())
     ax.set_title(f"Reviewer concerns: {a_sum} addressed / {p_sum} partial / {o_sum} open  "
-                 f"(was 5/6/12 morning → 10/5/8 v5 → {a_sum}/{p_sum}/{o_sum} v9)",
+                 f"(was 5/6/12 morning → 10/5/8 v5 → {a_sum}/{p_sum}/{o_sum} v11)",
                  fontsize=9.5)
     ax.legend(loc="lower right", fontsize=8, framealpha=0.9)
     ax.set_xlabel("count")
@@ -157,15 +157,15 @@ def panel_pipelines(ax):
 
 def panel_blockers(ax):
     blockers = [
-        ("#1  EO state coverage — Bayesian floor + non-stat. characterized",
+        ("#1  EO state coverage — Bayesian floor + dynamics fully char.",
          "obj-039 + obj-041 + obj-025 confirm EO unreachable by SMD.\n"
-         "obj-043: ΔG_EO ≥ 2.02 kcal/mol. obj-047: stationarity rejected\n"
-         "(p<1e-3); ensemble hops on 30s–15min timescale. Route A awaits PI.",
+         "obj-043: ΔG_EO ≥ 2.02 kcal/mol. obj-047/048: stepwise hopping\n"
+         "+ Inter is kinetic gateway (BC↔EC <1%/frame). Route A awaits PI.",
          "#d62728"),
-        ("#2  ΔG(CV0) + populations + drift  ✓ FULLY CHARACTERIZED",
-         "obj-038 ΔG (CI<0.5 kcal/mol). obj-043 BC 25%/Inter 46%/EC 24%.\n"
-         "obj-044 non-stat. obj-045 σ≈8 Å drift. obj-046 intrinsic.\n"
-         "obj-047: 3-4 change-points/video, stepwise — not gradual.",
+        ("#2  Dynamics + populations + kinetics  ✓ FULLY CHARACTERIZED",
+         "obj-038/043: ΔG + 25/46/24/5%. obj-044/045/046: non-stat,\n"
+         "intrinsic, σ≈8 Å. obj-047: stepwise. obj-048: 3-state HMM.\n"
+         "obj-049: Markovian (KS p>.13). obj-050: V1=V2 in rates.",
          "#2ca02c"),
         ("#3  PACE A100-80GB allocation — Monday PI sign-off ask",
          "Sole remaining bottleneck. Unblocks: route A (αIIbβ3 string\n"
@@ -189,21 +189,17 @@ def panel_blockers(ax):
     ax.set_ylim(-0.6, len(blockers) - 0.4)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("Blockers (ranked) — #2 + #4 closed, #1 stepwise-resolved (obj-047)",
+    ax.set_title("Blockers (ranked) — #2 + #4 closed, #1 dynamics fully char. (obj-048+049+050)",
                  fontsize=10)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
 
 def panel_today_deliverables(ax):
-    """13 thumbnail tiles: today's deliverables through v9 (obj-047 change-points)."""
+    """16 thumbnail tiles: today's deliverables through v12."""
     tiles = [
         ("free_energy_profile_v1.png",
          "obj-038\nΔG(CV0)"),
-        ("library_coverage_v2.png",
-         "F1\nLib cov v2"),
-        ("calibration_controls_v1.png",
-         "F2\nCalib"),
         ("rgd_docking_v1.png",
          "obj-039\nRGD pocket"),
         ("contact_mechanics_control.png",
@@ -222,15 +218,23 @@ def panel_today_deliverables(ax):
          "obj-046\nDrift\nintrinsic"),
         ("change_point_detection.png",
          "obj-047\nChange\npoints"),
+        ("hmm_state_assignment.png",
+         "obj-048\n3-state\nHMM"),
+        ("survival_time_analysis.png",
+         "obj-049\nMarkov\nKS p>.13"),
+        ("breakpoint_cross_validation.png",
+         "obj-050\nV1=V2"),
+        ("hmm_model_selection.png",
+         "obj-051\nHMM model\nselection"),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Today's deliverables (12 figures + 6 docs + 2 starter scripts + obj-047) — "
-                 "ΔG fully char., contact mech. closed, route D out, RMSF V1↔V2 r=0.998, "
-                 "EO Bayesian floor ΔG ≥ 2 kcal/mol, FES drift intrinsic + STEPWISE (p<1e-3)",
-                 fontsize=8.0, fontweight="bold")
+    ax.set_title("Today's deliverables (14 figures + 6 docs + 2 starter scripts) — "
+                 "ΔG + dynamics fully char., contact mech. closed, route D out, RMSF V1↔V2 r=0.998, "
+                 "EO floor ΔG≥2 kcal/mol, stepwise (p<1e-3), HMM Markovian, V1=V2 in rates",
+                 fontsize=7.8, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         path = FIG_DIR / name
         if path.exists():
@@ -293,11 +297,11 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v9)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v12)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→047 + 6 docs + 2 starter scripts  •  "
-        f"reviewer panel: 10/6/7 (was 5/6/12 morning)  •  "
-        f"EO Bayesian floor ΔG ≥ 2 kcal/mol  •  FES drift STEPWISE p<1e-3 (obj-047)  •  "
+        f"obj-038→051 + 6 docs + 2 starter scripts  •  "
+        f"reviewer panel: 11/5/7 (was 5/6/12 morning)  •  "
+        f"EO floor ΔG ≥ 2 kcal/mol  •  HMM Markovian + V1=V2 in rates (obj-048→051)  •  "
         f"PI sign-off Monday unblocks route A",
         fontsize=10.0, fontweight="bold", y=0.995,
     )

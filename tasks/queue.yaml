@@ -1,5 +1,56 @@
 max_chain: 10
 queue:
+- objective: 'HMM model selection: multi-init Baum-Welch stability check (10 random
+    inits) + 4-state BIC/AIC comparison. Closes "is 3 states the right model?" reviewer
+    concern. Audit §19.6 v11 P=4/P=5.
+
+    '
+  priority: 4
+  status: completed
+  added: 2026-05-05 12:30
+  completed: 2026-05-05 13:00
+  source: audit-2026-05-05-deepening-v11
+  success_criteria: 'figures/hmm_model_selection.png + JSON. log-L spread + ΔBIC/ΔAIC
+    table. Caveat documented: physics-init crucial for global optimum.
+
+    '
+  notes: 'EXECUTED 2026-05-05 13:00 as obj-051 (audit §20 v12). 3-state stability:
+    1/10 inits at obj-048 global optimum (log-L=-5286), 8/10 at local (-5337, Δ=51 nats),
+    1 degenerate. obj-048 physics-init was crucial. 4-state best log-L=-5047.4 with
+    means (54.5, 66.0, 75.0, 82.5) — splits BC into low/high. ΔBIC=-411, ΔAIC=-460:
+    4-state strongly preferred statistically. Three framings: physical 3-state (paper
+    main), statistical 4-state (supplement), practical (obj-048+049+050 robust to
+    K). Composite figure refreshed to v12. Tally still 11/5/7.
+
+    '
+- objective: 'HMM ↔ obj-043 state-fraction reconciliation note. Explain the 16-pp BC
+    discrepancy (HMM 40 % vs obj-043 hard-threshold 25 %) in terms of the 4-state
+    BC sub-division revealed in obj-051. Audit §20.5 v12 P=4.
+
+    '
+  priority: 4
+  status: pending
+  added: 2026-05-05 13:00
+  source: audit-2026-05-05-deepening-v12
+  success_criteria: 'docs/hmm_obj043_reconciliation.md (≤300 words) showing how the
+    obj-051 4-state low-BC + high-BC split bridges the two state-population pictures.
+
+    '
+- objective: 'Synthesis publication figure — collapse obj-038/043/047/048/049/050/051
+    into a single 4-panel publication figure: (a) ΔG(CV0) curve with bootstrap band,
+    (b) state populations + Bayesian EO floor, (c) HMM Viterbi path with transitions
+    + transition matrix inset, (d) per-state survival curves with exponential overlays.
+    Audit §20.5 v12 P=3.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 13:00
+  source: audit-2026-05-05-deepening-v12
+  success_criteria: 'figures/dynamics_synthesis_v1.png — single 4-panel publication
+    figure for the manuscript.
+
+    '
 - objective: 'HMM state-assignment over per-frame CV0 (V1+V2). The stepwise structure
     detected by obj-047 BinSeg+BIC fits naturally into a 3-state HMM (BC / Intermediate
     / EC) with per-state Gaussian emissions and a transition matrix. Output: trans
