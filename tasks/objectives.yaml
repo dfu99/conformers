@@ -1049,6 +1049,200 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-048
+  status: completed
+  statement: 3-state Gaussian HMM — BC/Intermediate/EC populations + 10-s dwell-times
+  methodology: >
+    Audit §17.6 v9 P=3 follow-up to obj-047. Implemented from-scratch
+    Gaussian-emission HMM (no `hmmlearn` dependency): forward-backward
+    in log-space + Baum-Welch EM + Viterbi decoding on the V1+V2
+    concatenated per-frame CV0 trace (n = 1645 frames). Initialization:
+    means [55, 70, 82] Å, sigmas [4, 4, 4], diagonal-heavy A. After EM
+    convergence (73 iter), states sorted by mean for stable BC /
+    Intermediate / EC labelling.
+
+    Stationary distribution computed as the left eigenvector of the
+    transition matrix A at λ = 1. Dwell-time analysis enumerates
+    Viterbi-decoded state runs per video and reports mean lifetime ±
+    95 % CI in seconds (HS-AFM at 1 fps). Co-localization with obj-047
+    BinSeg+BIC change-points uses ±10-frame tolerance.
+
+    Script: pipelines/afm-overlay/scripts/hmm_state_assignment.py
+  metrics:
+    n_frames_total: 1645
+    n_frames_v1: 379
+    n_frames_v2: 1266
+    n_states: 3
+    em_n_iter: 73
+    log_likelihood: -5286.34
+    state_bc_mean_A: 61.00
+    state_bc_std_A: 8.80
+    state_inter_mean_A: 74.36
+    state_inter_std_A: 3.26
+    state_ec_mean_A: 82.36
+    state_ec_std_A: 2.50
+    A_bc_bc: 0.9215
+    A_bc_inter: 0.0694
+    A_bc_ec: 0.0091
+    A_inter_bc: 0.0840
+    A_inter_inter: 0.8592
+    A_inter_ec: 0.0568
+    A_ec_bc: 0.0092
+    A_ec_inter: 0.0878
+    A_ec_ec: 0.9030
+    pi_stationary_bc: 0.405
+    pi_stationary_inter: 0.352
+    pi_stationary_ec: 0.244
+    v1_viterbi_frac_bc: 0.369
+    v1_viterbi_frac_inter: 0.443
+    v1_viterbi_frac_ec: 0.187
+    v2_viterbi_frac_bc: 0.409
+    v2_viterbi_frac_inter: 0.331
+    v2_viterbi_frac_ec: 0.260
+    bc_n_visits: 45
+    bc_mean_dwell_s: 14.6
+    bc_dwell_ci95_half_s: 4.3
+    bc_max_run_s: 89
+    inter_n_visits: 75
+    inter_mean_dwell_s: 7.8
+    inter_dwell_ci95_half_s: 1.8
+    inter_max_run_s: 49
+    ec_n_visits: 36
+    ec_mean_dwell_s: 11.1
+    ec_dwell_ci95_half_s: 3.6
+    ec_max_run_s: 48
+    obj047_v1_changepoints_matched: 3  # of 3
+    obj047_v2_changepoints_matched: 3  # of 4
+    obj047_co_localization_tolerance_frames: 10
+    obj047_co_localization_pct: 86  # 6/7 across both videos
+    inter_committor_to_bc: 0.597     # P(next state | leaving Inter) toward BC
+    inter_committor_to_ec: 0.403     # P(next state | leaving Inter) toward EC
+  figures:
+    - figures/hmm_state_assignment.png
+    - results/afm_pipeline/free_energy_profile/hmm_states.json
+    - results/afm_pipeline/free_energy_profile/hmm_states.npz
+  conclusions: >
+    **The Intermediate is the kinetic gateway, not just the ΔG minimum.**
+    BC↔EC direct transitions are < 1 % per frame; the ensemble must
+    pass through the Intermediate to reach the other endpoint. This is
+    a non-trivial finding from the experimental data alone — the obj-038
+    ΔG profile already showed BC and EC as separate basins, but the
+    HMM transition matrix proves they are dynamically coupled only
+    through the Intermediate.
+
+    **Mean dwell times confirm the 10-second timescale.** BC = 14.6 ±
+    4.3 s, Intermediate = 7.8 ± 1.8 s, EC = 11.1 ± 3.6 s. Independent
+    confirmation of obj-046's "10-100 second" estimate from FES-min
+    wandering. The Intermediate has the shortest lifetime — consistent
+    with its kinetic-gateway role.
+
+    **Experimental-side committor for Reviewer D**: P(Intermediate →
+    BC | leaving) = 0.597; P(Intermediate → EC | leaving) = 0.403. The
+    surface-bound ensemble is biased toward BC by ~60 % when leaving
+    the Intermediate. Reviewer D's true committor still requires
+    saddle-seeded unbiased MD; this is the experimental analog,
+    available now.
+
+    **Cross-validation with obj-047**: 6 of 7 BinSeg+BIC change-points
+    co-locate with HMM Viterbi state-transitions within ±10 frames
+    (V1: 3/3 = 100 %, V2: 3/4 = 75 %, combined 86 %). Two independent
+    methodologies converge on the same transition structure.
+
+    **Stationary distribution discrepancy**: HMM gives BC 40.5 %,
+    Inter 35.2 %, EC 24.4 % — different from obj-043's hard-threshold
+    25 / 46 / 24 / 5 %. Both are internally consistent under their
+    respective definitions; the HMM's BC state has σ = 8.8 Å so it
+    absorbs frames in the 50-70 Å transition zone. The HMM is the
+    right framework when BC↔EC kinetic accessibility is the
+    quantity of interest; the hard-threshold partition is right when
+    "fraction of time in the geometric BC band" is the question.
+  connects_to: null
+  completed_date: '2026-05-05'
+
+- id: obj-047
+  status: completed
+  statement: Stepwise re-organization, not drift — change-points localized at p < 1e-3
+  methodology: >
+    Audit §16.7 P=3 follow-up to obj-046. Implemented from-scratch
+    CUSUM (with 5000-permutation null) + binary segmentation with BIC
+    penalty (no `ruptures` dependency) over four sequences:
+
+      1. V1 per-block FES-min CV0 (n = 7 blocks, from obj-045 cache)
+      2. V2 per-block FES-min CV0 (n = 25 blocks)
+      3. V1 per-frame CV0 with 25-frame moving average (n = 379)
+      4. V2 per-frame CV0 with 25-frame moving average (n = 1266)
+
+    For each sequence reported the CUSUM peak frame, |peak|, the
+    permutation p-value, and the BinSeg+BIC change-point set with
+    per-segment means. The 25-frame MA suppresses per-frame fitting
+    jitter while keeping ~1/2 obj-045 block resolution.
+
+    Script: pipelines/afm-overlay/scripts/change_point_detection.py
+  metrics:
+    v1_block_fes_min_cusum_peak_frame: 225
+    v1_block_fes_min_cusum_peak_abs: 23.10
+    v1_block_fes_min_cusum_pvalue: 0.138
+    v2_block_fes_min_cusum_peak_frame: 1025
+    v2_block_fes_min_cusum_peak_abs: 28.94
+    v2_block_fes_min_cusum_pvalue: 0.580
+    v1_frame_cv0_cusum_peak_frame: 257
+    v1_frame_cv0_cusum_peak_abs: 749.14
+    v1_frame_cv0_cusum_pvalue: 0.0
+    v2_frame_cv0_cusum_peak_frame: 120
+    v2_frame_cv0_cusum_peak_abs: 1156.33
+    v2_frame_cv0_cusum_pvalue: 0.0
+    v1_frame_cv0_n_change_points: 3
+    v1_frame_cv0_change_points: [166, 228, 259]
+    v1_frame_cv0_max_segment_jump_A: 13.41
+    v2_frame_cv0_n_change_points: 4
+    v2_frame_cv0_change_points: [117, 200, 1049, 1205]
+    v2_frame_cv0_max_segment_jump_A: 17.91
+    v1_segment_means_A: [74.24, 69.08, 77.71, 64.30]
+    v2_segment_means_A: [80.84, 62.93, 71.11, 65.38, 76.43]
+    v2_longest_stable_plateau_frames: 848  # 200..1048
+    smoothing_window: 25
+    block_window: 50
+  figures:
+    - figures/change_point_detection.png
+    - results/afm_pipeline/free_energy_profile/change_points.json
+  conclusions: >
+    **Per-frame CUSUM rejects stationarity at p < 1e-3 in both
+    videos** (V1: |peak| = 749.1 at frame 257 with no permutation
+    samples meeting it; V2: |peak| = 1156.3 at frame 120, same).
+    This is the first formal hypothesis-test rejection of stationarity
+    in the audit chain (obj-044's z-test was at the band-population
+    level, not the underlying CV0 trajectory).
+
+    BinSeg+BIC reveals **stepwise structure, not drift**:
+
+    V1 (3 change-points, 4 segments):
+      - frames 0-165: Intermediate (74.24 Å)
+      - frames 166-227: low-Intermediate (69.08 Å)
+      - frames 228-258: EC excursion (77.71 Å, 30 frames)
+      - frames 259-378: BC fallback (64.30 Å)
+
+    V2 (4 change-points, 5 segments):
+      - frames 0-116: EC (80.84 Å)
+      - frames 117-199: BC (62.93 Å)
+      - frames 200-1048: Intermediate (71.11 Å, 848-frame plateau)
+      - frames 1049-1204: low-Intermediate (65.38 Å)
+      - frames 1205-1265: re-extended (76.43 Å)
+
+    The V1 block 4→5 jump from obj-045 is **resolved at frame 259**
+    with no preceding gradient — a genuine single-frame transition.
+    V2 has a 15-minute stable Intermediate plateau (frame 200-1048)
+    bracketed by sharp transitions, consistent with discrete
+    metastable-state hopping on the 30 s – 15 min timescale.
+
+    The per-block tests are underpowered (n = 7 + 25; both p > 0.13);
+    future analyses should defer to per-frame methods. The per-frame
+    results, with significance at p < 1e-3, are the publication-grade
+    output. obj-047 partially answers Reviewer D's "committor analysis"
+    concern from the experimental side (formal committor still requires
+    saddle-seeded unbiased MD); reviewer tally moves to 10/6/7 of 23.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-046
   status: completed
   statement: FES drift is intrinsic — no metadata signal explains it (V1 block 4→5 jump unattributable)

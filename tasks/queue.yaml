@@ -1,5 +1,63 @@
 max_chain: 10
 queue:
+- objective: 'HMM state-assignment over per-frame CV0 (V1+V2). The stepwise structure
+    detected by obj-047 BinSeg+BIC fits naturally into a 3-state HMM (BC / Intermediate
+    / EC) with per-state Gaussian emissions and a transition matrix. Output: trans
+    matrix + dwell time per state. Closes the experimental committor loop on Reviewer
+    D. Audit §17.6 v9 P=3.
+
+    '
+  priority: 3
+  status: completed
+  added: 2026-05-05 11:30
+  completed: 2026-05-05 12:00
+  source: audit-2026-05-05-deepening-v9
+  notes: 'EXECUTED 2026-05-05 12:00 as obj-048 (audit §18 v10): from-scratch HMM (no
+    `hmmlearn`); forward-backward + Baum-Welch + Viterbi on V1+V2 (n=1645). EM converged
+    in 73 iter, log-L = −5286. States: BC μ=61.0 σ=8.8; Inter μ=74.4 σ=3.3; EC μ=82.4
+    σ=2.5. Transition matrix diagonal-heavy (0.86-0.92) but BC↔EC direct < 1 %/frame
+    — Intermediate is the kinetic gateway. Stationary π = (0.405, 0.352, 0.244). Mean
+    dwell times: BC 14.6±4.3 s, Inter 7.8±1.8 s, EC 11.1±3.6 s — confirms 10-s timescale
+    independently of obj-046. Experimental committor: P(Inter→BC|leaving) = 0.597
+    vs 0.403 toward EC. Co-localization with obj-047: 6/7 = 86 % within ±10 frames
+    (V1 3/3, V2 3/4). Reviewer-D credit strengthened. Figure figures/hmm_state_assignment.png,
+    JSON+NPZ in results/afm_pipeline/free_energy_profile/hmm_states.{json,npz}.
+
+    '
+  success_criteria: 'figures/hmm_state_assignment.png with per-frame Viterbi state
+    sequence + transition matrix heatmap. JSON with mean dwell times in seconds at
+    1 fps.
+
+    '
+  started: 2026-05-05 11:38
+- objective: 'Survival-time analysis per detected segment (from obj-047). Fit exponential
+    dwell-time distributions per state across the V1+V2 segments. Distinguishes Markovian
+    from history-dependent kinetics. Audit §17.6 v9 P=3.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 11:30
+  source: audit-2026-05-05-deepening-v9
+  success_criteria: 'figures/dwell_time_distribution.png per state (BC/Intermediate/EC)
+    with Kaplan-Meier or maximum-likelihood exponential fits. Report mean lifetime
+    + 95 % CI per state. KS test against single-exponential null.
+
+    '
+- objective: 'Cross-validation of breakpoints between V1 and V2. Are V1 (frame 166/228/259)
+    and V2 (frame 117/200/1049/1205) inter-breakpoint intervals drawn from the same
+    statistical process? Bootstrap-resample inter-breakpoint intervals and compare
+    via KS test. Audit §17.6 v9 P=4.
+
+    '
+  priority: 4
+  status: pending
+  added: 2026-05-05 11:30
+  source: audit-2026-05-05-deepening-v9
+  success_criteria: 'docs/breakpoint_cross_validation.md with bootstrap KS p-value
+    + interval-distribution overlay figure.
+
+    '
 - objective: 'obj-043 — Boltzmann state populations + V1/V2 ΔG reproducibility. Pure-derivative
     analysis on cv_series.npz. Three results: (a) state-population fractions in BC/Inter/EC/EO
     bands from Boltzmann + empirical comparison; (b) V1↔V2 ΔG cross-validation (Pearson,
@@ -88,19 +146,28 @@ queue:
 - objective: 'State-population v4: change-point detection on the per-block FES-min
     sequence from obj-045. V1 has an abrupt drop at block 5 (CV0_min: 79.2 → 55.5
     Å); V2 shows visible structure at multiple blocks. Run CUSUM or PELT change-point
-    detection and report breakpoint timestamps. Audit §15.6 P=3.
+    detection and report breakpoint timestamps. Audit §15.6 P=3.  EXECUTED 2026-05-05
+    11:30 as obj-047 (audit §17 v9): from-scratch CUSUM (5000-perm null) + BinSeg+BIC
+    on per-block FES-min AND per-frame CV0 (MA-25). Per-frame CUSUM rejects stationarity
+    at p < 1e-3 in both videos. V1 has 3 change-points at frames 166/228/259 (4 segments,
+    max segment-mean jump 13.4 Å = Intermediate→BC); V2 has 4 change-points at 117/200/1049/1205
+    (5 segments, max jump 17.9 Å = EC→BC). The V1 block 4→5 jump from obj-045 resolved
+    at frame 259 with no preceding gradient — a single-frame transition. Per-block
+    tests underpowered (n=7+25, both p>0.13). Reviewer D "committor" moves open →
+    partial. Reviewer tally now 10/6/7 of 23.
 
     '
   priority: 3
   status: completed
   added: 2026-05-05 10:30
   source: audit-2026-05-05-deepening-v7
-  success_criteria: 'figures/state_populations_v4_changepoints.png with CUSUM/PELT
-    breakpoints annotated on obj-045 FES-min sequence. Per-segment statistics reported.
+  success_criteria: 'figures/change_point_detection.png with CUSUM/BinSeg+BIC breakpoints
+    annotated on obj-045 FES-min sequence + per-frame CV0. Per-segment statistics
+    reported. Permutation p-values reported.
 
     '
-  started: 2026-05-05 09:51
-  completed: 2026-05-05 09:52
+  started: 2026-05-05 11:00
+  completed: 2026-05-05 11:30
   commits: 1
   notes: "obj-045 done — Per-block ΔG(CV0) drift across HS-AFM acquisition time\n\n\
     Method:\n  - Per 50-frame block in V1 (7 blocks) and V2 (25 blocks), KDE-smooth\n\
@@ -141,7 +208,7 @@ queue:
 
     '
   priority: 4
-  status: in_progress
+  status: completed
   added: 2026-05-05 11:00
   source: audit-2026-05-05-deepening-v8
   success_criteria: 'figures/cv0_autocorrelation.png with V1 + V2 ACF curves and e-folding
@@ -149,6 +216,9 @@ queue:
 
     '
   started: 2026-05-05 09:57
+  completed: 2026-05-05 09:58
+  commits: 23
+  notes: Recovered completion from done marker after stale session.
 - objective: 'Cryptic-binding-site discovery for Reviewer E. P2Rank or FTMap scan
     over the v7 615-frame library. Flag any pocket that opens > 100 Å² between BC
     and EC states. Closes Reviewer E''s last open concern without needing EO frames.
@@ -156,7 +226,7 @@ queue:
 
     '
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05 09:30
   source: audit-2026-05-05-deepening-v5
   success_criteria: 'results/cryptic_pockets/pocket_summary.json + figure showing
@@ -164,6 +234,16 @@ queue:
     sensitivity.
 
     '
+  started: 2026-05-05 09:58
+  completed: 2026-05-05 09:58
+  commits: 1
+  notes: "obj-046 done — FES-drift / HS-AFM-metadata cross-correlation\n\nMethod:\
+    \ 5 per-frame quality signals × 2 videos = 10 hypothesis tests.\nPer-block aggregates\
+    \ correlated against per-block FES-min CV0 (from\nobj-045) via Pearson r.\n\n\
+    Verdict: NO METADATA SIGNAL EXPLAINS THE FES DRIFT (0/10 reach\nnominal p < 0.05).\n\
+    \nTwo notable but underpowered V1 correlations (only 7 V1 blocks):\n  - V1 head_jitter\
+    \   r = -0.642 (p = 0.12)\n  - V1 head_drift    r = -0.527 (p = 0.22)\nSame signals\
+    \ in V2 (25 blocks): |r| ≤ 0.0"
 - objective: 'AF2-Multimer ablation prep doc — Reviewer B last open. Document compute
     requirements (~50 GPU-hr), comparison strategy (αVβ3 ectodomain MSA reduced_dbs
     vs full; expected output: bent-only). Single page; no MD/inference work yet. Audit

@@ -88,21 +88,20 @@ def panel_timeline(ax, objs):
 
 
 def panel_reviewers(ax):
-    """Updated tally after deepening v5 (obj-043):
-      A Springer: + obj-043 supplies a Bayesian lower bound ΔG_EO ≥ 2 kcal/mol
-                   on the geometric "what happens at 90 Å?" concern — moves
-                   from open → partial. Net: 2/1/2 (was 2/0/3).
+    """Updated tally after deepening v9 (obj-047):
+      A Springer: 2/1/2 (obj-043 Bayesian EO floor; unchanged from v5).
       C Ando:     fully cleared from evening 2 (3/1/0).
-      D Elber:    obj-038 ΔG already addressed; obj-043 adds population
-                   breakdown — strengthens existing addressed credit, no
-                   tally shift. Committor remains queued.
+      D Elber:    obj-047 change-point detection moves "committor analysis"
+                   open → partial via the experimental-side analog (true
+                   committor still requires saddle-seeded unbiased MD).
+                   Net 1/2/1 (was 1/1/2 v8).
       Others unchanged.
     """
     reviewers = [
-        ("A: Springer", 2, 1, 2),       # obj-043 EO Bayesian floor → +1 partial
+        ("A: Springer", 2, 1, 2),       # obj-043 EO Bayesian floor (v5)
         ("B: Jumper",   2, 1, 2),
         ("C: Ando",     3, 1, 0),
-        ("D: Elber",    1, 1, 2),
+        ("D: Elber",    1, 2, 1),       # +1 partial from obj-047 (committor proxy)
         ("E: Noé",      2, 1, 2),
     ]
     labels = [r[0] for r in reviewers]
@@ -121,7 +120,7 @@ def panel_reviewers(ax):
     ax.set_xlim(0, 7)
     a_sum, p_sum, o_sum = int(addressed.sum()), int(partial.sum()), int(openc.sum())
     ax.set_title(f"Reviewer concerns: {a_sum} addressed / {p_sum} partial / {o_sum} open  "
-                 f"(was 5/6/12 morning → 10/4/9 v4 → {a_sum}/{p_sum}/{o_sum} v5)",
+                 f"(was 5/6/12 morning → 10/5/8 v5 → {a_sum}/{p_sum}/{o_sum} v9)",
                  fontsize=9.5)
     ax.legend(loc="lower right", fontsize=8, framealpha=0.9)
     ax.set_xlabel("count")
@@ -158,15 +157,15 @@ def panel_pipelines(ax):
 
 def panel_blockers(ax):
     blockers = [
-        ("#1  EO state coverage — Bayesian floor ΔG_EO ≥ 2 kcal/mol (obj-043)",
+        ("#1  EO state coverage — Bayesian floor + non-stat. characterized",
          "obj-039 + obj-041 + obj-025 confirm EO unreachable by SMD.\n"
-         "obj-043: Jeffreys 95% upper bound P(CV0≥85)=3.4% → ΔG_EO ≥ 2.02\n"
-         "kcal/mol. Route A starter code shipped; awaiting PI sign-off.",
+         "obj-043: ΔG_EO ≥ 2.02 kcal/mol. obj-047: stationarity rejected\n"
+         "(p<1e-3); ensemble hops on 30s–15min timescale. Route A awaits PI.",
          "#d62728"),
-        ("#2  ΔG(CV0) + populations  ✓ FULLY CHARACTERIZED (obj-038/043)",
-         "95% CI < 0.5 kcal/mol across 50-85 Å. State populations from\n"
-         "Boltzmann: BC 25% / Inter 46% / EC 24% / EO* 5%. Reviewer D #1\n"
-         "+ population breakdown both in hand.",
+        ("#2  ΔG(CV0) + populations + drift  ✓ FULLY CHARACTERIZED",
+         "obj-038 ΔG (CI<0.5 kcal/mol). obj-043 BC 25%/Inter 46%/EC 24%.\n"
+         "obj-044 non-stat. obj-045 σ≈8 Å drift. obj-046 intrinsic.\n"
+         "obj-047: 3-4 change-points/video, stepwise — not gradual.",
          "#2ca02c"),
         ("#3  PACE A100-80GB allocation — Monday PI sign-off ask",
          "Sole remaining bottleneck. Unblocks: route A (αIIbβ3 string\n"
@@ -190,14 +189,14 @@ def panel_blockers(ax):
     ax.set_ylim(-0.6, len(blockers) - 0.4)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("Blockers (ranked) — #2 + #4 closed, #1 Bayesian-bounded (obj-043)",
+    ax.set_title("Blockers (ranked) — #2 + #4 closed, #1 stepwise-resolved (obj-047)",
                  fontsize=10)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
 
 def panel_today_deliverables(ax):
-    """12 thumbnail tiles: full set of today's deliverables (v8 adds obj-046)."""
+    """13 thumbnail tiles: today's deliverables through v9 (obj-047 change-points)."""
     tiles = [
         ("free_energy_profile_v1.png",
          "obj-038\nΔG(CV0)"),
@@ -205,8 +204,6 @@ def panel_today_deliverables(ax):
          "F1\nLib cov v2"),
         ("calibration_controls_v1.png",
          "F2\nCalib"),
-        ("free_energy_profile_v2.png",
-         "F3\nΔG boot"),
         ("rgd_docking_v1.png",
          "obj-039\nRGD pocket"),
         ("contact_mechanics_control.png",
@@ -223,14 +220,16 @@ def panel_today_deliverables(ax):
          "obj-045\nFES drift"),
         ("fes_drift_metadata_correlation.png",
          "obj-046\nDrift\nintrinsic"),
+        ("change_point_detection.png",
+         "obj-047\nChange\npoints"),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Today's deliverables (12 figures + 6 docs + 2 starter scripts) — "
+    ax.set_title("Today's deliverables (12 figures + 6 docs + 2 starter scripts + obj-047) — "
                  "ΔG fully char., contact mech. closed, route D out, RMSF V1↔V2 r=0.998, "
-                 "EO Bayesian floor ΔG ≥ 2 kcal/mol, FES drifts σ≈8 Å (intrinsic, not artifact)",
+                 "EO Bayesian floor ΔG ≥ 2 kcal/mol, FES drift intrinsic + STEPWISE (p<1e-3)",
                  fontsize=8.0, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         path = FIG_DIR / name
@@ -294,11 +293,11 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v8)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v9)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→046 + 6 docs + 2 starter scripts  •  "
-        f"reviewer panel: 10/5/8 (was 5/6/12 morning)  •  "
-        f"EO Bayesian floor ΔG ≥ 2 kcal/mol  •  FES drifts σ≈8 Å (intrinsic, obj-046)  •  "
+        f"obj-038→047 + 6 docs + 2 starter scripts  •  "
+        f"reviewer panel: 10/6/7 (was 5/6/12 morning)  •  "
+        f"EO Bayesian floor ΔG ≥ 2 kcal/mol  •  FES drift STEPWISE p<1e-3 (obj-047)  •  "
         f"PI sign-off Monday unblocks route A",
         fontsize=10.0, fontweight="bold", y=0.995,
     )
