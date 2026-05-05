@@ -15,25 +15,37 @@ queue:
 
     '
   notes: 'EXECUTED 2026-05-05 13:00 as obj-051 (audit §20 v12). 3-state stability:
-    1/10 inits at obj-048 global optimum (log-L=-5286), 8/10 at local (-5337, Δ=51 nats),
-    1 degenerate. obj-048 physics-init was crucial. 4-state best log-L=-5047.4 with
-    means (54.5, 66.0, 75.0, 82.5) — splits BC into low/high. ΔBIC=-411, ΔAIC=-460:
+    1/10 inits at obj-048 global optimum (log-L=-5286), 8/10 at local (-5337, Δ=51
+    nats), 1 degenerate. obj-048 physics-init was crucial. 4-state best log-L=-5047.4
+    with means (54.5, 66.0, 75.0, 82.5) — splits BC into low/high. ΔBIC=-411, ΔAIC=-460:
     4-state strongly preferred statistically. Three framings: physical 3-state (paper
     main), statistical 4-state (supplement), practical (obj-048+049+050 robust to
     K). Composite figure refreshed to v12. Tally still 11/5/7.
 
     '
-- objective: 'HMM ↔ obj-043 state-fraction reconciliation note. Explain the 16-pp BC
-    discrepancy (HMM 40 % vs obj-043 hard-threshold 25 %) in terms of the 4-state
+- objective: 'HMM ↔ obj-043 state-fraction reconciliation note. Explain the 16-pp
+    BC discrepancy (HMM 40 % vs obj-043 hard-threshold 25 %) in terms of the 4-state
     BC sub-division revealed in obj-051. Audit §20.5 v12 P=4.
 
     '
   priority: 4
-  status: pending
+  status: completed
   added: 2026-05-05 13:00
   source: audit-2026-05-05-deepening-v12
   success_criteria: 'docs/hmm_obj043_reconciliation.md (≤300 words) showing how the
     obj-051 4-state low-BC + high-BC split bridges the two state-population pictures.
+
+    '
+  started: 2026-05-05 13:15
+  completed: 2026-05-05 13:30
+  notes: 'EXECUTED 2026-05-05 13:30 as obj-052. Cross-tab over 1645 V1+V2 frames identifies
+    a single dominant off-diagonal cell: 215 frames assigned HMM-BC but obj-043-Inter,
+    at CV0 = 65-77.7 Å (mean 67.8 Å). Exactly the "high-BC" sub-state at mean 66.0
+    Å from obj-051. Both partitions are internally consistent and answer different
+    questions (geometric band vs kinetic mode). EO* fold-in note: 40 of 42 obj-043
+    EO* frames go into HMM EC, explaining the matched EC fractions (HMM 24.4 % vs
+    obj-043 26 %). No reviewer-tally shift; methodological internal-consistency check.
+    Doc docs/hmm_obj043_reconciliation.md.
 
     '
 - objective: 'Synthesis publication figure — collapse obj-038/043/047/048/049/050/051
@@ -44,13 +56,14 @@ queue:
 
     '
   priority: 3
-  status: pending
+  status: in_progress
   added: 2026-05-05 13:00
   source: audit-2026-05-05-deepening-v12
   success_criteria: 'figures/dynamics_synthesis_v1.png — single 4-panel publication
     figure for the manuscript.
 
     '
+  started: 2026-05-05 15:07
 - objective: 'HMM state-assignment over per-frame CV0 (V1+V2). The stepwise structure
     detected by obj-047 BinSeg+BIC fits naturally into a 3-state HMM (BC / Intermediate
     / EC) with per-state Gaussian emissions and a transition matrix. Output: trans
@@ -99,8 +112,8 @@ queue:
   completed: 2026-05-05 12:30
   notes: 'EXECUTED 2026-05-05 12:30 as obj-049 (audit §19 v11). Per-state dwell analysis
     with right-censoring at video boundaries; MLE exp/Weibull/gamma; KS test vs exp
-    null; AIC. All 3 states PASS KS exponential at p > 0.13 (BC 0.65, Inter 0.14, EC
-    0.33). Weibull k clusters near 1 (1.03/1.06/1.22). Verdict: memoryless / Markovian.
+    null; AIC. All 3 states PASS KS exponential at p > 0.13 (BC 0.65, Inter 0.14,
+    EC 0.33). Weibull k clusters near 1 (1.03/1.06/1.22). Verdict: memoryless / Markovian.
     HMM Markov assumption empirically validated. Means: BC 14.6 [10.1,20.1] s; Inter
     6.94 [5.25,9.0] s; EC 11.4 [8.34,14.9] s. Figure figures/survival_time_analysis.png,
     JSON results/afm_pipeline/free_energy_profile/survival_times.json.
@@ -124,11 +137,11 @@ queue:
   completed: 2026-05-05 12:35
   notes: 'EXECUTED 2026-05-05 12:35 as obj-050 (audit §19 v11). Two passes: (1) obj-047
     inter-breakpoint intervals (V1 n=4, V2 n=5; KS D=0.30, perm p=0.96); (2) per-state
-    HMM dwell times (BC: KS p=0.25; Inter: 0.74; EC: 0.93). All 4/4 tests fail to reject
-    H0. All 4/4 V1/V2 mean-ratio 95 % CIs overlap 1. RECONCILIATION: rates are stationary
-    across V1 and V2; obj-044 non-stationarity is in finite-time populations only —
-    expected of a stationary Markov chain at finite n. Reviewer D partial → addressed.
-    Tally 10/6/7 → 11/5/7 of 23.
+    HMM dwell times (BC: KS p=0.25; Inter: 0.74; EC: 0.93). All 4/4 tests fail to
+    reject H0. All 4/4 V1/V2 mean-ratio 95 % CIs overlap 1. RECONCILIATION: rates
+    are stationary across V1 and V2; obj-044 non-stationarity is in finite-time populations
+    only — expected of a stationary Markov chain at finite n. Reviewer D partial →
+    addressed. Tally 10/6/7 → 11/5/7 of 23.
 
     '
 - objective: 'obj-043 — Boltzmann state populations + V1/V2 ΔG reproducibility. Pure-derivative

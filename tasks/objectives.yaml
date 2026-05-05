@@ -1049,6 +1049,73 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-052
+  status: completed
+  statement: HMM ↔ obj-043 16-pp BC discrepancy traced to 215-frame transition zone
+  methodology: >
+    Audit §20.5 v12 P=4 follow-up to obj-051. Cross-tabulated the
+    obj-048 HMM Viterbi state assignments against the obj-043 hard-
+    threshold partition (BC ≤65 / Inter 65-78 / EC 78-85 / EO* >85)
+    over the V1+V2 concatenated 1645-frame dataset. Identified the
+    largest off-diagonal cell and characterized its CV0 distribution.
+
+    Doc: docs/hmm_obj043_reconciliation.md
+  metrics:
+    n_frames_total: 1645
+    hmm_bc_obj043_bc: 433
+    hmm_bc_obj043_inter: 215   # the largest off-diagonal cell
+    hmm_bc_obj043_ec: 8
+    hmm_bc_obj043_eo: 2
+    hmm_inter_obj043_bc: 1
+    hmm_inter_obj043_inter: 517
+    hmm_inter_obj043_ec: 69
+    hmm_inter_obj043_eo: 0
+    hmm_ec_obj043_bc: 0
+    hmm_ec_obj043_inter: 10
+    hmm_ec_obj043_ec: 350
+    hmm_ec_obj043_eo: 40       # HMM EC absorbs all 40 obj-043 EO* frames
+    bc_inter_transition_zone_n_frames: 215
+    bc_inter_transition_zone_pct_all: 13.1
+    bc_inter_transition_zone_cv0_min: 65.0
+    bc_inter_transition_zone_cv0_max: 77.7
+    bc_inter_transition_zone_cv0_mean: 67.8
+    obj051_4state_high_bc_mean: 66.0   # matches transition zone
+  figures:
+    - docs/hmm_obj043_reconciliation.md
+  conclusions: >
+    **The 16-pp BC discrepancy is a 215-frame BC↔Intermediate
+    transition zone** at CV0 = 65-77.7 Å, mean 67.8 Å. obj-043's
+    hard threshold cuts at 65 Å and assigns these frames to
+    Intermediate; obj-048's 3-state HMM (BC mean 61, σ 8.8 Å) groups
+    them with BC.
+
+    The transition zone is exactly the **"high-BC" sub-state at
+    mean 66.0 Å** revealed by obj-051's 4-state HMM. The 4-state
+    framework makes the split explicit: low-BC (54.5 Å, very-bent)
+    + high-BC (66.0 Å, transition zone) + Intermediate (75.0 Å) +
+    EC (82.5 Å).
+
+    **Both pictures are internally consistent**; they answer
+    different questions:
+
+    - obj-043 → "fraction of time CV0 is in the BC band" → hard threshold
+    - obj-048 → "fraction of time in the BC kinetic mode" → HMM π
+
+    For the paper: report obj-043 fractions for the geometric/FES
+    interpretation (matches Springer 2014 BC band nomenclature),
+    report obj-048 stationary π for the kinetic interpretation
+    (matches Markov-chain dwell-time framework). Both are correct.
+
+    **EO* fold-in**: 40 of obj-043's 42 EO* frames (CV0 > 85 Å) are
+    absorbed into HMM EC, explaining why HMM EC (24.4 %) and
+    obj-043 EC (26.0 %) match within rounding despite the HMM
+    having no EO state.
+
+    No reviewer-tally shift; this is a methodological supplement
+    documenting an internal-consistency check.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-051
   status: completed
   statement: HMM model selection — multi-init validates obj-048; 4-state preferred (BIC -411)
