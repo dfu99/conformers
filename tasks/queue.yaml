@@ -1,5 +1,83 @@
 max_chain: 10
 queue:
+- objective: 'Free-energy profile v1 from V1+V2 fitted trajectories. Compute CV0 per
+    frame on the 1645 unbiased frames in results/afm_pipeline/v7_smoothed_final/{video1,video2}/fitted_coords_median_reanchored.npy.
+    Histogram with 1 Å bins, KDE smooth, ΔG = -kT log P(CV0) at 300 K. Plot ΔG curve
+    + state band overlays + EO coverage gap shading. Save to results/afm_pipeline/free_energy_profile/
+    + figures/free_energy_profile_v1.png. Append obj-038 to objectives.yaml.
+
+    '
+  priority: 1
+  status: in_progress
+  added: 2026-05-05 12:30
+  source: audit-2026-05-05
+  success_criteria: 'figures/free_energy_profile_v1.png exists with ΔG curve labeled
+    in kcal/mol or kT, state bands overlaid, EO gap visible. obj-038 logged.
+
+    '
+  started: 2026-05-05 01:13
+- objective: 'Close stale objective status drift. Mark obj-008 (AFCluster + ProteinTTT)
+    completed with dual-PACE-job outcome documented; mark obj-018 (extend conformer
+    library toward bent state) completed since the 615-frame library has been the
+    v7 reference for weeks.
+
+    '
+  priority: 2
+  status: pending
+  added: 2026-05-05 12:30
+  source: audit-2026-05-05
+  success_criteria: 'objectives.yaml reflects obj-008 and obj-018 as completed with
+    actual outcomes recorded.
+
+    '
+- objective: 'Library coverage v2 figure (F1). CV0/CV1/CV2 distributions across 615-frame
+    library AND V1+V2 fitted trajectories side-by-side, state thresholds overlaid,
+    EO gap visually unambiguous.
+
+    '
+  priority: 2
+  status: pending
+  added: 2026-05-05 12:30
+  source: audit-2026-05-05
+  success_criteria: 'figures/library_coverage_v2.png exists. EO gap visible.
+
+    '
+- objective: 'Reviewer-C calibration figure (F2). Combine figures/tip_calibration_sphere.png
+    and figures/random_baseline_v7.png into one publication-quality controls plot
+    showing real corr vs sphere control vs random rotation, per video.
+
+    '
+  priority: 2
+  status: pending
+  added: 2026-05-05 12:30
+  source: audit-2026-05-05
+  success_criteria: 'figures/calibration_controls_v1.png exists. Per-video numbers
+    labeled.
+
+    '
+- objective: 'Drop-list cleanup. Deprecate pipelines/avb3-conformers/scripts/ shadow
+    copies of stylize_sim_afm.py and render_projection_overlay.py — pointer stubs
+    or git rm after verifying no importers.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 12:30
+  source: audit-2026-05-05
+  success_criteria: 'grep -r avb3-conformers shows no importers in active pipelines.
+
+    '
+- objective: 'RGD docking proof-of-concept (F4). Smina or rdock against 5 bent + 5
+    extended v7 conformers. Bent vs extended binding affinity + pose comparison.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 12:30
+  source: audit-2026-05-05
+  success_criteria: 'figures/rgd_docking_v1.png exists. obj-039 logged.
+
+    '
 - objective: 'Sync 264 steering frames and afmfold code to RunPod. Check GPU memory
     (must be >18GB free). Create a standalone training script on RunPod that handles
     image generation + CNN training in one shot.
