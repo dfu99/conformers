@@ -1,0 +1,98 @@
+{
+  "records": [
+    {
+      "label": "bent",
+      "pdb": "bent_0753.pdb",
+      "cv0_A": 47.281375885009766,
+      "midas_sasa_A2": 462.9883728027344,
+      "occlusion_norm": 3.74,
+      "midas_leg_distance_A": 59.978790283203125
+    },
+    {
+      "label": "bent",
+      "pdb": "bent_0822.pdb",
+      "cv0_A": 47.507076263427734,
+      "midas_sasa_A2": 457.0760192871094,
+      "occlusion_norm": 3.8,
+      "midas_leg_distance_A": 60.45299530029297
+    },
+    {
+      "label": "bent",
+      "pdb": "bent_0762.pdb",
+      "cv0_A": 47.5345458984375,
+      "midas_sasa_A2": 447.16473388671875,
+      "occlusion_norm": 3.76,
+      "midas_leg_distance_A": 60.11854553222656
+    },
+    {
+      "label": "bent",
+      "pdb": "bent_0819.pdb",
+      "cv0_A": 47.557594299316406,
+      "midas_sasa_A2": 454.28045654296875,
+      "occlusion_norm": 3.86,
+      "midas_leg_distance_A": 60.633853912353516
+    },
+    {
+      "label": "bent",
+      "pdb": "bent_0744.pdb",
+      "cv0_A": 47.60017013549805,
+      "midas_sasa_A2": 475.3585205078125,
+      "occlusion_norm": 3.74,
+      "midas_leg_distance_A": 60.2542724609375
+    },
+    {
+      "label": "extended",
+      "pdb": "ext_0549.pdb",
+      "cv0_A": 84.91703796386719,
+      "midas_sasa_A2": 301.39373779296875,
+      "occlusion_norm": 4.24,
+      "midas_leg_distance_A": 111.82347869873047
+    },
+    {
+      "label": "extended",
+      "pdb": "ext_0540.pdb",
+      "cv0_A": 84.92001342773438,
+      "midas_sasa_A2": 291.9834289550781,
+      "occlusion_norm": 4.18,
+      "midas_leg_distance_A": 111.89827728271484
+    },
+    {
+      "label": "extended",
+      "pdb": "ext_0567.pdb",
+      "cv0_A": 84.96307373046875,
+      "midas_sasa_A2": 332.957763671875,
+      "occlusion_norm": 4.14,
+      "midas_leg_distance_A": 112.30538177490234
+    },
+    {
+      "label": "extended",
+      "pdb": "ext_0546.pdb",
+      "cv0_A": 85.00029754638672,
+      "midas_sasa_A2": 284.363037109375,
+      "occlusion_norm": 4.24,
+      "midas_leg_distance_A": 111.81365966796875
+    },
+    {
+      "label": "extended",
+      "pdb": "ext_0543.pdb",
+      "cv0_A": 85.03016662597656,
+      "midas_sasa_A2": 279.7732238769531,
+      "occlusion_norm": 4.14,
+      "midas_leg_distance_A": 112.15475463867188
+    }
+  ],
+  "midas_residues": {
+    "A:218": "\u03b1V D218 (\u03b2-propeller, contacts RGD-Arg)",
+    "B:119": "\u03b23 D119 (MIDAS)",
+    "B:121": "\u03b23 S121 (MIDAS)",
+    "B:123": "\u03b23 S123 (MIDAS)",
+    "B:220": "\u03b23 E220 (MIDAS)",
+    "B:251": "\u03b23 D251 (MIDAS)",
+    "B:122": "\u03b23 Y122 (RGD-Asp pocket)",
+    "B:214": "\u03b23 R214 (RGD-Asp pocket)",
+    "B:215": "\u03b23 N215 (LIMBS)",
+    "B:216": "\u03b23 R216 (RGD-Asp pocket)"
+  },
+  "method": "shrake-rupley + 12 A occlusion sphere",
+  "library_dir": "data/runs/avb3/conformers/all_frames_bent_extended"
+}

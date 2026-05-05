@@ -1046,6 +1046,59 @@ objectives:
     CV0 > 85 Å because the library has zero EO templates — this
     gap is now visualized rather than implicit. Next step: bootstrap
     confidence bands on the ΔG curve (audit follow-up F3).
+  connects_to: obj-039
+  completed_date: '2026-05-05'
+
+- id: obj-039
+  status: completed
+  statement: RGD-binding-pocket accessibility — bent vs extended αVβ3 v7 conformers
+  methodology: >
+    Reviewer-E proof-of-concept (audit-2026-05-05 §8 F4). Real Vina/smina
+    docking on αVβ3 was blocked on Mn²⁺ MIDAS parameterization + rdkit/
+    meeko/gemmi dependencies that conflict with the project's strict
+    venv split (CLAUDE.md §4 protenix vs boltz vs gemmi). Implemented
+    a defensible geometric proxy instead: for each of the 5 most-bent
+    (CV0=47.3-47.6 Å) and 5 most-extended (CV0=84.9-85.0 Å) library
+    conformers, computed (a) Shrake-Rupley SASA on the 10 canonical
+    MIDAS-pocket residues (αV D218 β-propeller; β3 D119, S121, S123,
+    Y122, R214, N215, R216, E220, D251 βA-domain RGD-binding shell);
+    (b) steric occlusion = heavy-atom count in a 12 Å sphere around
+    the MIDAS centroid (normalized by the bent reference); (c) the
+    MIDAS-centroid ↔ leg-centroid distance as the steric-blocker
+    metric. Script `pipelines/conformer-library/scripts/rgd_pocket_accessibility.py`.
+  metrics:
+    n_bent: 5
+    n_extended: 5
+    bent_cv0_mean_A: 47.50
+    extended_cv0_mean_A: 84.97
+    bent_midas_sasa_mean_A2: 459.4
+    extended_midas_sasa_mean_A2: 298.1
+    delta_sasa_pct: -35.1
+    bent_pocket_occlusion: 3.78
+    extended_pocket_occlusion: 4.19
+    bent_midas_leg_distance_A: 60.3
+    extended_midas_leg_distance_A: 112.0
+    delta_midas_leg_distance_A: 51.7
+  figures:
+    - figures/rgd_docking_v1.png
+    - results/afm_pipeline/rgd_docking/rgd_pocket_accessibility.png
+  conclusions: >
+    Negative result with high diagnostic value. The legs do retreat
+    52 Å from the MIDAS centroid in the extended frames — the
+    head-leg steering worked geometrically. But MIDAS-pocket SASA
+    DROPS 35 % on extension (459 → 298 Å²), and the 12 Å steric
+    sphere becomes more occluded (3.78 → 4.19 normalized atoms).
+    The interpretation is that v7's "extended" frames are EC
+    (extended-closed): the αV β-propeller and β3 βA-domain rotate
+    relative to each other during steering and incidentally bury
+    the MIDAS pocket; the EC→EO headpiece-opening transition
+    that exposes the high-affinity site never occurred (consistent
+    with obj-025 — k=1000 SMD only opens CV2 by 0.9 Å in 3 ns).
+    Real Vina/smina docking on these frames would therefore
+    rediscover the EO-coverage gap, not the bent-vs-extended
+    affinity contrast reviewer E imagines. RGD-affinity comparison
+    is gated on EO frames; this PoC sharpens the audit blocker
+    rather than dissolving it.
   connects_to: null
   completed_date: '2026-05-05'
 

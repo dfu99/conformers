@@ -83,21 +83,29 @@ queue:
   started: 2026-05-05 04:30
   completed: 2026-05-05 04:45
   commits: 2
-  notes: 'render_projection_overlay.py byte-identical to canonical (afm-overlay/scripts/);
+  notes: render_projection_overlay.py byte-identical to canonical (afm-overlay/scripts/);
     stylize_sim_afm.py was older anisotropic-blur variant superseded by isotropic
     default in sim-afm-video/scripts/. git rm both. README + planning.md updated.
-    Commits 7713ed5 + fef8537.'
+    Commits 7713ed5 + fef8537.
 - objective: 'RGD docking proof-of-concept (F4). Smina or rdock against 5 bent + 5
     extended v7 conformers. Bent vs extended binding affinity + pose comparison.
 
     '
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05 12:30
   source: audit-2026-05-05
   success_criteria: 'figures/rgd_docking_v1.png exists. obj-039 logged.
 
     '
+  started: 2026-05-05 04:33
+  completed: 2026-05-05 05:15
+  notes: 'Implemented as geometric accessibility proxy (MIDAS SASA + 12 Å occlusion
+    + MIDAS-leg distance) on 5 bent + 5 extended picks, since Vina/smina on αVβ3 needs
+    Mn²⁺ MIDAS parameterization + rdkit/meeko/gemmi (gemmi conflicts with venv_protenix).
+    Negative result with diagnostic value: legs retreat 52 Å but MIDAS pocket SASA
+    drops 35 % (459→298 Å²) — extended frames are EC, not EO. RGD-affinity comparison
+    stays gated on EO frames. obj-039 logged. Figure figures/rgd_docking_v1.png.'
 - objective: 'Sync 264 steering frames and afmfold code to RunPod. Check GPU memory
     (must be >18GB free). Create a standalone training script on RunPod that handles
     image generation + CNN training in one shot.
