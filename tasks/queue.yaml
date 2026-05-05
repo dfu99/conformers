@@ -7,37 +7,48 @@ queue:
 
     '
   priority: 1
-  status: pending
+  status: completed
   added: 2026-05-05 22:30
   source: audit-2026-05-05-evening-v3
   success_criteria: 'PI sign-off captured (Slack acknowledgement or planning.md note).
     docs/route_a_kickoff.md with αV/αIIb residue mapping + force-field gotchas.
 
     '
+  started: 2026-05-05 05:33
+  completed: 2026-05-05 05:50
+  notes: 'Pre-kickoff issues list shipped: docs/route_a_kickoff.md. Real BLOSUM62
+    alignment αV(1JV2)-αIIb(3FCS) at 38.6 % identity. αV D218 (RGD-Arg pocket) → αIIb
+    F231 (Δ +13, non-conservative). Offset varies +0 (N-term) → +13/+16 (propeller
+    mid) → +6 (calf-2) → +4 (membrane-proximal) — single global Δ does NOT work. 7
+    force-field gotchas documented (FF family, lipid, glycans, Ca²⁺, MIDAS shared,
+    heavy/light split, PSI disulfide). PI sign-off pending. Mapping JSON at results/route_a/av_aiib_alignment.json.
+    Companion: docs/route_a_risk_register.md.'
 - objective: 'Switching Gō-Martini parallel track. Start after route-A kickoff. 2-week
     cross-validation track using 1JV2 (bent) + a homology-mapped αIIbβ3-extended structure
     as Gō-A and Gō-B endpoints. Independent line of evidence for the EC→EO transition.
 
     '
   priority: 2
-  status: pending
+  status: in_progress
   added: 2026-05-05 22:30
   source: audit-2026-05-05-evening-v3
-  success_criteria: 'figures/go_martini_eo_trajectory.png shows the EC→EO CV0/CV2 progression.
-    Cross-validates route A.
+  success_criteria: 'figures/go_martini_eo_trajectory.png shows the EC→EO CV0/CV2
+    progression. Cross-validates route A.
 
     '
-- objective: 'Route-A risk register. Single doc listing the 5 highest-probability failure
-    modes for the αIIbβ3→αVβ3 string-method port (force-field carbohydrate decoration,
-    β-propeller blade numbering, membrane lipid composition, CV-definition mismatch,
-    string convergence). Mitigation per each.
+  started: 2026-05-05 05:38
+- objective: 'Route-A risk register. Single doc listing the 5 highest-probability
+    failure modes for the αIIbβ3→αVβ3 string-method port (force-field carbohydrate
+    decoration, β-propeller blade numbering, membrane lipid composition, CV-definition
+    mismatch, string convergence). Mitigation per each.
 
     '
   priority: 3
   status: pending
   added: 2026-05-05 22:30
   source: audit-2026-05-05-evening-v3
-  success_criteria: 'docs/route_a_risk_register.md with 5 named risks + mitigation strategies.
+  success_criteria: 'docs/route_a_risk_register.md with 5 named risks + mitigation
+    strategies.
 
     '
 - objective: 'EO-coverage strategy decision. Choose one of (a) αIIbβ3 string-method

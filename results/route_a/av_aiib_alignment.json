@@ -1,0 +1,137 @@
+{
+  "alignment_score": 1507.0,
+  "alignment_length": 949,
+  "av_seq_len": 927,
+  "aiib_seq_len": 913,
+  "identity_pct": 38.6,
+  "landmarks": [
+    {
+      "av_resSeq": 1,
+      "name": "\u03b2-propeller blade 1 (W1)",
+      "aiib_resSeq": 1,
+      "av_aa": "F",
+      "aiib_aa": "L",
+      "delta": 0
+    },
+    {
+      "av_resSeq": 62,
+      "name": "\u03b2-propeller blade 2 (W2)",
+      "aiib_resSeq": 60,
+      "av_aa": "S",
+      "aiib_aa": "A",
+      "delta": -2
+    },
+    {
+      "av_resSeq": 124,
+      "name": "\u03b2-propeller blade 3 (W3)",
+      "aiib_resSeq": 126,
+      "av_aa": "P",
+      "aiib_aa": "P",
+      "delta": 2
+    },
+    {
+      "av_resSeq": 180,
+      "name": "\u03b2-propeller blade 4 (W4)",
+      "aiib_resSeq": 192,
+      "av_aa": "Q",
+      "aiib_aa": "L",
+      "delta": 12
+    },
+    {
+      "av_resSeq": 218,
+      "name": "\u03b1V D218 (RGD-Arg pocket)",
+      "aiib_resSeq": 231,
+      "av_aa": "D",
+      "aiib_aa": "F",
+      "delta": 13
+    },
+    {
+      "av_resSeq": 243,
+      "name": "\u03b2-propeller blade 5 (W5)",
+      "aiib_resSeq": 257,
+      "av_aa": "V",
+      "aiib_aa": "A",
+      "delta": 14
+    },
+    {
+      "av_resSeq": 303,
+      "name": "\u03b2-propeller blade 6 (W6)",
+      "aiib_resSeq": 316,
+      "av_aa": "R",
+      "aiib_aa": "S",
+      "delta": 13
+    },
+    {
+      "av_resSeq": 367,
+      "name": "\u03b2-propeller blade 7 (W7)",
+      "aiib_resSeq": 383,
+      "av_aa": "E",
+      "aiib_aa": "P",
+      "delta": 16
+    },
+    {
+      "av_resSeq": 435,
+      "name": "thigh end",
+      "aiib_resSeq": 448,
+      "av_aa": "Y",
+      "aiib_aa": "Y",
+      "delta": 13
+    },
+    {
+      "av_resSeq": 442,
+      "name": "genu hinge",
+      "aiib_resSeq": 455,
+      "av_aa": "T",
+      "aiib_aa": "K",
+      "delta": 13
+    },
+    {
+      "av_resSeq": 505,
+      "name": "calf-1 mid",
+      "aiib_resSeq": 516,
+      "av_aa": "K",
+      "aiib_aa": "R",
+      "delta": 11
+    },
+    {
+      "av_resSeq": 605,
+      "name": "calf-2 start",
+      "aiib_resSeq": 611,
+      "av_aa": "K",
+      "aiib_aa": "Q",
+      "delta": 6
+    },
+    {
+      "av_resSeq": 702,
+      "name": "calf-2 mid",
+      "aiib_resSeq": 708,
+      "av_aa": "H",
+      "aiib_aa": "G",
+      "delta": 6
+    },
+    {
+      "av_resSeq": 740,
+      "name": "calf-2 end",
+      "aiib_resSeq": 746,
+      "av_aa": "A",
+      "aiib_aa": "A",
+      "delta": 6
+    },
+    {
+      "av_resSeq": 820,
+      "name": "membrane-proximal mid",
+      "aiib_resSeq": 824,
+      "av_aa": "M",
+      "aiib_aa": "L",
+      "delta": 4
+    },
+    {
+      "av_resSeq": 940,
+      "name": "C-terminal",
+      "aiib_resSeq": 944,
+      "av_aa": "D",
+      "aiib_aa": "L",
+      "delta": 4
+    }
+  ]
+}
