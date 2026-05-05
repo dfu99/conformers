@@ -1,0 +1,46 @@
+{
+  "_source": "Synthetic Ferg-Lab style \u03b1IIb-numbered CV definitions for testing remap_cvs.py",
+  "cvs": [
+    {
+      "name": "cv0_head_calf",
+      "type": "centroid_distance",
+      "domain_a": {
+        "chain": "A",
+        "residues": "1-435",
+        "_remapped_from_aiib": "1-448"
+      },
+      "domain_b": {
+        "chain": "A",
+        "residues": "442-605",
+        "_remapped_from_aiib": "455-611"
+      }
+    },
+    {
+      "name": "cv1_beta_head_tail",
+      "type": "centroid_distance",
+      "domain_a": {
+        "chain": "B",
+        "residues": "1-352"
+      },
+      "domain_b": {
+        "chain": "B",
+        "residues": "353-690"
+      }
+    },
+    {
+      "name": "cv2_head_open",
+      "type": "centroid_distance",
+      "domain_a": {
+        "chain": "A",
+        "residues": "1-435",
+        "_remapped_from_aiib": "1-448"
+      },
+      "domain_b": {
+        "chain": "B",
+        "residues": "1-352"
+      }
+    }
+  ],
+  "_alignment_source": "results/route_a/av_aiib_alignment.json",
+  "_remap_method": "BLOSUM62 \u03b1V-\u03b1IIb pairwise + linear interpolation between landmarks"
+}

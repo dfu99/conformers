@@ -1,0 +1,17 @@
+{
+  "_source": "Synthetic Ferg-Lab style αIIb-numbered CV definitions for testing remap_cvs.py",
+  "cvs": [
+    {"name": "cv0_head_calf",
+     "type": "centroid_distance",
+     "domain_a": {"chain": "A", "residues": "1-448"},
+     "domain_b": {"chain": "A", "residues": "455-611"}},
+    {"name": "cv1_beta_head_tail",
+     "type": "centroid_distance",
+     "domain_a": {"chain": "B", "residues": "1-352"},
+     "domain_b": {"chain": "B", "residues": "353-690"}},
+    {"name": "cv2_head_open",
+     "type": "centroid_distance",
+     "domain_a": {"chain": "A", "residues": "1-448"},
+     "domain_b": {"chain": "B", "residues": "1-352"}}
+  ]
+}
