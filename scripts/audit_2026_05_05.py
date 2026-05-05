@@ -196,7 +196,7 @@ def panel_blockers(ax):
 
 
 def panel_today_deliverables(ax):
-    """16 thumbnail tiles: today's deliverables through v12."""
+    """Today's deliverables tiles through v14 (obj-038→obj-054)."""
     tiles = [
         ("free_energy_profile_v1.png",
          "obj-038\nΔG(CV0)"),
@@ -206,8 +206,6 @@ def panel_today_deliverables(ax):
          "obj-040\nHertz F4"),
         ("library_coverage_v3.png",
          "obj-041\nRoute D null"),
-        ("rmsf_bootstrap_v1.png",
-         "obj-042\nRMSF boot"),
         ("state_populations_v1.png",
          "obj-043\nState pops"),
         ("state_populations_v2_windowed.png",
@@ -215,7 +213,7 @@ def panel_today_deliverables(ax):
         ("state_populations_v3_per_block_dg.png",
          "obj-045\nFES drift"),
         ("fes_drift_metadata_correlation.png",
-         "obj-046\nDrift\nintrinsic"),
+         "obj-046\nIntrinsic"),
         ("change_point_detection.png",
          "obj-047\nChange\npoints"),
         ("hmm_state_assignment.png",
@@ -226,15 +224,18 @@ def panel_today_deliverables(ax):
          "obj-050\nV1=V2"),
         ("hmm_model_selection.png",
          "obj-051\nHMM model\nselection"),
+        ("dynamics_synthesis_v1.png",
+         "obj-053\nSynthesis\n(paper)"),
+        ("cv_correlations_and_acf.png",
+         "obj-054\nACF τ\n+ CV ⊥"),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Today's deliverables (14 figures + 6 docs + 2 starter scripts) — "
-                 "ΔG + dynamics fully char., contact mech. closed, route D out, RMSF V1↔V2 r=0.998, "
-                 "EO floor ΔG≥2 kcal/mol, stepwise (p<1e-3), HMM Markovian, V1=V2 in rates",
-                 fontsize=7.8, fontweight="bold")
+    ax.set_title("Today's deliverables — ΔG + state pops + non-stat + breakpoints + HMM + Markovian + V1=V2 + model sel + synth + ACF "
+                 "(EO floor ΔG≥2 kcal/mol; stepwise p<1e-3; ACF τ_e ≈ Inter dwell; CV2 ⊥ CV0+CV1)",
+                 fontsize=7.5, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         path = FIG_DIR / name
         if path.exists():
@@ -297,11 +298,11 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v12)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v14)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→051 + 6 docs + 2 starter scripts  •  "
+        f"obj-038→054 + 7 docs + 2 starter scripts  •  "
         f"reviewer panel: 11/5/7 (was 5/6/12 morning)  •  "
-        f"EO floor ΔG ≥ 2 kcal/mol  •  HMM Markovian + V1=V2 in rates (obj-048→051)  •  "
+        f"EO floor ΔG ≥ 2 kcal/mol  •  HMM Markovian + V1=V2 + ACF τ_e ≈ Inter dwell  •  "
         f"PI sign-off Monday unblocks route A",
         fontsize=10.0, fontweight="bold", y=0.995,
     )

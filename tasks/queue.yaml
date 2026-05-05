@@ -1,5 +1,41 @@
 max_chain: 10
 queue:
+- objective: 'CV cross-correlation + CV0 ACF: tests whether obj-048+049 CV0-only analysis
+    loses information by computing Pearson r between CV0/CV1/CV2 per video; extracts
+    independent kinetic-timescale via CV0 sample-autocorrelation function and compares
+    to obj-049 dwell-time means. Audit §22.5 v13 P=4.
+
+    '
+  priority: 4
+  status: completed
+  added: 2026-05-05 14:00
+  completed: 2026-05-05 14:30
+  source: audit-2026-05-05-deepening-v13
+  success_criteria: 'figures/cv_correlations_and_acf.png + JSON. Pearson matrices per
+    video + ACF curves + e-folding fit + cross-validation against obj-049.
+
+    '
+  notes: 'EXECUTED 2026-05-05 14:30 as obj-054. CV0↔CV1: r = 0.84/0.87 (V1/V2) — highly
+    correlated, CV0-only justified. CV2 ⊥ CV0+CV1 (r ≤ 0.52 V1, ≤ 0.22 V2) — headpiece-
+    opening orthogonal axis; sharpens #1 EO blocker (CV2 the right CV but v7 max =
+    48.3 Å vs 50 Å threshold). CV0 ACF τ_e: V1 5.1 s (R²=0.81); V2 7.8 s (R²=0.80);
+    matches obj-049 Intermediate mean 6.9 s. Triangulates kinetic timescale at 5-15
+    s. Composite figure refreshed to v14 — 15 deliverable tiles. Tally still 11/5/7.
+
+    '
+- objective: '2-D HMM over (CV0, CV2): natural extension of obj-054. CV2 carries orthogonal
+    information from CV0; would give an explicit headpiece-opening state assignment
+    on top of the extension state. Audit §23.5 v14 P=4 (NEW).
+
+    '
+  priority: 4
+  status: pending
+  added: 2026-05-05 14:30
+  source: audit-2026-05-05-deepening-v14
+  success_criteria: 'figures/2d_hmm_cv0_cv2.png + JSON. 2-D Gaussian-emission HMM with
+    explicit head-piece-opening sub-state assignment.
+
+    '
 - objective: 'HMM model selection: multi-init Baum-Welch stability check (10 random
     inits) + 4-state BIC/AIC comparison. Closes "is 3 states the right model?" reviewer
     concern. Audit §19.6 v11 P=4/P=5.

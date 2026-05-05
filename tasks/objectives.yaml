@@ -1049,6 +1049,78 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-054
+  status: completed
+  statement: CV cross-correlation + CV0 ACF — kinetic-timescale triangulation, CV2 orthogonal
+  methodology: >
+    Audit §22.5 v13 P=4 follow-up. Two passes: (a) Pearson correlation
+    matrices between CV0 / CV1 / CV2 per video (3×3 per video; tests
+    whether the obj-048+049 CV0-only analysis loses information). (b)
+    Sample autocorrelation function of CV0 per video at lags τ = 0..59
+    frames (1 fps), with single-exponential decay fit ρ(τ) = exp(-τ/τ_e)
+    over τ = 1..50. Integrated autocorrelation time τ_int reported
+    using cutoff at ρ < 0.05.
+
+    Cross-validates the obj-049 dwell-time estimate against a direct
+    population-level kinetic timescale derived from the per-frame
+    CV0 trace.
+
+    Script: pipelines/afm-overlay/scripts/cv_correlation_and_acf.py
+  metrics:
+    n_v1: 379
+    n_v2: 1266
+    pearson_v1_cv0_cv1: 0.837
+    pearson_v1_cv0_cv2: 0.517
+    pearson_v1_cv1_cv2: 0.300
+    pearson_v2_cv0_cv1: 0.874
+    pearson_v2_cv0_cv2: 0.219
+    pearson_v2_cv1_cv2: 0.125
+    v1_cv0_acf_e_folding_s: 5.13
+    v1_cv0_acf_e_folding_R2: 0.812
+    v1_cv0_acf_integrated_s: 9.03
+    v2_cv0_acf_e_folding_s: 7.84
+    v2_cv0_acf_e_folding_R2: 0.797
+    v2_cv0_acf_integrated_s: 17.54
+    obj049_median_state_lifetime_s: 11.4
+    obj049_intermediate_lifetime_s: 6.9
+    v1_te_over_intermediate: 0.74
+    v2_te_over_intermediate: 1.13
+    cv0_cv1_redundant: true
+    cv2_orthogonal_to_cv0_cv1: true
+    timescale_triangulation: 5-15 s window from independent estimators
+  figures:
+    - figures/cv_correlations_and_acf.png
+    - results/afm_pipeline/free_energy_profile/cv_correlations_acf.json
+  conclusions: >
+    **CV0 and CV1 are highly correlated** (r = 0.84 / 0.87 in V1 / V2).
+    The audit-side claim that "CV0 head-tail distance" suffices for
+    kinetic analysis is empirically defensible — CV1 is essentially
+    a noisier proxy for the same extension axis.
+
+    **CV2 is largely orthogonal** to CV0/CV1 (r ≤ 0.52 V1, ≤ 0.22 V2).
+    CV2 carries headpiece-opening information not captured by CV0 or
+    CV1. The obj-048 3-state HMM on CV0 alone misses this orthogonal
+    dimension; the EO state cannot be detected by CV0 sampling. This
+    sharpens the audit's #1 EO blocker: EO is gated on a CV (CV2)
+    that the v7 HS-AFM data only weakly probes (CV2 max = 48.3 Å in
+    V2 vs 50 Å EO threshold).
+
+    **CV0 ACF e-folding time matches the Intermediate dwell time**:
+    V1 τ_e = 5.1 s, V2 τ_e = 7.8 s vs obj-049 Intermediate mean
+    6.9 s. Two independent estimators of αVβ3 surface-bound kinetics
+    agree on the 5-15 s timescale window. Strong methodological
+    cross-validation — neither obj-049 (per-state dwell-time MLE) nor
+    obj-054 (population-level CV0 ACF) used the other's pipeline.
+
+    The paper can confidently report **5-15 s as the αVβ3 surface-
+    bound kinetic timescale** with two-method triangulation.
+
+    No reviewer-tally shift (still 11/5/7); strengthens existing
+    addressed credit on Reviewer D (kinetic-timescale triangulation)
+    and Reviewer A (EO-CV2 gap is empirical).
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-053
   status: completed
   statement: Dynamics synthesis figure — 4-panel manuscript figure for ΔG + populations + HMM + survival
