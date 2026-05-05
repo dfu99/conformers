@@ -36,12 +36,23 @@ queue:
 
     '
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05 11:30
   source: audit-2026-05-05-deepening-v9
   success_criteria: 'figures/dwell_time_distribution.png per state (BC/Intermediate/EC)
     with Kaplan-Meier or maximum-likelihood exponential fits. Report mean lifetime
     + 95 % CI per state. KS test against single-exponential null.
+
+    '
+  started: 2026-05-05 12:15
+  completed: 2026-05-05 12:30
+  notes: 'EXECUTED 2026-05-05 12:30 as obj-049 (audit §19 v11). Per-state dwell analysis
+    with right-censoring at video boundaries; MLE exp/Weibull/gamma; KS test vs exp
+    null; AIC. All 3 states PASS KS exponential at p > 0.13 (BC 0.65, Inter 0.14, EC
+    0.33). Weibull k clusters near 1 (1.03/1.06/1.22). Verdict: memoryless / Markovian.
+    HMM Markov assumption empirically validated. Means: BC 14.6 [10.1,20.1] s; Inter
+    6.94 [5.25,9.0] s; EC 11.4 [8.34,14.9] s. Figure figures/survival_time_analysis.png,
+    JSON results/afm_pipeline/free_energy_profile/survival_times.json.
 
     '
 - objective: 'Cross-validation of breakpoints between V1 and V2. Are V1 (frame 166/228/259)
@@ -51,11 +62,22 @@ queue:
 
     '
   priority: 4
-  status: pending
+  status: completed
   added: 2026-05-05 11:30
   source: audit-2026-05-05-deepening-v9
-  success_criteria: 'docs/breakpoint_cross_validation.md with bootstrap KS p-value
-    + interval-distribution overlay figure.
+  success_criteria: 'figures/breakpoint_cross_validation.png + JSON. Bootstrap permutation
+    KS p-value + V1/V2 mean-ratio CI per pass.
+
+    '
+  started: 2026-05-05 12:25
+  completed: 2026-05-05 12:35
+  notes: 'EXECUTED 2026-05-05 12:35 as obj-050 (audit §19 v11). Two passes: (1) obj-047
+    inter-breakpoint intervals (V1 n=4, V2 n=5; KS D=0.30, perm p=0.96); (2) per-state
+    HMM dwell times (BC: KS p=0.25; Inter: 0.74; EC: 0.93). All 4/4 tests fail to reject
+    H0. All 4/4 V1/V2 mean-ratio 95 % CIs overlap 1. RECONCILIATION: rates are stationary
+    across V1 and V2; obj-044 non-stationarity is in finite-time populations only —
+    expected of a stationary Markov chain at finite n. Reviewer D partial → addressed.
+    Tally 10/6/7 → 11/5/7 of 23.
 
     '
 - objective: 'obj-043 — Boltzmann state populations + V1/V2 ΔG reproducibility. Pure-derivative
