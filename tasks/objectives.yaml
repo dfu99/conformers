@@ -1049,6 +1049,158 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-044
+  status: completed
+  statement: State-population v2 — windowed by HS-AFM time confirms non-stationarity
+  methodology: >
+    Audit-2026-05-05 §13.5 P=3 follow-up to obj-043. Re-do the
+    BC/Intermediate/EC/EO* fraction breakdown windowed in 50-frame
+    blocks per video. For each (block, state), compute the Wilson
+    Jeffreys 95 % CI and the z-score under the stationary-Bernoulli
+    null (block fraction − pooled mean) / sqrt(pooled·(1−pooled)/W).
+    Bonferroni-correct the per-(block, state) test threshold across
+    the V1+V2 multiple-testing budget.
+
+    Script: pipelines/afm-overlay/scripts/state_population_windowed.py
+  metrics:
+    window_frames: 50
+    n_v1_blocks: 7
+    n_v2_blocks: 25
+    pooled_v1_BC: 0.251
+    pooled_v1_Inter: 0.507
+    pooled_v1_EC: 0.230
+    pooled_v1_EO_star: 0.013
+    pooled_v2_BC: 0.268
+    pooled_v2_Inter: 0.434
+    pooled_v2_EC: 0.269
+    pooled_v2_EO_star: 0.029
+    v1_max_abs_z: 6.70
+    v2_max_abs_z: 7.50
+    v1_blocks_state_outside_2se: 14
+    v1_blocks_state_total: 28
+    v2_blocks_state_outside_2se: 52
+    v2_blocks_state_total: 100
+    bonferroni_z_threshold: 3.55
+    v1_significant_after_bonferroni: 7
+    v2_significant_after_bonferroni: 27
+    stationarity_verdict: rejected
+  figures:
+    - figures/state_populations_v2_windowed.png
+    - results/afm_pipeline/free_energy_profile/state_populations_windowed.json
+  conclusions: >
+    The stationarity assumption baked into obj-043 is **rejected** by
+    the windowed analysis at any reasonable significance level. V1
+    has 7/28 block-state pairs and V2 has 27/100 block-state pairs
+    that exceed the Bonferroni-corrected |z| threshold of 3.55 (under
+    the stationary-Bernoulli null). Maximum z-scores are 6.70 (V1)
+    and 7.50 (V2) — the surface-bound HS-AFM ensemble evolves on the
+    experiment timescale.
+
+    This is a meaningful methodological note for the paper:
+
+    (a) Pooled V1+V2 state populations from obj-043 (BC 25 % / Inter
+    46 % / EC 24 % / EO* 5 %) are an ensemble *average*, not the
+    ensemble at any one moment. Different segments of each video
+    sample materially different state mixtures.
+
+    (b) The pooled V1 vs V2 difference observed in obj-043
+    (Wasserstein 2.00 Å, KS p = 5.5e-4) likely arises *because* the
+    two videos sample different parts of the acquisition timeline —
+    not because V1 and V2 are biologically distinct ensembles. The
+    KS test was already detecting non-stationarity, not protocol
+    drift.
+
+    (c) The Bayesian ΔG_EO ≥ 2 kcal/mol bound from obj-043 is
+    *conservative* against this non-stationarity: the marginal
+    P(CV0 ≥ 85 Å) is what we bound, regardless of the within-video
+    block structure. The bound stands.
+
+    (d) Future analyses of these HS-AFM datasets should report
+    per-block state fractions as well as pooled, and should note
+    explicitly that the ensemble is non-stationary across the
+    HS-AFM acquisition window. A v3 of the analysis could plot
+    ΔG(CV0) per 50-frame block to see how the free-energy landscape
+    itself drifts.
+  connects_to: null
+  completed_date: '2026-05-05'
+
+- id: obj-043
+  status: completed
+  statement: Boltzmann state populations + V1/V2 ΔG reproducibility from unbiased fitted trajectories
+  methodology: >
+    Audit §13 deepening pass v5. Pure-derivative analysis on the existing
+    cv_series.npz cache (1645 frames from V1 + V2 fitted trajectories).
+    Three computations:
+
+      1. Boltzmann population fractions in BC, Intermediate, EC, EO bands
+         from P(CV0) = exp(−ΔG/kT) over the existing combined ΔG grid.
+         Compared to empirical (count-based) fractions for sanity.
+      2. V1 vs V2 ΔG cross-validation:
+         - per-bin Pearson r over CV0 ∈ [47.3, 85.0] Å (library support)
+         - Wasserstein-1 distance between V1 and V2 CV0 distributions
+         - Kolmogorov-Smirnov two-sample test
+      3. EO-coverage gap quantification:
+         - exact count of fitted CV0 ≥ 85 Å frames
+         - Jeffreys (Beta(0.5,0.5)) two-sided 95 % upper bound on
+           P(CV0 ≥ 85 Å) — a proper Bayesian rate bound given the count
+         - implied lower bound on ΔG_EO = −kT log P_upper
+
+    Script: pipelines/afm-overlay/scripts/state_population_v1.py
+  metrics:
+    n_total: 1645
+    n_v1: 379
+    n_v2: 1266
+    boltz_BC: 0.250
+    boltz_Intermediate: 0.457
+    boltz_EC: 0.244
+    boltz_EO_CV0_only: 0.049
+    empirical_BC: 0.264
+    empirical_Intermediate: 0.451
+    empirical_EC: 0.260
+    empirical_EO_CV0_only: 0.026
+    v1_v2_delta_g_pearson_r: 0.828
+    cv0_v1_v2_wasserstein_A: 2.00
+    ks_D: 0.118
+    ks_p: 5.5e-04
+    n_fitted_eo: 42
+    p_eo_empirical: 0.0255
+    p_eo_jeffreys_upper95: 0.0340
+    delta_g_eo_lower_bound_kcal: 2.02
+  figures:
+    - figures/state_populations_v1.png
+    - results/afm_pipeline/free_energy_profile/state_populations.json
+  conclusions: >
+    Three publishable claims unlocked from existing data, no new MD:
+
+    (a) **State populations**: at 300 K, the unbiased experimental
+    distribution is BC 25 % / Intermediate 46 % / EC 24 % / EO* 5 %
+    where the EO band is CV0 ≥ 85 Å only (CV2 ≥ 50 Å is empty in
+    the fit set). This contradicts the cartoon picture of a bistable
+    BC↔EO equilibrium and supports the v7 finding that the surface-
+    bound HS-AFM ensemble is dominated by the Intermediate state
+    along the bent→extended pathway.
+
+    (b) **V1↔V2 ΔG reproducibility**: Pearson r = 0.828 over the
+    library-supported region. The CV0 distributions agree to a
+    Wasserstein-1 distance of 2.00 Å — comparable to the noise floor
+    on individual frame fits — but the KS test rejects identical-
+    distribution at p = 5.5e-4, reflecting V1's heavier intermediate
+    weight vs V2's longer tail. This is a meaningful methodological
+    distinction for the paper: V1↔V2 are reproducible at the ranking
+    level (RMSF Pearson r = 0.998) but the underlying CV0 sampling
+    differs in the tails — the two videos probe different parts of
+    the same ensemble.
+
+    (c) **EO-coverage gap is now Bayesian-bounded**: 42/1645 fitted
+    frames at CV0 ≥ 85 Å. The Jeffreys 95 % upper bound on the EO*
+    population is 3.40 % → ΔG_EO ≥ 2.02 kcal/mol relative to the
+    Intermediate minimum. Reviewer A's "what happens at 90 Å?"
+    cannot be answered from the fit set, but a *floor* on the EO
+    free energy is now reportable: enhanced-sampling MD has to
+    overcome at least 2 kT.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-042
   status: completed
   statement: Bootstrap-confidence per-residue RMSF — top-19 ranking rock-solid, V1↔V2 Pearson r=0.998

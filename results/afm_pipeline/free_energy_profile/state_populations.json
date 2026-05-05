@@ -1,0 +1,32 @@
+{
+  "T_K": 300.0,
+  "kT_kcal": 0.5961,
+  "n_v1": 379,
+  "n_v2": 1266,
+  "boltzmann_populations": {
+    "BC": 0.24999584986641832,
+    "Intermediate": 0.4570101656887944,
+    "EC": 0.24410368284367856,
+    "EO_CV0_only": 0.04889030160110885
+  },
+  "empirical_populations": {
+    "BC": 0.26382978723404255,
+    "Intermediate": 0.451063829787234,
+    "EC": 0.25957446808510637,
+    "EO_CV0_only": 0.02553191489361702
+  },
+  "v1_v2_reproducibility": {
+    "delta_g_pearson_r_lib_support": 0.8283981650038292,
+    "delta_g_pearson_r_kT_clipped": 0.8283981650038292,
+    "cv0_wasserstein_A": 2.0041194427849525,
+    "ks_D": 0.11779564581275244,
+    "ks_p": 0.0005478315597349194
+  },
+  "eo_gap": {
+    "n_fitted_eo": 42,
+    "n_total": 1645,
+    "p_eo_empirical": 0.02553191489361702,
+    "p_eo_jeffreys_upper95": 0.034009043051923975,
+    "delta_g_eo_lower_bound_kcal": 2.0154908881802283
+  }
+}

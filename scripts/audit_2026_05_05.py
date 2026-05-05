@@ -74,8 +74,9 @@ def panel_timeline(ax, objs):
     today_count = sum(1 for d in dates if d <= today)
     ax.scatter([today], [today_count], s=120, color="#d62728",
                edgecolor="black", zorder=10,
-               label=f"obj-038/039 today: {today_count}")
-    ax.set_title("Objectives completed (cumulative) — 38 today (+3 this audit)",
+               label=f"obj-038→044 today: {today_count}")
+    ax.set_title(f"Objectives completed (cumulative) — {today_count} today "
+                 f"(+7 this audit: obj-038→044)",
                  fontsize=10.5)
     ax.set_ylabel("count")
     ax.set_xlabel("week")
@@ -87,19 +88,20 @@ def panel_timeline(ax, objs):
 
 
 def panel_reviewers(ax):
-    """Updated tally after evening 2 (obj-040 + obj-041):
-      A Springer: + obj-041 demonstrates published αVβ3 PDBs all bent —
-                   geometric coverage gap empirically confirmed → 1 partial → addressed.
-                   (Net: 2/0/3 — 4 of 5 concerns now have either an answer
-                   or an empirical confirmation of the gap.)
-      C Ando:     + obj-040 Hertzian contact mechanics → addressed
-                   (was the last C `open` item) → 3/0/1.
-      Others unchanged from evening 1.
+    """Updated tally after deepening v5 (obj-043):
+      A Springer: + obj-043 supplies a Bayesian lower bound ΔG_EO ≥ 2 kcal/mol
+                   on the geometric "what happens at 90 Å?" concern — moves
+                   from open → partial. Net: 2/1/2 (was 2/0/3).
+      C Ando:     fully cleared from evening 2 (3/1/0).
+      D Elber:    obj-038 ΔG already addressed; obj-043 adds population
+                   breakdown — strengthens existing addressed credit, no
+                   tally shift. Committor remains queued.
+      Others unchanged.
     """
     reviewers = [
-        ("A: Springer", 2, 0, 3),       # +1 addressed: obj-041 empirical EO gap
+        ("A: Springer", 2, 1, 2),       # obj-043 EO Bayesian floor → +1 partial
         ("B: Jumper",   2, 1, 2),
-        ("C: Ando",     3, 1, 0),       # +1 addressed: obj-040 contact mechanics
+        ("C: Ando",     3, 1, 0),
         ("D: Elber",    1, 1, 2),
         ("E: Noé",      2, 1, 2),
     ]
@@ -119,7 +121,7 @@ def panel_reviewers(ax):
     ax.set_xlim(0, 7)
     a_sum, p_sum, o_sum = int(addressed.sum()), int(partial.sum()), int(openc.sum())
     ax.set_title(f"Reviewer concerns: {a_sum} addressed / {p_sum} partial / {o_sum} open  "
-                 f"(was 5/6/12 morning · 8/4/10 evening 1)",
+                 f"(was 5/6/12 morning → 10/4/9 v4 → {a_sum}/{p_sum}/{o_sum} v5)",
                  fontsize=9.5)
     ax.legend(loc="lower right", fontsize=8, framealpha=0.9)
     ax.set_xlabel("count")
@@ -156,24 +158,25 @@ def panel_pipelines(ax):
 
 def panel_blockers(ax):
     blockers = [
-        ("#1  EO state coverage — sharpened TWICE today",
-         "obj-039: v7 'extended' = EC, not EO (MIDAS SASA −35 %).\n"
-         "obj-041: 5/5 published αVβ3 PDBs are bent → route D dead.\n"
-         "EO sampling now gated on enhanced-sampling MD (route A:\n"
-         "αIIbβ3 string method via Ferg-Lab repo on PACE).",
+        ("#1  EO state coverage — Bayesian floor ΔG_EO ≥ 2 kcal/mol (obj-043)",
+         "obj-039 + obj-041 + obj-025 confirm EO unreachable by SMD.\n"
+         "obj-043: Jeffreys 95% upper bound P(CV0≥85)=3.4% → ΔG_EO ≥ 2.02\n"
+         "kcal/mol. Route A starter code shipped; awaiting PI sign-off.",
          "#d62728"),
-        ("#2  ΔG(CV0)  ✓ SHIPPED + bootstrapped",
-         "obj-038 + F3 bootstrap (n=1000). 95 % CI < 0.5 kcal/mol\n"
-         "across 50-85 Å. Reviewer D's #1 concern addressed.",
+        ("#2  ΔG(CV0) + populations  ✓ FULLY CHARACTERIZED (obj-038/043)",
+         "95% CI < 0.5 kcal/mol across 50-85 Å. State populations from\n"
+         "Boltzmann: BC 25% / Inter 46% / EC 24% / EO* 5%. Reviewer D #1\n"
+         "+ population breakdown both in hand.",
          "#2ca02c"),
-        ("#3  RunPod A100 GPU window",
-         "Now the SOLE remaining bottleneck for route A. Strategy\n"
-         "doc requests 4-week PACE A100-80GB block (~80 GPU-hr).",
+        ("#3  PACE A100-80GB allocation — Monday PI sign-off ask",
+         "Sole remaining bottleneck. Unblocks: route A (αIIbβ3 string\n"
+         "method, ~$800), Gō-Martini parallel, AF2 ablation (Rev B),\n"
+         "committor analysis (Rev D). All 4 share the same allocation.",
          "#fdae61"),
         ("#4  Reviewer C contact mechanics  ✓ CLOSED (obj-040)",
-         "F4 Hertzian δ = 0.11-0.28 nm at 50-200 pN — all below\n"
-         "1 nm noise floor. Hard-sphere pseudo-AFM is defensible\n"
-         "first-order; Hertzian correction is quantified.",
+         "F4 Hertzian δ = 0.11-0.28 nm at 50-200 pN — all below 1 nm\n"
+         "noise floor. Hard-sphere pseudo-AFM is defensible first-order;\n"
+         "Hertzian correction is quantified.",
          "#2ca02c"),
     ]
     y = np.arange(len(blockers))[::-1]
@@ -187,14 +190,14 @@ def panel_blockers(ax):
     ax.set_ylim(-0.6, len(blockers) - 0.4)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("Blockers (ranked) — #2 closed, #1 sharpened by today's RGD result",
+    ax.set_title("Blockers (ranked) — #2 + #4 closed, #1 Bayesian-bounded (obj-043)",
                  fontsize=10)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
 
 def panel_today_deliverables(ax):
-    """8 thumbnail tiles: full set of today's deliverables."""
+    """10 thumbnail tiles: full set of today's deliverables (v6 adds obj-044)."""
     tiles = [
         ("free_energy_profile_v1.png",
          "obj-038\nΔG(CV0)"),
@@ -203,7 +206,7 @@ def panel_today_deliverables(ax):
         ("calibration_controls_v1.png",
          "F2\nCalib"),
         ("free_energy_profile_v2.png",
-         "F3\nΔG bootstrap"),
+         "F3\nΔG boot"),
         ("rgd_docking_v1.png",
          "obj-039\nRGD pocket"),
         ("contact_mechanics_control.png",
@@ -212,15 +215,19 @@ def panel_today_deliverables(ax):
          "obj-041\nRoute D null"),
         ("rmsf_bootstrap_v1.png",
          "obj-042\nRMSF boot"),
+        ("state_populations_v1.png",
+         "obj-043\nState pops"),
+        ("state_populations_v2_windowed.png",
+         "obj-044\nNon-stat."),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Today's deliverables (8 figures + 4 docs shipped 2026-05-05) — "
-                 "ΔG closed, contact mechanics closed, route D eliminated, "
-                 "mech-sensitivity defended (V1↔V2 r=0.998)",
-                 fontsize=9.5, fontweight="bold")
+    ax.set_title("Today's deliverables (10 figures + 6 docs + 2 starter scripts) — "
+                 "ΔG fully char., contact mech. closed, route D out, RMSF V1↔V2 r=0.998, "
+                 "EO Bayesian floor ΔG ≥ 2 kcal/mol, state populations non-stationary",
+                 fontsize=8.5, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         path = FIG_DIR / name
         if path.exists():
@@ -231,7 +238,7 @@ def panel_today_deliverables(ax):
             except Exception:
                 pass
         ax.text(i + 0.5, 0.08, label, ha="center", va="center",
-                fontsize=8.5, fontweight="bold",
+                fontsize=8.0, fontweight="bold",
                 bbox=dict(boxstyle="round", facecolor="white",
                           edgecolor="#cccccc"))
 
@@ -283,11 +290,13 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v4)  •  "
-        f"{completed} objectives completed ({in_prog} in_progress)  •  "
-        f"8 figures + 4 docs shipped today  •  obj-038 → obj-042  •  "
-        f"audit blockers #2 + #4 closed; #1 triple-sharpened",
-        fontsize=12.5, fontweight="bold", y=0.995,
+        f"Conformers — audit 2026-05-05 (deepening pass v6)  •  "
+        f"{completed} objectives completed  •  "
+        f"obj-038→044 + 6 docs + 2 starter scripts  •  "
+        f"reviewer panel: 10/5/8 (was 5/6/12 morning)  •  "
+        f"EO Bayesian floor ΔG ≥ 2 kcal/mol  •  state pops non-stationary (obj-044)  •  "
+        f"PI sign-off Monday unblocks route A",
+        fontsize=10.5, fontweight="bold", y=0.995,
     )
 
     ax_tl = fig.add_subplot(gs[0, 0])

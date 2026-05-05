@@ -1,0 +1,55 @@
+{
+  "window_frames": 50,
+  "state_bands": [
+    {
+      "name": "BC",
+      "cv0_lo": 0.0,
+      "cv0_hi": 65.0
+    },
+    {
+      "name": "Inter.",
+      "cv0_lo": 65.0,
+      "cv0_hi": 78.0
+    },
+    {
+      "name": "EC",
+      "cv0_lo": 78.0,
+      "cv0_hi": 85.0
+    },
+    {
+      "name": "EO*",
+      "cv0_lo": 85.0,
+      "cv0_hi": 1000.0
+    }
+  ],
+  "v1": {
+    "n_frames": 379,
+    "n_blocks": 7,
+    "pooled_fractions": [
+      0.25065963060686014,
+      0.5065963060686016,
+      0.22955145118733508,
+      0.013192612137203167
+    ],
+    "max_abs_z": 6.695521930815024,
+    "n_blocks_state_outside_2se": 14,
+    "n_blocks_state_total": 28,
+    "n_significant_bonferroni": 7
+  },
+  "v2": {
+    "n_frames": 1266,
+    "n_blocks": 25,
+    "pooled_fractions": [
+      0.2677725118483412,
+      0.4344391785150079,
+      0.2685624012638231,
+      0.029225908372827805
+    ],
+    "max_abs_z": 7.497281796234438,
+    "n_blocks_state_outside_2se": 52,
+    "n_blocks_state_total": 100,
+    "n_significant_bonferroni": 27
+  },
+  "bonferroni_z_threshold": 3.5463378873635376,
+  "stationarity_verdict": "non_stationary_after_bonferroni"
+}

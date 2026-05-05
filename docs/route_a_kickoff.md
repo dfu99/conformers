@@ -21,7 +21,7 @@ resSeq 1-959). Global alignment, gap_open=−10, gap_extend=−1.
 - **Alignment length**: 949 columns
 - **Sequence identity**: **38.6 %** — moderate; well within homology-
   port range
-- **Alignment score**: 167
+- **Alignment score**: 1507 (BLOSUM62, gap_open=−10, gap_extend=−1)
 
 Saved as `results/route_a/av_aiib_alignment.json` for downstream
 CV-remapping scripts.

@@ -516,3 +516,45 @@ Before diagnosing new failures, verify in order:
 - Command context: 3 ns OpenMM MD on solvated αVβ3 with `--report-interval 1500`.
 - Symptom: process dies silently with no error after ~1.5 hours of production. production.nc plateaus at ~1.4 GB. Total project dir ~1.6 GB.
 - Action: (a) use `--report-interval 5000` or higher (3× smaller .nc), (b) deploy a watchdog that deletes equilibration.nc and minimized.pdb once production starts (saves ~800 MB), (c) run a local backup loop that pulls production.nc to WD_BLACK every 30 min — as insurance, not as the primary fix.
+
+
+### Published αVβ3 Ectodomain PDBs Are All Bent (Route D Eliminated)
+- Command context: obj-041, scoring all 5 published full-ectodomain αVβ3 crystal structures (1JV2, 1L5G, 4G1E, 4G1M, 4MMX) on the v7 domain CVs.
+- Symptom: All 5 cluster tightly in CV0 ≈ 51-52 Å (BC band), CV1 ≈ 26-28 Å, CV2 ≈ 36 Å. Even cilengitide-bound 1L5G (open headpiece internally) crystallizes bent overall.
+- Root cause: full-ectodomain αVβ3 only crystallizes bent because the legs collapse onto the head in solution; cryo-EM of EO state exists but at lower resolution and not all deposited as PDBs.
+- Action: do NOT propose "download an EO PDB" as a route to EO endpoints for αVβ3. Enhanced-sampling MD (string method, metadynamics, REMD, Switching Gō-Martini) is the only path. Documented as `docs/eo_coverage_strategy.md` with the recommendation revised from "D + A" to "A primary + E parallel backup" after this finding.
+- Practical implication: empirically test "free shortcut" routes before betting on them in strategy docs. obj-041 took 1 day of $0 compute and saved a multi-week dead-end.
+
+### V1↔V2 Per-Residue RMSF Pearson r=0.998 Validates Pipeline Reproducibility
+- Command context: obj-042, head-aligned per-residue RMSF over V1 (379 frames) and V2 (1266 frames) fitted-trajectory CAs.
+- Symptom: Per-video means agree to 4 sig figs (V1=19.29, V2=19.30 Å), per-residue Pearson r = 0.998. 500-bootstrap CI width median 2.41 Å.
+- Action: this cross-video reproducibility level is much higher than typical pipeline noise — it cannot be a coding artefact since V1 and V2 are processed independently from raw HS-AFM streams. Use this as the headline reproducibility number in the paper. The mechanical-sensitivity ranking (obj-028 composite v2) is now quantitatively defended against finite-sample noise.
+- Practical implication: when two independent runs of the same pipeline give nearly-identical per-residue scalars, that's strong evidence for *both* the pipeline being deterministic and the underlying biology being reproducible across HS-AFM datasets.
+
+### BLOSUM62 αV-αIIb Pairwise Alignment: Per-Position Lookup Mandatory
+- Command context: route-A kickoff doc, αV(1JV2 chain A) ↔ αIIb(3FCS chain A) global alignment.
+- Symptom: 38.6 % identity, 949-column alignment. Naive expectation: a single global Δ residue offset would let us port αIIbβ3 CV definitions to αVβ3.
+- Reality: the offset varies through the structure: −2 to +0 at the N-terminus (W1-W2 propeller blades), +12 to +16 in the mid-propeller (W4-W7), +13 across genu + calf-1, +6 in calf-2, +4 in membrane-proximal. αV D218 (RGD-Arg pocket) maps to αIIb F231 — Δ +13 *and* non-conservative substitution.
+- Action: never use a single global Δ for cross-integrin homology porting. Always run a real pairwise alignment, save the per-position lookup table (results/route_a/av_aiib_alignment.json), and feed it through a remap script (pipelines/route_a/scripts/remap_cvs.py).
+- Practical implication: this is generally true for cross-paralog porting in protein families. Apparently-similar sequence lengths can hide structurally-meaningful insertion/deletion patterns that break naive offset assumptions.
+
+### Bayesian Rate Bound Salvages "We Don't Have Data There" Reviewer Concerns
+- Command context: obj-043 audit-2026-05-05 §13. Reviewer A asks "what happens at CV0 ≥ 90 Å?" but the v7 fitted set has 42/1645 frames at CV0 ≥ 85 Å and zero at CV2 ≥ 50 Å (the EO definition).
+- Naive response: "we don't sample EO; the answer requires enhanced-sampling MD" — concedes the reviewer's point fully.
+- Better response: report a **Jeffreys (Beta(0.5,0.5)) two-sided 95 % upper bound** on the unobserved-rate parameter. With n=1645 and k=42, P(CV0 ≥ 85 Å) ≤ 3.40 % at 95 % confidence → ΔG_EO ≥ −kT·log(0.034) = 2.02 kcal/mol relative to the Intermediate minimum. The reviewer's geometric question is still unanswered, but the *thermodynamic* claim is bounded.
+- Action: when a reviewer flags missing data in a region, look for a Bayesian rate bound or a one-sided concentration bound before retreating to "we need more compute". Often the existing data already constrains the unobserved region enough to make a publishable claim.
+- Practical implication: Jeffreys priors give well-calibrated bounds for Bernoulli-type tail-occupancy questions even when the count is zero or near-zero. Use scipy.stats.beta.ppf(1-α/2, 0.5+k, 0.5+n-k) — no asymptotic-normal approximation, valid for any (k, n).
+
+### Audit Document Integrity: Verify Numerical Claims Against On-Disk Data
+- Command context: audit-2026-05-05 §13.1 deepening pass v5. Cross-checked every figure, JSON, and metric cited in §1-§12 against on-disk reality.
+- Symptom: 23/23 cited artifacts existed but **1 numerical drift**: docs/route_a_kickoff.md and audit §12.2 claimed "Alignment score: 167" while the actual av_aiib_alignment.json has alignment_score=1507. The 167 figure was implausible (typical BLOSUM62 score for 949-column 38.6 %-identity alignment is 1000-1500), but had been silently propagated to two documents.
+- Root cause: a metric was likely derived incorrectly during initial doc drafting (wrong sum or mis-scaled value) and never re-verified against the saved JSON.
+- Action: any audit document that makes specific numerical claims should cycle through the source artifacts at least once and re-verify each metric. Add a per-pass integrity check as a routine step of audit deepening; it took ~10 minutes here and caught one real drift.
+- Practical implication: audit/decision documents are most useful when they're trusted; one wrong number in a high-stakes doc poisons the rest. Build a metric-extraction lineage so each claim can point to a specific JSON key and value.
+
+### HS-AFM State Populations Are Non-Stationary Across Acquisition Time
+- Command context: obj-044 audit §14. Windowed (50-frame block) re-analysis of obj-043's pooled state populations in V1 (379 frames) and V2 (1266 frames) of fitted CV0.
+- Symptom: under the stationary-Bernoulli null with Bonferroni-correction across V1+V2 (128 block-state pairs), V1 has 7/28 and V2 has 27/100 pairs significantly outside the pooled mean. Maximum |z| = 6.70 (V1) and 7.50 (V2).
+- Root cause: the surface-bound HS-AFM ensemble evolves on the experiment timescale — at 1 fps acquisition this is seconds-to-minutes. The pooled population fractions (BC 25 % / Inter 46 % / EC 24 % / EO* 5 %) are an ensemble *average* across this drift, not a steady-state distribution.
+- Action: when reporting fractional state populations from HS-AFM (or any time-series molecule sampling), always (a) check stationarity by windowed analysis, (b) include both the pooled average and a per-window breakdown in the supplementary, (c) note explicitly in the discussion that the ensemble is non-stationary if so. Pooling alone hides drift.
+- Practical implication: this also explains the V1↔V2 KS p = 5.5e-4 from obj-043 — V1 and V2 sample different parts of an evolving ensemble, not different ensembles. The cross-video reproducibility at the *ranking* level (RMSF Pearson r = 0.998) is preserved; only the marginal *distribution* differs in the tails.

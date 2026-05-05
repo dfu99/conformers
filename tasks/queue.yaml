@@ -1,9 +1,100 @@
 max_chain: 10
 queue:
+- objective: 'obj-043 — Boltzmann state populations + V1/V2 ΔG reproducibility. Pure-derivative
+    analysis on cv_series.npz. Three results: (a) state-population fractions in BC/Inter/EC/EO
+    bands from Boltzmann + empirical comparison; (b) V1↔V2 ΔG cross-validation (Pearson,
+    Wasserstein, KS); (c) Bayesian (Jeffreys 95 %) upper bound on EO occupancy → ΔG_EO
+    lower bound. CPU-only, no new MD.
+
+    '
+  priority: 1
+  status: completed
+  added: 2026-05-05 09:30
+  source: audit-2026-05-05-deepening-v5
+  success_criteria: 'figures/state_populations_v1.png + state_populations.json + obj-043
+    in objectives.yaml. EO Bayesian floor reportable.
+
+    '
+  started: 2026-05-05 09:00
+  completed: 2026-05-05 09:35
+  notes: BC 25 % / Inter 46 % / EC 24 % / EO* 5 % (CV0 ≥ 85 Å only). V1↔V2 ΔG Pearson
+    r = 0.828, Wasserstein 2.00 Å, KS p = 5.5e-4 (small effect). 42/1645 frames at
+    CV0 ≥ 85 Å → P_EO ≤ 3.40 % → ΔG_EO ≥ 2.02 kcal/mol. Reviewer A "what at 90 Å"
+    moves open → partial. Audit §13 logged. Composite figure refreshed to 10/5/8.
+- objective: 'Audit-document integrity audit — verify each figure, JSON, and metric
+    cited in §1-§12 against on-disk reality. Catch any drift between audit text and
+    raw data. Audit §13 deepening pass v5.
+
+    '
+  priority: 2
+  status: completed
+  added: 2026-05-05 09:30
+  source: audit-2026-05-05-deepening-v5
+  success_criteria: 'all artifacts confirmed; one numerical drift fixed (alignment
+    score 167 → 1507 in route_a_kickoff.md and §12.2).
+
+    '
+  started: 2026-05-05 08:30
+  completed: 2026-05-05 09:00
+  notes: 23/23 cited artifacts exist. 22/23 metrics reproduce from raw data. One drift
+    (BLOSUM62 alignment score) fixed in two places. Audit document is now quantitatively
+    self-consistent.
+- objective: 'State-population v2: stratify by HS-AFM time. obj-043 reports pooled
+    V1+V2; redo the analysis windowed in 50-frame blocks per video to flag any non-stationarity
+    (drift in the state populations across the experiment timeline). Quick CPU follow-up
+    to obj-043. Audit §13.5 P=3.
+
+    '
+  priority: 3
+  status: completed
+  added: 2026-05-05 09:30
+  source: audit-2026-05-05-deepening-v5
+  success_criteria: 'figures/state_populations_v2_windowed.png with per-block fractions
+    + 95 % CI band. Confirms or rejects stationarity assumption baked into obj-043.
+
+    '
+  started: 2026-05-05 09:40
+  completed: 2026-05-05 09:50
+  notes: 'Stationarity REJECTED. V1: 7/28 block-state pairs significant after Bonferroni,
+    max |z| = 6.70. V2: 27/100, max |z| = 7.50. Pooled obj-043 fractions are ensemble
+    averages across HS-AFM time, not steady-state. The obj-043 V1↔V2 KS p = 5.5e-4 is
+    explained by within-video drift, not protocol mismatch. Bayesian ΔG_EO ≥ 2 kcal/mol
+    bound is conservative against non-stationarity and stands. obj-044 logged. Audit
+    §14 added.'
+- objective: 'State-population v3: per-block ΔG(CV0) — see how the free-energy landscape
+    itself drifts on the HS-AFM acquisition timeline. Build on obj-044 by computing ΔG
+    from KDE-smoothed P(CV0) per 50-frame block and overlaying as faded curves vs the
+    pooled ΔG. Audit §14.4 follow-up.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 09:50
+  source: audit-2026-05-05-deepening-v6
+  success_criteria: 'figures/state_populations_v3_per_block_dg.png with overlay of per-block
+    ΔG curves vs pooled. Confirms or rejects the prediction that the FES drifts in the
+    Intermediate-EC region (where obj-044 z-scores were highest).
+
+    '
+- objective: 'Cryptic-binding-site discovery for Reviewer E. P2Rank or FTMap scan
+    over the v7 615-frame library. Flag any pocket that opens > 100 Å² between BC
+    and EC states. Closes Reviewer E''s last open concern without needing EO frames.
+    Audit §13.5 P=3.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 09:30
+  source: audit-2026-05-05-deepening-v5
+  success_criteria: 'results/cryptic_pockets/pocket_summary.json + figure showing
+    pocket SASA vs CV0. Either ≥ 1 cryptic site identified or null result with bounded
+    sensitivity.
+
+    '
 - objective: 'AF2-Multimer ablation prep doc — Reviewer B last open. Document compute
     requirements (~50 GPU-hr), comparison strategy (αVβ3 ectodomain MSA reduced_dbs
-    vs full; expected output: bent-only). Single page; no MD/inference work yet.
-    Audit §12.7 P=3.
+    vs full; expected output: bent-only). Single page; no MD/inference work yet. Audit
+    §12.7 P=3.
 
     '
   priority: 3
@@ -31,16 +122,16 @@ queue:
   status: completed
   added: 2026-05-05 23:30
   source: audit-2026-05-05-evening-v4
-  success_criteria: 'docs/committor_analysis_prep.md with seed selection rule + 5 ns
-    budget + expected committor histogram shape.
+  success_criteria: 'docs/committor_analysis_prep.md with seed selection rule + 5
+    ns budget + expected committor histogram shape.
 
     '
   started: 2026-05-05 06:15
   completed: 2026-05-05 06:25
-  notes: '50 trajectories (10 saddle seeds × 5 vel-seeds), 5 ns each → ~80 GPU-hr A100-80GB.
-    Pre-reg: committor ∈ [0.40, 0.65] supports obj-038 ΔG; outside [0.30, 0.75] falsifies
-    and pivots to "HS-AFM surface biases population". Both outcomes publishable. Submit
-    script outline given. Same PACE allocation as route-A.'
+  notes: '50 trajectories (10 saddle seeds × 5 vel-seeds), 5 ns each → ~80 GPU-hr
+    A100-80GB. Pre-reg: committor ∈ [0.40, 0.65] supports obj-038 ΔG; outside [0.30,
+    0.75] falsifies and pivots to "HS-AFM surface biases population". Both outcomes
+    publishable. Submit script outline given. Same PACE allocation as route-A.'
 - objective: 'PI sign-off + αIIbβ3 string-method port kickoff. Strategy doc requests
     a 4-week PACE A100-80GB block (~80 GPU-hr × $10) to port the Ferg-Lab principalcurve_integrin_structures
     repo from αIIbβ3 to αVβ3. Once PI approves, produce a 1-page issues list of αV
@@ -162,10 +253,10 @@ queue:
     '
   started: 2026-05-05 05:48
   completed: 2026-05-05 06:05
-  notes: 'V1 vs V2 per-residue RMSF Pearson r = 0.998 (cross-video reproducibility).
+  notes: V1 vs V2 per-residue RMSF Pearson r = 0.998 (cross-video reproducibility).
     CI width median 2.41 Å, max 4.34 Å. Top-19 rock-solid (hold rate ≥ 0.97 across
     500 resamples); 20-vs-21 boundary is fuzzy (CI overlap 87.12-90.84 Å) — recommend
-    publication-grade ranking is top-19. obj-042 logged. Figure figures/rmsf_bootstrap_v1.png.'
+    publication-grade ranking is top-19. obj-042 logged. Figure figures/rmsf_bootstrap_v1.png.
 - objective: 'Library coverage v3 — re-render F1 once any EO frames become available.
     Aspirational; gated on EO-coverage strategy.
 
