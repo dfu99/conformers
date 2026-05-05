@@ -1049,6 +1049,95 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-055
+  status: completed
+  statement: 2-D HMM over (CV0, CV2) — no EO support, CV2 is primary clustering axis
+  methodology: >
+    Audit §23.5 v14 P=4 follow-up to obj-054. From-scratch
+    multivariate Gaussian-emission HMM (no `hmmlearn`); forward-
+    backward in log-space + Baum-Welch EM with 2×2 covariance updates
+    + Viterbi decoding. Fit 3-state and 4-state on the V1+V2
+    concatenated (CV0, CV2) trace (n=1645). 4-state init seeded at
+    (CV0=85, CV2=55) deliberately, to test whether the EM converges
+    to an EO state if the data supports it. BIC and AIC compared;
+    free parameters per K = 2K + 3K + (K-1) + K(K-1) = 5K + K² - 1.
+
+    Script: pipelines/afm-overlay/scripts/hmm_2d_cv0_cv2.py
+  metrics:
+    n: 1645
+    cv0_range_low: 9.9
+    cv0_range_high: 91.5
+    cv2_range_low: 7.6
+    cv2_range_high: 48.3
+    cv2_max_under_eo_threshold: true   # 48.3 < 50
+    k3_log_likelihood: -10138.95
+    k3_n_params: 23
+    k3_BIC: 20448.23
+    k3_AIC: 20323.90
+    k3_state0_mu_cv0: 65.77
+    k3_state0_mu_cv2: 30.42
+    k3_state0_sigma_cv0: 12.49
+    k3_state0_sigma_cv2: 6.58
+    k3_state0_pi: 0.355
+    k3_state1_mu_cv0: 67.86
+    k3_state1_mu_cv2: 40.29
+    k3_state1_pi: 0.341
+    k3_state2_mu_cv0: 80.55
+    k3_state2_mu_cv2: 40.09
+    k3_state2_pi: 0.303
+    k4_log_likelihood: -9897.80
+    k4_n_params: 35
+    k4_BIC: 20054.80
+    k4_AIC: 19865.60
+    k4_seeded_state_initial_cv2: 55.0
+    k4_seeded_state_final_cv2: 41.63    # drifted DOWN, not up
+    k4_highest_cv2_state_pi: 0.100
+    delta_BIC_4_minus_3: -393.43
+    delta_AIC_4_minus_3: -458.30
+    preferred_by_BIC: 4-state
+    preferred_by_AIC: 4-state
+    eo_state_recovered: false
+    eo_threshold_cv2: 50.0
+  figures:
+    - figures/hmm_2d_cv0_cv2.png
+    - results/afm_pipeline/free_energy_profile/hmm_2d_cv0_cv2.json
+  conclusions: >
+    **CRITICAL FINDING: the v7 fitted data does not support an EO
+    state, even when given CV2 as an explicit dimension.** The
+    deliberately-seeded 4-state HMM (4th state initialized at
+    CV2=55) saw its 4th-state CV2 mean drift DOWN from 55 to 41.63 Å
+    during EM convergence — well below the 50 Å EO threshold. The
+    data prefers to use the 4th state for an extension-axis split
+    (EC at 77.3 vs extended-EC at 83.1 Å) rather than for an EO mode.
+
+    **Three independent negative results now converge on the EO
+    blocker**: (i) obj-025 SMD k=1000 only opens CV2 by 0.9 Å in
+    3 ns; (ii) obj-041 all 5 published full-ectodomain αVβ3 crystals
+    are bent in CV2; (iii) obj-055 2-D HMM with explicit CV2
+    dimension finds zero EO frames. The EO blocker is empirical.
+
+    **The 2-D HMM clusters primarily by CV2, not CV0**. The 3-state
+    2-D HMM splits the data into a low-CV2 mode (CV2 ≈ 30 ± 6.6,
+    n_pi=0.355) and two narrow high-CV2 modes (CV2 ≈ 40, σ ≈ 2)
+    that further split by CV0 into Inter (67.9) vs EC (80.6). This
+    is a different state partition than obj-048's 1-D CV0-only HMM
+    (which recovers the textbook BC/Inter/EC). Both partitions are
+    correct under their objective functions; obj-048 is for the
+    extension axis, obj-055 is for the headpiece-opening axis.
+
+    **4-state preferred by ΔBIC = -393, ΔAIC = -458** (well past
+    decisive ΔBIC > 10 threshold). The 4th state at (83.1, 41.6) Å
+    is a sub-EC, not EO.
+
+    For the paper: obj-048 1-D HMM remains the main-text state
+    assignment (matches Springer 2014); obj-055 2-D HMM is the
+    supplement that documents the headpiece-opening dimension and
+    makes the EO-blocker case empirically airtight. Reviewer-A EO
+    coverage strengthened (3 independent negatives), Reviewer-D HMM
+    defense now spans 1-D and 2-D variants. Tally still 11/5/7 of 23.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-054
   status: completed
   statement: CV cross-correlation + CV0 ACF — kinetic-timescale triangulation, CV2 orthogonal

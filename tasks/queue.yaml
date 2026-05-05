@@ -11,8 +11,8 @@ queue:
   added: 2026-05-05 14:00
   completed: 2026-05-05 14:30
   source: audit-2026-05-05-deepening-v13
-  success_criteria: 'figures/cv_correlations_and_acf.png + JSON. Pearson matrices per
-    video + ACF curves + e-folding fit + cross-validation against obj-049.
+  success_criteria: 'figures/cv_correlations_and_acf.png + JSON. Pearson matrices
+    per video + ACF curves + e-folding fit + cross-validation against obj-049.
 
     '
   notes: 'EXECUTED 2026-05-05 14:30 as obj-054. CV0↔CV1: r = 0.84/0.87 (V1/V2) — highly
@@ -29,11 +29,23 @@ queue:
 
     '
   priority: 4
-  status: pending
+  status: completed
   added: 2026-05-05 14:30
+  completed: 2026-05-05 15:00
   source: audit-2026-05-05-deepening-v14
-  success_criteria: 'figures/2d_hmm_cv0_cv2.png + JSON. 2-D Gaussian-emission HMM with
-    explicit head-piece-opening sub-state assignment.
+  success_criteria: 'figures/hmm_2d_cv0_cv2.png + JSON. 2-D Gaussian-emission HMM
+    with explicit head-piece-opening sub-state assignment.
+
+    '
+  started: 2026-05-05 14:35
+  notes: 'EXECUTED 2026-05-05 15:00 as obj-055 (audit §24 v15). 3-state 2-D HMM clusters
+    PRIMARILY by CV2: low-CV2 mode (CV2≈30) + two narrow high-CV2 modes (CV2≈40) split
+    by CV0 (Inter 67.9 / EC 80.6) — different partition than obj-048''s CV0-only BC/Inter/EC.
+    4-state preferred by ΔBIC=-393. CRITICAL: 4-state seeded at (CV0=85, CV2=55) saw
+    its 4th-state CV2 mean drift DOWN to 41.63 Å during EM — v7 data does not support
+    an EO state even with CV2 explicit. Three independent EO negatives now converge
+    (obj-025 + obj-041 + obj-055). Reviewer A EO coverage strengthened. Tally still
+    11/5/7. Audit §24 v15 added. Composite figure to refresh in next pass.
 
     '
 - objective: 'HMM model selection: multi-init Baum-Welch stability check (10 random
