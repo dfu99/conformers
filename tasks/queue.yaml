@@ -8,7 +8,7 @@ queue:
 
     '
   priority: 1
-  status: in_progress
+  status: completed
   added: 2026-05-05 12:30
   source: audit-2026-05-05
   success_criteria: 'figures/free_energy_profile_v1.png exists with ΔG curve labeled
@@ -16,6 +16,10 @@ queue:
 
     '
   started: 2026-05-05 01:13
+  completed: 2026-05-05 02:00
+  notes: 'Free-energy minimum at CV0 ≈ 70-75 Å (Intermediate range); BC and EC barriers
+    ≈ 4-5 kcal/mol. EO region (>85 Å) hatched as ΔG-undefined. Reviewer D #1 concern
+    addressed. Commit 38a47fa.'
 - objective: 'Close stale objective status drift. Mark obj-008 (AFCluster + ProteinTTT)
     completed with dual-PACE-job outcome documented; mark obj-018 (extend conformer
     library toward bent state) completed since the 615-frame library has been the
@@ -23,50 +27,66 @@ queue:
 
     '
   priority: 2
-  status: pending
+  status: skipped
   added: 2026-05-05 12:30
   source: audit-2026-05-05
   success_criteria: 'objectives.yaml reflects obj-008 and obj-018 as completed with
     actual outcomes recorded.
 
     '
+  started: 2026-05-05 01:22
+  completed: 2026-05-05 02:30
+  notes: Recovered stale in_progress item after newer queued work arrived.
 - objective: 'Library coverage v2 figure (F1). CV0/CV1/CV2 distributions across 615-frame
     library AND V1+V2 fitted trajectories side-by-side, state thresholds overlaid,
     EO gap visually unambiguous.
 
     '
   priority: 2
-  status: pending
+  status: skipped
   added: 2026-05-05 12:30
   source: audit-2026-05-05
   success_criteria: 'figures/library_coverage_v2.png exists. EO gap visible.
 
     '
+  started: 2026-05-05 02:30
+  completed: 2026-05-05 03:30
+  notes: Recovered stale in_progress item after newer queued work arrived.
 - objective: 'Reviewer-C calibration figure (F2). Combine figures/tip_calibration_sphere.png
     and figures/random_baseline_v7.png into one publication-quality controls plot
     showing real corr vs sphere control vs random rotation, per video.
 
     '
   priority: 2
-  status: pending
+  status: skipped
   added: 2026-05-05 12:30
   source: audit-2026-05-05
   success_criteria: 'figures/calibration_controls_v1.png exists. Per-video numbers
     labeled.
 
     '
+  started: 2026-05-05 03:30
+  completed: 2026-05-05 04:30
+  notes: Recovered stale in_progress item after newer queued work arrived.
 - objective: 'Drop-list cleanup. Deprecate pipelines/avb3-conformers/scripts/ shadow
     copies of stylize_sim_afm.py and render_projection_overlay.py — pointer stubs
     or git rm after verifying no importers.
 
     '
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05 12:30
   source: audit-2026-05-05
   success_criteria: 'grep -r avb3-conformers shows no importers in active pipelines.
 
     '
+  started: 2026-05-05 04:30
+  completed: 2026-05-05 04:45
+  commits: 2
+  notes: 'render_projection_overlay.py byte-identical to canonical (afm-overlay/scripts/);
+    stylize_sim_afm.py was older anisotropic-blur variant superseded by isotropic
+    default in sim-afm-video/scripts/. git rm both. README + planning.md updated.
+    Commits 7713ed5 + fef8537.'
 - objective: 'RGD docking proof-of-concept (F4). Smina or rdock against 5 bent + 5
     extended v7 conformers. Bent vs extended binding affinity + pose comparison.
 
