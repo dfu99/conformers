@@ -8,13 +8,14 @@ queue:
 
     '
   priority: 1
-  status: pending
+  status: in_progress
   added: 2026-05-05 21:30
   source: audit-2026-05-05-evening
   success_criteria: 'docs/eo_coverage_strategy.md with three routes scored on time,
     cost, success probability. PI sign-off requested.
 
     '
+  started: 2026-05-05 05:04
 - objective: 'F4 contact-mechanics control (Reviewer C last open). Render a 2 nm probe
     sphere under Hertzian compression at known force; compare to hard-sphere geometric
     pseudo-AFM; report systematic offset. Closes Reviewer C #4 blocker in audit §10.8.
