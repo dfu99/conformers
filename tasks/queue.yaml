@@ -1,5 +1,33 @@
 max_chain: 10
 queue:
+- objective: 'AF2-Multimer ablation prep doc — Reviewer B last open. Document compute
+    requirements (~50 GPU-hr), comparison strategy (αVβ3 ectodomain MSA reduced_dbs
+    vs full; expected output: bent-only). Single page; no MD/inference work yet.
+    Audit §12.7 P=3.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 23:30
+  source: audit-2026-05-05-evening-v4
+  success_criteria: 'docs/af2_multimer_ablation_prep.md with compute budget + comparison
+    plan + expected outcome.
+
+    '
+- objective: 'Committor analysis prep doc — Reviewer D last open. Seed unbiased MD
+    from ΔG-saddle CV0 ≈ 67 Å (per obj-038). Count which side of BC↔EC barrier each
+    trajectory commits to in 5 ns. Plan only; document seeds + script outline. Audit
+    §12.7 P=3.
+
+    '
+  priority: 3
+  status: pending
+  added: 2026-05-05 23:30
+  source: audit-2026-05-05-evening-v4
+  success_criteria: 'docs/committor_analysis_prep.md with seed selection rule + 5 ns
+    budget + expected committor histogram shape.
+
+    '
 - objective: 'PI sign-off + αIIbβ3 string-method port kickoff. Strategy doc requests
     a 4-week PACE A100-80GB block (~80 GPU-hr × $10) to port the Ferg-Lab principalcurve_integrin_structures
     repo from αIIbβ3 to αVβ3. Once PI approves, produce a 1-page issues list of αV

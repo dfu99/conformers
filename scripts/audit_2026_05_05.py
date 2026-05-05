@@ -194,14 +194,14 @@ def panel_blockers(ax):
 
 
 def panel_today_deliverables(ax):
-    """7 thumbnail tiles: full set of today's deliverables."""
+    """8 thumbnail tiles: full set of today's deliverables."""
     tiles = [
         ("free_energy_profile_v1.png",
          "obj-038\nΔG(CV0)"),
         ("library_coverage_v2.png",
-         "F1\nLib coverage v2"),
+         "F1\nLib cov v2"),
         ("calibration_controls_v1.png",
-         "F2\nCalib controls"),
+         "F2\nCalib"),
         ("free_energy_profile_v2.png",
          "F3\nΔG bootstrap"),
         ("rgd_docking_v1.png",
@@ -210,14 +210,17 @@ def panel_today_deliverables(ax):
          "obj-040\nHertz F4"),
         ("library_coverage_v3.png",
          "obj-041\nRoute D null"),
+        ("rmsf_bootstrap_v1.png",
+         "obj-042\nRMSF boot"),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Today's deliverables (7 figures shipped 2026-05-05) — "
-                 "ΔG closed, contact mechanics closed, route D eliminated",
-                 fontsize=10, fontweight="bold")
+    ax.set_title("Today's deliverables (8 figures + 4 docs shipped 2026-05-05) — "
+                 "ΔG closed, contact mechanics closed, route D eliminated, "
+                 "mech-sensitivity defended (V1↔V2 r=0.998)",
+                 fontsize=9.5, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         path = FIG_DIR / name
         if path.exists():
@@ -280,10 +283,11 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v3)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v4)  •  "
         f"{completed} objectives completed ({in_prog} in_progress)  •  "
-        f"7 figures shipped today  •  obj-040 Hertz + obj-041 route-D-null",
-        fontsize=13, fontweight="bold", y=0.995,
+        f"8 figures + 4 docs shipped today  •  obj-038 → obj-042  •  "
+        f"audit blockers #2 + #4 closed; #1 triple-sharpened",
+        fontsize=12.5, fontweight="bold", y=0.995,
     )
 
     ax_tl = fig.add_subplot(gs[0, 0])
