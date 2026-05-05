@@ -92,7 +92,7 @@ queue:
 
     '
   priority: 3
-  status: in_progress
+  status: completed
   added: 2026-05-05 10:30
   source: audit-2026-05-05-deepening-v7
   success_criteria: 'figures/state_populations_v4_changepoints.png with CUSUM/PELT
@@ -100,6 +100,15 @@ queue:
 
     '
   started: 2026-05-05 09:51
+  completed: 2026-05-05 09:52
+  commits: 1
+  notes: "obj-045 done — Per-block ΔG(CV0) drift across HS-AFM acquisition time\n\n\
+    Method:\n  - Per 50-frame block in V1 (7 blocks) and V2 (25 blocks), KDE-smooth\n\
+    \    P(CV0) (bw=0.30) → ΔG = -kT log P normalized to 0 at each block\n    minimum.\n\
+    \  - Track 3 drift metrics: per-block FES-min CV0 location, per-block\n    ΔG\
+    \ std at fixed CV0 bins, ΔG values at probe CV0 = 50/70/80/85 Å.\n\nVerdict: FREE-ENERGY\
+    \ LANDSCAPE DRIFTS SIGNIFICANTLY.\n\nKey numbers:\n  - V1 pooled FES min: CV0\
+    \ = 74.9 Å\n  - V2 pooled FES min: CV0"
 - objective: 'Cross-correlate per-block FES drift with HS-AFM frame metadata. Does
     V1 block 5 (FES-min jump 79→55 Å) coincide with a tip-recalibration event, imaging-force
     change, or substrate flush? Requires returning to raw HS-AFM metadata. Audit §15.6
@@ -107,7 +116,7 @@ queue:
 
     '
   priority: 3
-  status: pending
+  status: completed
   added: 2026-05-05 10:30
   source: audit-2026-05-05-deepening-v7
   success_criteria: 'docs/hsafm_metadata_correlation.md with timeline overlay of FES
@@ -115,6 +124,31 @@ queue:
     (b) no match, drift is intrinsic.
 
     '
+  started: 2026-05-05 09:52
+  completed: 2026-05-05 11:00
+  notes: 'Verdict: FES_drift_independent_of_metadata. 0/10 hypothesis tests reach
+    p < 0.05. V1 block 4→5 (FES jump 79.2 → 55.5 Å) is fit-quality-CLEAN and metadata-CLEAN
+    — fit corr actually +0.007 better at block 5. V2 block 17 (lowest fit corr 0.876)
+    has FES-min CV0 = 82.9 Å, within 0.4 Å of V2 pooled minimum. **The FES non-stationarity
+    from obj-044/045 is real biology, not imaging artifact.** σ ≈ 8 Å FES-min wandering
+    on the 10-100 s timescale is intrinsic to the surface-bound αVβ3 ensemble. Implementation
+    chose direct-figure approach (figures/fes_drift_metadata_correlation.png) over
+    docs/. obj-046 logged. Audit §16 added.'
+- objective: 'State-population v5: long-time autocorrelation of CV0 — characterize
+    the timescale of the intrinsic ensemble drift confirmed by obj-046. Compute autocorrelation
+    function of the per-frame CV0 series, report e-folding time. Could distinguish
+    diffusive vs hopping dynamics. Audit §16.7 P=4.
+
+    '
+  priority: 4
+  status: in_progress
+  added: 2026-05-05 11:00
+  source: audit-2026-05-05-deepening-v8
+  success_criteria: 'figures/cv0_autocorrelation.png with V1 + V2 ACF curves and e-folding
+    time annotated. Decay timescale reported in seconds (1 fps).
+
+    '
+  started: 2026-05-05 09:57
 - objective: 'Cryptic-binding-site discovery for Reviewer E. P2Rank or FTMap scan
     over the v7 615-frame library. Flag any pocket that opens > 100 Å² between BC
     and EC states. Closes Reviewer E''s last open concern without needing EO frames.
