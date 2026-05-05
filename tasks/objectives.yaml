@@ -1049,6 +1049,52 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-040
+  status: completed
+  statement: F4 Hertzian contact-mechanics control closes Reviewer C blocker
+  methodology: >
+    Implemented `pipelines/sim-afm-video/scripts/contact_mechanics_control.py`.
+    Compared the hard-sphere geometric paraboloid dilation (currently
+    used in `simulate_afm_video.py`) against a Hertzian contact-mechanics
+    model on a 2 nm probe sphere imaged with a 1.5 nm Si tip across
+    HS-AFM-typical imaging forces (50, 100, 200 pN). Material constants
+    from Müller/Ando HS-AFM literature: E_protein = 1 GPa, E_tip = 130 GPa
+    (Si), ν = 0.3 both. Computed effective radius R_eff = 0.857 nm and
+    effective modulus E* = 1.09 GPa. For each force computed Hertz
+    indentation δ = (9F²/(16 E*² R_eff))^(1/3), contact radius a, and
+    peak contact pressure p_max. Rendered side-by-side height maps,
+    cross-section overlay, and δ-vs-F curve.
+  metrics:
+    R_eff_nm: 0.857
+    E_star_GPa: 1.09
+    force_50_pN_indent_nm: 0.111
+    force_100_pN_indent_nm: 0.177
+    force_200_pN_indent_nm: 0.281
+    force_50_pN_contact_radius_nm: 0.309
+    force_100_pN_contact_radius_nm: 0.389
+    force_200_pN_contact_radius_nm: 0.490
+    force_50_pN_p_max_MPa: 250
+    force_100_pN_p_max_MPa: 315
+    force_200_pN_p_max_MPa: 397
+    HS_AFM_noise_floor_nm: 1.0
+    max_height_loss_pct_at_200pN: 14
+  figures:
+    - figures/contact_mechanics_control.png
+    - results/afm_pipeline/contact_mechanics/contact_mechanics_control.png
+  conclusions: >
+    Hertzian indentation across the HS-AFM imaging-force range
+    (50-200 pN) ranges 0.11-0.28 nm — 5-14 % of the 2 nm probe-sphere
+    height. All values sit BELOW the 1 nm vertical noise floor
+    (Ando 2013 review). Hard-sphere pseudo-AFM is therefore a
+    defensible first-order model for the v7 fitting pipeline:
+    Hertzian correction is a known, quantifiable systematic in
+    the noise-bounded regime, not a confounder for fit conclusions.
+    Reviewer-C contact-mechanics #4 audit blocker closes. Optional
+    follow-up: an `--hertz-force` flag on `simulate_afm_video.py`
+    for downstream correction; document offset in figure captions.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-039
   status: completed
   statement: RGD-binding-pocket accessibility — bent vs extended αVβ3 v7 conformers

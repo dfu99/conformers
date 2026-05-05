@@ -8,7 +8,7 @@ queue:
 
     '
   priority: 1
-  status: in_progress
+  status: completed
   added: 2026-05-05 21:30
   source: audit-2026-05-05-evening
   success_criteria: 'docs/eo_coverage_strategy.md with three routes scored on time,
@@ -16,19 +16,34 @@ queue:
 
     '
   started: 2026-05-05 05:04
+  completed: 2026-05-05 05:08
+  commits: 2
+  notes: "EO-COVERAGE STRATEGY — done 2026-05-05\n\nDELIVERABLE: docs/eo_coverage_strategy.md\
+    \ (178 lines, 46 table rows)\n\n5 ROUTES SCORED:\n  A. αIIbβ3 string method (Ferg-Lab\
+    \ repo cloned on PACE)\n     — 6-8 wk, ~$800 PACE, ~70% success\n  B. Funnel metadynamics\
+    \ + Plumed (needs GROMACS)\n     — 4 wk, ~$1200, ~50% success\n  C. T-REMD 8 replicas\n\
+    \     — 3 wk, ~$1500, ~40% success\n  D. Published EO-state PDBs (1L5G + 2VDR)\n\
+    \     — 1 day, $0, >95% success\n  E. Switching Gō-Martini CG\n     — 2 wk, ~$200,\
+    \ ~60% success"
 - objective: 'F4 contact-mechanics control (Reviewer C last open). Render a 2 nm probe
     sphere under Hertzian compression at known force; compare to hard-sphere geometric
     pseudo-AFM; report systematic offset. Closes Reviewer C #4 blocker in audit §10.8.
 
     '
   priority: 2
-  status: pending
+  status: completed
   added: 2026-05-05 21:30
   source: audit-2026-05-05-evening
   success_criteria: 'figures/contact_mechanics_control.png with Hertzian-vs-hard-sphere
     overlay; absolute height offset reported.
 
     '
+  started: 2026-05-05 05:08
+  completed: 2026-05-05 05:25
+  notes: 'R_eff=0.857 nm, E*=1.09 GPa (E_protein=1 GPa, E_tip=130 GPa, ν=0.3). At
+    HS-AFM imaging forces 50/100/200 pN: δ=0.11/0.18/0.28 nm — all below 1 nm noise
+    floor. Hard-sphere pseudo-AFM is defensible first-order; Hertzian correction is
+    a known quantifiable systematic. Reviewer C #4 closes. obj-040 logged.'
 - objective: 'Bootstrap on per-residue RMSF (obj-027 follow-up). Analogous to F3 ΔG
     bootstrap, but resample the rotation-corrected RMSF over the 615-frame library
     + V1+V2 fitted trajectories. Establishes finite-sample noise floor for the mechanical-sensitivity
@@ -36,13 +51,14 @@ queue:
 
     '
   priority: 3
-  status: pending
+  status: in_progress
   added: 2026-05-05 21:30
   source: audit-2026-05-05-evening
   success_criteria: 'figures/rmsf_bootstrap_v1.png with per-residue 95 % bands; top-20
     flexible-residue ranking annotated with whether ranking survives 95 % CI overlap.
 
     '
+  started: 2026-05-05 05:11
 - objective: 'Library coverage v3 — re-render F1 once any EO frames become available.
     Aspirational; gated on EO-coverage strategy.
 
