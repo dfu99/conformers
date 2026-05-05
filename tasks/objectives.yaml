@@ -1000,6 +1000,55 @@ objectives:
   connects_to: null
   completed_date: '2026-05-03'
 
+- id: obj-038
+  status: completed
+  statement: Experimental ΔG(CV0) from V1+V2 unbiased fitted trajectories addresses Reviewer D
+  methodology: >
+    Used the 1645 unbiased frames from the AFM-overlay pipeline
+    (V1=379 + V2=1266, fitted_coords_median_reanchored.npy) as an
+    experimental sample of P(CV0). Computed CV0 = αV head-thigh ↔
+    αV calf centroid distance per frame in Å (mdtraj loads in nm,
+    ×10 in pipeline convention). KDE-smoothed P(CV0) with bandwidth
+    0.18, then ΔG(CV0) = −kT log P(CV0) at T=300 K (kT=0.596 kcal/mol),
+    normalized to ΔG=0 at the global minimum. New script
+    `pipelines/afm-overlay/scripts/free_energy_profile.py`. Figure
+    overlays state bands (BC ≤65, Intermediate, EC ≥78) and hatches
+    the EO region (>85 Å) where library coverage is missing so the
+    ΔG estimate is undefined.
+  metrics:
+    n_frames_v1: 379
+    n_frames_v2: 1266
+    n_frames_total: 1645
+    cv0_mean_v1_A: 70.41
+    cv0_mean_v2_A: 71.05
+    cv0_range_v1_A: "31.8-88.9"
+    cv0_range_v2_A: "9.9-91.5"
+    delta_g_minimum_cv0_A: "≈70-75 (Intermediate)"
+    bc_barrier_estimate_kcal: "≈4-5"
+    ec_barrier_estimate_kcal: "≈4-5"
+    library_coverage_min_A: 47.3
+    library_coverage_max_A: 85.0
+    eo_coverage_pct: 0
+    T_kelvin: 300
+    kT_kcal: 0.596
+  figures:
+    - figures/free_energy_profile_v1.png
+    - results/afm_pipeline/free_energy_profile/free_energy.png
+  conclusions: >
+    The free-energy minimum sits in the Intermediate range (CV0 ≈
+    70-75 Å), not at either canonical state — consistent with
+    multi-state equilibrium under HS-AFM imaging conditions. V1
+    shows bimodal weight (BC + Intermediate/EC), V2 is EC-biased,
+    explaining why the v7 pipeline returns different state fractions
+    on the two videos. Reviewer D's "where is the ΔG?" demand is
+    addressed without needing additional MD: the existing 1645
+    unbiased frames suffice. Hard limitation: ΔG is undefined for
+    CV0 > 85 Å because the library has zero EO templates — this
+    gap is now visualized rather than implicit. Next step: bootstrap
+    confidence bands on the ΔG curve (audit follow-up F3).
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-029
   status: completed
   statement: First-principles bent-state geometry predicts αIIbβ3 more bent than αVβ3
