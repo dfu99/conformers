@@ -74,9 +74,9 @@ def panel_timeline(ax, objs):
     today_count = sum(1 for d in dates if d <= today)
     ax.scatter([today], [today_count], s=120, color="#d62728",
                edgecolor="black", zorder=10,
-               label=f"obj-038→044 today: {today_count}")
+               label=f"obj-038→045 today: {today_count}")
     ax.set_title(f"Objectives completed (cumulative) — {today_count} today "
-                 f"(+7 this audit: obj-038→044)",
+                 f"(+8 this audit: obj-038→045)",
                  fontsize=10.5)
     ax.set_ylabel("count")
     ax.set_xlabel("week")
@@ -197,7 +197,7 @@ def panel_blockers(ax):
 
 
 def panel_today_deliverables(ax):
-    """10 thumbnail tiles: full set of today's deliverables (v6 adds obj-044)."""
+    """11 thumbnail tiles: full set of today's deliverables (v7 adds obj-045)."""
     tiles = [
         ("free_energy_profile_v1.png",
          "obj-038\nΔG(CV0)"),
@@ -219,14 +219,16 @@ def panel_today_deliverables(ax):
          "obj-043\nState pops"),
         ("state_populations_v2_windowed.png",
          "obj-044\nNon-stat."),
+        ("state_populations_v3_per_block_dg.png",
+         "obj-045\nFES drift"),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Today's deliverables (10 figures + 6 docs + 2 starter scripts) — "
+    ax.set_title("Today's deliverables (11 figures + 6 docs + 2 starter scripts) — "
                  "ΔG fully char., contact mech. closed, route D out, RMSF V1↔V2 r=0.998, "
-                 "EO Bayesian floor ΔG ≥ 2 kcal/mol, state populations non-stationary",
+                 "EO Bayesian floor ΔG ≥ 2 kcal/mol, FES non-stationary + drifts σ≈8 Å",
                  fontsize=8.5, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         path = FIG_DIR / name
@@ -290,11 +292,11 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v6)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v7)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→044 + 6 docs + 2 starter scripts  •  "
+        f"obj-038→045 + 6 docs + 2 starter scripts  •  "
         f"reviewer panel: 10/5/8 (was 5/6/12 morning)  •  "
-        f"EO Bayesian floor ΔG ≥ 2 kcal/mol  •  state pops non-stationary (obj-044)  •  "
+        f"EO Bayesian floor ΔG ≥ 2 kcal/mol  •  FES drifts σ≈8 Å (obj-044/045)  •  "
         f"PI sign-off Monday unblocks route A",
         fontsize=10.5, fontweight="bold", y=0.995,
     )

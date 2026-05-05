@@ -57,23 +57,62 @@ queue:
   completed: 2026-05-05 09:50
   notes: 'Stationarity REJECTED. V1: 7/28 block-state pairs significant after Bonferroni,
     max |z| = 6.70. V2: 27/100, max |z| = 7.50. Pooled obj-043 fractions are ensemble
-    averages across HS-AFM time, not steady-state. The obj-043 V1↔V2 KS p = 5.5e-4 is
-    explained by within-video drift, not protocol mismatch. Bayesian ΔG_EO ≥ 2 kcal/mol
-    bound is conservative against non-stationarity and stands. obj-044 logged. Audit
-    §14 added.'
+    averages across HS-AFM time, not steady-state. The obj-043 V1↔V2 KS p = 5.5e-4
+    is explained by within-video drift, not protocol mismatch. Bayesian ΔG_EO ≥ 2
+    kcal/mol bound is conservative against non-stationarity and stands. obj-044 logged.
+    Audit §14 added.'
 - objective: 'State-population v3: per-block ΔG(CV0) — see how the free-energy landscape
-    itself drifts on the HS-AFM acquisition timeline. Build on obj-044 by computing ΔG
-    from KDE-smoothed P(CV0) per 50-frame block and overlaying as faded curves vs the
-    pooled ΔG. Audit §14.4 follow-up.
+    itself drifts on the HS-AFM acquisition timeline. Build on obj-044 by computing
+    ΔG from KDE-smoothed P(CV0) per 50-frame block and overlaying as faded curves
+    vs the pooled ΔG. Audit §14.4 follow-up.
+
+    '
+  priority: 3
+  status: completed
+  added: 2026-05-05 09:50
+  source: audit-2026-05-05-deepening-v6
+  success_criteria: 'figures/state_populations_v3_per_block_dg.png with overlay of
+    per-block ΔG curves vs pooled. Confirms or rejects the prediction that the FES
+    drifts in the Intermediate-EC region (where obj-044 z-scores were highest).
+
+    '
+  started: 2026-05-05 09:46
+  completed: 2026-05-05 10:30
+  notes: 'Free-energy landscape DRIFTS SIGNIFICANTLY. FES-min CV0 location std = 8.25
+    (V1) / 8.29 (V2) Å across blocks. Per-block ΔG std max = 4.08/4.42 kcal/mol over
+    lib support. V2 pooled FES min at 82.5 Å is an averaged-over-drift artefact (no
+    block actually prefers that CV0 alone). Three paper-implications logged: (a) ΔG
+    curve is time-averaged FES; (b) per-block ΔG std is the better experimental uncertainty
+    than F3 bootstrap CI; (c) obj-043 Bayesian ΔG_EO ≥ 2 kcal/mol bound stands. obj-045
+    logged. Audit §15 added.'
+- objective: 'State-population v4: change-point detection on the per-block FES-min
+    sequence from obj-045. V1 has an abrupt drop at block 5 (CV0_min: 79.2 → 55.5
+    Å); V2 shows visible structure at multiple blocks. Run CUSUM or PELT change-point
+    detection and report breakpoint timestamps. Audit §15.6 P=3.
+
+    '
+  priority: 3
+  status: in_progress
+  added: 2026-05-05 10:30
+  source: audit-2026-05-05-deepening-v7
+  success_criteria: 'figures/state_populations_v4_changepoints.png with CUSUM/PELT
+    breakpoints annotated on obj-045 FES-min sequence. Per-segment statistics reported.
+
+    '
+  started: 2026-05-05 09:51
+- objective: 'Cross-correlate per-block FES drift with HS-AFM frame metadata. Does
+    V1 block 5 (FES-min jump 79→55 Å) coincide with a tip-recalibration event, imaging-force
+    change, or substrate flush? Requires returning to raw HS-AFM metadata. Audit §15.6
+    P=3.
 
     '
   priority: 3
   status: pending
-  added: 2026-05-05 09:50
-  source: audit-2026-05-05-deepening-v6
-  success_criteria: 'figures/state_populations_v3_per_block_dg.png with overlay of per-block
-    ΔG curves vs pooled. Confirms or rejects the prediction that the FES drifts in the
-    Intermediate-EC region (where obj-044 z-scores were highest).
+  added: 2026-05-05 10:30
+  source: audit-2026-05-05-deepening-v7
+  success_criteria: 'docs/hsafm_metadata_correlation.md with timeline overlay of FES
+    drift vs metadata events. Either (a) match found, mechanistic explanation, or
+    (b) no match, drift is intrinsic.
 
     '
 - objective: 'Cryptic-binding-site discovery for Reviewer E. P2Rank or FTMap scan

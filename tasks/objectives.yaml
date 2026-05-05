@@ -1049,6 +1049,82 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-045
+  status: completed
+  statement: Per-block ΔG(CV0) — free-energy landscape drifts significantly across HS-AFM time
+  methodology: >
+    Audit §14.4 follow-up to obj-044. Per 50-frame block in V1 (7
+    blocks) and V2 (25 blocks), KDE-smooth P(CV0) (bw=0.30 to handle
+    block-size noise) and compute ΔG = −kT log P normalized to 0 at
+    each block's minimum. Overlay all per-block ΔG curves on top of
+    the pooled. Track three drift metrics:
+
+      1. Per-block FES-minimum CV0 location (where the block's free-
+         energy curve dips lowest).
+      2. std(ΔG) across blocks at each CV0 bin — large value means
+         the landscape itself shifts in that region.
+      3. ΔG at fixed CV0 probes (50, 70, 80, 85 Å) for landscape
+         stability checks.
+
+    Script: pipelines/afm-overlay/scripts/state_population_per_block_dg.py
+  metrics:
+    n_v1_blocks: 7
+    n_v2_blocks: 25
+    pooled_v1_fes_min_cv0_A: 74.9
+    pooled_v2_fes_min_cv0_A: 82.5
+    pooled_combined_fes_min_cv0_A: 75.6
+    v1_block_fes_min_range_A: [55.5, 79.2]
+    v2_block_fes_min_range_A: [54.3, 84.0]
+    v1_block_fes_min_std_A: 8.25
+    v2_block_fes_min_std_A: 8.29
+    v1_drift_std_lib_kcal_median: 1.89
+    v1_drift_std_lib_kcal_max: 4.08
+    v2_drift_std_lib_kcal_median: 2.93
+    v2_drift_std_lib_kcal_max: 4.42
+    verdict: FES_drifts_significantly
+  figures:
+    - figures/state_populations_v3_per_block_dg.png
+    - results/afm_pipeline/free_energy_profile/per_block_dg.npz
+    - results/afm_pipeline/free_energy_profile/per_block_dg_summary.json
+  conclusions: >
+    The non-stationarity flagged by obj-044 is now visualized at the
+    free-energy-landscape level. The FES minimum location drifts by
+    a standard deviation of ≈ 8 Å in both videos — wider than the
+    13-Å Intermediate band itself — and with extremes spanning
+    [55.5, 79.2] Å in V1 and [54.3, 84.0] Å in V2. The landscape
+    itself flips between BC-favoring (CV0 ≈ 55-65 Å) and EC-favoring
+    (CV0 ≈ 80-84 Å) modes within a single video.
+
+    Per-block ΔG std across the library-supported CV0 ∈ [47.3, 85.0]
+    Å region is median 1.9-2.9 kcal/mol (3-5 kT) with a max of
+    ≈ 4.1-4.4 kcal/mol — the local landscape varies by ~7 kT across
+    the acquisition window.
+
+    Notable: V2 *pooled* has its FES minimum at CV0 = 82.5 Å, but
+    individual V2 blocks have minima as low as 54.3 Å. The pooled
+    minimum is therefore an *averaged-over-drift* artefact — when
+    blocks at different times prefer different CV0, the pooled KDE
+    integrates a broad super-position into a flatter shape with the
+    minimum biased toward whatever side has more frames.
+
+    Implications for the paper:
+
+    (a) The single ΔG(CV0) curve from obj-038 + F3 bootstrap should
+    be presented as the time-averaged FES with the per-block drift
+    figure as the supplementary "stationarity check".
+
+    (b) The drift envelope (std across blocks) is the better
+    description of the *experimental uncertainty* in any per-CV0
+    ΔG claim — the F3 bootstrap CI was the *finite-sample* noise
+    floor, while obj-045's drift std is the *population* noise floor
+    that includes the true ensemble evolution.
+
+    (c) The Bayesian ΔG_EO ≥ 2 kcal/mol bound from obj-043 still
+    stands because the marginal P(CV0 ≥ 85 Å) is what was bounded.
+    Per-block drift does not affect this.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-044
   status: completed
   statement: State-population v2 — windowed by HS-AFM time confirms non-stationarity

@@ -1,0 +1,23 @@
+{
+  "T_K": 300.0,
+  "window_frames": 50,
+  "n_v1_blocks": 7,
+  "n_v2_blocks": 25,
+  "pooled_v1_fes_min_cv0_A": 74.9,
+  "pooled_v2_fes_min_cv0_A": 82.5,
+  "v1_block_fes_min_range_A": [
+    55.5,
+    79.2
+  ],
+  "v2_block_fes_min_range_A": [
+    54.3,
+    84.0
+  ],
+  "v1_block_fes_min_std_A": 8.252272414311102,
+  "v2_block_fes_min_std_A": 8.293467308671326,
+  "v1_drift_std_lib_kcal_median": 1.894388456091956,
+  "v1_drift_std_lib_kcal_max": 4.077880129749088,
+  "v2_drift_std_lib_kcal_median": 2.926228680578644,
+  "v2_drift_std_lib_kcal_max": 4.421880350617721,
+  "verdict": "FES_drifts_significantly"
+}
