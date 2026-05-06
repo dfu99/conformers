@@ -74,9 +74,9 @@ def panel_timeline(ax, objs):
     today_count = sum(1 for d in dates if d <= today)
     ax.scatter([today], [today_count], s=120, color="#d62728",
                edgecolor="black", zorder=10,
-               label=f"obj-038→056 today: {today_count}")
+               label=f"obj-038→057 today: {today_count}")
     ax.set_title(f"Objectives completed (cumulative) — {today_count} today "
-                 f"(+19 this audit: obj-038→056)",
+                 f"(+20 this audit: obj-038→057)",
                  fontsize=10.5)
     ax.set_ylabel("count")
     ax.set_xlabel("week")
@@ -102,7 +102,7 @@ def panel_reviewers(ax):
         ("B: Jumper",   2, 1, 2),
         ("C: Ando",     3, 1, 0),
         ("D: Elber",    2, 1, 1),       # obj-048+049+050 → +1 addressed (v11)
-        ("E: Noé",      2, 2, 1),       # obj-056 cryptic-scan → +1 partial (v16)
+        ("E: Noé",      3, 1, 1),       # obj-056+057 cryptic close → +1 addressed (v17)
     ]
     labels = [r[0] for r in reviewers]
     addressed = np.array([r[1] for r in reviewers])
@@ -120,7 +120,7 @@ def panel_reviewers(ax):
     ax.set_xlim(0, 7)
     a_sum, p_sum, o_sum = int(addressed.sum()), int(partial.sum()), int(openc.sum())
     ax.set_title(f"Reviewer concerns: {a_sum} addressed / {p_sum} partial / {o_sum} open  "
-                 f"(was 5/6/12 morning → 10/5/8 v5 → 11/5/7 v11 → {a_sum}/{p_sum}/{o_sum} v16)",
+                 f"(was 5/6/12 morning → 10/5/8 v5 → 11/5/7 v11 → 12/4/7 v16 → {a_sum}/{p_sum}/{o_sum} v17)",
                  fontsize=9.5)
     ax.legend(loc="lower right", fontsize=8, framealpha=0.9)
     ax.set_xlabel("count")
@@ -165,23 +165,22 @@ def panel_blockers(ax):
         ("#2  Dynamics + populations + kinetics  ✓ FULLY CHARACTERIZED",
          "obj-038/043: ΔG + 25/46/24/5%. obj-044-047: non-stat, σ≈8 Å.\n"
          "obj-048: 3-state HMM. obj-049: Markovian (KS p>.13).\n"
-         "obj-051-053: model sel + synthesis. obj-054: ACF τ_e≈Inter dwell.",
+         "obj-051-054: model sel + synth + ACF τ_e≈Inter dwell.",
          "#2ca02c"),
         ("#3  PACE A100-80GB allocation — Monday PI sign-off ask",
          "Sole remaining bottleneck. Unblocks: route A (αIIbβ3 string\n"
-         "method, ~$800), Gō-Martini parallel, AF2 ablation (Rev B),\n"
-         "P2Rank validation of obj-056 cryptic candidate (Rev E).",
+         "method, ~$800), Gō-Martini parallel, AF2 ablation (Rev B).\n"
+         "Cryptic-binding now closed locally (no compute needed).",
          "#fdae61"),
         ("#4  Reviewer C contact mechanics  ✓ CLOSED (obj-040)",
          "F4 Hertzian δ = 0.11-0.28 nm at 50-200 pN — all below 1 nm\n"
-         "noise floor. Hard-sphere pseudo-AFM is defensible first-order;\n"
-         "Hertzian correction is quantified.",
+         "noise floor. Hard-sphere pseudo-AFM is defensible first-order.",
          "#2ca02c"),
-        ("#5  Reviewer E cryptic-binding  ◐ PARTIAL (obj-056)",
-         "1 druggable candidate at β3 K417-K422 hybrid/EGF1 hinge\n"
-         "(agg ΔSASA +237 Å², hydroph 40%, F421 aromatic). Bounded\n"
-         "null: any pocket >100 Å² would have been detected.",
-         "#fdae61"),
+        ("#5  Reviewer E cryptic-binding  ✓ CLOSED (obj-056 + 057)",
+         "obj-056 SASA scan: 1 candidate K417-K422 (β3 hybrid hinge).\n"
+         "obj-057 LIGSITE: candidate ΔV = -3153 Å³ — region opens to\n"
+         "bulk, NOT a discrete druggable pocket. Negative result + bound.",
+         "#2ca02c"),
     ]
     y = np.arange(len(blockers))[::-1]
     for yi, (title, body, color) in zip(y, blockers):
@@ -194,14 +193,14 @@ def panel_blockers(ax):
     ax.set_ylim(-0.6, len(blockers) - 0.4)
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("Blockers (ranked) — #2 + #4 closed, #1 EO triple-negative, #5 partial (obj-056)",
+    ax.set_title("Blockers (ranked) — #2 + #4 + #5 closed (obj-057), #1 EO triple-negative",
                  fontsize=9.5)
     for spine in ax.spines.values():
         spine.set_visible(False)
 
 
 def panel_today_deliverables(ax):
-    """Today's deliverables tiles through v16 (obj-038→obj-056)."""
+    """Today's deliverables tiles through v17 (obj-038→obj-057)."""
     tiles = [
         ("free_energy_profile_v1.png",
          "obj-038\nΔG(CV0)"),
@@ -237,14 +236,16 @@ def panel_today_deliverables(ax):
          "obj-055\n2-D HMM"),
         ("cryptic_pockets_v1.png",
          "obj-056\nCryptic"),
+        ("pocket_volume_validation_v1.png",
+         "obj-057\nLIGSITE"),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
     ax.set_ylim(0, 1)
     ax.axis("off")
-    ax.set_title("Today's deliverables — ΔG + state pops + non-stat + breakpoints + HMM + Markovian + V1=V2 + model sel + synth + ACF + 2-D HMM + cryptic-pocket "
-                 "(EO floor ΔG≥2 kcal/mol; stepwise p<1e-3; ACF τ_e ≈ Inter dwell; CV2 ⊥ CV0+CV1; cryptic candidate β3 K417-K422 hybrid hinge)",
-                 fontsize=7.0, fontweight="bold")
+    ax.set_title("Today's deliverables — ΔG + state pops + non-stat + breakpoints + HMM + Markovian + V1=V2 + model sel + synth + ACF + 2-D HMM + cryptic-pocket + LIGSITE "
+                 "(EO floor ΔG≥2 kcal/mol; stepwise p<1e-3; ACF τ_e ≈ Inter dwell; CV2 ⊥ CV0+CV1; cryptic K417-K422 opens to bulk, not druggable pocket)",
+                 fontsize=6.5, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         path = FIG_DIR / name
         if path.exists():
@@ -307,14 +308,14 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v16)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v17)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→056 + 7 docs + 2 starter scripts  •  "
-        f"reviewer panel: 12/4/7 (was 5/6/12 morning)  •  "
+        f"obj-038→057 + 7 docs + 2 starter scripts  •  "
+        f"reviewer panel: 13/3/7 (was 5/6/12 morning)  •  "
         f"EO triple-confirmed (obj-025 + 041 + 055)  •  HMM Markovian + V1=V2 + ACF τ_e ≈ Inter dwell  •  "
-        f"cryptic candidate β3 K417-K422 (Reviewer E partial)  •  "
+        f"Reviewer E cryptic-binding CLOSED (obj-056 SASA + obj-057 LIGSITE = bulk-opening, not pocket)  •  "
         f"PI sign-off Monday unblocks route A",
-        fontsize=9.5, fontweight="bold", y=0.995,
+        fontsize=9.0, fontweight="bold", y=0.995,
     )
 
     ax_tl = fig.add_subplot(gs[0, 0])

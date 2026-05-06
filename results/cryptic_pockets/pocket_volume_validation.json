@@ -1,0 +1,626 @@
+{
+  "regions": {
+    "A_candidate_K417-K422": {
+      "bent_mean_pocket_volume_A3": 8373.375,
+      "bent_std_pocket_volume_A3": 138.5600896272083,
+      "extended_mean_pocket_volume_A3": 5220.45,
+      "extended_std_pocket_volume_A3": 75.44465065529829,
+      "delta_mean_A3": -3152.925,
+      "delta_pooled_se_A3": 70.5560681302466,
+      "welch_t": -44.68680134187319,
+      "delta_significant_alpha_005": true,
+      "n_per_state": 5,
+      "frames": {
+        "bent": [
+          {
+            "centroid_A": [
+              258.5667724609375,
+              281.38140869140625,
+              281.015380859375
+            ],
+            "pocket_volume_A3": 8177.625,
+            "n_pocket_cells": 2423,
+            "n_accessible_cells": 5445,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4449954086317723,
+            "n_atoms_considered": 1615,
+            "n_rays": 7,
+            "frame": "bent_0753.pdb",
+            "state": "bent",
+            "cv0_A": 47.281375885009766
+          },
+          {
+            "centroid_A": [
+              258.768798828125,
+              280.46661376953125,
+              281.13861083984375
+            ],
+            "pocket_volume_A3": 8332.875,
+            "n_pocket_cells": 2469,
+            "n_accessible_cells": 5466,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4517014270032931,
+            "n_atoms_considered": 1628,
+            "n_rays": 7,
+            "frame": "bent_0822.pdb",
+            "state": "bent",
+            "cv0_A": 47.507076263427734
+          },
+          {
+            "centroid_A": [
+              259.0726013183594,
+              280.8514099121094,
+              280.8502197265625
+            ],
+            "pocket_volume_A3": 8467.875,
+            "n_pocket_cells": 2509,
+            "n_accessible_cells": 5548,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.45223503965392936,
+            "n_atoms_considered": 1631,
+            "n_rays": 7,
+            "frame": "bent_0762.pdb",
+            "state": "bent",
+            "cv0_A": 47.5345458984375
+          },
+          {
+            "centroid_A": [
+              258.83697509765625,
+              280.2353820800781,
+              280.80621337890625
+            ],
+            "pocket_volume_A3": 8349.75,
+            "n_pocket_cells": 2474,
+            "n_accessible_cells": 5509,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.44908331820657105,
+            "n_atoms_considered": 1638,
+            "n_rays": 7,
+            "frame": "bent_0819.pdb",
+            "state": "bent",
+            "cv0_A": 47.557594299316406
+          },
+          {
+            "centroid_A": [
+              258.4248046875,
+              279.960205078125,
+              280.8783874511719
+            ],
+            "pocket_volume_A3": 8538.75,
+            "n_pocket_cells": 2530,
+            "n_accessible_cells": 5519,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.45841637977894545,
+            "n_atoms_considered": 1657,
+            "n_rays": 7,
+            "frame": "bent_0744.pdb",
+            "state": "bent",
+            "cv0_A": 47.60017013549805
+          }
+        ],
+        "extended": [
+          {
+            "centroid_A": [
+              103.86920166015625,
+              152.95098876953125,
+              148.23399353027344
+            ],
+            "pocket_volume_A3": 5190.75,
+            "n_pocket_cells": 1538,
+            "n_accessible_cells": 4515,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.3406423034330011,
+            "n_atoms_considered": 1186,
+            "n_rays": 7,
+            "frame": "ext_0549.pdb",
+            "state": "extended",
+            "cv0_A": 84.91703796386719
+          },
+          {
+            "centroid_A": [
+              103.31060791015625,
+              151.57398986816406,
+              149.03680419921875
+            ],
+            "pocket_volume_A3": 5308.875,
+            "n_pocket_cells": 1573,
+            "n_accessible_cells": 4480,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.35111607142857143,
+            "n_atoms_considered": 1182,
+            "n_rays": 7,
+            "frame": "ext_0540.pdb",
+            "state": "extended",
+            "cv0_A": 84.92001342773438
+          },
+          {
+            "centroid_A": [
+              103.48760986328125,
+              152.57740783691406,
+              148.96038818359375
+            ],
+            "pocket_volume_A3": 5140.125,
+            "n_pocket_cells": 1523,
+            "n_accessible_cells": 4604,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.3307993049522155,
+            "n_atoms_considered": 1183,
+            "n_rays": 7,
+            "frame": "ext_0567.pdb",
+            "state": "extended",
+            "cv0_A": 84.96307373046875
+          },
+          {
+            "centroid_A": [
+              103.83760070800781,
+              152.377197265625,
+              149.2053985595703
+            ],
+            "pocket_volume_A3": 5170.5,
+            "n_pocket_cells": 1532,
+            "n_accessible_cells": 4500,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.34044444444444444,
+            "n_atoms_considered": 1187,
+            "n_rays": 7,
+            "frame": "ext_0546.pdb",
+            "state": "extended",
+            "cv0_A": 85.00029754638672
+          },
+          {
+            "centroid_A": [
+              103.49099731445312,
+              152.5035858154297,
+              148.85499572753906
+            ],
+            "pocket_volume_A3": 5292.0,
+            "n_pocket_cells": 1568,
+            "n_accessible_cells": 4538,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.34552666372851476,
+            "n_atoms_considered": 1187,
+            "n_rays": 7,
+            "frame": "ext_0543.pdb",
+            "state": "extended",
+            "cv0_A": 85.03016662597656
+          }
+        ],
+        "bent_cv0": [
+          47.281375885009766,
+          47.507076263427734,
+          47.5345458984375,
+          47.557594299316406,
+          47.60017013549805
+        ],
+        "extended_cv0": [
+          84.91703796386719,
+          84.92001342773438,
+          84.96307373046875,
+          85.00029754638672,
+          85.03016662597656
+        ]
+      }
+    },
+    "B_MIDAS_pos_control": {
+      "bent_mean_pocket_volume_A3": 7928.55,
+      "bent_std_pocket_volume_A3": 123.8767532671082,
+      "extended_mean_pocket_volume_A3": 8399.7,
+      "extended_std_pocket_volume_A3": 113.03479138079568,
+      "delta_mean_A3": 471.15000000000055,
+      "delta_pooled_se_A3": 74.99641866449358,
+      "welch_t": 6.282299986986746,
+      "delta_significant_alpha_005": true,
+      "n_per_state": 5,
+      "frames": {
+        "bent": [
+          {
+            "centroid_A": [
+              230.6597900390625,
+              260.6528015136719,
+              288.35760498046875
+            ],
+            "pocket_volume_A3": 7900.875,
+            "n_pocket_cells": 2341,
+            "n_accessible_cells": 4962,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.47178557033454255,
+            "n_atoms_considered": 1668,
+            "n_rays": 7,
+            "frame": "bent_0753.pdb",
+            "state": "bent",
+            "cv0_A": 47.281375885009766
+          },
+          {
+            "centroid_A": [
+              230.85549926757812,
+              259.98248291015625,
+              288.5830993652344
+            ],
+            "pocket_volume_A3": 7954.875,
+            "n_pocket_cells": 2357,
+            "n_accessible_cells": 4997,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4716830098058835,
+            "n_atoms_considered": 1650,
+            "n_rays": 7,
+            "frame": "bent_0822.pdb",
+            "state": "bent",
+            "cv0_A": 47.507076263427734
+          },
+          {
+            "centroid_A": [
+              231.168212890625,
+              260.5365905761719,
+              288.4288024902344
+            ],
+            "pocket_volume_A3": 7894.125,
+            "n_pocket_cells": 2339,
+            "n_accessible_cells": 4914,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.475986975986976,
+            "n_atoms_considered": 1664,
+            "n_rays": 7,
+            "frame": "bent_0762.pdb",
+            "state": "bent",
+            "cv0_A": 47.5345458984375
+          },
+          {
+            "centroid_A": [
+              230.66490173339844,
+              260.1746826171875,
+              288.706787109375
+            ],
+            "pocket_volume_A3": 8116.875,
+            "n_pocket_cells": 2405,
+            "n_accessible_cells": 5025,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4786069651741294,
+            "n_atoms_considered": 1662,
+            "n_rays": 7,
+            "frame": "bent_0819.pdb",
+            "state": "bent",
+            "cv0_A": 47.557594299316406
+          },
+          {
+            "centroid_A": [
+              230.4468994140625,
+              260.0662841796875,
+              288.40728759765625
+            ],
+            "pocket_volume_A3": 7776.0,
+            "n_pocket_cells": 2304,
+            "n_accessible_cells": 4891,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.47106931097934984,
+            "n_atoms_considered": 1664,
+            "n_rays": 7,
+            "frame": "bent_0744.pdb",
+            "state": "bent",
+            "cv0_A": 47.60017013549805
+          }
+        ],
+        "extended": [
+          {
+            "centroid_A": [
+              60.8390998840332,
+              161.8784942626953,
+              147.1118927001953
+            ],
+            "pocket_volume_A3": 8336.25,
+            "n_pocket_cells": 2470,
+            "n_accessible_cells": 4991,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4948908034462032,
+            "n_atoms_considered": 1648,
+            "n_rays": 7,
+            "frame": "ext_0549.pdb",
+            "state": "extended",
+            "cv0_A": 84.91703796386719
+          },
+          {
+            "centroid_A": [
+              60.61100387573242,
+              161.58990478515625,
+              146.8209991455078
+            ],
+            "pocket_volume_A3": 8488.125,
+            "n_pocket_cells": 2515,
+            "n_accessible_cells": 4998,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.5032012805122049,
+            "n_atoms_considered": 1670,
+            "n_rays": 7,
+            "frame": "ext_0540.pdb",
+            "state": "extended",
+            "cv0_A": 84.92001342773438
+          },
+          {
+            "centroid_A": [
+              60.465301513671875,
+              162.00570678710938,
+              147.12179565429688
+            ],
+            "pocket_volume_A3": 8241.75,
+            "n_pocket_cells": 2442,
+            "n_accessible_cells": 4958,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4925373134328358,
+            "n_atoms_considered": 1641,
+            "n_rays": 7,
+            "frame": "ext_0567.pdb",
+            "state": "extended",
+            "cv0_A": 84.96307373046875
+          },
+          {
+            "centroid_A": [
+              60.83759689331055,
+              161.85421752929688,
+              146.93829345703125
+            ],
+            "pocket_volume_A3": 8518.5,
+            "n_pocket_cells": 2524,
+            "n_accessible_cells": 4990,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.505811623246493,
+            "n_atoms_considered": 1659,
+            "n_rays": 7,
+            "frame": "ext_0546.pdb",
+            "state": "extended",
+            "cv0_A": 85.00029754638672
+          },
+          {
+            "centroid_A": [
+              60.6117057800293,
+              161.99990844726562,
+              147.21229553222656
+            ],
+            "pocket_volume_A3": 8413.875,
+            "n_pocket_cells": 2493,
+            "n_accessible_cells": 5044,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4942505947660587,
+            "n_atoms_considered": 1663,
+            "n_rays": 7,
+            "frame": "ext_0543.pdb",
+            "state": "extended",
+            "cv0_A": 85.03016662597656
+          }
+        ],
+        "bent_cv0": [
+          47.281375885009766,
+          47.507076263427734,
+          47.5345458984375,
+          47.557594299316406,
+          47.60017013549805
+        ],
+        "extended_cv0": [
+          84.91703796386719,
+          84.92001342773438,
+          84.96307373046875,
+          85.00029754638672,
+          85.03016662597656
+        ]
+      }
+    },
+    "C_alphaV_Cterm_neg_control": {
+      "bent_mean_pocket_volume_A3": 7120.575,
+      "bent_std_pocket_volume_A3": 127.25585079869609,
+      "extended_mean_pocket_volume_A3": 5476.95,
+      "extended_std_pocket_volume_A3": 123.9456975352513,
+      "delta_mean_A3": -1643.625,
+      "delta_pooled_se_A3": 79.44380089094429,
+      "welch_t": -20.68915361006292,
+      "delta_significant_alpha_005": true,
+      "n_per_state": 5,
+      "frames": {
+        "bent": [
+          {
+            "centroid_A": [
+              282.4267272949219,
+              227.99624633789062,
+              262.07025146484375
+            ],
+            "pocket_volume_A3": 6928.875,
+            "n_pocket_cells": 2053,
+            "n_accessible_cells": 4451,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.46124466412042237,
+            "n_atoms_considered": 1526,
+            "n_rays": 7,
+            "frame": "bent_0753.pdb",
+            "state": "bent",
+            "cv0_A": 47.281375885009766
+          },
+          {
+            "centroid_A": [
+              283.5035095214844,
+              228.65150451660156,
+              262.7747802734375
+            ],
+            "pocket_volume_A3": 7155.0,
+            "n_pocket_cells": 2120,
+            "n_accessible_cells": 4444,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.47704770477047703,
+            "n_atoms_considered": 1527,
+            "n_rays": 7,
+            "frame": "bent_0822.pdb",
+            "state": "bent",
+            "cv0_A": 47.507076263427734
+          },
+          {
+            "centroid_A": [
+              282.9800109863281,
+              228.2360076904297,
+              262.0870056152344
+            ],
+            "pocket_volume_A3": 7104.375,
+            "n_pocket_cells": 2105,
+            "n_accessible_cells": 4490,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4688195991091314,
+            "n_atoms_considered": 1533,
+            "n_rays": 7,
+            "frame": "bent_0762.pdb",
+            "state": "bent",
+            "cv0_A": 47.5345458984375
+          },
+          {
+            "centroid_A": [
+              283.26324462890625,
+              228.5419921875,
+              262.4389953613281
+            ],
+            "pocket_volume_A3": 7283.25,
+            "n_pocket_cells": 2158,
+            "n_accessible_cells": 4511,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4783861671469741,
+            "n_atoms_considered": 1532,
+            "n_rays": 7,
+            "frame": "bent_0819.pdb",
+            "state": "bent",
+            "cv0_A": 47.557594299316406
+          },
+          {
+            "centroid_A": [
+              282.271240234375,
+              227.5054931640625,
+              261.9632263183594
+            ],
+            "pocket_volume_A3": 7131.375,
+            "n_pocket_cells": 2113,
+            "n_accessible_cells": 4467,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4730244011640922,
+            "n_atoms_considered": 1517,
+            "n_rays": 7,
+            "frame": "bent_0744.pdb",
+            "state": "bent",
+            "cv0_A": 47.60017013549805
+          }
+        ],
+        "extended": [
+          {
+            "centroid_A": [
+              224.5294952392578,
+              77.87975311279297,
+              118.62974548339844
+            ],
+            "pocket_volume_A3": 5373.0,
+            "n_pocket_cells": 1592,
+            "n_accessible_cells": 4057,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.392408183386739,
+            "n_atoms_considered": 1324,
+            "n_rays": 7,
+            "frame": "ext_0549.pdb",
+            "state": "extended",
+            "cv0_A": 84.91703796386719
+          },
+          {
+            "centroid_A": [
+              224.7779998779297,
+              78.04824829101562,
+              118.63524627685547
+            ],
+            "pocket_volume_A3": 5396.625,
+            "n_pocket_cells": 1599,
+            "n_accessible_cells": 4065,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.3933579335793358,
+            "n_atoms_considered": 1326,
+            "n_rays": 7,
+            "frame": "ext_0540.pdb",
+            "state": "extended",
+            "cv0_A": 84.92001342773438
+          },
+          {
+            "centroid_A": [
+              224.68772888183594,
+              77.95275115966797,
+              117.58724975585938
+            ],
+            "pocket_volume_A3": 5514.75,
+            "n_pocket_cells": 1634,
+            "n_accessible_cells": 4078,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.40068661108386466,
+            "n_atoms_considered": 1329,
+            "n_rays": 7,
+            "frame": "ext_0567.pdb",
+            "state": "extended",
+            "cv0_A": 84.96307373046875
+          },
+          {
+            "centroid_A": [
+              224.312255859375,
+              77.89600372314453,
+              118.47349548339844
+            ],
+            "pocket_volume_A3": 5423.625,
+            "n_pocket_cells": 1607,
+            "n_accessible_cells": 4112,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.39080739299610895,
+            "n_atoms_considered": 1337,
+            "n_rays": 7,
+            "frame": "ext_0546.pdb",
+            "state": "extended",
+            "cv0_A": 85.00029754638672
+          },
+          {
+            "centroid_A": [
+              224.66525268554688,
+              77.95624542236328,
+              118.56724548339844
+            ],
+            "pocket_volume_A3": 5676.75,
+            "n_pocket_cells": 1682,
+            "n_accessible_cells": 4110,
+            "n_total_cells": 9261,
+            "buriedness_fraction": 0.4092457420924574,
+            "n_atoms_considered": 1328,
+            "n_rays": 7,
+            "frame": "ext_0543.pdb",
+            "state": "extended",
+            "cv0_A": 85.03016662597656
+          }
+        ],
+        "bent_cv0": [
+          47.281375885009766,
+          47.507076263427734,
+          47.5345458984375,
+          47.557594299316406,
+          47.60017013549805
+        ],
+        "extended_cv0": [
+          84.91703796386719,
+          84.92001342773438,
+          84.96307373046875,
+          85.00029754638672,
+          85.03016662597656
+        ]
+      }
+    }
+  },
+  "verdict": "DOWNGRADED (informative) \u2014 candidate region IS conformationally active during BC\u2192EC, but pocket volume DECREASES (opens to bulk solvent) rather than forming a discrete druggable pocket. Consistent with obj-056 \u0394SASA gain + obj-039 MIDAS occlusion: extension exposes surface, does not gate a new ligand-binding site.",
+  "effect_summary": {
+    "candidate_delta_A3": -3152.925,
+    "midas_delta_A3": 471.15000000000055,
+    "ctrl_delta_A3": -1643.625,
+    "candidate_minus_control_A3": -1509.3000000000002,
+    "candidate_relative_to_midas": -6.691977077363889
+  },
+  "params": {
+    "n_per_state": 5,
+    "grid_spacing_A": 1.5,
+    "box_half_A": 15.0,
+    "probe_min_A": 1.4,
+    "probe_max_A": 4.0,
+    "raycast_radius_A": 7.0,
+    "ray_hits_threshold": 5,
+    "n_rays": 7,
+    "algorithm": "LIGSITE-style 7-ray probe-grid void detection"
+  }
+}
