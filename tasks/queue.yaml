@@ -1,5 +1,30 @@
 max_chain: 10
 queue:
+- objective: 'Per-state CV2 distribution × HMM state: complementary to obj-063 (per-state
+    RMSF) along the orthogonal headpiece-opening axis. Tests whether the obj-048 1-D-CV0-only
+    HMM state label carries CV2 information (R²) and whether per-state CV2 distributions
+    differ pairwise (KS). Audit §33 v24 P=4.
+
+    '
+  priority: 4
+  status: completed
+  added: 2026-05-06 00:30
+  completed: 2026-05-06 01:00
+  source: audit-2026-05-05-deepening-v24
+  success_criteria: 'figures/per_state_cv2_distribution.png + JSON. R² of state for each
+    of CV0/CV1/CV2 + pairwise KS p-values + Bonferroni multi-test correction.
+
+    '
+  notes: 'EXECUTED 2026-05-06 01:00 as obj-064 (audit §33 v24). R² state explains: CV0
+    0.681 (def.); CV1 0.658 (≈ CV0 + noise); CV2 only 0.053 (5 %). Per-state CV2 means:
+    BC 34.96 ± 6.98 / Inter 37.63 ± 5.88 / EC 38.28 ± 5.16 Å. Pairwise KS: BC↔Inter
+    D=0.295 p=2.7e-24 (Bonferroni-sig); BC↔EC D=0.276 p=3.7e-17 (Bonferroni-sig); Inter↔EC
+    D=0.070 p=0.18 (NS). 1-D HMM carries "BC has closed head" info but cannot resolve
+    Inter↔EC headpiece opening — consistent with v7 not containing further-EO frames.
+    Four-method triangulation on CV2 orthogonality (obj-054/055/059/064). Tally stays
+    13/3/7. Cumulative count 61.
+
+    '
 - objective: 'Per-state RMSF decomposition: stratify obj-027/042 per-residue RMSF by HMM
     Viterbi state (obj-048 BC/Inter/EC). Tests whether the calf-2 hotspot is state-invariant
     or driven by a particular state population. Bootstrap-CI per state on within-state

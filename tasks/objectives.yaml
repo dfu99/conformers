@@ -1049,6 +1049,108 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-064
+  status: completed
+  statement: Per-state CV2 distribution × HMM state — 1-D HMM carries 5 % of CV2 variance;
+    BC distinguishable but Inter ≈ EC by CV2
+  methodology: >
+    Audit §33 v24 P=4 follow-up to obj-063 (per-state RMSF). obj-063
+    decomposed flexibility along chain coordinates; this pass decomposes
+    CV-space along the orthogonal headpiece-opening axis (CV2). Tests
+    whether the obj-048 1-D-CV0-only HMM state label carries CV2
+    information.
+
+    Method:
+      1. Load CV0/CV1/CV2 from cv_series.npz (V1+V2, n=1645).
+      2. Load HMM Viterbi labels from hmm_states.npz.
+      3. Per state s ∈ {BC, Inter, EC}: histogram + mean/std/median/IQR
+         for each CV.
+      4. Pairwise KS test on per-CV distributions across BC/Inter/EC.
+      5. R² = between-state-variance / total variance per CV.
+      6. Bonferroni correction across 3 pairwise tests per CV.
+
+    Script: pipelines/afm-overlay/scripts/per_state_cv2_distribution.py
+  metrics:
+    n_frames: 1645
+    n_BC: 658
+    n_Inter: 587
+    n_EC: 400
+    cv0_r2_state: 0.681
+    cv1_r2_state: 0.658
+    cv2_r2_state: 0.053
+    cv2_BC_mean_A: 34.96
+    cv2_BC_std_A: 6.98
+    cv2_Inter_mean_A: 37.63
+    cv2_Inter_std_A: 5.88
+    cv2_EC_mean_A: 38.28
+    cv2_EC_std_A: 5.16
+    cv2_BC_vs_Inter_ks_D: 0.295
+    cv2_BC_vs_Inter_p: 2.71e-24
+    cv2_Inter_vs_EC_ks_D: 0.070
+    cv2_Inter_vs_EC_p: 0.18
+    cv2_BC_vs_EC_ks_D: 0.276
+    cv2_BC_vs_EC_p: 3.65e-17
+    cv2_n_sig_pairs_bonf: 2
+    bonferroni_alpha: 0.0056
+  figures:
+    - figures/per_state_cv2_distribution.png
+    - results/afm_pipeline/free_energy_profile/per_state_cv2_distribution.json
+  conclusions: >
+    **The 1-D-CV0 HMM carries CV2 information but very partially**.
+    R² state explains: CV0 0.681 (definitional, since the HMM is
+    fit on CV0); CV1 0.658 (CV1 ≈ CV0 + noise — confirms obj-054
+    r ≥ 0.84 between CV0 and CV1, and obj-059 within-state CV1
+    correlation +0.69 to +0.82); CV2 only 0.053 (5 % of variance).
+
+    **BC is CV2-distinguishable, Inter ≈ EC by CV2**:
+    - BC mean CV2 = 34.96 ± 6.98 Å (lowest, headpiece closed)
+    - Inter mean CV2 = 37.63 ± 5.88 Å
+    - EC mean CV2 = 38.28 ± 5.16 Å
+    - Pairwise KS: BC↔Inter D = 0.295 p = 2.7e-24 (Bonferroni-sig);
+      BC↔EC D = 0.276 p = 3.65e-17 (Bonferroni-sig); Inter↔EC
+      D = 0.070 p = 0.18 (NS).
+
+    The 1-D HMM correctly carries "BC has closed headpiece"
+    information but cannot resolve Inter↔EC headpiece-opening.
+    This is consistent with v7 data simply not containing
+    further-opened-EO frames (cf. obj-055 2-D HMM with seeded
+    CV2 = 55 collapsing back to 41.6, obj-059 3-D HMM with same
+    behavior). Both Inter and EC stop near CV2 ≈ 38 Å, well
+    below the 50 Å EO threshold.
+
+    **Triangulation across CV2-orthogonality methods**: four
+    independent objectives now confirm the orthogonal-CV2 finding:
+    - obj-054: per-CV correlation r ≤ 0.52 V1, ≤ 0.22 V2
+    - obj-055: 2-D HMM clusters primarily by CV2
+    - obj-059: 3-D HMM finds CV1 redundant with CV0, CV2 carries info
+    - obj-064: 1-D HMM × CV2 explains only 5 % of variance
+
+    **Reviewer panel reinforced**:
+    - **Reviewer A** (Springer/Campbell): the classical "bent = head
+      closed" picture is empirically confirmed (BC CV2 ≈ 35 Å vs
+      Inter+EC ≈ 38 Å); the EO geometry remains out of reach in the
+      v7 data (Inter ≈ EC stop at 38 Å, IQR upper bound 42 Å).
+    - **Reviewer D** (Elber/Chipot): the 1-D HMM characterization
+      story is comprehensively closed across 8 methodological
+      decompositions: dimensionality (obj-048/055/059), state count
+      (obj-051), rate matrix (obj-061), Markovianity (obj-049),
+      V1=V2 (obj-050), reconciliation with hard-threshold (obj-052),
+      per-state RMSF (obj-063), per-state CV2 (obj-064).
+
+    No category shifts; tally unchanged at 13/3/7 of 23. Cumulative
+    count 61.
+
+    **Caveats**:
+      (1) R² calculated from finite samples; the 5 % CV2 estimate
+      is confidence-bounded but the order-of-magnitude (CV0/CV1 R² ≈
+      0.7 vs CV2 R² ≈ 0.05) is the clean finding.
+      (2) Same data as obj-054/055/059 — this is a different
+      decomposition of identical observations, not new information.
+      The diagnostic value is in confirming that 4 independent
+      analytical formulations agree.
+  connects_to: null
+  completed_date: '2026-05-06'
+
 - id: obj-063
   status: completed
   statement: Per-state RMSF decomposition — BC>Inter>EC with 99% of residues sig-different; calf-2 hotspot
