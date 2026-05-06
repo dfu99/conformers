@@ -1,0 +1,646 @@
+{
+  "regions": {
+    "A_candidate_K417-K422": {
+      "bent_mean_score": -0.6533999999999999,
+      "bent_std_score": 0.672068672086417,
+      "extended_mean_score": -0.5332000000000001,
+      "extended_std_score": 0.4368051052815202,
+      "delta_mean": 0.12019999999999975,
+      "delta_pooled_se": 0.3584619924064474,
+      "welch_t": 0.335321463771002,
+      "delta_significant_alpha_005": false,
+      "bent_components": {
+        "n_hydroph": 9.2,
+        "n_hbond": 7.8,
+        "n_clash": 11.2
+      },
+      "extended_components": {
+        "n_hydroph": 8.4,
+        "n_hbond": 8.4,
+        "n_clash": 11.6
+      },
+      "frames": {
+        "bent": [
+          {
+            "centroid_A": [
+              258.5667724609375,
+              281.38140869140625,
+              281.015380859375
+            ],
+            "n_clash": 10,
+            "n_hydrophobic": 10,
+            "n_hbond": 8,
+            "hydroph_score": 0.4,
+            "hbond_score": 4.696,
+            "clash_penalty": 5.0,
+            "total_score": 0.09600000000000009,
+            "n_heavy_in_shell": 93,
+            "frame": "bent_0753.pdb",
+            "state": "bent",
+            "cv0_A": 47.281375885009766
+          },
+          {
+            "centroid_A": [
+              258.768798828125,
+              280.46661376953125,
+              281.13861083984375
+            ],
+            "n_clash": 12,
+            "n_hydrophobic": 7,
+            "n_hbond": 7,
+            "hydroph_score": 0.28,
+            "hbond_score": 4.109,
+            "clash_penalty": 6.0,
+            "total_score": -1.6109999999999998,
+            "n_heavy_in_shell": 96,
+            "frame": "bent_0822.pdb",
+            "state": "bent",
+            "cv0_A": 47.507076263427734
+          },
+          {
+            "centroid_A": [
+              259.0726013183594,
+              280.8514099121094,
+              280.8502197265625
+            ],
+            "n_clash": 12,
+            "n_hydrophobic": 11,
+            "n_hbond": 9,
+            "hydroph_score": 0.44,
+            "hbond_score": 5.2829999999999995,
+            "clash_penalty": 6.0,
+            "total_score": -0.27700000000000014,
+            "n_heavy_in_shell": 95,
+            "frame": "bent_0762.pdb",
+            "state": "bent",
+            "cv0_A": 47.5345458984375
+          },
+          {
+            "centroid_A": [
+              258.83697509765625,
+              280.2353820800781,
+              280.80621337890625
+            ],
+            "n_clash": 11,
+            "n_hydrophobic": 9,
+            "n_hbond": 8,
+            "hydroph_score": 0.36,
+            "hbond_score": 4.696,
+            "clash_penalty": 5.5,
+            "total_score": -0.44399999999999995,
+            "n_heavy_in_shell": 94,
+            "frame": "bent_0819.pdb",
+            "state": "bent",
+            "cv0_A": 47.557594299316406
+          },
+          {
+            "centroid_A": [
+              258.4248046875,
+              279.960205078125,
+              280.8783874511719
+            ],
+            "n_clash": 11,
+            "n_hydrophobic": 9,
+            "n_hbond": 7,
+            "hydroph_score": 0.36,
+            "hbond_score": 4.109,
+            "clash_penalty": 5.5,
+            "total_score": -1.0309999999999997,
+            "n_heavy_in_shell": 98,
+            "frame": "bent_0744.pdb",
+            "state": "bent",
+            "cv0_A": 47.60017013549805
+          }
+        ],
+        "extended": [
+          {
+            "centroid_A": [
+              103.86920166015625,
+              152.95098876953125,
+              148.23399353027344
+            ],
+            "n_clash": 11,
+            "n_hydrophobic": 8,
+            "n_hbond": 8,
+            "hydroph_score": 0.32,
+            "hbond_score": 4.696,
+            "clash_penalty": 5.5,
+            "total_score": -0.484,
+            "n_heavy_in_shell": 70,
+            "frame": "ext_0549.pdb",
+            "state": "extended",
+            "cv0_A": 84.91703796386719
+          },
+          {
+            "centroid_A": [
+              103.31060791015625,
+              151.57398986816406,
+              149.03680419921875
+            ],
+            "n_clash": 13,
+            "n_hydrophobic": 8,
+            "n_hbond": 9,
+            "hydroph_score": 0.32,
+            "hbond_score": 5.2829999999999995,
+            "clash_penalty": 6.5,
+            "total_score": -0.8970000000000002,
+            "n_heavy_in_shell": 65,
+            "frame": "ext_0540.pdb",
+            "state": "extended",
+            "cv0_A": 84.92001342773438
+          },
+          {
+            "centroid_A": [
+              103.48760986328125,
+              152.57740783691406,
+              148.96038818359375
+            ],
+            "n_clash": 11,
+            "n_hydrophobic": 8,
+            "n_hbond": 8,
+            "hydroph_score": 0.32,
+            "hbond_score": 4.696,
+            "clash_penalty": 5.5,
+            "total_score": -0.484,
+            "n_heavy_in_shell": 70,
+            "frame": "ext_0567.pdb",
+            "state": "extended",
+            "cv0_A": 84.96307373046875
+          },
+          {
+            "centroid_A": [
+              103.83760070800781,
+              152.377197265625,
+              149.2053985595703
+            ],
+            "n_clash": 12,
+            "n_hydrophobic": 9,
+            "n_hbond": 8,
+            "hydroph_score": 0.36,
+            "hbond_score": 4.696,
+            "clash_penalty": 6.0,
+            "total_score": -0.944,
+            "n_heavy_in_shell": 67,
+            "frame": "ext_0546.pdb",
+            "state": "extended",
+            "cv0_A": 85.00029754638672
+          },
+          {
+            "centroid_A": [
+              103.49099731445312,
+              152.5035858154297,
+              148.85499572753906
+            ],
+            "n_clash": 11,
+            "n_hydrophobic": 9,
+            "n_hbond": 9,
+            "hydroph_score": 0.36,
+            "hbond_score": 5.2829999999999995,
+            "clash_penalty": 5.5,
+            "total_score": 0.1429999999999998,
+            "n_heavy_in_shell": 67,
+            "frame": "ext_0543.pdb",
+            "state": "extended",
+            "cv0_A": 85.03016662597656
+          }
+        ]
+      }
+    },
+    "B_MIDAS_pos_control": {
+      "bent_mean_score": 3.074,
+      "bent_std_score": 1.383579596553809,
+      "extended_mean_score": 1.4676,
+      "extended_std_score": 0.6566725211244948,
+      "delta_mean": -1.6063999999999998,
+      "delta_pooled_se": 0.6849104028995326,
+      "welch_t": -2.3454162664187734,
+      "delta_significant_alpha_005": true,
+      "bent_components": {
+        "n_hydroph": 3.8,
+        "n_hbond": 6.0,
+        "n_clash": 1.2
+      },
+      "extended_components": {
+        "n_hydroph": 4.4,
+        "n_hbond": 6.8,
+        "n_clash": 5.4
+      },
+      "frames": {
+        "bent": [
+          {
+            "centroid_A": [
+              230.6597900390625,
+              260.6528015136719,
+              288.35760498046875
+            ],
+            "n_clash": 1,
+            "n_hydrophobic": 4,
+            "n_hbond": 5,
+            "hydroph_score": 0.16,
+            "hbond_score": 2.9349999999999996,
+            "clash_penalty": 0.5,
+            "total_score": 2.5949999999999998,
+            "n_heavy_in_shell": 95,
+            "frame": "bent_0753.pdb",
+            "state": "bent",
+            "cv0_A": 47.281375885009766
+          },
+          {
+            "centroid_A": [
+              230.85549926757812,
+              259.98248291015625,
+              288.5830993652344
+            ],
+            "n_clash": 3,
+            "n_hydrophobic": 3,
+            "n_hbond": 4,
+            "hydroph_score": 0.12,
+            "hbond_score": 2.348,
+            "clash_penalty": 1.5,
+            "total_score": 0.968,
+            "n_heavy_in_shell": 89,
+            "frame": "bent_0822.pdb",
+            "state": "bent",
+            "cv0_A": 47.507076263427734
+          },
+          {
+            "centroid_A": [
+              231.168212890625,
+              260.5365905761719,
+              288.4288024902344
+            ],
+            "n_clash": 0,
+            "n_hydrophobic": 4,
+            "n_hbond": 7,
+            "hydroph_score": 0.16,
+            "hbond_score": 4.109,
+            "clash_penalty": 0.0,
+            "total_score": 4.269,
+            "n_heavy_in_shell": 91,
+            "frame": "bent_0762.pdb",
+            "state": "bent",
+            "cv0_A": 47.5345458984375
+          },
+          {
+            "centroid_A": [
+              230.66490173339844,
+              260.1746826171875,
+              288.706787109375
+            ],
+            "n_clash": 1,
+            "n_hydrophobic": 3,
+            "n_hbond": 8,
+            "hydroph_score": 0.12,
+            "hbond_score": 4.696,
+            "clash_penalty": 0.5,
+            "total_score": 4.316,
+            "n_heavy_in_shell": 90,
+            "frame": "bent_0819.pdb",
+            "state": "bent",
+            "cv0_A": 47.557594299316406
+          },
+          {
+            "centroid_A": [
+              230.4468994140625,
+              260.0662841796875,
+              288.40728759765625
+            ],
+            "n_clash": 1,
+            "n_hydrophobic": 5,
+            "n_hbond": 6,
+            "hydroph_score": 0.2,
+            "hbond_score": 3.522,
+            "clash_penalty": 0.5,
+            "total_score": 3.222,
+            "n_heavy_in_shell": 91,
+            "frame": "bent_0744.pdb",
+            "state": "bent",
+            "cv0_A": 47.60017013549805
+          }
+        ],
+        "extended": [
+          {
+            "centroid_A": [
+              60.8390998840332,
+              161.8784942626953,
+              147.1118927001953
+            ],
+            "n_clash": 5,
+            "n_hydrophobic": 4,
+            "n_hbond": 7,
+            "hydroph_score": 0.16,
+            "hbond_score": 4.109,
+            "clash_penalty": 2.5,
+            "total_score": 1.7690000000000001,
+            "n_heavy_in_shell": 89,
+            "frame": "ext_0549.pdb",
+            "state": "extended",
+            "cv0_A": 84.91703796386719
+          },
+          {
+            "centroid_A": [
+              60.61100387573242,
+              161.58990478515625,
+              146.8209991455078
+            ],
+            "n_clash": 5,
+            "n_hydrophobic": 5,
+            "n_hbond": 5,
+            "hydroph_score": 0.2,
+            "hbond_score": 2.9349999999999996,
+            "clash_penalty": 2.5,
+            "total_score": 0.6349999999999998,
+            "n_heavy_in_shell": 88,
+            "frame": "ext_0540.pdb",
+            "state": "extended",
+            "cv0_A": 84.92001342773438
+          },
+          {
+            "centroid_A": [
+              60.465301513671875,
+              162.00570678710938,
+              147.12179565429688
+            ],
+            "n_clash": 6,
+            "n_hydrophobic": 4,
+            "n_hbond": 7,
+            "hydroph_score": 0.16,
+            "hbond_score": 4.109,
+            "clash_penalty": 3.0,
+            "total_score": 1.2690000000000001,
+            "n_heavy_in_shell": 92,
+            "frame": "ext_0567.pdb",
+            "state": "extended",
+            "cv0_A": 84.96307373046875
+          },
+          {
+            "centroid_A": [
+              60.83759689331055,
+              161.85421752929688,
+              146.93829345703125
+            ],
+            "n_clash": 6,
+            "n_hydrophobic": 4,
+            "n_hbond": 7,
+            "hydroph_score": 0.16,
+            "hbond_score": 4.109,
+            "clash_penalty": 3.0,
+            "total_score": 1.2690000000000001,
+            "n_heavy_in_shell": 91,
+            "frame": "ext_0546.pdb",
+            "state": "extended",
+            "cv0_A": 85.00029754638672
+          },
+          {
+            "centroid_A": [
+              60.6117057800293,
+              161.99990844726562,
+              147.21229553222656
+            ],
+            "n_clash": 5,
+            "n_hydrophobic": 5,
+            "n_hbond": 8,
+            "hydroph_score": 0.2,
+            "hbond_score": 4.696,
+            "clash_penalty": 2.5,
+            "total_score": 2.396,
+            "n_heavy_in_shell": 96,
+            "frame": "ext_0543.pdb",
+            "state": "extended",
+            "cv0_A": 85.03016662597656
+          }
+        ]
+      }
+    },
+    "C_alphaV_Cterm_neg_control": {
+      "bent_mean_score": 0.8709999999999998,
+      "bent_std_score": 0.802143690369749,
+      "extended_mean_score": -3.3136,
+      "extended_std_score": 0.913935610423404,
+      "delta_mean": -4.1846,
+      "delta_pooled_se": 0.5438221768188568,
+      "welch_t": -7.694794692776679,
+      "delta_significant_alpha_005": true,
+      "bent_components": {
+        "n_hydroph": 7.2,
+        "n_hbond": 9.0,
+        "n_clash": 9.4
+      },
+      "extended_components": {
+        "n_hydroph": 5.2,
+        "n_hbond": 3.2,
+        "n_clash": 10.8
+      },
+      "frames": {
+        "bent": [
+          {
+            "centroid_A": [
+              282.4267272949219,
+              227.99624633789062,
+              262.07025146484375
+            ],
+            "n_clash": 9,
+            "n_hydrophobic": 7,
+            "n_hbond": 9,
+            "hydroph_score": 0.28,
+            "hbond_score": 5.2829999999999995,
+            "clash_penalty": 4.5,
+            "total_score": 1.0629999999999997,
+            "n_heavy_in_shell": 79,
+            "frame": "bent_0753.pdb",
+            "state": "bent",
+            "cv0_A": 47.281375885009766
+          },
+          {
+            "centroid_A": [
+              283.5035095214844,
+              228.65150451660156,
+              262.7747802734375
+            ],
+            "n_clash": 10,
+            "n_hydrophobic": 9,
+            "n_hbond": 10,
+            "hydroph_score": 0.36,
+            "hbond_score": 5.869999999999999,
+            "clash_penalty": 5.0,
+            "total_score": 1.2299999999999995,
+            "n_heavy_in_shell": 85,
+            "frame": "bent_0822.pdb",
+            "state": "bent",
+            "cv0_A": 47.507076263427734
+          },
+          {
+            "centroid_A": [
+              282.9800109863281,
+              228.2360076904297,
+              262.0870056152344
+            ],
+            "n_clash": 8,
+            "n_hydrophobic": 6,
+            "n_hbond": 9,
+            "hydroph_score": 0.24,
+            "hbond_score": 5.2829999999999995,
+            "clash_penalty": 4.0,
+            "total_score": 1.5229999999999997,
+            "n_heavy_in_shell": 84,
+            "frame": "bent_0762.pdb",
+            "state": "bent",
+            "cv0_A": 47.5345458984375
+          },
+          {
+            "centroid_A": [
+              283.26324462890625,
+              228.5419921875,
+              262.4389953613281
+            ],
+            "n_clash": 11,
+            "n_hydrophobic": 7,
+            "n_hbond": 8,
+            "hydroph_score": 0.28,
+            "hbond_score": 4.696,
+            "clash_penalty": 5.5,
+            "total_score": -0.524,
+            "n_heavy_in_shell": 81,
+            "frame": "bent_0819.pdb",
+            "state": "bent",
+            "cv0_A": 47.557594299316406
+          },
+          {
+            "centroid_A": [
+              282.271240234375,
+              227.5054931640625,
+              261.9632263183594
+            ],
+            "n_clash": 9,
+            "n_hydrophobic": 7,
+            "n_hbond": 9,
+            "hydroph_score": 0.28,
+            "hbond_score": 5.2829999999999995,
+            "clash_penalty": 4.5,
+            "total_score": 1.0629999999999997,
+            "n_heavy_in_shell": 80,
+            "frame": "bent_0744.pdb",
+            "state": "bent",
+            "cv0_A": 47.60017013549805
+          }
+        ],
+        "extended": [
+          {
+            "centroid_A": [
+              224.5294952392578,
+              77.87975311279297,
+              118.62974548339844
+            ],
+            "n_clash": 10,
+            "n_hydrophobic": 7,
+            "n_hbond": 4,
+            "hydroph_score": 0.28,
+            "hbond_score": 2.348,
+            "clash_penalty": 5.0,
+            "total_score": -2.372,
+            "n_heavy_in_shell": 71,
+            "frame": "ext_0549.pdb",
+            "state": "extended",
+            "cv0_A": 84.91703796386719
+          },
+          {
+            "centroid_A": [
+              224.7779998779297,
+              78.04824829101562,
+              118.63524627685547
+            ],
+            "n_clash": 10,
+            "n_hydrophobic": 5,
+            "n_hbond": 1,
+            "hydroph_score": 0.2,
+            "hbond_score": 0.587,
+            "clash_penalty": 5.0,
+            "total_score": -4.213,
+            "n_heavy_in_shell": 79,
+            "frame": "ext_0540.pdb",
+            "state": "extended",
+            "cv0_A": 84.92001342773438
+          },
+          {
+            "centroid_A": [
+              224.68772888183594,
+              77.95275115966797,
+              117.58724975585938
+            ],
+            "n_clash": 11,
+            "n_hydrophobic": 4,
+            "n_hbond": 2,
+            "hydroph_score": 0.16,
+            "hbond_score": 1.174,
+            "clash_penalty": 5.5,
+            "total_score": -4.166,
+            "n_heavy_in_shell": 75,
+            "frame": "ext_0567.pdb",
+            "state": "extended",
+            "cv0_A": 84.96307373046875
+          },
+          {
+            "centroid_A": [
+              224.312255859375,
+              77.89600372314453,
+              118.47349548339844
+            ],
+            "n_clash": 11,
+            "n_hydrophobic": 5,
+            "n_hbond": 5,
+            "hydroph_score": 0.2,
+            "hbond_score": 2.9349999999999996,
+            "clash_penalty": 5.5,
+            "total_score": -2.365,
+            "n_heavy_in_shell": 77,
+            "frame": "ext_0546.pdb",
+            "state": "extended",
+            "cv0_A": 85.00029754638672
+          },
+          {
+            "centroid_A": [
+              224.66525268554688,
+              77.95624542236328,
+              118.56724548339844
+            ],
+            "n_clash": 12,
+            "n_hydrophobic": 5,
+            "n_hbond": 4,
+            "hydroph_score": 0.2,
+            "hbond_score": 2.348,
+            "clash_penalty": 6.0,
+            "total_score": -3.452,
+            "n_heavy_in_shell": 73,
+            "frame": "ext_0543.pdb",
+            "state": "extended",
+            "cv0_A": 85.03016662597656
+          }
+        ]
+      }
+    }
+  },
+  "verdict": "NEGATIVE / INTERMEDIATE \u2014 candidate druggability is STABLE across BC\u2192EC (\u0394 ns) and absolute extended-state score sits between MIDAS (positive control) and a flat-surface negative control. The region has some druggable atom-type features but its druggability is not gated by extension. Consistent with obj-057 LIGSITE: K417-K422 is conformationally responsive (loses pocket volume) but its atom-type composition stays moderate/similar \u2014 neither a cryptic-opening site nor a discrete druggable pocket.",
+  "comparisons": {
+    "candidate_ext_score": -0.5332000000000001,
+    "midas_ext_score": 1.4676,
+    "control_ext_score": -3.3136,
+    "candidate_minus_control_ext": 2.7804,
+    "candidate_minus_midas_ext": -2.0008
+  },
+  "params": {
+    "n_per_state": 5,
+    "clash_radius_A": 3.5,
+    "hydrophobic_shell_A": [
+      4.0,
+      7.0
+    ],
+    "hbond_shell_A": [
+      3.0,
+      5.0
+    ],
+    "weight_hydrophobic": 0.04,
+    "weight_hbond": 0.587,
+    "weight_clash": 0.5,
+    "algorithm": "Vina-proxy: atom-type weighted shell counts (hydroph + hbond - clash)"
+  }
+}
