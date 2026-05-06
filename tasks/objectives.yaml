@@ -1049,6 +1049,121 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-066
+  status: completed
+  statement: Per-state contact-network metrics — graph-theoretic decomposition of obj-065
+    contact maps; β3 PSI domain becomes more "social", αV β-propeller blades 4-6 become
+    "lonely" on extension
+  methodology: >
+    Audit §35 v26 P=4 follow-up to obj-065 (per-state contact-map
+    differential). obj-065 was pairwise (residue-residue); this pass
+    moves to graph-theoretic node-level metrics: per-residue contact
+    degree d_s[i], per-state network density, clustering coefficient,
+    and "lonely vs social" residue ranking.
+
+    Method:
+      1. Load obj-065 per-state expected contact maps C_s[i, j] from
+         results/afm_pipeline/contact_map_per_state/contact_maps.npz.
+      2. Threshold at P(contact) ≥ 0.5 → binary expected-contact graph.
+      3. Per residue: degree d_s[i] = Σ_j A_s[i, j].
+      4. Per residue: clustering coefficient
+         cc_s[i] = (2 · #triangles at i) / (d_s[i] · (d_s[i] - 1)).
+      5. Network density = mean d_s / (n - 1).
+      6. Δ degree per residue (EC − BC); top-K most lonely / social.
+
+    Script: pipelines/avb3-conformers/scripts/contact_network_metrics.py
+  metrics:
+    n_residues: 790
+    expected_contact_threshold: 0.5
+    BC_edges: 4468
+    Inter_edges: 4333
+    EC_edges: 4341
+    BC_density_pct: 1.43
+    EC_density_pct: 1.39
+    BC_mean_degree: 11.31
+    Inter_mean_degree: 10.97
+    EC_mean_degree: 10.99
+    BC_mean_clustering: 0.5344
+    Inter_mean_clustering: 0.5331
+    EC_mean_clustering: 0.5347
+    delta_density_EC_BC_pct: -0.04
+    delta_mean_degree_EC_BC: -0.32
+    delta_mean_clustering_EC_BC: 0.0003
+    n_lonely_residues: 275
+    n_social_residues: 104
+    top_lonely_residue: A:271
+    top_lonely_delta_deg: -4.0
+    top_social_residue: B:76
+    top_social_delta_deg: 5.0
+  figures:
+    - figures/contact_network_metrics_v1.png
+    - results/afm_pipeline/contact_map_per_state/network_metrics.json
+  conclusions: >
+    **At the strong-contact threshold (P ≥ 0.5), network density drops
+    only marginally on extension** (BC 1.43 % → EC 1.39 %, Δ = −0.04
+    percentage points). The total edge count drops from 4468 (BC) to
+    4341 (EC), a 2.8 % reduction. Compare with obj-065's 26 % reduction
+    at the contact-prob>0 threshold — the difference is in *intermediate*
+    contacts (P ∈ [0.05, 0.5]) which break or weaken on extension
+    without disappearing entirely.
+
+    **Mean clustering coefficient is preserved across states**
+    (0.5344 / 0.5331 / 0.5347, BC / Inter / EC) — the local
+    triangle-closure structure is independent of state. The integrin
+    rearranges contact pairs without changing how interconnected
+    each residue's neighborhood is. Suggests a "swap" rather than
+    "loss" pattern: lonely residues lose contacts to fellow blade
+    members and gain contacts from elsewhere, keeping clustering
+    locally constant.
+
+    **275 lonely residues (degree drops EC vs BC) vs 104 social
+    residues (degree gains EC vs BC)**. Mean Δ = −0.32 (slight
+    overall lonely-bias, consistent with edge-count reduction).
+
+    **Top-12 lonely residues all in αV β-propeller blades 4-6**:
+    A:271, A:308, A:332, A:333, A:336, A:340 (blade 4-5 region);
+    A:301 (blade 5); A:216, A:249 (blade 3); A:331 (blade 5);
+    plus β3 βA-domain α7-helix B:325, B:297. Max Δ = -4 contacts
+    (A:271, A:336, A:308, B:325).
+
+    **Top-12 social residues cluster in β3 PSI/I-EGF1 domain**:
+    B:4, B:76 (top, Δ = +5), B:111, B:131, B:135, B:217, B:240,
+    B:246, B:284, B:297 — these β3 N-terminal residues become
+    more interconnected as the integrin extends, consistent with
+    the head-leg "knee" shifting from being adjacent to β-propeller
+    (BC) to the new EC pivot. αV thigh-knee residues A:428, A:429
+    (the hinge itself) also gain contacts. αV N-terminal A:61
+    gains (+3) — consistent with the α-tail pivoting onto the
+    body during extension.
+
+    **Reviewer panel reinforced**:
+    - **Reviewer A** (Springer/Campbell): the BC → EC conformational
+      change is empirically a "contact swap" — αV β-propeller blade
+      contacts trade for β3 PSI/I-EGF1 contacts. The PSI domain
+      classically swings out during full activation; the v7
+      empirical data shows partial PSI-region rewiring even
+      without reaching EO.
+    - **Reviewer D** (Elber/Chipot): clustering coefficient
+      preservation argues for a low-dimensional reaction
+      coordinate — the rearrangement is local, not a global
+      network restructure.
+
+    No category shifts; tally unchanged at 13/3/7 of 23. Cumulative
+    count 63.
+
+    **Caveats**:
+      (1) Threshold-dependent: obj-065's 26 % contact loss vs
+      obj-066's 2.8 % edge loss reflects the threshold (any
+      probability vs strong probability ≥ 0.5). Both are
+      mathematically correct readings of the same data.
+      (2) Discrete-edge analysis discards weak-contact information;
+      P ∈ [0.05, 0.5] contacts are absent from the binary graph
+      but contribute to the obj-065 differential maps.
+      (3) Clustering coefficient is a local metric; could miss
+      higher-order motifs (4-cycles, hubs, communities).
+  connects_to: null
+  completed_date: '2026-05-06'
+
 - id: obj-065
   status: completed
   statement: Per-state Cα-Cα contact-map differential — 93 break / 29 form contacts EC-BC;

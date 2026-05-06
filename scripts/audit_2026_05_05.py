@@ -76,7 +76,7 @@ def panel_timeline(ax, objs):
                edgecolor="black", zorder=10,
                label=f"obj-038→059 today: {today_count}")
     ax.set_title(f"Objectives completed (cumulative) — {today_count} today "
-                 f"(+28 this audit: obj-038→065)",
+                 f"(+29 this audit: obj-038→066)",
                  fontsize=10.5)
     ax.set_ylabel("count")
     ax.set_xlabel("week")
@@ -233,6 +233,7 @@ def panel_today_deliverables(ax):
         ("rmsf_per_state_v1.png",             "obj-063\nPer-state RMSF"),
         ("per_state_cv2_distribution.png",    "obj-064\nPer-state CV2"),
         ("contact_map_per_state_v1.png",      "obj-065\nContact diff"),
+        ("contact_network_metrics_v1.png",    "obj-066\nNetwork degree"),
         ("library_coverage_v3.png",           "obj-041\nNo-EO crystals"),
         ("rgd_docking_v1.png",                "obj-039\nRGD-MIDAS"),
         ("contact_mechanics_control.png",     "obj-040\nHertz F4"),
@@ -248,8 +249,8 @@ def panel_today_deliverables(ax):
     ax.set_ylim(0, n_rows)
     ax.axis("off")
     ax.set_title("Today's deliverables (clustered): row 1 = dynamics + 1-D HMM + ACF + FES×HMM (13); "
-                 "row 2 = multi-D HMM + Q-rate + per-state RMSF/CV2/contacts + EO + AFM + cryptic-binding (12)  "
-                 "— per-state RMSF: BC 19.7 / Inter 14.9 / EC 12.4 Å; per-state CV2 R² 0.05; contact diff: 93 break / 29 form (EC-BC)",
+                 "row 2 = multi-D HMM + Q-rate + per-state RMSF/CV2/contacts/network + EO + AFM + cryptic-binding (13)  "
+                 "— per-state thread: RMSF (BC>EC), CV2 R² 0.05, 93 break/29 form, network ⟨k⟩ 11.3→11.0 (-2.8%)",
                  fontsize=7.0, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         row = i // n_row
@@ -319,13 +320,13 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v25)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v26)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→065 + 7 docs + 2 starter scripts  •  "
+        f"obj-038→066 + 7 docs + 2 starter scripts  •  "
         f"reviewer panel: 13/3/7 (was 5/6/12 morning)  •  "
         f"EO 4× confirmed  •  HMM dim+K+Q triangulated  •  "
         f"Reviewer E CLOSED 3-method  •  "
-        f"obj-063 RMSF, obj-064 CV2, obj-065 contact-diff per state  •  "
+        f"per-state thread closed across 4 axes (RMSF/CV2/contact-diff/network)  •  "
         f"PI sign-off Monday unblocks route A",
         fontsize=8.5, fontweight="bold", y=0.995,
     )

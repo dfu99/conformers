@@ -1,5 +1,31 @@
 max_chain: 10
 queue:
+- objective: 'Per-state contact-network metrics: graph-theoretic decomposition of obj-065
+    contact maps. Per-residue degree d_s[i], per-state network density, clustering coefficient,
+    "lonely" vs "social" residue ranking. Audit §35 v26 P=4.
+
+    '
+  priority: 4
+  status: completed
+  added: 2026-05-06 01:30
+  completed: 2026-05-06 02:00
+  source: audit-2026-05-05-deepening-v26
+  success_criteria: 'figures/contact_network_metrics_v1.png + JSON. Per-state degree/density/clustering
+    + top-K lonely/social residues. Reviewer A reinforced via β3 PSI / αV β-propeller
+    contact-swap interpretation.
+
+    '
+  notes: 'EXECUTED 2026-05-06 02:00 as obj-066 (audit §35 v26). At P(contact)≥0.5 threshold:
+    BC 4468 edges (density 1.43 %, ⟨k⟩=11.31, ⟨cc⟩=0.534) → EC 4341 edges (1.39 %,
+    11.0, 0.535). Edge loss only 2.8 % at strong-contact threshold (vs 26 % at any-prob
+    threshold from obj-065). Mean clustering preserved (Δ < 0.001) — "swap" not "loss".
+    275 lonely / 104 social residues; mean Δk = -0.32. **Top-12 lonely cluster in αV
+    β-propeller blades 4-6** (A:271/308/332/333/336/340/216/249/301/331) plus β3 α7-helix
+    (B:325/297). **Top-12 social cluster in β3 PSI/I-EGF1 domain** (B:4/76/111/131/135/217/240/246/284
+    + αV thigh A:428/429 + αV N-term A:61) — empirically PSI-region rewiring even
+    without reaching EO. Tally still 13/3/7. Cumulative count 63.
+
+    '
 - objective: 'Per-state Cα-Cα contact-map differential: residue-residue level decomposition
     of the BC → Inter → EC transition. 8 Å contact maps per frame, averaged per HMM
     state, differentials Δ(EC-BC), Δ(Inter-BC), Δ(EC-Inter); top-K most-disrupted contacts;

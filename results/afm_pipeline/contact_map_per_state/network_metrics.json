@@ -1,0 +1,296 @@
+{
+  "n_residues": 790,
+  "expected_contact_threshold": 0.5,
+  "edge_count": {
+    "BC": 4468.0,
+    "Inter": 4333.0,
+    "EC": 4341.0
+  },
+  "network_density_pct": {
+    "BC": 1.4336365532399609,
+    "Inter": 1.3903194237217436,
+    "EC": 1.3928863647302305
+  },
+  "mean_degree": {
+    "BC": 11.311392405063291,
+    "Inter": 10.969620253164557,
+    "EC": 10.989873417721519
+  },
+  "mean_clustering": {
+    "BC": 0.5344404544804866,
+    "Inter": 0.5331193875577033,
+    "EC": 0.53471707914026
+  },
+  "delta_density_EC_BC_pct": -0.04075018850973038,
+  "delta_mean_degree_EC_BC": -0.3215189873417721,
+  "delta_mean_clustering_EC_BC": 0.00027662465977340567,
+  "frac_clustering_loss_pct": -0.051759678268050294,
+  "top_lonely": [
+    {
+      "rank": 1,
+      "ca_index_in_head": 270,
+      "residue": "A:271",
+      "deg_BC": 11.0,
+      "deg_Inter": 9.0,
+      "deg_EC": 7.0,
+      "delta_deg_EC_BC": -4.0,
+      "cc_BC": 0.43636363636363634,
+      "cc_EC": 0.7619047619047619
+    },
+    {
+      "rank": 2,
+      "ca_index_in_head": 335,
+      "residue": "A:336",
+      "deg_BC": 14.0,
+      "deg_Inter": 10.0,
+      "deg_EC": 10.0,
+      "delta_deg_EC_BC": -4.0,
+      "cc_BC": 0.5164835164835165,
+      "cc_EC": 0.5555555555555556
+    },
+    {
+      "rank": 3,
+      "ca_index_in_head": 307,
+      "residue": "A:308",
+      "deg_BC": 12.0,
+      "deg_Inter": 9.0,
+      "deg_EC": 8.0,
+      "delta_deg_EC_BC": -4.0,
+      "cc_BC": 0.45454545454545453,
+      "cc_EC": 0.7142857142857143
+    },
+    {
+      "rank": 4,
+      "ca_index_in_head": 764,
+      "residue": "B:325",
+      "deg_BC": 14.0,
+      "deg_Inter": 10.0,
+      "deg_EC": 10.0,
+      "delta_deg_EC_BC": -4.0,
+      "cc_BC": 0.3956043956043956,
+      "cc_EC": 0.4
+    },
+    {
+      "rank": 5,
+      "ca_index_in_head": 331,
+      "residue": "A:332",
+      "deg_BC": 14.0,
+      "deg_Inter": 12.0,
+      "deg_EC": 11.0,
+      "delta_deg_EC_BC": -3.0,
+      "cc_BC": 0.42857142857142855,
+      "cc_EC": 0.5272727272727272
+    },
+    {
+      "rank": 6,
+      "ca_index_in_head": 248,
+      "residue": "A:249",
+      "deg_BC": 15.0,
+      "deg_Inter": 12.0,
+      "deg_EC": 12.0,
+      "delta_deg_EC_BC": -3.0,
+      "cc_BC": 0.49523809523809526,
+      "cc_EC": 0.6515151515151515
+    },
+    {
+      "rank": 7,
+      "ca_index_in_head": 736,
+      "residue": "B:297",
+      "deg_BC": 12.0,
+      "deg_Inter": 10.0,
+      "deg_EC": 9.0,
+      "delta_deg_EC_BC": -3.0,
+      "cc_BC": 0.5,
+      "cc_EC": 0.5833333333333334
+    },
+    {
+      "rank": 8,
+      "ca_index_in_head": 300,
+      "residue": "A:301",
+      "deg_BC": 18.0,
+      "deg_Inter": 14.0,
+      "deg_EC": 15.0,
+      "delta_deg_EC_BC": -3.0,
+      "cc_BC": 0.41830065359477125,
+      "cc_EC": 0.44761904761904764
+    },
+    {
+      "rank": 9,
+      "ca_index_in_head": 332,
+      "residue": "A:333",
+      "deg_BC": 16.0,
+      "deg_Inter": 15.0,
+      "deg_EC": 13.0,
+      "delta_deg_EC_BC": -3.0,
+      "cc_BC": 0.4166666666666667,
+      "cc_EC": 0.46153846153846156
+    },
+    {
+      "rank": 10,
+      "ca_index_in_head": 215,
+      "residue": "A:216",
+      "deg_BC": 7.0,
+      "deg_Inter": 4.0,
+      "deg_EC": 4.0,
+      "delta_deg_EC_BC": -3.0,
+      "cc_BC": 0.5238095238095238,
+      "cc_EC": 1.0
+    },
+    {
+      "rank": 11,
+      "ca_index_in_head": 339,
+      "residue": "A:340",
+      "deg_BC": 26.0,
+      "deg_Inter": 21.0,
+      "deg_EC": 23.0,
+      "delta_deg_EC_BC": -3.0,
+      "cc_BC": 0.38153846153846155,
+      "cc_EC": 0.4189723320158103
+    },
+    {
+      "rank": 12,
+      "ca_index_in_head": 330,
+      "residue": "A:331",
+      "deg_BC": 11.0,
+      "deg_Inter": 8.0,
+      "deg_EC": 8.0,
+      "delta_deg_EC_BC": -3.0,
+      "cc_BC": 0.4,
+      "cc_EC": 0.5
+    }
+  ],
+  "top_social": [
+    {
+      "rank": 1,
+      "ca_index_in_head": 515,
+      "residue": "B:76",
+      "deg_BC": 7.0,
+      "deg_Inter": 7.0,
+      "deg_EC": 12.0,
+      "delta_deg_EC_BC": 5.0,
+      "cc_BC": 0.5714285714285714,
+      "cc_EC": 0.3939393939393939
+    },
+    {
+      "rank": 2,
+      "ca_index_in_head": 60,
+      "residue": "A:61",
+      "deg_BC": 8.0,
+      "deg_Inter": 10.0,
+      "deg_EC": 11.0,
+      "delta_deg_EC_BC": 3.0,
+      "cc_BC": 0.5357142857142857,
+      "cc_EC": 0.43636363636363634
+    },
+    {
+      "rank": 3,
+      "ca_index_in_head": 723,
+      "residue": "B:284",
+      "deg_BC": 11.0,
+      "deg_Inter": 11.0,
+      "deg_EC": 13.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.41818181818181815,
+      "cc_EC": 0.34615384615384615
+    },
+    {
+      "rank": 4,
+      "ca_index_in_head": 679,
+      "residue": "B:240",
+      "deg_BC": 4.0,
+      "deg_Inter": 4.0,
+      "deg_EC": 6.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.8333333333333334,
+      "cc_EC": 0.6
+    },
+    {
+      "rank": 5,
+      "ca_index_in_head": 570,
+      "residue": "B:131",
+      "deg_BC": 10.0,
+      "deg_Inter": 11.0,
+      "deg_EC": 12.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.4444444444444444,
+      "cc_EC": 0.4090909090909091
+    },
+    {
+      "rank": 6,
+      "ca_index_in_head": 574,
+      "residue": "B:135",
+      "deg_BC": 11.0,
+      "deg_Inter": 11.0,
+      "deg_EC": 13.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.5272727272727272,
+      "cc_EC": 0.46153846153846156
+    },
+    {
+      "rank": 7,
+      "ca_index_in_head": 685,
+      "residue": "B:246",
+      "deg_BC": 12.0,
+      "deg_Inter": 13.0,
+      "deg_EC": 14.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.48484848484848486,
+      "cc_EC": 0.4065934065934066
+    },
+    {
+      "rank": 8,
+      "ca_index_in_head": 656,
+      "residue": "B:217",
+      "deg_BC": 6.0,
+      "deg_Inter": 6.0,
+      "deg_EC": 8.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.6666666666666666,
+      "cc_EC": 0.4642857142857143
+    },
+    {
+      "rank": 9,
+      "ca_index_in_head": 443,
+      "residue": "B:4",
+      "deg_BC": 8.0,
+      "deg_Inter": 8.0,
+      "deg_EC": 10.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.6785714285714286,
+      "cc_EC": 0.5555555555555556
+    },
+    {
+      "rank": 10,
+      "ca_index_in_head": 428,
+      "residue": "A:429",
+      "deg_BC": 13.0,
+      "deg_Inter": 14.0,
+      "deg_EC": 15.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.44871794871794873,
+      "cc_EC": 0.42857142857142855
+    },
+    {
+      "rank": 11,
+      "ca_index_in_head": 427,
+      "residue": "A:428",
+      "deg_BC": 13.0,
+      "deg_Inter": 13.0,
+      "deg_EC": 15.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.46153846153846156,
+      "cc_EC": 0.4666666666666667
+    },
+    {
+      "rank": 12,
+      "ca_index_in_head": 550,
+      "residue": "B:111",
+      "deg_BC": 13.0,
+      "deg_Inter": 13.0,
+      "deg_EC": 15.0,
+      "delta_deg_EC_BC": 2.0,
+      "cc_BC": 0.4358974358974359,
+      "cc_EC": 0.4
+    }
+  ]
+}
