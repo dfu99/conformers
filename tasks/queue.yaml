@@ -1,5 +1,33 @@
 max_chain: 10
 queue:
+- objective: 'Per-state Cα-Cα contact-map differential: residue-residue level decomposition
+    of the BC → Inter → EC transition. 8 Å contact maps per frame, averaged per HMM
+    state, differentials Δ(EC-BC), Δ(Inter-BC), Δ(EC-Inter); top-K most-disrupted contacts;
+    per-residue contact-disruption score. Audit §34 v25 P=4.
+
+    '
+  priority: 4
+  status: completed
+  added: 2026-05-06 01:00
+  completed: 2026-05-06 01:30
+  source: audit-2026-05-05-deepening-v25
+  success_criteria: 'figures/contact_map_per_state_v1.png + JSON. Per-state contact-prob
+    matrices + differentials + top-K break/form contact pairs. Reviewer A reinforced
+    via head-leg interface contact identification.
+
+    '
+  notes: 'EXECUTED 2026-05-06 01:30 as obj-065 (audit §34 v25). 8 Å Cα cutoff; 790 headpiece
+    CAs (αV 1-440 + β3 1-350). BC total contacts 9083, Inter 7750, EC 6697 — net -2386
+    (−26 %) on BC → EC. At |ΔC| > 0.3: 93 break, 29 form (EC vs BC). Top-15 break clusters:
+    β3 specificity loop B:162-167 (4 break-pairs, max |ΔC|=0.64), β3 α7-helix B:219-253
+    (2), αV β-propeller blades 2-5 (5 break-pairs at A:117-147 / A:216-248 / A:290-322).
+    αV-β3 head-leg interface A:400↔B:266 at rank 9 (ΔC=-0.51) — directly empirical
+    rendering of Springer 2014 hinge model. Top-3 form pairs all in αV thigh A:233-289,
+    A:304-334, A:285-380 (intra-thigh closure as hinge opens). Tally still 13/3/7.
+    Cumulative count 62. Composite figure refreshed to v25 (13 tiles/row × 2 rows;
+    25 used).
+
+    '
 - objective: 'Per-state CV2 distribution × HMM state: complementary to obj-063 (per-state
     RMSF) along the orthogonal headpiece-opening axis. Tests whether the obj-048 1-D-CV0-only
     HMM state label carries CV2 information (R²) and whether per-state CV2 distributions

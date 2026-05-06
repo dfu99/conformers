@@ -1,0 +1,18 @@
+{
+  "n_frames": 1645,
+  "n_BC": 658,
+  "n_Inter": 587,
+  "n_EC": 400,
+  "n_head_ca": 790,
+  "contact_cutoff_A": 8.0,
+  "diff_threshold": 0.3,
+  "n_contacts_break_EC_BC": 93,
+  "n_contacts_form_EC_BC": 29,
+  "sum_abs_delta_EC_BC": 2836.649658203125,
+  "max_abs_delta_EC_BC": 0.6372947692871094,
+  "BC_total_contacts": 9083.060546875,
+  "Inter_total_contacts": 7749.5595703125,
+  "EC_total_contacts": 6696.974609375,
+  "top_residue_disruption_idx": 697,
+  "top_residue_disruption_score": 13.117887496948242
+}
