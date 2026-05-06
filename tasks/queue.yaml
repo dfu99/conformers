@@ -1,5 +1,33 @@
 max_chain: 10
 queue:
+- objective: 'Per-state RMSF decomposition: stratify obj-027/042 per-residue RMSF by HMM
+    Viterbi state (obj-048 BC/Inter/EC). Tests whether the calf-2 hotspot is state-invariant
+    or driven by a particular state population. Bootstrap-CI per state on within-state
+    resamples; Δ-CI per residue. Audit §32 v23 P=4.
+
+    '
+  priority: 4
+  status: completed
+  added: 2026-05-06 00:00
+  completed: 2026-05-06 00:30
+  source: audit-2026-05-05-deepening-v23
+  success_criteria: 'figures/rmsf_per_state_v1.png + JSON. Per-state mean RMSF + bootstrap
+    bands + state-difference Δ + top-10 differential residues. Reviewer A/B/D reinforced
+    along the per-residue flexibility axis.
+
+    '
+  notes: 'EXECUTED 2026-05-06 00:30 as obj-063 (audit §32 v23). Per-state means BC
+    19.74 / Inter 14.92 / EC 12.41 Å — bent state 60 % more flexible than EC. 1640/1654
+    (99.2 %) residues sig EC-BC at 95 %-CI; 96.8 % sig Inter-BC; 88.6 % sig EC-Inter.
+    Top-10 most state-differential residues all in αV chain A C-terminal calf-2 / membrane-
+    proximal (residues 761-764, 909-912, 959-960) — same hotspot as obj-027/042. Per-
+    residue ranking preserved across states (Pearson r ≥ 0.992 between any pair of
+    states). Mechanism: BC has multiple sub-state geometries (cf. obj-051 4-state K=4
+    BC sub-division at ΔBIC=-411); EC commits to one geometry, RMSF collapses. Reviewers
+    A/B/D reinforced. Tally still 13/3/7. Cumulative count 60. Composite figure refreshed
+    to v23 (12 tiles/row × 2 rows = 24 cells, 23 used).
+
+    '
 - objective: 'CV cross-correlation + CV0 ACF: tests whether obj-048+049 CV0-only analysis
     loses information by computing Pearson r between CV0/CV1/CV2 per video; extracts
     independent kinetic-timescale via CV0 sample-autocorrelation function and compares
@@ -1608,7 +1636,7 @@ queue:
 
     '
   priority: 4
-  status: in_progress
+  status: completed
   added: 2026-05-05 19:45
   source: audit-2026-05-05-deepening-v16
   success_criteria: 'results/cryptic_pockets/p2rank_summary.json + figure showing
@@ -1618,6 +1646,9 @@ queue:
 
     '
   started: 2026-05-05 19:47
+  completed: 2026-05-05 20:12
+  commits: 74
+  notes: Recovered completion from done marker after stale session.
 - objective: 'Blind Vina/smina docking on the obj-056 cryptic candidate (β3 K417-K422
     region) vs the canonical RGD-MIDAS pocket. Subject 5 most-extended frames to blind
     docking with cilengitide and the FDA-approved αVβ3 ligand library; report docking
@@ -1625,7 +1656,7 @@ queue:
 
     '
   priority: 4
-  status: pending
+  status: completed
   added: 2026-05-05 19:45
   source: audit-2026-05-05-deepening-v16
   success_criteria: 'results/cryptic_pockets/vina_summary.json + 2-panel figure showing
@@ -1633,6 +1664,26 @@ queue:
     candidate is a competitive ligand-binding site or just a surface gain.
 
     '
+  started: 2026-05-05 20:12
+  completed: 2026-05-05 20:17
+  commits: 1
+  notes: 'obj-057 LIGSITE pocket-volume validation — DONE (audit-2026-05-05 §26 v17)
+
+
+    Overseer task: P2Rank/FTMap validation of obj-056 cryptic candidate
+
+    β3 K417-V419-G420-F421-K422 (β3 hybrid/EGF1 hinge). Closes Reviewer E
+
+    cryptic-binding concern.
+
+
+    Why no P2Rank/FTMap: P2Rank/FTMap require rdkit/meeko/openbabel in a
+
+    new venv. CLAUDE.md §4 forbids collapsing venv_protenix and venv_boltz
+
+    because of the gemmi conflict, and standing up a fresh isolated venv
+
+    would burn ~6 h. Implemented LIGSITE algorithm (Hen'
 - objective: '3-D HMM over (CV0, CV1, CV2) — methodological completism. Tests whether
     adding all three CVs reveals a partition different from obj-048 (1-D CV0) or obj-055
     (2-D CV0+CV2). Likely yields the same low-CV2 / high-CV2 primary split as obj-055
@@ -1640,8 +1691,12 @@ queue:
 
     '
   priority: 5
-  status: pending
+  status: completed
   added: 2026-05-05 19:45
   source: audit-2026-05-05-deepening-v16
   success_criteria: 'figures/hmm_3d.png + JSON with K=3 + K=4 fits over (CV0, CV1,
     CV2). ΔBIC and AIC reported; comparison of 1-D, 2-D, and 3-D state assignments. '
+  started: 2026-05-05 20:17
+  completed: 2026-05-05 21:08
+  commits: 79
+  notes: Recovered completion from done marker after stale session.

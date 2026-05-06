@@ -1,0 +1,159 @@
+{
+  "top_diff_EC_BC": [
+    {
+      "rank": 1,
+      "ca_idx": 763,
+      "chain": "A",
+      "resSeq": 764,
+      "rmsf_BC": 58.04765701293945,
+      "rmsf_Inter": 43.09059524536133,
+      "rmsf_EC": 33.181827545166016,
+      "delta_EC_BC": -24.90629208755493,
+      "delta_EC_BC_ci": [
+        -28.332870626449584,
+        -21.34188203811646
+      ],
+      "sig_EC_BC": true
+    },
+    {
+      "rank": 2,
+      "ca_idx": 761,
+      "chain": "A",
+      "resSeq": 762,
+      "rmsf_BC": 56.93428421020508,
+      "rmsf_Inter": 41.84090042114258,
+      "rmsf_EC": 32.189945220947266,
+      "delta_EC_BC": -24.78792358779907,
+      "delta_EC_BC_ci": [
+        -28.36118087768555,
+        -21.152304363250735
+      ],
+      "sig_EC_BC": true
+    },
+    {
+      "rank": 3,
+      "ca_idx": 910,
+      "chain": "A",
+      "resSeq": 911,
+      "rmsf_BC": 56.5924072265625,
+      "rmsf_Inter": 40.36065673828125,
+      "rmsf_EC": 31.92681884765625,
+      "delta_EC_BC": -24.696406158447267,
+      "delta_EC_BC_ci": [
+        -28.336399841308594,
+        -21.030573463439943
+      ],
+      "sig_EC_BC": true
+    },
+    {
+      "rank": 4,
+      "ca_idx": 909,
+      "chain": "A",
+      "resSeq": 910,
+      "rmsf_BC": 56.059242248535156,
+      "rmsf_Inter": 40.023162841796875,
+      "rmsf_EC": 31.39864158630371,
+      "delta_EC_BC": -24.69509008026123,
+      "delta_EC_BC_ci": [
+        -28.324272537231444,
+        -21.10596723556519
+      ],
+      "sig_EC_BC": true
+    },
+    {
+      "rank": 5,
+      "ca_idx": 762,
+      "chain": "A",
+      "resSeq": 763,
+      "rmsf_BC": 57.03307342529297,
+      "rmsf_Inter": 42.12325668334961,
+      "rmsf_EC": 32.524715423583984,
+      "delta_EC_BC": -24.55337022781372,
+      "delta_EC_BC_ci": [
+        -28.017663860321044,
+        -20.91640090942383
+      ],
+      "sig_EC_BC": true
+    },
+    {
+      "rank": 6,
+      "ca_idx": 908,
+      "chain": "A",
+      "resSeq": 909,
+      "rmsf_BC": 55.019187927246094,
+      "rmsf_Inter": 39.28140640258789,
+      "rmsf_EC": 30.75878143310547,
+      "delta_EC_BC": -24.29904426574707,
+      "delta_EC_BC_ci": [
+        -27.881921005249023,
+        -20.65393104553223
+      ],
+      "sig_EC_BC": true
+    },
+    {
+      "rank": 7,
+      "ca_idx": 959,
+      "chain": "A",
+      "resSeq": 960,
+      "rmsf_BC": 56.12834548950195,
+      "rmsf_Inter": 41.25391387939453,
+      "rmsf_EC": 31.908889770507812,
+      "delta_EC_BC": -24.265930130004882,
+      "delta_EC_BC_ci": [
+        -28.023940753936767,
+        -20.488593816757202
+      ],
+      "sig_EC_BC": true
+    },
+    {
+      "rank": 8,
+      "ca_idx": 760,
+      "chain": "A",
+      "resSeq": 761,
+      "rmsf_BC": 56.10448455810547,
+      "rmsf_Inter": 41.148521423339844,
+      "rmsf_EC": 31.95878791809082,
+      "delta_EC_BC": -24.195872982025147,
+      "delta_EC_BC_ci": [
+        -27.801805400848387,
+        -20.517013740539554
+      ],
+      "sig_EC_BC": true
+    },
+    {
+      "rank": 9,
+      "ca_idx": 911,
+      "chain": "A",
+      "resSeq": 912,
+      "rmsf_BC": 55.7603759765625,
+      "rmsf_Inter": 39.61377716064453,
+      "rmsf_EC": 31.631874084472656,
+      "delta_EC_BC": -24.156220069885254,
+      "delta_EC_BC_ci": [
+        -27.733298444747923,
+        -20.52379484176636
+      ],
+      "sig_EC_BC": true
+    },
+    {
+      "rank": 10,
+      "ca_idx": 958,
+      "chain": "A",
+      "resSeq": 959,
+      "rmsf_BC": 56.071250915527344,
+      "rmsf_Inter": 40.793128967285156,
+      "rmsf_EC": 31.99710464477539,
+      "delta_EC_BC": -24.11795778656006,
+      "delta_EC_BC_ci": [
+        -27.903043222427367,
+        -20.294011116027832
+      ],
+      "sig_EC_BC": true
+    }
+  ],
+  "n_sig_ec_bc": 1640,
+  "n_sig_int_bc": 1601,
+  "n_sig_ec_int": 1465,
+  "n_ca_total": 1654,
+  "method": "Bootstrap n=500 per state on V1+V2 Kabsch-aligned headpiece coords; \u0394-CI excludes 0 \u2192 state-differential"
+}

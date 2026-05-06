@@ -76,7 +76,7 @@ def panel_timeline(ax, objs):
                edgecolor="black", zorder=10,
                label=f"obj-038→059 today: {today_count}")
     ax.set_title(f"Objectives completed (cumulative) — {today_count} today "
-                 f"(+22 this audit: obj-038→059)",
+                 f"(+26 this audit: obj-038→063)",
                  fontsize=10.5)
     ax.set_ylabel("count")
     ax.set_xlabel("week")
@@ -229,6 +229,8 @@ def panel_today_deliverables(ax):
         ("hmm_2d_cv0_cv2.png",                "obj-055\n2-D HMM"),
         ("hmm_3d_cv0_cv1_cv2.png",            "obj-059\n3-D HMM"),
         ("hmm_rate_matrix_consolidation.png", "obj-061\nQ-rate"),
+        ("per_block_state_pop_correlation.png", "obj-062\nFES drift × HMM"),
+        ("rmsf_per_state_v1.png",             "obj-063\nPer-state RMSF"),
         ("library_coverage_v3.png",           "obj-041\nNo-EO crystals"),
         ("rgd_docking_v1.png",                "obj-039\nRGD-MIDAS"),
         ("contact_mechanics_control.png",     "obj-040\nHertz F4"),
@@ -236,14 +238,16 @@ def panel_today_deliverables(ax):
         ("pocket_volume_validation_v1.png",   "obj-057\nLIGSITE"),
         ("vina_proxy_scoring_v1.png",         "obj-058\nVina-proxy"),
     ]
-    n_row = 11
+    n_row = 12
     n_rows = (len(tiles) + n_row - 1) // n_row
+    while len(tiles) < n_row * n_rows:
+        tiles.append(("", ""))
     ax.set_xlim(0, n_row)
     ax.set_ylim(0, n_rows)
     ax.axis("off")
     ax.set_title("Today's deliverables (clustered): row 1 = dynamics + 1-D HMM thread; "
-                 "row 2 = synthesis + 2-D/3-D HMM + AFM controls + cryptic-binding triangulation "
-                 "(EO 4× confirmed; HMM 1-D+2-D+3-D agree; cryptic K417-K422 opens to bulk, not druggable)",
+                 "row 2 = synthesis + 2-D/3-D HMM + Q-rate + FES×HMM + per-state RMSF + AFM controls + cryptic-binding "
+                 "(EO 4× confirmed; HMM 1-D+2-D+3-D agree; per-state RMSF: BC 19.7 Å > Inter 14.9 Å > EC 12.4 Å, 99 % residues sig)",
                  fontsize=7.0, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         row = i // n_row
@@ -313,12 +317,13 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v21)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v23)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→061 + 7 docs + 2 starter scripts  •  "
+        f"obj-038→063 + 7 docs + 2 starter scripts  •  "
         f"reviewer panel: 13/3/7 (was 5/6/12 morning)  •  "
         f"EO 4× confirmed (obj-025 + 041 + 055 + 059)  •  HMM dim+K+Q triangulated  •  "
         f"Reviewer E CLOSED via 3-method triangulation (obj-056/057/058)  •  "
+        f"obj-063: BC>Inter>EC RMSF 19.7/14.9/12.4 Å (99 % residues sig)  •  "
         f"PI sign-off Monday unblocks route A",
         fontsize=8.5, fontweight="bold", y=0.995,
     )
