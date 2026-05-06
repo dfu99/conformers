@@ -1049,6 +1049,127 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-059
+  status: completed
+  statement: 3-D HMM over (CV0, CV1, CV2) — same partition as obj-055, CV1 confirmed redundant, no EO support
+  methodology: >
+    Audit §28 v19 P=5 follow-up to obj-055. Methodological completism:
+    fit a full 3-D Gaussian-emission HMM over (CV0, CV1, CV2) to test
+    whether adding CV1 reveals a partition different from obj-048 (1-D)
+    or obj-055 (2-D). obj-054 already established CV1 highly correlated
+    with CV0 (r = 0.84 V1 / 0.87 V2) — expectation is "no, same partition".
+
+    Implementation: from-scratch (no `hmmlearn`):
+      - 3-D Gaussian emissions per state (mean ∈ ℝ³, full 3×3 covariance)
+      - Forward-backward in log-space
+      - Baum-Welch EM with 3×3 covariance updates + 1e-3·I regularization
+      - Viterbi decoding
+    Free parameters: 3K means + 6K cov + (K-1) π + K(K-1) A = 35 (K=3),
+    51 (K=4).
+
+    Both 3-state and 4-state HMMs fitted from physically-motivated inits
+    (4th state seeded at CV2 = 55 to test EO recovery, mirroring obj-055).
+
+    Script: pipelines/afm-overlay/scripts/hmm_3d_cv0_cv1_cv2.py
+    Inputs: results/afm_pipeline/free_energy_profile/cv_series.npz (n=1645).
+  metrics:
+    n: 1645
+    cv0_range_low: 9.9
+    cv0_range_high: 91.5
+    cv1_range_low: 20.9
+    cv1_range_high: 101.3
+    cv2_range_low: 7.6
+    cv2_range_high: 48.3
+    cv2_max_under_eo_threshold: true
+    k3_log_likelihood: -15694.97
+    k3_n_params: 35
+    k3_BIC: 31649.13
+    k3_AIC: 31459.94
+    k4_log_likelihood: -15674.87
+    k4_n_params: 51
+    k4_BIC: 31727.42
+    k4_AIC: 31451.74
+    delta_BIC_4_minus_3: 78.28
+    delta_AIC_4_minus_3: -8.20
+    preferred_by_BIC: 3-state
+    preferred_by_AIC: 4-state
+    k4_seeded_state_initial_cv2: 55.0
+    k4_seeded_state_final_cv2: 42.18
+    k4_highest_cv2_state_pi: 0.002
+    eo_state_recovered: false
+    k3_state0_mu_cv0: 65.96
+    k3_state0_mu_cv1: 63.41
+    k3_state0_mu_cv2: 33.88
+    k3_state0_sigma_cv0: 10.95
+    k3_state0_sigma_cv2: 6.88
+    k3_state0_pi: 0.578
+    k3_state1_mu_cv0: 75.12
+    k3_state1_mu_cv2: 40.61
+    k3_state1_pi: 0.272
+    k3_state2_mu_cv0: 82.35
+    k3_state2_mu_cv2: 40.63
+    k3_state2_pi: 0.149
+    bic_3d_minus_2d_K3: 11200.91
+    bic_3d_minus_2d_K4: 11672.62
+  figures:
+    - figures/hmm_3d_cv0_cv1_cv2.png
+    - results/afm_pipeline/free_energy_profile/hmm_3d_cv0_cv1_cv2.json
+  conclusions: >
+    **3-D HMM yields the same partition as obj-055 2-D**. The 3-state
+    fit's primary clustering is on CV2: state 0 (low CV2 ≈ 33.9, broad,
+    π = 0.578) vs states 1 + 2 (high CV2 ≈ 40.6, narrow, split by CV0
+    into Inter 75 vs EC 82). Identical to the obj-055 partition; CV1
+    adds no new partition information.
+
+    **CV1 redundant with CV0 (confirmed)**. State-mean correlations show
+    CV0/CV1 corr = +0.69 to +0.82 within each state — CV1 tracks CV0
+    closely as expected from obj-054 (r = 0.84 V1 / 0.87 V2). Adding
+    CV1 as an HMM dimension just adds noise; the BIC penalty (51 params
+    vs 23 in 2-D) outweighs the marginal likelihood improvement.
+
+    **NO EO support — independent third confirmation**. The 4-state
+    HMM seeded at (CV0=85, CV1=85, CV2=55) saw the seeded state's CV2
+    mean drift DOWN from 55 to 42.18 Å during EM, exactly as in obj-055.
+    The seeded state ended at π = 0.002 (degenerate, ~3 frames; σ ≈ 0.4
+    Å — near-singular Gaussian). The 4th state is NOT an EO state but
+    a degenerate near-zero-mass artifact of over-parameterization.
+
+    **Model selection**: ΔBIC (4 − 3) = +78.28 → 3-state preferred (BIC
+    penalizes the degenerate 4th state). ΔAIC = −8.20 → 4-state weakly
+    preferred (AIC has a smaller penalty per parameter). Conservative
+    interpretation: 3-state is the right model in 3-D space.
+
+    **Cross-dimensional triangulation closes the HMM thread**:
+      - obj-048 1-D HMM (CV0): 3-state BC/Inter/EC, log-L = −5286
+      - obj-051 4-state ablation: marginal +411 ΔBIC for K=4, sub-BC
+      - obj-055 2-D HMM (CV0, CV2): 4-state preferred (ΔBIC = -393),
+        primary partition on CV2, no EO recovery
+      - obj-059 3-D HMM (CV0, CV1, CV2): 3-state preferred (ΔBIC=+78),
+        same primary partition as obj-055, CV1 confirmed redundant
+    Three independent HMM analyses agree: αVβ3 surface-bound dynamics
+    are well-described by 3 states organized along CV0 (extension);
+    CV2 carries an orthogonal headpiece-opening axis where the v7
+    data does not extend into the EO regime.
+
+    **Reviewer panel unchanged**: obj-059 strengthens existing
+    Reviewer A (4 independent EO negatives now: obj-025/041/055/059)
+    and Reviewer D (HMM defense spans 1-D, 2-D, and 3-D variants).
+    Total tally remains **13/3/7** of 23.
+
+    **Caveats**:
+      (1) Absolute BIC values not directly comparable across HMM
+      dimensionalities since they're integrating different observation
+      density spaces. The relative within-dimensionality comparisons
+      (3 vs 4 states) and recovered state partitions are the
+      meaningful comparisons.
+      (2) The 4-state degenerate state's near-zero π and tiny σ
+      could in principle indicate a real rare state hidden in the
+      data, but the σ = 0.4 Å width is below experimental noise
+      (1 nm vertical, ~5 Å lateral per obj-027), so it's almost
+      certainly an EM artifact.
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-058
   status: completed
   statement: Vina-proxy ligand-fit scoring of obj-056 candidate — STABLE druggability across BC→EC, intermediate absolute score

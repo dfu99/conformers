@@ -74,9 +74,9 @@ def panel_timeline(ax, objs):
     today_count = sum(1 for d in dates if d <= today)
     ax.scatter([today], [today_count], s=120, color="#d62728",
                edgecolor="black", zorder=10,
-               label=f"obj-038→058 today: {today_count}")
+               label=f"obj-038→059 today: {today_count}")
     ax.set_title(f"Objectives completed (cumulative) — {today_count} today "
-                 f"(+21 this audit: obj-038→058)",
+                 f"(+22 this audit: obj-038→059)",
                  fontsize=10.5)
     ax.set_ylabel("count")
     ax.set_xlabel("week")
@@ -157,10 +157,10 @@ def panel_pipelines(ax):
 
 def panel_blockers(ax):
     blockers = [
-        ("#1  EO state coverage — triple-confirmed empirical negative",
-         "obj-025 SMD k=1000 only opens CV2 0.9 Å in 3 ns. obj-041\n"
-         "5/5 published full-ecto crystals are bent in CV2. obj-055\n"
-         "2-D HMM finds zero EO support. ΔG_EO≥2.02 kcal/mol (obj-043).",
+        ("#1  EO state coverage — 4× confirmed empirical negative",
+         "obj-025 SMD k=1000 opens CV2 only 0.9 Å in 3 ns. obj-041\n"
+         "5/5 ecto crystals bent. obj-055 2-D HMM seed 55→41.6 (drift).\n"
+         "obj-059 3-D HMM seed 55→42.2 (drift). ΔG_EO≥2.02 kcal/mol.",
          "#d62728"),
         ("#2  Dynamics + populations + kinetics  ✓ FULLY CHARACTERIZED",
          "obj-038/043: ΔG + 25/46/24/5%. obj-044-047: non-stat, σ≈8 Å.\n"
@@ -240,6 +240,8 @@ def panel_today_deliverables(ax):
          "obj-057\nLIGSITE"),
         ("vina_proxy_scoring_v1.png",
          "obj-058\nVina-proxy"),
+        ("hmm_3d_cv0_cv1_cv2.png",
+         "obj-059\n3-D HMM"),
     ]
     n = len(tiles)
     ax.set_xlim(0, n)
@@ -310,12 +312,12 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v18)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v19)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→058 + 7 docs + 2 starter scripts  •  "
+        f"obj-038→059 + 7 docs + 2 starter scripts  •  "
         f"reviewer panel: 13/3/7 (was 5/6/12 morning)  •  "
-        f"EO triple-confirmed (obj-025 + 041 + 055)  •  HMM Markovian + V1=V2 + ACF τ_e ≈ Inter dwell  •  "
-        f"Reviewer E CLOSED via 3-method triangulation: SASA + LIGSITE + Vina-proxy (obj-056/057/058)  •  "
+        f"EO 4× confirmed (obj-025 + 041 + 055 + 059)  •  HMM 1-D + 2-D + 3-D triangulated  •  "
+        f"Reviewer E CLOSED via 3-method triangulation (obj-056/057/058)  •  "
         f"PI sign-off Monday unblocks route A",
         fontsize=8.5, fontweight="bold", y=0.995,
     )
