@@ -1,5 +1,33 @@
 max_chain: 10
 queue:
+- objective: 'Per-state domain-pair distances: 6th axis of per-state thread. Centroid-centroid
+    distances over the 5 αVβ3 domains × 10 pairs, per HMM state. Identifies WHICH domains
+    separate during extension (head-leg vs head-head). Audit §37 v28 P=4.
+
+    '
+  priority: 4
+  status: completed
+  added: 2026-05-06 03:00
+  completed: 2026-05-06 03:30
+  source: audit-2026-05-05-deepening-v28
+  success_criteria: 'figures/domain_pair_distances_per_state_v1.png + JSON. Per-state mean
+    ± std for each of 10 pairs, ranked by Δ EC-BC. Reviewer A canonical confirmation
+    of head-leg separation model.
+
+    '
+  notes: 'EXECUTED 2026-05-06 03:30 as obj-068 (audit §37 v28). 5 canonical αVβ3 domains
+    × 10 pairs. **Top separation: α-tail↔β-head Δ +43.48 Å BC→EC** (107.8→151.3 Å);
+    α-head↔α-tail Δ +42.56 Å (within αV); β-head↔β-tail Δ +32.57 Å (within β3, hybrid
+    swing-out). **Heads stay together: α-head↔β-head Δ only +3.32 Å** (35→38 Å) — the
+    headpiece stays as a unit. Legs stay close: α-calf↔β-tail Δ +5.62; α-tail↔β-tail
+    Δ +9.53. **Empirical confirmation of Springer head-leg separation model**: extension
+    is α-tail-from-β-head, NOT head-from-head. α-tail involved in 2 of top 2 separating
+    pairs → α C-terminal foot is the kinetic gateway. BC σ 2-3× wider than EC σ across
+    all pairs (consistent with obj-067 shape variance + obj-051 BC sub-state heterogeneity).
+    Reviewer A canonical model rendered quantitatively. Tally still 13/3/7. Cumulative
+    count 65.
+
+    '
 - objective: 'Per-state shape anisotropy: 5th orthogonal axis of the per-state thread.
     Inertia-tensor eigenvalues per frame → Rg, asphericity, acylindricity, κ². Tests
     "extension makes integrin more rod-like". Audit §36 v27 P=4.

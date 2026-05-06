@@ -1,0 +1,138 @@
+{
+  "per_state": {
+    "BC": {
+      "n": 658,
+      "mean_distance_A": 68.90089434010089,
+      "max_distance_A": 177.09029784864845,
+      "min_distance_A": 7.55343719905772
+    },
+    "Inter": {
+      "n": 587,
+      "mean_distance_A": 83.33325930209425,
+      "max_distance_A": 180.58359873542008,
+      "min_distance_A": 5.5693980287745815
+    },
+    "EC": {
+      "n": 400,
+      "mean_distance_A": 91.22187704729804,
+      "max_distance_A": 186.4228162818455,
+      "min_distance_A": 16.154030895070953
+    }
+  },
+  "per_pair": {
+    "alpha_head_thigh \u2194 alpha_calf": {
+      "BC_mean_A": 60.8723318480377,
+      "BC_std_A": 8.808244126014017,
+      "Inter_mean_A": 74.30378154027181,
+      "Inter_std_A": 3.1135223011269173,
+      "EC_mean_A": 82.41731702900341,
+      "EC_std_A": 2.422474606992691,
+      "delta_EC_BC_A": 21.54498518096571,
+      "delta_Inter_BC_A": 13.43144969223411,
+      "delta_EC_Inter_A": 8.1135354887316
+    },
+    "alpha_head_thigh \u2194 alpha_tail": {
+      "BC_mean_A": 129.9186612767781,
+      "BC_std_A": 21.381468449589153,
+      "Inter_mean_A": 159.1483621595167,
+      "Inter_std_A": 10.843177162650814,
+      "EC_mean_A": 172.4747130275777,
+      "EC_std_A": 5.563267799760895,
+      "delta_EC_BC_A": 42.55605175079961,
+      "delta_Inter_BC_A": 29.229700882738598,
+      "delta_EC_Inter_A": 13.326350868061013
+    },
+    "alpha_head_thigh \u2194 beta_head": {
+      "BC_mean_A": 34.9586453063421,
+      "BC_std_A": 6.980322966403444,
+      "Inter_mean_A": 37.63489829517642,
+      "Inter_std_A": 5.8789954231805766,
+      "EC_mean_A": 38.28024121505765,
+      "EC_std_A": 5.164020044195403,
+      "delta_EC_BC_A": 3.321595908715551,
+      "delta_Inter_BC_A": 2.676252988834321,
+      "delta_EC_Inter_A": 0.6453429198812302
+    },
+    "alpha_head_thigh \u2194 beta_tail": {
+      "BC_mean_A": 81.4915545388285,
+      "BC_std_A": 14.223982848953996,
+      "Inter_mean_A": 102.29669239626453,
+      "Inter_std_A": 8.031185589220655,
+      "EC_mean_A": 114.39845745792503,
+      "EC_std_A": 5.438231124524954,
+      "delta_EC_BC_A": 32.90690291909654,
+      "delta_Inter_BC_A": 20.805137857436037,
+      "delta_EC_Inter_A": 12.101765061660501
+    },
+    "alpha_calf \u2194 alpha_tail": {
+      "BC_mean_A": 78.93348685482877,
+      "BC_std_A": 13.747800781013417,
+      "Inter_mean_A": 89.83766165408582,
+      "Inter_std_A": 8.52195015615026,
+      "EC_mean_A": 92.07829149366276,
+      "EC_std_A": 4.784510761193878,
+      "delta_EC_BC_A": 13.144804638833989,
+      "delta_Inter_BC_A": 10.90417479925705,
+      "delta_EC_Inter_A": 2.2406298395769397
+    },
+    "alpha_calf \u2194 beta_head": {
+      "BC_mean_A": 49.466514868254926,
+      "BC_std_A": 10.883458005022188,
+      "Inter_mean_A": 59.234043100264884,
+      "Inter_std_A": 7.916280951306458,
+      "EC_mean_A": 67.98788243502295,
+      "EC_std_A": 6.252911032747095,
+      "delta_EC_BC_A": 18.521367566768028,
+      "delta_Inter_BC_A": 9.767528232009958,
+      "delta_EC_Inter_A": 8.75383933475807
+    },
+    "alpha_calf \u2194 beta_tail": {
+      "BC_mean_A": 34.969442836094906,
+      "BC_std_A": 8.280270046115813,
+      "Inter_mean_A": 39.2720037994191,
+      "Inter_std_A": 6.594732481244293,
+      "EC_mean_A": 40.59179163839866,
+      "EC_std_A": 5.933502411355754,
+      "delta_EC_BC_A": 5.622348802303755,
+      "delta_Inter_BC_A": 4.302560963324197,
+      "delta_EC_Inter_A": 1.3197878389795576
+    },
+    "alpha_tail \u2194 beta_head": {
+      "BC_mean_A": 107.79325868728193,
+      "BC_std_A": 19.091369027893148,
+      "Inter_mean_A": 135.00897863984932,
+      "Inter_std_A": 10.655364441375147,
+      "EC_mean_A": 151.27683059165548,
+      "EC_std_A": 7.134317310121489,
+      "delta_EC_BC_A": 43.48357190437355,
+      "delta_Inter_BC_A": 27.215719952567383,
+      "delta_EC_Inter_A": 16.267851951806165
+    },
+    "alpha_tail \u2194 beta_tail": {
+      "BC_mean_A": 54.09286824186443,
+      "BC_std_A": 8.779847197788303,
+      "Inter_mean_A": 61.53025647601625,
+      "Inter_std_A": 5.826494065416049,
+      "EC_mean_A": 63.62761765322751,
+      "EC_std_A": 3.1673633319937124,
+      "delta_EC_BC_A": 9.53474941136308,
+      "delta_Inter_BC_A": 7.437388234151818,
+      "delta_EC_Inter_A": 2.097361177211262
+    },
+    "beta_head \u2194 beta_tail": {
+      "BC_mean_A": 56.51217894269747,
+      "BC_std_A": 12.027605850281587,
+      "Inter_mean_A": 75.06591496007766,
+      "Inter_std_A": 7.774234977480661,
+      "EC_mean_A": 89.08562793144927,
+      "EC_std_A": 6.005798940889378,
+      "delta_EC_BC_A": 32.5734489887518,
+      "delta_Inter_BC_A": 18.553736017380196,
+      "delta_EC_Inter_A": 14.019712971371604
+    }
+  },
+  "max_separation_pair": "alpha_tail \u2194 beta_head",
+  "max_separation_delta_A": 43.48357190437355,
+  "least_separation_pair": "alpha_head_thigh \u2194 beta_head",
+  "least_separation_delta_A": 3.321595908715551
+}
