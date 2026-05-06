@@ -213,30 +213,31 @@ def panel_today_deliverables(ax):
     """
     tiles = [
         # === Row 1: dynamics + 1-D HMM thread ===
-        ("free_energy_profile_v1.png",   "obj-038\nΔG(CV0)"),
-        ("state_populations_v1.png",     "obj-043\nState pops"),
+        ("free_energy_profile_v1.png",        "obj-038\nΔG(CV0)"),
+        ("state_populations_v1.png",          "obj-043\nState pops"),
         ("state_populations_v2_windowed.png", "obj-044\nNon-stat."),
         ("state_populations_v3_per_block_dg.png", "obj-045\nFES drift"),
         ("fes_drift_metadata_correlation.png", "obj-046\nIntrinsic"),
-        ("change_point_detection.png",   "obj-047\nChange-pts"),
-        ("hmm_state_assignment.png",     "obj-048\n3-state HMM"),
-        ("survival_time_analysis.png",   "obj-049\nMarkov"),
-        ("breakpoint_cross_validation.png", "obj-050\nV1=V2"),
-        ("hmm_model_selection.png",      "obj-051\nModel sel"),
-        # === Row 2: synthesis + multi-D HMM + cryptic + AFM controls ===
-        ("dynamics_synthesis_v1.png",    "obj-053\nSynthesis"),
-        ("cv_correlations_and_acf.png",  "obj-054\nACF τ"),
-        ("hmm_2d_cv0_cv2.png",           "obj-055\n2-D HMM"),
-        ("hmm_3d_cv0_cv1_cv2.png",       "obj-059\n3-D HMM"),
-        ("library_coverage_v3.png",      "obj-041\nNo-EO crystals"),
-        ("rgd_docking_v1.png",           "obj-039\nRGD-MIDAS"),
-        ("contact_mechanics_control.png", "obj-040\nHertz F4"),
-        ("cryptic_pockets_v1.png",       "obj-056\nCryptic SASA"),
-        ("pocket_volume_validation_v1.png", "obj-057\nLIGSITE"),
-        ("vina_proxy_scoring_v1.png",    "obj-058\nVina-proxy"),
+        ("change_point_detection.png",        "obj-047\nChange-pts"),
+        ("hmm_state_assignment.png",          "obj-048\n3-state HMM"),
+        ("survival_time_analysis.png",        "obj-049\nMarkov"),
+        ("breakpoint_cross_validation.png",   "obj-050\nV1=V2"),
+        ("hmm_model_selection.png",           "obj-051\nModel sel"),
+        ("dynamics_synthesis_v1.png",         "obj-053\nSynthesis"),
+        # === Row 2: multi-D HMM + Q-rate + EO + cryptic + AFM controls ===
+        ("cv_correlations_and_acf.png",       "obj-054\nACF τ"),
+        ("hmm_2d_cv0_cv2.png",                "obj-055\n2-D HMM"),
+        ("hmm_3d_cv0_cv1_cv2.png",            "obj-059\n3-D HMM"),
+        ("hmm_rate_matrix_consolidation.png", "obj-061\nQ-rate"),
+        ("library_coverage_v3.png",           "obj-041\nNo-EO crystals"),
+        ("rgd_docking_v1.png",                "obj-039\nRGD-MIDAS"),
+        ("contact_mechanics_control.png",     "obj-040\nHertz F4"),
+        ("cryptic_pockets_v1.png",            "obj-056\nCryptic SASA"),
+        ("pocket_volume_validation_v1.png",   "obj-057\nLIGSITE"),
+        ("vina_proxy_scoring_v1.png",         "obj-058\nVina-proxy"),
     ]
-    n_row = 10
-    n_rows = len(tiles) // n_row
+    n_row = 11
+    n_rows = (len(tiles) + n_row - 1) // n_row
     ax.set_xlim(0, n_row)
     ax.set_ylim(0, n_rows)
     ax.axis("off")
@@ -312,11 +313,11 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v20)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v21)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→059 + 7 docs + 2 starter scripts  •  "
+        f"obj-038→061 + 7 docs + 2 starter scripts  •  "
         f"reviewer panel: 13/3/7 (was 5/6/12 morning)  •  "
-        f"EO 4× confirmed (obj-025 + 041 + 055 + 059)  •  HMM 1-D + 2-D + 3-D triangulated  •  "
+        f"EO 4× confirmed (obj-025 + 041 + 055 + 059)  •  HMM dim+K+Q triangulated  •  "
         f"Reviewer E CLOSED via 3-method triangulation (obj-056/057/058)  •  "
         f"PI sign-off Monday unblocks route A",
         fontsize=8.5, fontweight="bold", y=0.995,
