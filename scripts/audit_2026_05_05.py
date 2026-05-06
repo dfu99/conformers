@@ -200,69 +200,69 @@ def panel_blockers(ax):
 
 
 def panel_today_deliverables(ax):
-    """Today's deliverables tiles through v17 (obj-038→obj-057)."""
+    """Today's deliverables tiles through v20 (obj-038→obj-059), 2-row clustered.
+
+    Row 1 (10 tiles, dynamics + 1-D HMM thread):
+        obj-038 ΔG(CV0), obj-043 State pops, obj-044 Non-stat, obj-045 FES drift,
+        obj-046 Intrinsic, obj-047 Change-pts, obj-048 3-state HMM, obj-049 Markov,
+        obj-050 V1=V2, obj-051 Model sel
+    Row 2 (10 tiles, synthesis + 2/3-D HMM + cryptic-binding + EO/AFM controls):
+        obj-052 Reconcile, obj-053 Synthesis, obj-054 ACF τ, obj-055 2-D HMM,
+        obj-059 3-D HMM, obj-039 RGD pocket, obj-040 Hertz F4, obj-056 Cryptic,
+        obj-057 LIGSITE, obj-058 Vina-proxy
+    """
     tiles = [
-        ("free_energy_profile_v1.png",
-         "obj-038\nΔG(CV0)"),
-        ("rgd_docking_v1.png",
-         "obj-039\nRGD pocket"),
-        ("contact_mechanics_control.png",
-         "obj-040\nHertz F4"),
-        ("library_coverage_v3.png",
-         "obj-041\nRoute D"),
-        ("state_populations_v1.png",
-         "obj-043\nState pops"),
-        ("state_populations_v2_windowed.png",
-         "obj-044\nNon-stat."),
-        ("state_populations_v3_per_block_dg.png",
-         "obj-045\nFES drift"),
-        ("fes_drift_metadata_correlation.png",
-         "obj-046\nIntrinsic"),
-        ("change_point_detection.png",
-         "obj-047\nChange-pts"),
-        ("hmm_state_assignment.png",
-         "obj-048\n3-state HMM"),
-        ("survival_time_analysis.png",
-         "obj-049\nMarkov"),
-        ("breakpoint_cross_validation.png",
-         "obj-050\nV1=V2"),
-        ("hmm_model_selection.png",
-         "obj-051\nModel sel"),
-        ("dynamics_synthesis_v1.png",
-         "obj-053\nSynthesis"),
-        ("cv_correlations_and_acf.png",
-         "obj-054\nACF τ"),
-        ("hmm_2d_cv0_cv2.png",
-         "obj-055\n2-D HMM"),
-        ("cryptic_pockets_v1.png",
-         "obj-056\nCryptic"),
-        ("pocket_volume_validation_v1.png",
-         "obj-057\nLIGSITE"),
-        ("vina_proxy_scoring_v1.png",
-         "obj-058\nVina-proxy"),
-        ("hmm_3d_cv0_cv1_cv2.png",
-         "obj-059\n3-D HMM"),
+        # === Row 1: dynamics + 1-D HMM thread ===
+        ("free_energy_profile_v1.png",   "obj-038\nΔG(CV0)"),
+        ("state_populations_v1.png",     "obj-043\nState pops"),
+        ("state_populations_v2_windowed.png", "obj-044\nNon-stat."),
+        ("state_populations_v3_per_block_dg.png", "obj-045\nFES drift"),
+        ("fes_drift_metadata_correlation.png", "obj-046\nIntrinsic"),
+        ("change_point_detection.png",   "obj-047\nChange-pts"),
+        ("hmm_state_assignment.png",     "obj-048\n3-state HMM"),
+        ("survival_time_analysis.png",   "obj-049\nMarkov"),
+        ("breakpoint_cross_validation.png", "obj-050\nV1=V2"),
+        ("hmm_model_selection.png",      "obj-051\nModel sel"),
+        # === Row 2: synthesis + multi-D HMM + cryptic + AFM controls ===
+        ("dynamics_synthesis_v1.png",    "obj-053\nSynthesis"),
+        ("cv_correlations_and_acf.png",  "obj-054\nACF τ"),
+        ("hmm_2d_cv0_cv2.png",           "obj-055\n2-D HMM"),
+        ("hmm_3d_cv0_cv1_cv2.png",       "obj-059\n3-D HMM"),
+        ("library_coverage_v3.png",      "obj-041\nNo-EO crystals"),
+        ("rgd_docking_v1.png",           "obj-039\nRGD-MIDAS"),
+        ("contact_mechanics_control.png", "obj-040\nHertz F4"),
+        ("cryptic_pockets_v1.png",       "obj-056\nCryptic SASA"),
+        ("pocket_volume_validation_v1.png", "obj-057\nLIGSITE"),
+        ("vina_proxy_scoring_v1.png",    "obj-058\nVina-proxy"),
     ]
-    n = len(tiles)
-    ax.set_xlim(0, n)
-    ax.set_ylim(0, 1)
+    n_row = 10
+    n_rows = len(tiles) // n_row
+    ax.set_xlim(0, n_row)
+    ax.set_ylim(0, n_rows)
     ax.axis("off")
-    ax.set_title("Today's deliverables — ΔG + state pops + non-stat + breakpoints + HMM + Markovian + V1=V2 + model sel + synth + ACF + 2-D HMM + cryptic-pocket + LIGSITE "
-                 "(EO floor ΔG≥2 kcal/mol; stepwise p<1e-3; ACF τ_e ≈ Inter dwell; CV2 ⊥ CV0+CV1; cryptic K417-K422 opens to bulk, not druggable pocket)",
-                 fontsize=6.5, fontweight="bold")
+    ax.set_title("Today's deliverables (clustered): row 1 = dynamics + 1-D HMM thread; "
+                 "row 2 = synthesis + 2-D/3-D HMM + AFM controls + cryptic-binding triangulation "
+                 "(EO 4× confirmed; HMM 1-D+2-D+3-D agree; cryptic K417-K422 opens to bulk, not druggable)",
+                 fontsize=7.0, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
+        row = i // n_row
+        col = i % n_row
+        y_lo = (n_rows - 1 - row) + 0.18
+        y_hi = (n_rows - 1 - row) + 0.92
+        y_label = (n_rows - 1 - row) + 0.05
         path = FIG_DIR / name
         if path.exists():
             try:
                 img = mpimg.imread(str(path))
-                ax.imshow(img, extent=(i + 0.05, i + 0.95, 0.18, 0.92),
+                ax.imshow(img, extent=(col + 0.05, col + 0.95, y_lo, y_hi),
                           aspect="auto")
             except Exception:
                 pass
-        ax.text(i + 0.5, 0.08, label, ha="center", va="center",
-                fontsize=8.0, fontweight="bold",
+        ax.text(col + 0.5, y_label, label, ha="center", va="center",
+                fontsize=8.5, fontweight="bold",
                 bbox=dict(boxstyle="round", facecolor="white",
                           edgecolor="#cccccc"))
+    ax.axhline(1.0, color="#666", linestyle=":", linewidth=0.8, alpha=0.5)
 
 
 def panel_queue_snapshot(ax, queue):
@@ -305,14 +305,14 @@ def main() -> int:
     objs = load_objectives()
     _queue = load_queue()  # kept for future panel_queue_snapshot reactivation
     del _queue
-    fig = plt.figure(figsize=(15.5, 13.0))
-    gs = fig.add_gridspec(3, 2, height_ratios=[1.0, 1.0, 0.85],
+    fig = plt.figure(figsize=(15.5, 16.5))
+    gs = fig.add_gridspec(3, 2, height_ratios=[1.0, 1.0, 1.7],
                           hspace=0.42, wspace=0.18)
 
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v19)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v20)  •  "
         f"{completed} objectives completed  •  "
         f"obj-038→059 + 7 docs + 2 starter scripts  •  "
         f"reviewer panel: 13/3/7 (was 5/6/12 morning)  •  "

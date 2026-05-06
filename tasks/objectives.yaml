@@ -1049,6 +1049,66 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-060
+  status: completed
+  statement: v20 composite refinement (2-row clustered tiles) + audit synthesis doc end-of-day rewrite
+  methodology: >
+    Audit §29 v20 P=4 polish pass. Two deliverables consolidate the
+    19 prior deepening passes into reader-ready artifacts.
+
+    (1) Composite figure refinement: figures/audit-2026-05-05.png had
+    grown to 20 tiles in a single row, ~37 px per tile — unreadable.
+    Restructured to a 2-row × 10-tile layout in scripts/audit_2026_05_05.py:
+      Row 1 (dynamics + 1-D HMM thread): obj-038 ΔG, obj-043 State pops,
+        obj-044 Non-stat, obj-045 FES drift, obj-046 Intrinsic, obj-047
+        Change-pts, obj-048 3-state HMM, obj-049 Markov, obj-050 V1=V2,
+        obj-051 Model sel.
+      Row 2 (synthesis + multi-D HMM + AFM controls + cryptic-binding):
+        obj-053 Synthesis, obj-054 ACF τ, obj-055 2-D HMM, obj-059 3-D HMM,
+        obj-041 No-EO crystals, obj-039 RGD-MIDAS, obj-040 Hertz F4,
+        obj-056 Cryptic SASA, obj-057 LIGSITE, obj-058 Vina-proxy.
+    Figure size grew from 15.5×13 to 15.5×16.5 in (height_ratios for the
+    deliverables row 0.85 → 1.7). Visible thread separator at row boundary.
+
+    (2) Synthesis doc rewrite: docs/audit_2026-05-05_synthesis.md was
+    stuck at v5 morning state (35 objectives, 8/4/10 panel). Rewrote
+    end-to-end as v20 end-of-day distillation:
+      - headline numbers updated (57 obj, 13/3/7 of 23, trajectory)
+      - four-thread organization (Dynamics, HMM, Cryptic, EO blocker)
+      - status table per thread with closure rationale
+      - confidence statement covering all four analytical axes
+      - cross-references to audit doc + figures + commits
+    122 lines → ~150 lines.
+
+    Script: scripts/audit_2026_05_05.py (panel_today_deliverables refactor)
+    Doc: docs/audit_2026-05-05_synthesis.md (full rewrite)
+  metrics:
+    composite_tiles: 20
+    composite_layout: "2-row × 10-tile clustered by analytical thread"
+    composite_size_pre: "15.5 × 13.0 in"
+    composite_size_post: "15.5 × 16.5 in"
+    synthesis_lines_pre: 122
+    synthesis_lines_post: 150
+    threads_documented: 4
+    cross_references: 6
+  figures:
+    - figures/audit-2026-05-05.png
+    - docs/audit_2026-05-05_synthesis.md
+  conclusions: >
+    The audit's 22 today-shipped objectives + 19 prior deepening
+    passes are now consolidated into:
+      (a) one rendered status board (composite v20, 2-row clustered)
+      (b) one paper-ready synthesis page (refreshed end-of-day)
+    Together these are the two artifacts the PI / reviewers / paper
+    co-authors should look at first. They link out to the full
+    audit doc (3275 lines, 28 §) and per-objective entries in
+    objectives.yaml (57 entries).
+
+    No new analytical content; pure consolidation. Reviewer panel
+    unchanged at 13/3/7. Cumulative count 57 (+1 polish pass).
+  connects_to: null
+  completed_date: '2026-05-05'
+
 - id: obj-059
   status: completed
   statement: 3-D HMM over (CV0, CV1, CV2) — same partition as obj-055, CV1 confirmed redundant, no EO support
