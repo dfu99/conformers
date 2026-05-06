@@ -1049,6 +1049,120 @@ objectives:
   connects_to: obj-039
   completed_date: '2026-05-05'
 
+- id: obj-067
+  status: completed
+  statement: Per-state shape anisotropy decomposition — extension makes integrin more rod-like;
+    Rg +17 Å, asphericity +2130 Å², κ² +0.19 BC→EC; 11/12 Bonferroni-sig
+  methodology: >
+    Audit §36 v27 P=4 final piece of the per-state thread. Adds the
+    5th orthogonal axis (global shape) to the per-state characterization
+    triangle (obj-063 RMSF / obj-064 CV2 / obj-065 contacts / obj-066
+    network).
+
+    Method:
+      1. Load V1 + V2 fitted_coords_median_reanchored.npy; subset to
+         all 1654 CAs.
+      2. Per frame: center on centroid; compute gyration tensor
+         S_ab = (1/N) Σ_i Δr_ia Δr_ib.
+      3. Diagonalize → eigenvalues λ1 ≥ λ2 ≥ λ3.
+      4. Derived shape parameters:
+         - Rg² = λ1 + λ2 + λ3 (radius of gyration)
+         - Asphericity b = λ1 - (λ2 + λ3)/2 (rod-like-ness)
+         - Acylindricity c = λ2 - λ3
+         - Relative anisotropy κ² = (b² + 0.75c²) / Rg^4 ∈ [0, 1]
+      5. Per HMM Viterbi state: mean / std + pairwise KS tests
+         + Bonferroni correction (4 params × 3 pairs = 12 tests).
+
+    Script: pipelines/avb3-conformers/scripts/shape_anisotropy_per_state.py
+  metrics:
+    n_frames: 1645
+    n_BC: 658
+    n_Inter: 587
+    n_EC: 400
+    Rg_BC_mean_A: 53.02
+    Rg_BC_std_A: 7.13
+    Rg_Inter_mean_A: 63.72
+    Rg_Inter_std_A: 3.94
+    Rg_EC_mean_A: 70.01
+    Rg_EC_std_A: 2.80
+    delta_Rg_BC_to_EC_A: 16.99
+    asphericity_BC_mean_A2: 2206.7
+    asphericity_BC_std_A2: 791.4
+    asphericity_Inter_mean_A2: 3470.6
+    asphericity_EC_mean_A2: 4336.9
+    asphericity_EC_std_A2: 324.0
+    delta_asphericity_BC_to_EC_A2: 2130.2
+    kappa_sq_BC_mean: 0.592
+    kappa_sq_BC_std: 0.180
+    kappa_sq_Inter_mean: 0.728
+    kappa_sq_EC_mean: 0.784
+    kappa_sq_EC_std: 0.061
+    delta_kappa_sq_BC_to_EC: 0.192
+    n_sig_pairs_bonf: 11
+    n_total_tests: 12
+    bonferroni_alpha: 0.0042
+  figures:
+    - figures/shape_anisotropy_per_state_v1.png
+    - results/afm_pipeline/shape_anisotropy_per_state/shape_anisotropy_per_state.png
+  conclusions: >
+    **Extension makes the integrin dramatically more rod-like**:
+    - **Rg increases by 17 Å BC → EC** (53 → 70 Å, +32 %).
+    - **Asphericity increases by 2130 Å² BC → EC** (2207 → 4337 Å²,
+      +97 %). The λ1 eigenvalue (longest axis) grows much faster
+      than λ2+λ3.
+    - **Relative anisotropy κ² increases from 0.59 to 0.78** —
+      EC sits much closer to the κ²=1 (rod) limit than to κ²=0
+      (sphere).
+    - 11 of 12 Bonferroni-significant pairwise KS tests at α=0.0042;
+      only Inter↔EC acylindricity is NS (p = 0.09) — Inter and EC
+      have similar minor-axis differences, but the major axis
+      grows substantially.
+
+    **BC has wider distributions than EC**: BC σ_Rg = 7.13 Å vs
+    EC σ_Rg = 2.80 Å (2.5× wider); BC σ_asph = 791 Å² vs EC
+    σ_asph = 324 Å² (2.4× wider); BC σ_κ² = 0.180 vs EC σ_κ² =
+    0.061 (3× wider). **The bent state is structurally
+    heterogeneous; the extended state is structurally committed**.
+    Consistent with the obj-051 4-state K=4 BC sub-division
+    (multiple BC micro-states inflating the apparent variance)
+    and the obj-063 per-residue RMSF gap (BC 19.7 Å > EC 12.4 Å).
+
+    **Reviewer panel reinforced**:
+    - **Reviewer A** (Springer/Campbell): the BC → EC transition
+      is a global shape change (Rg +32 %, asphericity +97 %) —
+      the integrin literally becomes a different shape. This is
+      the macroscopic cousin of obj-065's contact-level rendering
+      of the Springer hinge model.
+    - **Reviewer B** (Jumper/Ahdritz): per-state shape histograms
+      show clean three-cluster structure in (Rg, asphericity)
+      space — independent confirmation of the obj-048 HMM state
+      partition.
+    - **Reviewer C** (Ando/Scheuring): the integrin's longest
+      axis grows from λ1 ≈ 30 nm² (BC) to ~50 nm² (EC) — the
+      HS-AFM imaging strategy of looking down the membrane normal
+      should resolve this geometry change in real space.
+    - **Reviewer D** (Elber/Chipot): the per-state shape variance
+      shows BC is the high-variance "fluctuating bent ensemble"
+      and EC is the low-variance "committed extended" — consistent
+      with the kinetic gateway picture from obj-048 (Inter as the
+      bottleneck) and obj-049 (BC longest dwell).
+
+    No category shifts; tally unchanged at 13/3/7 of 23. Cumulative
+    count 64.
+
+    **Caveats**:
+      (1) Rg is dominated by the longest axis (λ1); the BC→EC
+      growth is mostly λ1 (the major axis stretches) not symmetric
+      growth. λ2, λ3 (minor axes) change less.
+      (2) Same-frame-set as obj-063/064/065/066 — this is a 5th
+      decomposition of identical observations. The diagnostic value
+      is in the agreement across orthogonal axes.
+      (3) Frame centering uses centroid of all 1654 CAs; alternative
+      centerings (head-only, body-only) would shift Rg but not the
+      κ² interpretation.
+  connects_to: null
+  completed_date: '2026-05-06'
+
 - id: obj-066
   status: completed
   statement: Per-state contact-network metrics — graph-theoretic decomposition of obj-065

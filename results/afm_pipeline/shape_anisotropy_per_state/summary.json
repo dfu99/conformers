@@ -1,0 +1,103 @@
+{
+  "per_state": {
+    "BC": {
+      "n": 658,
+      "Rg_mean_A": 53.01862491308091,
+      "Rg_std_A": 7.1310307603307015,
+      "asphericity_mean_A2": 2206.6575228986767,
+      "asphericity_std_A2": 791.3683291941832,
+      "acylindricity_mean_A2": 184.15500671124386,
+      "acylindricity_std_A2": 100.70672137454372,
+      "kappa_sq_mean": 0.5915590438844585,
+      "kappa_sq_std": 0.18039639735925433
+    },
+    "Inter": {
+      "n": 587,
+      "Rg_mean_A": 63.72444997187565,
+      "Rg_std_A": 3.937345931948718,
+      "asphericity_mean_A2": 3470.5844769485966,
+      "asphericity_std_A2": 508.51062244779706,
+      "acylindricity_mean_A2": 165.92635357755614,
+      "acylindricity_std_A2": 80.57793827907577,
+      "kappa_sq_mean": 0.7280763850199912,
+      "kappa_sq_std": 0.10211278737521906
+    },
+    "EC": {
+      "n": 400,
+      "Rg_mean_A": 70.00626534792283,
+      "Rg_std_A": 2.8018616586952763,
+      "asphericity_mean_A2": 4336.8608412742615,
+      "asphericity_std_A2": 323.9572382302819,
+      "acylindricity_mean_A2": 170.30508425086737,
+      "acylindricity_std_A2": 70.73122483625335,
+      "kappa_sq_mean": 0.7843946652114391,
+      "kappa_sq_std": 0.06138933776120471
+    }
+  },
+  "pairwise_ks": {
+    "Rg": {
+      "BC_vs_Inter": {
+        "ks_D": 0.7078649358181056,
+        "p": 4.5354450477425105e-150
+      },
+      "Inter_vs_EC": {
+        "ks_D": 0.7256175468483816,
+        "p": 5.466007606908033e-122
+      },
+      "BC_vs_EC": {
+        "ks_D": 0.9355851063829788,
+        "p": 1.773520079986698e-240
+      }
+    },
+    "asphericity": {
+      "BC_vs_Inter": {
+        "ks_D": 0.6688535285802313,
+        "p": 2.7418402074402338e-132
+      },
+      "Inter_vs_EC": {
+        "ks_D": 0.7136925042589438,
+        "p": 1.6691135906308007e-117
+      },
+      "BC_vs_EC": {
+        "ks_D": 0.9421048632218845,
+        "p": 1.76551355965052e-245
+      }
+    },
+    "acylindricity": {
+      "BC_vs_Inter": {
+        "ks_D": 0.2393992429695065,
+        "p": 4.2133046506834923e-16
+      },
+      "Inter_vs_EC": {
+        "ks_D": 0.0791695059625213,
+        "p": 0.09469555473527089
+      },
+      "BC_vs_EC": {
+        "ks_D": 0.26493161094224926,
+        "p": 7.302902696725994e-16
+      }
+    },
+    "kappa_sq": {
+      "BC_vs_Inter": {
+        "ks_D": 0.44216380234358416,
+        "p": 4.1492327315844384e-55
+      },
+      "Inter_vs_EC": {
+        "ks_D": 0.42790885860306643,
+        "p": 1.1920808301025215e-39
+      },
+      "BC_vs_EC": {
+        "ks_D": 0.6393313069908815,
+        "p": 2.2610129330383418e-96
+      }
+    }
+  },
+  "bonferroni_alpha_per_param": 0.004166666666666667,
+  "interpretation": {
+    "rg_increases_BC_to_EC": true,
+    "asphericity_increases_BC_to_EC": true,
+    "kappa_increases_BC_to_EC": true,
+    "delta_Rg_BC_to_EC_A": 16.98764043484192,
+    "delta_asphericity_BC_to_EC_A2": 2130.203318375585
+  }
+}

@@ -76,7 +76,7 @@ def panel_timeline(ax, objs):
                edgecolor="black", zorder=10,
                label=f"obj-038→059 today: {today_count}")
     ax.set_title(f"Objectives completed (cumulative) — {today_count} today "
-                 f"(+29 this audit: obj-038→066)",
+                 f"(+30 this audit: obj-038→067)",
                  fontsize=10.5)
     ax.set_ylabel("count")
     ax.set_xlabel("week")
@@ -234,6 +234,7 @@ def panel_today_deliverables(ax):
         ("per_state_cv2_distribution.png",    "obj-064\nPer-state CV2"),
         ("contact_map_per_state_v1.png",      "obj-065\nContact diff"),
         ("contact_network_metrics_v1.png",    "obj-066\nNetwork degree"),
+        ("shape_anisotropy_per_state_v1.png", "obj-067\nShape Rg + κ²"),
         ("library_coverage_v3.png",           "obj-041\nNo-EO crystals"),
         ("rgd_docking_v1.png",                "obj-039\nRGD-MIDAS"),
         ("contact_mechanics_control.png",     "obj-040\nHertz F4"),
@@ -241,7 +242,7 @@ def panel_today_deliverables(ax):
         ("pocket_volume_validation_v1.png",   "obj-057\nLIGSITE"),
         ("vina_proxy_scoring_v1.png",         "obj-058\nVina-proxy"),
     ]
-    n_row = 13
+    n_row = 14
     n_rows = (len(tiles) + n_row - 1) // n_row
     while len(tiles) < n_row * n_rows:
         tiles.append(("", ""))
@@ -249,8 +250,8 @@ def panel_today_deliverables(ax):
     ax.set_ylim(0, n_rows)
     ax.axis("off")
     ax.set_title("Today's deliverables (clustered): row 1 = dynamics + 1-D HMM + ACF + FES×HMM (13); "
-                 "row 2 = multi-D HMM + Q-rate + per-state RMSF/CV2/contacts/network + EO + AFM + cryptic-binding (13)  "
-                 "— per-state thread: RMSF (BC>EC), CV2 R² 0.05, 93 break/29 form, network ⟨k⟩ 11.3→11.0 (-2.8%)",
+                 "row 2 = multi-D HMM + Q-rate + per-state RMSF/CV2/contacts/network/shape + EO + AFM + cryptic-binding (14)  "
+                 "— per-state 5 axes: RMSF, CV2, contacts (93 break), network (β3 PSI rewire), Rg+17 Å + asphericity +2130 Å² (rod-like)",
                  fontsize=7.0, fontweight="bold")
     for i, (name, label) in enumerate(tiles):
         row = i // n_row
@@ -320,13 +321,14 @@ def main() -> int:
     completed = sum(1 for o in objs if o.get("status") == "completed")
     in_prog = sum(1 for o in objs if o.get("status") == "in_progress")
     fig.suptitle(
-        f"Conformers — audit 2026-05-05 (deepening pass v26)  •  "
+        f"Conformers — audit 2026-05-05 (deepening pass v27)  •  "
         f"{completed} objectives completed  •  "
-        f"obj-038→066 + 7 docs + 2 starter scripts  •  "
+        f"obj-038→067 + 7 docs + 2 starter scripts  •  "
         f"reviewer panel: 13/3/7 (was 5/6/12 morning)  •  "
         f"EO 4× confirmed  •  HMM dim+K+Q triangulated  •  "
         f"Reviewer E CLOSED 3-method  •  "
-        f"per-state thread closed across 4 axes (RMSF/CV2/contact-diff/network)  •  "
+        f"per-state thread closed across 5 axes (RMSF/CV2/contacts/network/shape)  •  "
+        f"obj-067: Rg +17 Å BC→EC, asphericity +2130 Å² (rod-like)  •  "
         f"PI sign-off Monday unblocks route A",
         fontsize=8.5, fontweight="bold", y=0.995,
     )

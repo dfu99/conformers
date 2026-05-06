@@ -1,5 +1,29 @@
 max_chain: 10
 queue:
+- objective: 'Per-state shape anisotropy: 5th orthogonal axis of the per-state thread.
+    Inertia-tensor eigenvalues per frame → Rg, asphericity, acylindricity, κ². Tests
+    "extension makes integrin more rod-like". Audit §36 v27 P=4.
+
+    '
+  priority: 4
+  status: completed
+  added: 2026-05-06 02:30
+  completed: 2026-05-06 03:00
+  source: audit-2026-05-05-deepening-v27
+  success_criteria: 'figures/shape_anisotropy_per_state_v1.png + JSON. Per-state Rg/asphericity/κ²
+    + pairwise KS + Bonferroni multi-test correction. Reviewer A/B/C/D reinforced.
+
+    '
+  notes: 'EXECUTED 2026-05-06 03:00 as obj-067 (audit §36 v27). Per-state means: Rg
+    BC 53.02 ± 7.13 / Inter 63.72 ± 3.94 / EC 70.01 ± 2.80 Å (Δ BC→EC +17 Å, +32 %).
+    Asphericity BC 2207 / EC 4337 Å² (Δ +2130, +97 %). κ² BC 0.59 / EC 0.78 (Δ +0.19).
+    BC σ 2.4-3× wider than EC σ — bent is structurally heterogeneous, EC is structurally
+    committed (consistent with obj-051 K=4 BC sub-division + obj-063 per-residue RMSF
+    gap). 11/12 Bonferroni-sig pairs at α=0.0042; only Inter↔EC acylindricity NS (p=0.09).
+    Per-state thread now closed across 5 orthogonal axes. Tally still 13/3/7. Cumulative
+    count 64.
+
+    '
 - objective: 'Per-state contact-network metrics: graph-theoretic decomposition of obj-065
     contact maps. Per-residue degree d_s[i], per-state network density, clustering coefficient,
     "lonely" vs "social" residue ranking. Audit §35 v26 P=4.
