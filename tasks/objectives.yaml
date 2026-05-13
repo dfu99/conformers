@@ -3704,3 +3704,43 @@ objectives:
     bent crystal also makes it the cleanest target for steering MD.
   connects_to: null
   completed_date: '2026-04-29'
+
+- id: obj-069
+  status: completed
+  statement: Regenerate v1 overlay with playhead+state-bands panel to match v2 May-3
+    redesign
+  methodology: >
+    The May-3 overlay redesign (commit c1e7b0f, locked-square AFM +
+    stacked CV-trajectory line plot with BC/Inter/EC bands + red
+    playhead) was only re-rendered for video2 at the time. Rendered
+    video1 against the same v7 fitted dir using
+    pipelines/afm-overlay/scripts/render_projection_overlay.py to
+    produce a stylistically matched companion. Output written to
+    results/afm_pipeline/v7_smoothed_final/video1/overlay_v2/. Sent
+    both v1+v2 opt gifs to the PI over Slack.
+  metrics:
+    n_frames_total: 379
+    n_frames_rendered: 150
+    correlation_mean: 0.965
+    bc_pct: 43.5
+    inter_pct: 6.3
+    ec_pct: 50.1
+    render_minutes: 5
+    opt_gif_mb: 8.4
+    unopt_gif_mb: 30.3
+    panel_layout: AFM | overlay | 3-stacked-CVs-with-state-bands+playhead
+  figures:
+    - results/afm_pipeline/v7_smoothed_final/video1/overlay_v2/pdb_projection_video_opt.gif
+    - results/afm_pipeline/v7_smoothed_final/video1/overlay_v2/pdb_projection_grid.png
+  conclusions: >
+    v1 (379 fr, corr 0.965, BC 43.5 / Inter 6.3 / EC 50.1) and v2
+    (1266 fr, corr 0.939, BC 18.6 / Inter 2.8 / EC 78.6) overlays
+    are now stylistically identical: AFM | PDB projection overlay |
+    three stacked CV traces with state bands and a red playhead.
+    Both can be paired in a single paper figure (or supplementary
+    movie pair) without visual inconsistency. The pair sharply
+    illustrates that v1 spends ~50/50 BC/EC while v2 spends ~80 %
+    in EC — different sample conditions, same molecule, same
+    pipeline output stack.
+  connects_to: null
+  completed_date: '2026-05-13'
