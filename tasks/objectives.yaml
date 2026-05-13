@@ -3705,6 +3705,96 @@ objectives:
   connects_to: null
   completed_date: '2026-04-29'
 
+- id: obj-070
+  status: completed
+  statement: Multi-integrin extension — 7NXD α5β1 half-bent slots #3 in bent-stability
+    ranking; 6WOV reference corrected (was ryanodine receptor)
+  methodology: >
+    Planning priority #6 ("extend multi_integrin_first_principles to
+    6WOV α5β1 bent cryo-EM"). Inspected
+    data/multi_integrin/raw_pdbs/6WOV.cif and found it is actually
+    ryanodine receptor RyR2 (cryo-EM tetramer with C4 symmetry, 4
+    copies — that is why mdtraj previously flagged it as "4 copies").
+    Searched RCSB for the actual α5β1 full ectodomain cryo-EM
+    structure: **7NXD** (Schumacher et al 2021, "Cryo-EM structure of
+    human integrin alpha5beta1 in the half-bent conformation"). Single
+    copy each of α5 (chain A, 911/991 aa) and β1 (chain B, 693/778
+    aa). Downloaded the curated .pdb (no CIF asymmetric-unit
+    extractor needed). Added 7NXD to HETERODIMER_REGISTRY in
+    pipelines/avb3-conformers/scripts/multi_integrin_first_principles.py
+    and re-ran. Deleted 6WOV.cif from the multi-integrin raw_pdbs
+    folder (wrong protein, would corrupt any future per-PDB loop).
+    Fixed the wrong PDB ID in docs/integrin_heterodimer_plan.md.
+  metrics:
+    avb3_1jv2_head_leg_buried_sasa_A2: 13442
+    avb3_1jv2_head_tail_A: 42.61
+    avb3_1jv2_Rg_A: 39.23
+    avb3_1jv2_long_axis_A: 129.22
+    aiibb3_3fcs_head_leg_buried_sasa_A2: 15298
+    aiibb3_3fcs_head_tail_A: 37.2
+    aiibb3_3fcs_Rg_A: 39.14
+    aiibb3_3fcs_long_axis_A: 119.06
+    a5b1_7nxd_head_leg_buried_sasa_A2: 10555
+    a5b1_7nxd_head_tail_A: 73.94
+    a5b1_7nxd_Rg_A: 48.78
+    a5b1_7nxd_long_axis_A: 161.18
+    a5b1_alpha_chain_coverage: 0.92
+    a5b1_beta_chain_coverage: 0.89
+    full_ectodomain_count: 3
+    headpiece_only_count: 5
+  figures:
+    - results/multi_integrin/bent_state_features.png
+  conclusions: >
+    **α5β1 in cryo-EM is substantially less bent than the αVβ3 and
+    αIIbβ3 crystal forms** — confirmed empirically from
+    first-principles geometry without consulting the Schumacher
+    2021 paper's interpretation:
+
+    Bent-stability ranking (more buried head-leg SASA + smaller
+    head-tail distance ⇒ more stably bent):
+
+    | Rank | PDB | Integrin | Buried-SASA (Å²) | Head-tail (Å) | Rg (Å) |
+    |---:|---|---|---:|---:|---:|
+    | 1 | 3FCS | αIIbβ3 | 15298 | 37.2 | 39.1 |
+    | 2 | 1JV2 | αVβ3   | 13442 | 42.6 | 39.2 |
+    | 3 | 7NXD | α5β1   | **10555** | **73.9** | **48.8** |
+
+    α5β1 head-tail distance is **+31 Å** longer than αVβ3's bent
+    crystal and **+37 Å** longer than αIIbβ3's; Rg is **+10 Å**
+    larger; long-axis extent is **+32 Å** larger. The "half-bent"
+    naming in the deposit title is empirically supported by all
+    three geometric metrics simultaneously — it is genuinely less
+    compact, not just an interpretive label.
+
+    Biological interpretation: this triangulates with the activation
+    hierarchy (αIIbβ3 hardest to activate / αVβ3 bistable / α5β1
+    relatively easy) — the more conformationally-flexible /
+    constitutively-active an integrin, the further its solution
+    "bent" state sits from the canonical crystallographic bent. α5β1
+    in cryo-EM is closer to αVβ3's INTERMEDIATE (CV0 ≈ 74 Å in our
+    HS-AFM HMM) than to αVβ3's BC (CV0 ≈ 61 Å) by head-tail
+    distance.
+
+    Reviewer relevance:
+    - Reviewer A (Springer/Campbell): adds an empirical third
+      anchor to the bent-stability series at the canonical-model
+      level. Confirms head-tail centroid distance is an integrin-
+      generic CV.
+    - Reviewer B (Jumper/Ahdritz): expanded reference set for
+      AF2/Boltz baselines.
+    - Reviewer C (Ando): cryo-EM and HS-AFM both reveal α5β1
+      occupying a wider conformational range than the crystal form
+      suggests — supports the case that surface-bound HS-AFM ensembles
+      are not artefactually broadened.
+
+    The earlier 6WOV reference in `docs/integrin_heterodimer_plan.md`
+    and `tasks/planning.md` was a PDB-ID error (6WOV = ryanodine
+    receptor RyR2 tetramer, not an integrin). Both docs corrected;
+    misidentified .cif deleted to prevent future loop-over-folder
+    contamination.
+  connects_to: null
+  completed_date: '2026-05-13'
+
 - id: obj-069
   status: completed
   statement: Regenerate v1 overlay with playhead+state-bands panel to match v2 May-3

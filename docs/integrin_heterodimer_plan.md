@@ -24,7 +24,7 @@ our αVβ3 work:
 | αVβ6         | RGD             | 4UM9 head + peptide, 5FFG   | ~1600      | |
 | αVβ8         | RGD (atypical)  | 6OM2, 6UJC                  | ~1600      | constitutively extended |
 | α4β1         | LDV (non-RGD)   | e.g., 1QC5 (β1 headpiece)   | ~1700      | |
-| α5β1 (full)  | RGD             | 6WOV  (cryo-EM bent)        | ~1700      | |
+| α5β1 (full)  | RGD             | 7NXD  (cryo-EM half-bent)   | ~1700      | corrected 2026-05-13: prior 6WOV ID was wrong (RyR2, not an integrin) |
 | αLβ2         | leukocyte       | 6TR1 (full extended), 3HI6  | ~1700      | |
 | αMβ2         | leukocyte       | 7USM, 7USL                  | ~1700      | |
 

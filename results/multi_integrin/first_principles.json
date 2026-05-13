@@ -148,5 +148,30 @@
     "alpha_head_to_alpha_tail_A": 51.14,
     "beta_head_to_beta_tail_A": 15.72,
     "head_alpha_to_head_beta_A": 43.53
+  },
+  {
+    "pdb_id": "7NXD",
+    "name": "\u03b15\u03b21 (half-bent cryo-EM)",
+    "alpha_chain": "A",
+    "beta_chain": "B",
+    "alpha_full_length": 991,
+    "beta_full_length": 778,
+    "expected_state": "half-bent",
+    "is_full_ectodomain": true,
+    "alpha_residues": 911,
+    "beta_residues": 693,
+    "alpha_coverage": 0.919,
+    "beta_coverage": 0.891,
+    "rg_A": 48.78,
+    "long_axis_extent_A": 161.18,
+    "head_tail_distance_A": 73.94,
+    "alpha_head_to_alpha_tail_A": 89.16,
+    "beta_head_to_beta_tail_A": 60.25,
+    "head_alpha_to_head_beta_A": 46.55,
+    "head_only_sasa_A2": 33163.0,
+    "leg_only_sasa_A2": 34260.9,
+    "head_in_complex_sasa_A2": 24327.9,
+    "leg_in_complex_sasa_A2": 32541.0,
+    "head_leg_buried_sasa_A2": 10555.0
   }
 ]

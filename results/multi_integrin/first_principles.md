@@ -11,6 +11,7 @@ Bent-state geometry from RCSB-deposited heterodimer ectodomain PDBs. Features ar
 | 5FFG | αVβ6 headpiece (apo) | no | 767/325 | 32.84 | 111.89 | 32.26 | 51.24 | 14.28 | 39.27 | — |
 | 6OM2 | αVβ8 headpiece + LAP | no | 680/323 | 33.34 | 113.34 | 36.0 | 52.45 | 21.11 | 41.61 | — |
 | 6UJC | αVβ8 headpiece + Fab | no | 598/363 | 33.66 | 115.74 | 32.75 | 51.14 | 15.72 | 43.53 | — |
+| 7NXD | α5β1 (half-bent cryo-EM) | yes | 911/693 | 48.78 | 161.18 | 73.94 | 89.16 | 60.25 | 46.55 | 10555 |
 
 ## Predicted bent-fraction ranking
 
@@ -20,3 +21,4 @@ Bent-fraction prediction uses head-leg buried SASA as the primary stabilizer (mo
 |---:|---|---|---:|---:|---|
 | 1 | 3FCS | αIIbβ3 (bent crystal) | 15298 | 37.2 | highest |
 | 2 | 1JV2 | αVβ3 (bent crystal) | 13442 | 42.61 | #2 |
+| 3 | 7NXD | α5β1 (half-bent cryo-EM) | 10555 | 73.94 | #3 |

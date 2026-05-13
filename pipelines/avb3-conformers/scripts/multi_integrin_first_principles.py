@@ -99,6 +99,15 @@ HETERODIMER_REGISTRY = {
         "expected_state": "headpiece-only",
         "is_full_ectodomain": False,
     },
+    "7NXD": {
+        "name": "α5β1 (half-bent cryo-EM)",
+        "alpha_chain": "A",
+        "beta_chain": "B",
+        "alpha_full_length": 991,
+        "beta_full_length": 778,
+        "expected_state": "half-bent",
+        "is_full_ectodomain": True,
+    },
 }
 
 
