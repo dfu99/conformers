@@ -204,17 +204,92 @@ objectives:
   status: completed
   statement: Add Claude skill for deterministic PACE job operations.
   methodology: >
-    Created .claude/skills/pace-slurm-ops/SKILL.md with trigger conditions, preflight
-    checklist, smoke/real pipeline workflows, and failure handling documentation.
-    Added CLAUDE.md discovery pointer so agents find the skill automatically.
+    Created `.claude/skills/pace-slurm-ops/SKILL.md` (82 lines, frontmatter
+    + 7 sections) as the canonical procedure Claude agents must follow
+    for any PACE Phoenix cluster interaction in this repo.
+
+    Skill spec contents:
+      1. *Frontmatter* — `name: pace-slurm-ops` + a `description` that
+         encodes the trigger conditions (substrings the Claude harness
+         pattern-matches on: "submit ... PACE", "ssh ... login-phoenix",
+         "squeue", "sacct").
+      2. *Use This Skill When* — three explicit user intents.
+      3. *Canonical Entry Point* — single dispatcher
+         `pipelines/protenix-a5b1/scripts/pace_minimal.sh` (317 LOC
+         bash, pure ssh/rsync, no python deps). The skill explicitly
+         names the SSH host alias `pace-phoenix` so agents don't
+         rebuild it from CLAUDE.md each time.
+      4. *Preflight (Always)* — three commands: VPN check, key-based
+         SSH non-interactive test, `pace_minimal.sh check`. Includes
+         the one-time `ssh-copy-id` enrollment recipe with explicit
+         "Do not automate password storage" guidance.
+      5. *Smoke Test Workflow* — 60-second hello-world contract:
+         `pace_minimal.sh smoke 5 60`. Expected stdout signatures
+         enumerated. This is the round-trip validation of the entire
+         submit → watch → fetch chain.
+      6. *Real Pipeline Workflow* — `submit / watch / fetch` verbs
+         against the default A5B1 submit script.
+      7. *Operational Defaults* — PACE host alias, default account
+         `gts-yke8`, A5B1 GPU constraint `--gres=gpu:RTX_6000:1`,
+         smoke output extensions (`.log`, `.err`; `.out` optional).
+      8. *Failure Handling* — 4 enumerated failure modes with
+         diagnostic commands and remediation steps. Verbatim quoted
+         in the bug-report skeleton agents should produce when stuck.
+
+    `pace_minimal.sh` exposes 5 verbs (check / smoke / submit /
+    watch / fetch) with an env-var contract (`PACE_HOST`,
+    `PACE_REMOTE_ROOT`, `PACE_ACCOUNT`, `PACE_GIT_PULL`). Default
+    `PACE_GIT_PULL=1` means submit always pulls the latest commit
+    on the remote before sbatch — agents cannot accidentally submit
+    against stale code.
+
+    Discovery: `CLAUDE.md §2 Skills` block lists this skill
+    explicitly so the harness loads `SKILL.md` into context on
+    PACE-related queries. Global `~/.claude/CLAUDE.md` Global Skills
+    table also lists `pace-slurm-ops` under "Submitting, monitoring,
+    or fetching GPU jobs on Georgia Tech PACE cluster".
   metrics:
+    skill_md_lines: 82
+    pace_minimal_loc: 317
+    verbs: [check, smoke, submit, watch, fetch]
+    env_vars: [PACE_HOST, PACE_REMOTE_ROOT, PACE_ACCOUNT, PACE_GIT_PULL]
+    default_pace_host_alias: pace-phoenix
+    default_pace_account: gts-yke8
+    default_git_pull_before_submit: true
     failure_modes_documented: 4
     workflow_types: [smoke, real_pipeline, status_check]
+    smoke_contract_duration_s: 60
   figures:
   - results/obj-004-pace-skill-integration.png
   conclusions: >
-    Claude agents now follow a deterministic flow for PACE interactions instead of
-    re-deriving SSH/SLURM commands each time. Reduces errors from ad-hoc scripting.
+    The skill turned PACE operations from "Claude re-derives SSH
+    flags from scratch every session" into "Claude loads SKILL.md
+    and dispatches to one of 5 known verbs". Two operational
+    consequences:
+
+      (a) Reproducibility: every PACE-related conversation in
+          this repo since 2026-03-10 has followed the same flow
+          (preflight → smoke if uncertain → real submit → watch →
+          fetch). Skill content acts as the durable interface;
+          internal pace_minimal.sh implementation is a private
+          contract.
+      (b) Failure mode triage: the 4 documented failure modes
+          (hostname resolve / key auth / missing account /
+          watch-stall) cover the long tail of PACE failures we
+          have seen. When a new failure mode surfaces it gets
+          appended to the SKILL.md, not solved ad-hoc.
+
+    The smoke-test contract is the load-bearing piece: a 60-sec
+    hello-world job exercises the entire submit→watch→fetch chain
+    against the real cluster. If smoke passes, the heavy pipeline
+    is safe to launch. This protocol survives changes to Protenix /
+    Boltz / AFCluster pipelines below it.
+
+    The pace_minimal.sh dispatcher uses pure bash + ssh/rsync — no
+    python dependency, no biopython environment conflict, no need
+    to activate venv_protenix or venv_boltz before invoking. This
+    matches CLAUDE.md §4 environment-isolation hard requirement.
+  connects_to: obj-005
   completed_date: '2026-03-10'
 - id: obj-005
   status: completed
