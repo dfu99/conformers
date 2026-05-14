@@ -154,7 +154,7 @@ Final outputs:
 - [x] AF2 reduced_dbs conformer validation (obj-007, 2026-03-23) — AF2 also locked to bent conformation. 25 predictions have pairwise RMSD 0.1-2.9Å.
 - [x] MSA-subsampled Protenix conformer validation (obj-006, 2026-03-20) — TM-score validates frame realism but Protenix is MSA-depth-invariant for AVB3.
 - [x] Build AVB3 conformer + pseudo-AFM image pipeline (obj-005, 2026-03-18)
-- [x] Add dedicated A5B1 staged pipeline runner + sbatch entrypoint. (obj-001, 2026-03-06)
+- [x] Add dedicated A5B1 staged pipeline runner + sbatch entrypoint. (obj-001, 2026-03-06) — 2026-05-13 documentation pass: expanded methodology (5 scripts, 1258 LOC total: 1000 Py + 258 bash, RTX_6000 GPU, venv_protenix, SLURM gts-yke8), strengthened conclusions tying to follow-on obj-002/007/008, regenerated cleaner architecture diagram at `results/obj-001-a5b1-pipeline-architecture.png`. Pipeline thread is mature; no further compute should be spent on it per audit-2026-05-05 drop-list.
 - [x] Add deterministic stage-merging utility for final tagged complex export. (obj-002, 2026-03-06)
 - [x] Build PACE minimal remote control script with smoke test validation. (obj-003, 2026-03-09)
 - [x] Add Claude skill for deterministic PACE job operations. (obj-004, 2026-03-10)

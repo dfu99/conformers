@@ -3,18 +3,83 @@ objectives:
   status: completed
   statement: Add dedicated A5B1 staged pipeline runner and sbatch entrypoint.
   methodology: >
-    Built run_complete_tagged_pipeline.sh and submit_complete_tagged_pipeline_slurm.sh
-    under pipelines/protenix-a5b1/scripts. Pipeline chains setup, input building,
-    two-stage protenix pred, and merge into final CIF/PDB.
+    Built a five-script staged-attachment pipeline under
+    `pipelines/protenix-a5b1/scripts/`:
+
+      1. `setup_staged_attachment_workflow.py` (342 LOC, Python) —
+         provisions workflow dir, validates sequence file, sets up
+         MSA cache hand-off, writes per-stage manifest JSONs.
+      2. `build_staged_protenix_inputs.py` (154 LOC, Python) —
+         constructs the per-stage Protenix input JSON for stage 1
+         (A5B1 + SpyTag, ligand-anchor residue = 10) and stage 2
+         (A5B1 + Streptavidin, ligand-anchor residue = 1).
+      3. `run_complete_tagged_pipeline.sh` (213 LOC, bash with `set
+         -euo pipefail`) — orchestrates the entire chain:
+         heterodimer-CIF auto-selection from a previous predictions
+         dir → stage-1 `protenix pred` → stage-2 `protenix pred` →
+         RMSD-min receptor-aligned merge → final CIF/PDB.
+         Parameterised via 25+ env vars (MODEL_NAME, SEED, DTYPE,
+         USE_MSA, USE_TEMPLATE, SELECTION_MODE, etc.) with sane
+         defaults; legacy-path fallback if the new path is missing.
+      4. `merge_staged_tagged_complex.py` (504 LOC, Python) —
+         receptor-aligns stage-1 and stage-2 outputs to the accepted
+         heterodimer frame by minimising backbone RMSD on chains A+B,
+         extracts ligand chains, writes one merged CIF/PDB.
+      5. `submit_complete_tagged_pipeline_slurm.sh` (45 LOC, bash)
+         — the PACE sbatch entrypoint. Pinned to GPU=RTX_6000
+         (cheapest GPU that fits Protenix bf16 weights for an A5B1
+         ectodomain) under venv_protenix, account `gts-yke8`,
+         mail-type END,FAIL.
+
+    Selection logic: `SELECTION_MODE=ranking` picks the
+    best-`ranking_score` sample per stage (default); alternative
+    modes available for ablation.
+
+    Diagram: `results/obj-001-a5b1-pipeline-architecture.png` shows
+    the full graph (2 inputs → 4 staged steps → 1 merged output)
+    with the SLURM entrypoints and runtime constraints (GPU,
+    venv) annotated.
   metrics:
     scripts_added: 5
+    python_loc: 1000
+    bash_loc: 258
     stages: 2
     outputs: [CIF, PDB]
+    gpu_constraint: RTX_6000
+    venv: venv_protenix
+    slurm_account: gts-yke8
+    follow_on_objectives:
+    - obj-002  # deterministic stage-merging utility
+    - obj-007  # tail-aware selection + conjugates-first branch
+    - obj-008  # auto-search until pass
   figures:
   - results/obj-001-a5b1-pipeline-architecture.png
   conclusions: >
-    End-to-end staged pipeline enables heterodimer + SpyTag + Streptavidin assembly
-    with deterministic ranking_score selection and receptor-aligned merging.
+    The end-to-end staged pipeline turned A5B1 + SpyTag/Streptavidin
+    assembly from a manual three-step procedure into one sbatch
+    submission. Three downstream capabilities that this enabled:
+
+      (a) obj-002 — the deterministic stage-merger that took
+          receptor-aligned RMSD-min as its primary criterion (kept
+          a single canonical merged output rather than the prior
+          fan-out of N-per-stage outputs);
+      (b) obj-007 — the tail-aware selection + conjugates-first
+          branch that re-uses this exact graph but flips the order
+          (linker-geometry filtering at stage gate);
+      (c) obj-008 — the "auto-search until pass" mode that loops
+          the runner with different seeds + USE_TEMPLATE flags
+          until the per-stage QC criteria are met.
+
+    All three downstream objectives consume `run_complete_tagged_pipeline.sh`
+    unchanged; the graph was stable enough that no breaking change
+    was needed across the workstream. The 25+ env-var contract is
+    the durable interface — internal script reshuffling happens
+    inside that boundary.
+
+    Workstream A status (2026-05): the A5B1 tagged-assembly thread
+    is now mature; the audit-2026-05-05 drop-list explicitly flags
+    no more compute should be spent here from the AFMFold side
+    (this pipeline remains as reference / paper-companion).
   connects_to: obj-002
   completed_date: '2026-03-06'
 - id: obj-002
@@ -3707,8 +3772,8 @@ objectives:
 
 - id: obj-070
   status: completed
-  statement: Multi-integrin extension — 7NXD α5β1 half-bent slots #3 in bent-stability
-    ranking; 6WOV reference corrected (was ryanodine receptor)
+  statement: "Multi-integrin extension — 7NXD α5β1 half-bent slots #3 in bent-stability
+    ranking; 6WOV reference corrected (was ryanodine receptor)"
   methodology: >
     Planning priority #6 ("extend multi_integrin_first_principles to
     6WOV α5β1 bent cryo-EM"). Inspected
