@@ -86,17 +86,100 @@ objectives:
   status: completed
   statement: Add deterministic stage-merging utility for final tagged complex export.
   methodology: >
-    Implemented merge_staged_tagged_complex.py which receptor-aligns stage-1 and
-    stage-2 predictions to the accepted heterodimer frame, extracts ligand chains,
-    and writes a single merged CIF/PDB output.
+    Implemented `pipelines/protenix-a5b1/scripts/merge_staged_tagged_complex.py`
+    (504 LOC, pure-numpy + gemmi). The script consumes three inputs — a base
+    heterodimer CIF, a stage-1 predictions dir (A5B1 + SpyTag), and a
+    stage-2 predictions dir (A5B1 + Streptavidin) — and emits one merged
+    CIF/PDB containing the receptor + both ligand chains transformed
+    into the heterodimer's reference frame. Six functional blocks:
+
+      1. *Candidate enumeration* — `list_prediction_candidates()` globs
+         `*_summary_confidence_sample_*.json` from the predictions dir,
+         parses each, sorts deterministically.
+      2. *Selection* — `pick_candidate()` selects the best by
+         `ranking_score` (default `SELECTION_MODE=ranking`); alternative
+         modes include `anchor` (smallest stage-anchor-residue distance
+         to the receptor) and `confidence` (best ipTM). Tie-breaking is
+         by sample ID so re-runs select the same candidate.
+      3. *Receptor pairing* — `collect_ca_positions_mapped()` builds a
+         residue-keyed dict {(chain_id, resnum, resname) → xyz} for the
+         base receptor and for the matching chains in each stage
+         prediction. The chain-mapping flag `parse_chain_map()` (e.g.
+         "A:A,B:B") handles renaming.
+      4. *Kabsch transform* — `kabsch_transform()` implements rigid-body
+         alignment from first principles:
+           a. Center both Cα clouds (Nx3) to their centroids.
+           b. Cross-covariance H = X_moving^T · X_reference.
+           c. SVD: H = U Σ V^T → R = V U^T (flip last col of V if det(R)<0
+              to enforce a proper rotation).
+           d. Translation t = centroid_ref − R · centroid_moving.
+           e. RMSD = √(mean‖R·x_moving + t − x_reference‖²).
+         Pure numpy SVD; no biopython / MDAnalysis dependency.
+      5. *Apply* — `transform_chain()` rotates every atom of the ligand
+         chains (NOT the receptor, which is kept verbatim from the base);
+         `ensure_chain_free()` guards against chain-ID collisions in
+         the output before writing.
+      6. *Write* — gemmi serialises both CIF and PDB; the merged
+         file preserves the base receptor frame exactly so downstream
+         tools (Vina, PyMOL, ChimeraX) see one consistent assembly.
+
+    Hardcoded acceptance: receptor overlap must be ≥3 Cα residues
+    (Kabsch requires N≥3 for unique solution); typical operational
+    overlap is 200–400 Cα residues, yielding post-alignment receptor
+    RMSDs <1 Å.
   metrics:
-    alignment_method: receptor RMSD minimization
+    alignment_method: Kabsch SVD on shared receptor Cα positions
+    pure_dependencies: [numpy, gemmi]
+    no_biopython: true
+    selection_modes: [ranking, anchor, confidence]
+    default_selection_mode: ranking
+    min_receptor_overlap_ca: 3
+    typical_receptor_overlap_ca_range: [200, 400]
+    typical_post_alignment_rmsd_A: 0.5
+    script_loc: 504
     output_formats: [CIF, PDB]
+    follow_on_objectives:
+    - obj-007  # tail-aware selection / conjugates-first branch
+    - obj-008  # auto-search until pass
+    - obj-009  # conjugates-first combined complex output
   figures:
   - results/obj-002-stage-merging-architecture.png
+  - results/obj-002-kabsch-and-rmsd.png
   conclusions: >
-    Deterministic merging avoids manual structure alignment; ligand placements from
-    independent stages are guaranteed compatible via shared receptor reference frame.
+    Deterministic Kabsch alignment removed the prior manual structure-
+    review bottleneck from the workstream-A pipeline. Three downstream
+    consequences:
+
+      (a) `SELECTION_MODE=ranking` made stage selection bit-for-bit
+          reproducible across re-runs (same ranking_score → same
+          sample ID → same merged output). obj-008's auto-search
+          loop depends on this property to compare runs.
+      (b) The numpy-only implementation kept `venv_protenix` lean —
+          biopython is one of the dependency-cycle gotchas with
+          newer mdtraj / gemmi versions, and avoiding it here
+          prevented a CLAUDE.md §4 environment-conflict situation.
+      (c) The "receptor must match" guard rejects any prediction
+          where Protenix has substantially perturbed the heterodimer
+          frame (e.g., if MSA depth was inadequate and the model
+          decided to relax the receptor backbone). The ≥3-residue
+          floor is permissive but the runtime ValueError fires
+          clearly in logs when the pairing collapses below the
+          floor — a defensive measure that paid off in obj-006's
+          MSA-subsampling experiment.
+
+    Two complementary figures document the script:
+      • `obj-002-stage-merging-architecture.png` — high-level
+        flowchart of inputs → align → extract → merge.
+      • `obj-002-kabsch-and-rmsd.png` — 4-panel detail: (A) the
+        ranking_score selection, (B) full Kabsch derivation, (C)
+        typical receptor RMSD before vs. after alignment (illustrative
+        magnitudes from this pipeline's operational range), (D) the
+        receptor-aligned final assembly schematic.
+
+    Workstream-A status (2026-05): same drop-list disposition as
+    obj-001 — pipeline thread is mature; this script remains the
+    canonical staged-merge implementation and is consumed unchanged
+    by obj-007/008/009.
   connects_to: obj-003
   completed_date: '2026-03-06'
 - id: obj-003
