@@ -4057,3 +4057,87 @@ objectives:
     pipeline output stack.
   connects_to: null
   completed_date: '2026-05-13'
+
+- id: obj-071
+  status: completed
+  statement: v16 sim+overlay rotational misalignment fixed — project stable coords,
+    not smooth, to match sim render
+  methodology: >
+    PI flagged that the v16 sim+overlay should be identity-aligned by
+    construction (the sim AFM is forward-rendered from the same PDB the
+    overlay projects), so any visible misalignment is a bug, not a fit
+    artefact. Inspected a single frame from the v16 overlay (frame 400/1266)
+    and confirmed a ~30° rotational mismatch between the AFM blob and
+    the projected atoms.
+
+    Root cause: the v7 pipeline stores TWO coord variants per video:
+      • `fitted_coords_smooth.npy` — direct head-tracking fit + temporal
+        smoothing (the "scientific" coords).
+      • `fitted_coords_stable.npy` — same coords after
+        `pipelines/sim-afm-video/scripts/stabilize_orientation.py` applies
+        a 5-stage cosmetic rotation (PCA-flatten + side-lock + long-axis
+        sign-align + stepwise yaw + head xy-anchor smoothing).
+
+    `simulate_afm_video.py` reads STABLE. `render_projection_overlay.py`
+    defaults to SMOOTH. Verified the rotation difference: at frame 100
+    the smooth-vs-stable head→tail axis differs by **66° in the xy
+    plane** (smooth = -44.3°, stable = -110.6°).
+
+    Fix: a shadow fitted-dir at `/tmp/v16_sim_fitted_stable/` with
+    `fitted_coords_smooth.npy` symlinked to `fitted_coords_stable.npy`,
+    so the overlay script reads the stabilized coords without code
+    changes. Re-ran the same `render_projection_overlay.py` invocation
+    against that shadow dir → corrected output at
+    `results/afm_pipeline/v7_smoothed_final/video2/overlay_v2_sim_v16_aligned/`.
+
+    Updated `overlay_v2_sim_v16/CAVEAT.md` (the original output's
+    sidecar) to document the bug specifically — not just the
+    higher-level "circular by construction" framing from the first pass.
+  metrics:
+    misalignment_frame: 100
+    smooth_head_tail_xy_angle_deg: -44.3
+    stable_head_tail_xy_angle_deg: -110.6
+    angle_diff_deg: 66.3
+    visual_misalignment_estimate_deg: 30
+    aligned_mp4_mb: 1.1
+    aligned_gif_opt_mb: 7.9
+    aligned_gif_full_mb: 28.0
+    fix_type: shadow_dir_symlink
+    code_changes: 0
+  figures:
+    - figures/v16_overlay_alignment_fix.png
+  conclusions: >
+    Two takeaways:
+
+      (a) **Architectural**: when forward-render and inverse-overlay
+          paths consume different post-processing of the same source
+          coords, the result is a visible bug masquerading as a science
+          artefact. The smooth-vs-stable split exists for a real reason
+          (stabilize_orientation produces aesthetically-coherent
+          sim videos), but the overlay must follow the same
+          post-processing to remain self-consistent. Codified in
+          tasks/lessons.md as "sim+overlay must project the same coord
+          variant that fed the sim".
+
+      (b) **Reviewer/PI**: the corrected overlay is now truly
+          tautological — atoms sit pixel-for-pixel on the AFM blob,
+          which is what's expected by construction. It still does NOT
+          constitute fit-quality evidence (v1=0.965 and v2=0.939
+          against real AFM remain the only legitimate correlation
+          numbers). The corrected video is just a cleaner pipeline-
+          consistency demonstration.
+
+    Figure `figures/v16_overlay_alignment_fix.png` is a 3-frame
+    before/after grid (frames 200, 400, 800 of 1266) showing the tilt
+    in the original smooth-coords render vs the identity alignment in
+    the stable-coords re-render. The bug is visible across the full
+    trajectory, not just one cherry-picked frame.
+
+    Detection cost: ~10 s (single grep on the sim-afm pipeline to find
+    `coord-file` default + one numpy load to compute the angle diff).
+    Fix cost: ~5 min wall clock for the re-render + shadow-dir symlink.
+    Going forward: add a 1-line sanity check at the top of
+    `render_projection_overlay.py` that prints which coord-file it is
+    reading, so future agents notice the choice without grepping.
+  connects_to: null
+  completed_date: '2026-06-07'
