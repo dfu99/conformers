@@ -180,14 +180,19 @@ def main():
         skip_frames = meta.get("skip_frames", 0)
         print(f"Skip frames: {skip_frames}")
 
-    # Load fitted coordinates
+    # Load fitted coordinates. NB: print the resolved path so any
+    # coord-variant symlink is visible in logs — silently loading the
+    # wrong variant (e.g., smooth instead of stable) produced an obvious
+    # rotational misalignment in obj-071; this provenance line is the
+    # tripwire for that mistake.
     smooth_path = args.fitted_dir / "fitted_coords_smooth.npy"
     raw_path = args.fitted_dir / "fitted_coords.npy"
     if smooth_path.exists():
         fitted_coords = np.load(str(smooth_path))
-        print("Using smoothed coordinates")
+        print(f"Loaded coords from: {smooth_path.resolve()}")
     else:
         fitted_coords = np.load(str(raw_path))
+        print(f"Loaded coords from: {raw_path.resolve()}")
     correlations = np.load(str(args.fitted_dir / "fitted_correlations.npy"))
     topology_path = args.fitted_dir / "topology.pdb"
     n_frames = len(fitted_coords)
