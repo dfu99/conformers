@@ -1,0 +1,74 @@
+project: conformers
+domain: protein structure prediction / integrin conformer ensembles / HS-AFM fitting
+type: research
+target_venue: "Nature Structural & Molecular Biology or PNAS"
+
+reviewers:
+  - id: A
+    name: "The Integrin Structural Biologist"
+    inspired_by: "Timothy Springer / Iain Campbell (integrin activation, bent-extended transition)"
+    lens: |
+      Has spent 30 years on integrin conformations. Knows αVβ3 and α5β1
+      bent-extended pathways from cryo-EM and HS-AFM. Will challenge whether
+      your steered MD samples the real activation pathway or just generates
+      kinematically-extended decoys.
+    biases: "Penalizes conformers that aren't validated against known activation states. Rewards explicit comparison to PDB structures (1L5G, 1JV2, etc.)."
+    signature_questions:
+      - "Are your extended conformers structurally distinct from a knee-flexed bent state, or do they just have a larger CV0 distance?"
+      - "Where is the comparison to the αIIbβ3 string method structures? You mention them as Year 3 work."
+      - "Your CV0 range 53-79Å misses the truly extended states (>85Å). What happens at 90Å — does the head domain orient correctly?"
+
+  - id: B
+    name: "The AlphaFold / Boltz Structural Predictor"
+    inspired_by: "John Jumper / Gustaf Ahdritz (AlphaFold, OpenFold, Boltz)"
+    lens: |
+      Cares whether your Protenix/Boltz/AFCluster pipeline buys anything
+      over plain AlphaFold-Multimer + OpenMM relaxation. Will demand
+      pLDDT-vs-conformer-rank analysis and ask whether MSA subsampling
+      is a real conformational diversity strategy.
+    biases: "Penalizes pipeline complexity without ablation. Rewards explicit comparison to AlphaFold-Multimer baseline."
+    signature_questions:
+      - "Why three predictors (Protenix, Boltz, AFCluster) and not just AlphaFold-Multimer with MSA subsampling?"
+      - "MSA-subsampled Protenix is depth-invariant for AVB3. Doesn't that mean MSA subsampling isn't doing what AFCluster claims?"
+      - "Where is the ranking-score-vs-RMSD calibration? Are your 'best' samples actually structurally correct?"
+
+  - id: C
+    name: "The HS-AFM / Single-Molecule Imaging Specialist"
+    inspired_by: "Toshio Ando / Simon Scheuring (high-speed AFM, single-molecule dynamics)"
+    lens: |
+      Will scrutinize the pseudo-AFM image generation. The corrected tip
+      size (1-2nm) is closer to experimental, but is the contact mechanics
+      correct? Knows the Linz HS-AFM data. Will check the SO(3) fitting
+      against trivial baselines.
+    biases: "Penalizes pseudo-AFM that doesn't reproduce known image features. Rewards explicit calibration against test particles of known geometry."
+    signature_questions:
+      - "Your corrected tip 1-2nm gives video1 corr=0.97 vs 0.69 with the wrong tip. What's the corr for a flat sphere control?"
+      - "Pseudo-AFM contact mechanics — are you using Hertzian, JKR, or just a hard-sphere approximation?"
+      - "The Linz GIF has 409 + 1296 frames. Your conformer library has 309. Is 309 frames enough resolution to fit 1296?"
+
+  - id: D
+    name: "The Steered MD / Enhanced Sampling Methodologist"
+    inspired_by: "Ron Elber / Christophe Chipot (string method, metadynamics, milestoning)"
+    lens: |
+      Asks whether 1-3ns steered MD on RunPod actually samples the
+      transition state ensemble. Demands free-energy profiles, not just
+      endpoint structures. Will challenge the 'CV distance extend' as the
+      right reaction coordinate.
+    biases: "Penalizes endpoint-only sampling. Rewards explicit free-energy or committor analyses."
+    signature_questions:
+      - "Where is the free-energy profile along your CV distance? 1-3ns of steering doesn't give you ΔG."
+      - "What's the committor distribution at the midpoint? If it's not 0.5, your CV is bad."
+      - "Why CV distance extend rather than the leg-knee dihedral angle, which is the established activation coordinate?"
+
+  - id: E
+    name: "The Drug Discovery / Translational Skeptic"
+    inspired_by: "Frank Noé / John Chodera (computational drug discovery, MD for therapeutics)"
+    lens: |
+      Wants to know what the integrin conformer ensemble enables that you
+      couldn't do with crystal structures. Asks about RGD-mimetic binding,
+      ligand-induced conformational selection, and small-molecule docking.
+    biases: "Penalizes structural studies without therapeutic relevance. Rewards explicit binding/docking applications."
+    signature_questions:
+      - "What's the use case? Conformer ensemble for cryptic binding site discovery? Docking against the activated state?"
+      - "Have you docked an RGD peptide against your extended conformers and the bent state? Does the binding mode differ?"
+      - "How does this compare to using BIOVIA Discovery Studio with a flexible-receptor ensemble docking pipeline?"

@@ -1,8 +1,8 @@
 max_chain: 10
 queue:
 - objective: 'Per-state domain-pair distances: 6th axis of per-state thread. Centroid-centroid
-    distances over the 5 αVβ3 domains × 10 pairs, per HMM state. Identifies WHICH domains
-    separate during extension (head-leg vs head-head). Audit §37 v28 P=4.
+    distances over the 5 αVβ3 domains × 10 pairs, per HMM state. Identifies WHICH
+    domains separate during extension (head-leg vs head-head). Audit §37 v28 P=4.
 
     '
   priority: 4
@@ -10,16 +10,16 @@ queue:
   added: 2026-05-06 03:00
   completed: 2026-05-06 03:30
   source: audit-2026-05-05-deepening-v28
-  success_criteria: 'figures/domain_pair_distances_per_state_v1.png + JSON. Per-state mean
-    ± std for each of 10 pairs, ranked by Δ EC-BC. Reviewer A canonical confirmation
+  success_criteria: 'figures/domain_pair_distances_per_state_v1.png + JSON. Per-state
+    mean ± std for each of 10 pairs, ranked by Δ EC-BC. Reviewer A canonical confirmation
     of head-leg separation model.
 
     '
   notes: 'EXECUTED 2026-05-06 03:30 as obj-068 (audit §37 v28). 5 canonical αVβ3 domains
     × 10 pairs. **Top separation: α-tail↔β-head Δ +43.48 Å BC→EC** (107.8→151.3 Å);
     α-head↔α-tail Δ +42.56 Å (within αV); β-head↔β-tail Δ +32.57 Å (within β3, hybrid
-    swing-out). **Heads stay together: α-head↔β-head Δ only +3.32 Å** (35→38 Å) — the
-    headpiece stays as a unit. Legs stay close: α-calf↔β-tail Δ +5.62; α-tail↔β-tail
+    swing-out). **Heads stay together: α-head↔β-head Δ only +3.32 Å** (35→38 Å) —
+    the headpiece stays as a unit. Legs stay close: α-calf↔β-tail Δ +5.62; α-tail↔β-tail
     Δ +9.53. **Empirical confirmation of Springer head-leg separation model**: extension
     is α-tail-from-β-head, NOT head-from-head. α-tail involved in 2 of top 2 separating
     pairs → α C-terminal foot is the kinetic gateway. BC σ 2-3× wider than EC σ across
@@ -52,9 +52,9 @@ queue:
     count 64.
 
     '
-- objective: 'Per-state contact-network metrics: graph-theoretic decomposition of obj-065
-    contact maps. Per-residue degree d_s[i], per-state network density, clustering coefficient,
-    "lonely" vs "social" residue ranking. Audit §35 v26 P=4.
+- objective: 'Per-state contact-network metrics: graph-theoretic decomposition of
+    obj-065 contact maps. Per-residue degree d_s[i], per-state network density, clustering
+    coefficient, "lonely" vs "social" residue ranking. Audit §35 v26 P=4.
 
     '
   priority: 4
@@ -67,21 +67,22 @@ queue:
     contact-swap interpretation.
 
     '
-  notes: 'EXECUTED 2026-05-06 02:00 as obj-066 (audit §35 v26). At P(contact)≥0.5 threshold:
-    BC 4468 edges (density 1.43 %, ⟨k⟩=11.31, ⟨cc⟩=0.534) → EC 4341 edges (1.39 %,
-    11.0, 0.535). Edge loss only 2.8 % at strong-contact threshold (vs 26 % at any-prob
-    threshold from obj-065). Mean clustering preserved (Δ < 0.001) — "swap" not "loss".
-    275 lonely / 104 social residues; mean Δk = -0.32. **Top-12 lonely cluster in αV
-    β-propeller blades 4-6** (A:271/308/332/333/336/340/216/249/301/331) plus β3 α7-helix
-    (B:325/297). **Top-12 social cluster in β3 PSI/I-EGF1 domain** (B:4/76/111/131/135/217/240/246/284
-    + αV thigh A:428/429 + αV N-term A:61) — empirically PSI-region rewiring even
-    without reaching EO. Tally still 13/3/7. Cumulative count 63.
+  notes: 'EXECUTED 2026-05-06 02:00 as obj-066 (audit §35 v26). At P(contact)≥0.5
+    threshold: BC 4468 edges (density 1.43 %, ⟨k⟩=11.31, ⟨cc⟩=0.534) → EC 4341 edges
+    (1.39 %, 11.0, 0.535). Edge loss only 2.8 % at strong-contact threshold (vs 26
+    % at any-prob threshold from obj-065). Mean clustering preserved (Δ < 0.001) —
+    "swap" not "loss". 275 lonely / 104 social residues; mean Δk = -0.32. **Top-12
+    lonely cluster in αV β-propeller blades 4-6** (A:271/308/332/333/336/340/216/249/301/331)
+    plus β3 α7-helix (B:325/297). **Top-12 social cluster in β3 PSI/I-EGF1 domain**
+    (B:4/76/111/131/135/217/240/246/284 + αV thigh A:428/429 + αV N-term A:61) — empirically
+    PSI-region rewiring even without reaching EO. Tally still 13/3/7. Cumulative count
+    63.
 
     '
 - objective: 'Per-state Cα-Cα contact-map differential: residue-residue level decomposition
     of the BC → Inter → EC transition. 8 Å contact maps per frame, averaged per HMM
-    state, differentials Δ(EC-BC), Δ(Inter-BC), Δ(EC-Inter); top-K most-disrupted contacts;
-    per-residue contact-disruption score. Audit §34 v25 P=4.
+    state, differentials Δ(EC-BC), Δ(Inter-BC), Δ(EC-Inter); top-K most-disrupted
+    contacts; per-residue contact-disruption score. Audit §34 v25 P=4.
 
     '
   priority: 4
@@ -94,16 +95,16 @@ queue:
     via head-leg interface contact identification.
 
     '
-  notes: 'EXECUTED 2026-05-06 01:30 as obj-065 (audit §34 v25). 8 Å Cα cutoff; 790 headpiece
-    CAs (αV 1-440 + β3 1-350). BC total contacts 9083, Inter 7750, EC 6697 — net -2386
-    (−26 %) on BC → EC. At |ΔC| > 0.3: 93 break, 29 form (EC vs BC). Top-15 break clusters:
-    β3 specificity loop B:162-167 (4 break-pairs, max |ΔC|=0.64), β3 α7-helix B:219-253
-    (2), αV β-propeller blades 2-5 (5 break-pairs at A:117-147 / A:216-248 / A:290-322).
-    αV-β3 head-leg interface A:400↔B:266 at rank 9 (ΔC=-0.51) — directly empirical
-    rendering of Springer 2014 hinge model. Top-3 form pairs all in αV thigh A:233-289,
-    A:304-334, A:285-380 (intra-thigh closure as hinge opens). Tally still 13/3/7.
-    Cumulative count 62. Composite figure refreshed to v25 (13 tiles/row × 2 rows;
-    25 used).
+  notes: 'EXECUTED 2026-05-06 01:30 as obj-065 (audit §34 v25). 8 Å Cα cutoff; 790
+    headpiece CAs (αV 1-440 + β3 1-350). BC total contacts 9083, Inter 7750, EC 6697
+    — net -2386 (−26 %) on BC → EC. At |ΔC| > 0.3: 93 break, 29 form (EC vs BC). Top-15
+    break clusters: β3 specificity loop B:162-167 (4 break-pairs, max |ΔC|=0.64),
+    β3 α7-helix B:219-253 (2), αV β-propeller blades 2-5 (5 break-pairs at A:117-147
+    / A:216-248 / A:290-322). αV-β3 head-leg interface A:400↔B:266 at rank 9 (ΔC=-0.51)
+    — directly empirical rendering of Springer 2014 hinge model. Top-3 form pairs
+    all in αV thigh A:233-289, A:304-334, A:285-380 (intra-thigh closure as hinge
+    opens). Tally still 13/3/7. Cumulative count 62. Composite figure refreshed to
+    v25 (13 tiles/row × 2 rows; 25 used).
 
     '
 - objective: 'Per-state CV2 distribution × HMM state: complementary to obj-063 (per-state
@@ -117,24 +118,24 @@ queue:
   added: 2026-05-06 00:30
   completed: 2026-05-06 01:00
   source: audit-2026-05-05-deepening-v24
-  success_criteria: 'figures/per_state_cv2_distribution.png + JSON. R² of state for each
-    of CV0/CV1/CV2 + pairwise KS p-values + Bonferroni multi-test correction.
+  success_criteria: 'figures/per_state_cv2_distribution.png + JSON. R² of state for
+    each of CV0/CV1/CV2 + pairwise KS p-values + Bonferroni multi-test correction.
 
     '
-  notes: 'EXECUTED 2026-05-06 01:00 as obj-064 (audit §33 v24). R² state explains: CV0
-    0.681 (def.); CV1 0.658 (≈ CV0 + noise); CV2 only 0.053 (5 %). Per-state CV2 means:
-    BC 34.96 ± 6.98 / Inter 37.63 ± 5.88 / EC 38.28 ± 5.16 Å. Pairwise KS: BC↔Inter
-    D=0.295 p=2.7e-24 (Bonferroni-sig); BC↔EC D=0.276 p=3.7e-17 (Bonferroni-sig); Inter↔EC
-    D=0.070 p=0.18 (NS). 1-D HMM carries "BC has closed head" info but cannot resolve
-    Inter↔EC headpiece opening — consistent with v7 not containing further-EO frames.
-    Four-method triangulation on CV2 orthogonality (obj-054/055/059/064). Tally stays
-    13/3/7. Cumulative count 61.
+  notes: 'EXECUTED 2026-05-06 01:00 as obj-064 (audit §33 v24). R² state explains:
+    CV0 0.681 (def.); CV1 0.658 (≈ CV0 + noise); CV2 only 0.053 (5 %). Per-state CV2
+    means: BC 34.96 ± 6.98 / Inter 37.63 ± 5.88 / EC 38.28 ± 5.16 Å. Pairwise KS:
+    BC↔Inter D=0.295 p=2.7e-24 (Bonferroni-sig); BC↔EC D=0.276 p=3.7e-17 (Bonferroni-sig);
+    Inter↔EC D=0.070 p=0.18 (NS). 1-D HMM carries "BC has closed head" info but cannot
+    resolve Inter↔EC headpiece opening — consistent with v7 not containing further-EO
+    frames. Four-method triangulation on CV2 orthogonality (obj-054/055/059/064).
+    Tally stays 13/3/7. Cumulative count 61.
 
     '
-- objective: 'Per-state RMSF decomposition: stratify obj-027/042 per-residue RMSF by HMM
-    Viterbi state (obj-048 BC/Inter/EC). Tests whether the calf-2 hotspot is state-invariant
-    or driven by a particular state population. Bootstrap-CI per state on within-state
-    resamples; Δ-CI per residue. Audit §32 v23 P=4.
+- objective: 'Per-state RMSF decomposition: stratify obj-027/042 per-residue RMSF
+    by HMM Viterbi state (obj-048 BC/Inter/EC). Tests whether the calf-2 hotspot is
+    state-invariant or driven by a particular state population. Bootstrap-CI per state
+    on within-state resamples; Δ-CI per residue. Audit §32 v23 P=4.
 
     '
   priority: 4
@@ -150,13 +151,13 @@ queue:
   notes: 'EXECUTED 2026-05-06 00:30 as obj-063 (audit §32 v23). Per-state means BC
     19.74 / Inter 14.92 / EC 12.41 Å — bent state 60 % more flexible than EC. 1640/1654
     (99.2 %) residues sig EC-BC at 95 %-CI; 96.8 % sig Inter-BC; 88.6 % sig EC-Inter.
-    Top-10 most state-differential residues all in αV chain A C-terminal calf-2 / membrane-
-    proximal (residues 761-764, 909-912, 959-960) — same hotspot as obj-027/042. Per-
-    residue ranking preserved across states (Pearson r ≥ 0.992 between any pair of
-    states). Mechanism: BC has multiple sub-state geometries (cf. obj-051 4-state K=4
-    BC sub-division at ΔBIC=-411); EC commits to one geometry, RMSF collapses. Reviewers
-    A/B/D reinforced. Tally still 13/3/7. Cumulative count 60. Composite figure refreshed
-    to v23 (12 tiles/row × 2 rows = 24 cells, 23 used).
+    Top-10 most state-differential residues all in αV chain A C-terminal calf-2 /
+    membrane- proximal (residues 761-764, 909-912, 959-960) — same hotspot as obj-027/042.
+    Per- residue ranking preserved across states (Pearson r ≥ 0.992 between any pair
+    of states). Mechanism: BC has multiple sub-state geometries (cf. obj-051 4-state
+    K=4 BC sub-division at ΔBIC=-411); EC commits to one geometry, RMSF collapses.
+    Reviewers A/B/D reinforced. Tally still 13/3/7. Cumulative count 60. Composite
+    figure refreshed to v23 (12 tiles/row × 2 rows = 24 cells, 23 used).
 
     '
 - objective: 'CV cross-correlation + CV0 ACF: tests whether obj-048+049 CV0-only analysis
@@ -1831,3 +1832,54 @@ queue:
   completed: 2026-05-05 21:08
   commits: 79
   notes: Recovered completion from done marker after stale session.
+- objective: 'Complete documentation for: Add dedicated A5B1 staged pipeline runner
+    + sbatch entrypoint. (obj-001, 2026-03-06). Record methodology, conclusions, and
+    generate a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-05-13 22:00
+  source: auto-requeue
+  started: 2026-05-13 22:00
+  completed: 2026-05-13 22:05
+  commits: 1
+  notes: "obj-001 documentation pass — COMPLETE — 2026-05-13\n\nTarget: Add dedicated\
+    \ A5B1 staged pipeline runner + sbatch entrypoint (obj-001, 2026-03-06)\n\nWhat\
+    \ was done:\n1. Expanded methodology in tasks/objectives.yaml with per-script\
+    \ LOC + responsibility\n   (5 scripts, 1258 total: 1000 Py + 258 bash; SLURM gts-yke8\
+    \ / RTX_6000 / venv_protenix)\n2. Strengthened conclusions tying obj-001 to follow-on\
+    \ obj-002 (deterministic merger),\n   obj-007 (tail-aware selection + conjugates-first),\
+    \ obj-008 (auto-search un"
+- objective: 'Complete documentation for: Add deterministic stage-merging utility
+    for final tagged complex export. (obj-002, 2026-03-06). Record methodology, conclusions,
+    and generate a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-05-13 22:00
+  source: auto-requeue
+  started: 2026-05-13 22:05
+  completed: 2026-05-13 22:08
+  commits: 1
+  notes: "obj-002 documentation pass — COMPLETE — 2026-05-13\n\nTarget: Add deterministic\
+    \ stage-merging utility for final tagged complex export (obj-002, 2026-03-06)\n\
+    \nWhat was done:\n1. Expanded obj-002 methodology in tasks/objectives.yaml with\
+    \ the 6 functional blocks\n   of merge_staged_tagged_complex.py (504 LOC, pure-numpy\
+    \ + gemmi):\n   candidate enumeration → ranking_score selection → receptor pairing\
+    \ →\n   Kabsch SVD alignment → ligand transform → CIF/PDB write.\n2. Documented\
+    \ SELECTION_MODE alternatives (r"
+- objective: 'Complete documentation for: Add Claude skill for deterministic PACE
+    job operations. (obj-004, 2026-03-10). Record methodology, conclusions, and generate
+    a visualization.'
+  priority: 4
+  status: completed
+  added: 2026-05-13 22:00
+  source: auto-requeue
+  started: 2026-05-13 22:08
+  completed: 2026-05-13 22:10
+  commits: 1
+  notes: "obj-004 documentation pass — COMPLETE — 2026-05-13\n\nTarget: Add Claude\
+    \ skill for deterministic PACE job operations (obj-004, 2026-03-10)\n\nWhat was\
+    \ done:\n1. Expanded obj-004 methodology in tasks/objectives.yaml documenting\
+    \ all 8 sections\n   of .claude/skills/pace-slurm-ops/SKILL.md (82 lines): frontmatter\
+    \ trigger,\n   when-to-use, canonical entry, preflight, smoke contract, real pipeline\
+    \ workflow,\n   operational defaults, failure handling.\n2. Documented pace_minimal.sh's\
+    \ 5-verb dispatch (check / s"
