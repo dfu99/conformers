@@ -60,6 +60,18 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.cif`
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
+## Checkpoint 2026-06-21 — all priorities externally gated
+Queue fully drained (70 completed, 0 pending). Last analysis work was obj-071
+(v16 overlay alignment fix, committed 2026-06-09). The audit-deepening thread
+(obj-038→068) has exhausted CPU-only analysis of the existing v7 HS-AFM data —
+the per-state thread is closed across 6 orthogonal axes and the reviewer tally
+sits at 13/3/7 of 23. **Every remaining open/partial concern requires either the
+pending PACE A100-80GB allocation, external RunPod compute, or a new HS-AFM
+dataset we do not have.** The single gating decision is the PACE A100-80GB
+sign-off (~$800), pending since 2026-05-05 (~7 weeks) — it unblocks priorities
+#1/#3/#4/#7/#8. Surfaced to PI via Slack at this checkpoint. No further
+non-redundant CPU-only work available; holding for the allocation decision.
+
 ## Next Priority
 1. **PI sign-off + αIIbβ3 string-method port kickoff** — P=1 BLOCKED by PI approval for a 4-week PACE A100-80GB allocation (~$800). Closes EO-coverage blocker #1. Day-1 starter scripts ready (`pipelines/route_a/scripts/{remap_cvs.py, build_av_topology.py}`). Cumulative ~28-40% joint pass probability after gating per `docs/route_a_risk_register.md`.
 2. **Gō-Martini week-1 setup** — P=2 parallel cross-validation track for route A. CG MD with switching Gō-contacts (Gō-A = 1JV2 bent, Gō-B = literature EO target). 14-day plan, ~$200 GPU on A40. Acceptance: monotonic CV0+CV2 trajectory, MIDAS SASA increases (would reverse obj-039 negative). See `docs/go_martini_kickoff.md`.
