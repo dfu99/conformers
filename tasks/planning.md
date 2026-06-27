@@ -60,6 +60,19 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.cif`
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
+## Checkpoint 2026-06-27 — awaiting PI decision on staged Stage-1 ($200)
+Queue still drained (70 completed, 0 pending); no new analysis since obj-071
+(2026-06-09) — CPU-only analysis of existing v7 HS-AFM data remains exhausted
+(per-state thread closed 6 ways, reviewer tally 13/3/7 of 23). PI questioned the
+flat $800 PACE ask ("is it something else?"). Responded: clarified this is
+*enhanced-sampling MD (string method)*, not another predictor, and restructured
+the ask into staged early-stop gates. **`docs/route_a_kickoff.md` §4–§5 rewritten
+into a 3-stage gate table**: Stage 1 ~$200 / ~1 wk (topology build + remapped-CV
+reproduction check + membrane equilibration) is the only approval requested
+up front; Stages 2–3 (~$600) gated on Stage 1 passing. Caps real downside at
+~$200. Lesson codified ("Frame Compute Asks as Staged Early-Stop Gates").
+**Holding for PI's Stage-1 decision** — when approved, kick off Stage 1 only.
+
 ## Checkpoint 2026-06-21 — all priorities externally gated
 Queue fully drained (70 completed, 0 pending). Last analysis work was obj-071
 (v16 overlay alignment fix, committed 2026-06-09). The audit-deepening thread
@@ -67,13 +80,10 @@ Queue fully drained (70 completed, 0 pending). Last analysis work was obj-071
 the per-state thread is closed across 6 orthogonal axes and the reviewer tally
 sits at 13/3/7 of 23. **Every remaining open/partial concern requires either the
 pending PACE A100-80GB allocation, external RunPod compute, or a new HS-AFM
-dataset we do not have.** The single gating decision is the PACE A100-80GB
-sign-off (~$800), pending since 2026-05-05 (~7 weeks) — it unblocks priorities
-#1/#3/#4/#7/#8. Surfaced to PI via Slack at this checkpoint. No further
-non-redundant CPU-only work available; holding for the allocation decision.
+dataset we do not have.** Surfaced to PI via Slack at this checkpoint.
 
 ## Next Priority
-1. **PI sign-off + αIIbβ3 string-method port kickoff** — P=1 BLOCKED by PI approval for a 4-week PACE A100-80GB allocation (~$800). Closes EO-coverage blocker #1. Day-1 starter scripts ready (`pipelines/route_a/scripts/{remap_cvs.py, build_av_topology.py}`). Cumulative ~28-40% joint pass probability after gating per `docs/route_a_risk_register.md`.
+1. **PI sign-off (Stage 1, ~$200) + αIIbβ3 string-method port kickoff** — P=1 BLOCKED by PI approval. Restructured from a flat $800 ask into staged early-stop gates (`docs/route_a_kickoff.md` §4): Stage 1 ~$200/~1 wk (topology + CV-reproduction check) → gate → Stages 2–3 ~$600. This is enhanced-sampling MD (string method), NOT a predictor. Closes EO-coverage blocker #1. Day-1 starter scripts ready (`pipelines/route_a/scripts/{remap_cvs.py, build_av_topology.py}`). ~40% joint pass after gating per `docs/route_a_risk_register.md`; gates convert the gamble into a $200 test.
 2. **Gō-Martini week-1 setup** — P=2 parallel cross-validation track for route A. CG MD with switching Gō-contacts (Gō-A = 1JV2 bent, Gō-B = literature EO target). 14-day plan, ~$200 GPU on A40. Acceptance: monotonic CV0+CV2 trajectory, MIDAS SASA increases (would reverse obj-039 negative). See `docs/go_martini_kickoff.md`.
 3. **αIIbβ3 steering MD on RunPod** — First-principles prediction (obj-029) confirms αIIbβ3 (3FCS) is the right second integrin. Pipeline path locked: feed 3FCS conformers + library.json into `pipelines/sim-afm-video/run_pipeline.sh`. Domain re-mapping uses `pipelines/avb3-conformers/scripts/map_aiib3_to_avb3_domains.py`.
 4. **AF2-Multimer ablation** — Reviewer B last open of 2. ~50 GPU-hours on A100-40GB. Pre-registered expected outcome + falsifying threshold per `docs/af2_multimer_ablation_prep.md`.

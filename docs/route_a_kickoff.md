@@ -168,22 +168,48 @@ Before any MD launch:
 
 ## 4. Compute budget and PACE allocation
 
-Per `docs/eo_coverage_strategy.md` recommendation A:
+**What this is — and is not.** This block is *not* another structure
+predictor (Protenix/Boltz/AFCluster/AF2 all collapse to bent; that is
+settled — see obj-041, obj-055). It is **enhanced-sampling molecular
+dynamics** — the finite-temperature string method — which physically
+drives αVβ3 along the bent→extended-open (EO) path and yields a
+free-energy profile. The EO state is absent from every source we have:
+the HS-AFM movies top out short of it (obj-055), no EO crystal exists
+(obj-041), and plain steered MD is ~100× too slow within budget
+(obj-025). The string method is the one remaining route, and it is the
+only one that produces the ΔG curve reviewers keep demanding.
 
-- **Block size**: 4 weeks wall, 80 GPU-hr peak
+**Staged budget with early-stop gates (cap the downside).** Do NOT
+commit the full $800 up front. The run is gated (see
+`docs/route_a_risk_register.md`); each gate is a cheap decision point:
+
+| Stage | Work | GPU-hr | ~$ | Decision gate |
+|------|------|-------:|---:|---------------|
+| 1 | Topology build + remapped-CV check + membrane equilibration | ~20 | ~$200 | Does the ported setup reproduce obj-029 geometry at 300 K? |
+| 2 | String optimization (production) | ~50 | ~$500 | String converged in < 50 GPU-hr? |
+| 3 | Validation + ΔG / committor analysis | ~10 | ~$100 | EO endpoint reaches CV0 ≥ 80, CV2 ≥ 50? |
+
 - **Hardware**: PACE A100-80GB, account `gts-yke8`
-- **Budget proxy**: 80 GPU-hr × $10/hr ≈ $800
+- **Recommended approval**: Stage 1 only (~$200, ~1 week). If it clears,
+  continue to Stages 2–3. If Stage 1 fails, stop — $200 spent, not
+  $800 — and publish around the bent→EC transition already fully
+  characterized (reviewer tally 13/3/7 of 23), documenting EO as a hard
+  limit. Real downside is capped at ~$200.
+- **Success odds**: ~70 % the method works in principle (validated in
+  published αIIbβ3 work); ~40 % joint pass after all porting risks
+  (`docs/route_a_risk_register.md`). The gates exist precisely because
+  the joint odds are a coin-flip — they convert a $800 gamble into a
+  $200 test.
 - **Submit script**: copy `pipelines/protenix-avb3-template/scripts/submit_slurm.sh`
   as starting template, modify for the string-method run loop.
-- **Wall time**: 1 week prep + 2 weeks string optimization + 1 week
-  validation = 4 weeks.
 
 ---
 
 ## 5. PI sign-off requested
 
-1. Approve a 4-week PACE A100-80GB block from 2026-05-12 (next
-   Monday) through 2026-06-09.
+1. Approve **Stage 1 only** (~$200, ~1 week PACE A100-80GB): topology
+   build + remapped-CV reproduction check + membrane equilibration.
+   Stages 2–3 (~$600) gated on Stage 1 passing its decision check.
 2. Approve the use of the cloned Ferg-Lab repo on PACE per
    `tasks/lessons.md` String Method Implementations note.
 3. Optionally approve the parallel Switching Gō-Martini track
@@ -203,4 +229,8 @@ Per `docs/eo_coverage_strategy.md` recommendation A:
 ---
 
 _Author: AFK audit deepening pass v3, 2026-05-05 late evening._
-_Status: pre-kickoff. Activate after PI sign-off._
+_Revised 2026-06-27: budget restructured into staged early-stop gates
+(Stage 1 ~$200 decision point) after PI questioned the flat $800 ask and
+the "is it another model?" framing. This is enhanced-sampling MD, not a
+predictor._
+_Status: pre-kickoff. Awaiting PI decision on Stage 1 (~$200)._
