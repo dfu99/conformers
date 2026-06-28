@@ -223,15 +223,36 @@ commit the full ~$800 up front. The run is gated (see
 - **Submit script**: copy `pipelines/protenix-avb3-template/scripts/submit_slurm.sh`
   as starting template, modify for the string-method run loop.
 
+**Compute target: RunPod is the cheaper option (added 2026-06-28).** PI
+flagged an already-running RunPod pod. Read-only inspection
+(`ssh -p 11363 root@213.173.109.6`): **RTX 2000 Ada 16 GB**, 48 CPU,
+251 GB RAM, persistent **2.3 PB `/workspace`** network volume (ideal for
+multi-week runs that must survive pod restarts). 16 GB fits the MD
+comfortably. *Constraint*: the GPU is currently at 99 % utilization
+(memory free, compute saturated) by the caDNAgentic oxDNA job — do NOT
+contend with it; wait for a free GPU window or spin a second pod.
+- **Stage 1 on RunPod ≈ $0**: the pod is already paid for; the
+  build-and-check gate is short. Replaces the ~$200 PACE Stage-1.
+- **Production on RunPod**: rent a faster card (A40 48 GB / L40S, well
+  under $1/hr) on the same `/workspace` volume. RunPod $/hr ≪ the
+  ~$10/hr PACE A100-80GB proxy → real production likely a few hundred $,
+  not $800. (A40 already in-budget per `docs/go_martini_kickoff.md`.)
+- **Setup**: isolated env on `/workspace` (OpenMM + Ferg-Lab string
+  stack + force fields), ~1 hr one-time. `nvcc`/conda not in base PATH —
+  use a conda env that ships the CUDA runtime (OpenMM does).
+- PACE (`gts-yke8`, A100-40GB/L40S) remains the fallback if RunPod
+  capacity/stability is insufficient for the weeks-long Stage-2 run.
+
 ---
 
 ## 5. PI sign-off requested
 
-1. Approve **Stage 1 only** (~$200, ~1 week PACE A100-80GB): topology
-   build + remapped-CV reproduction check + membrane equilibration.
-   Stages 2–3 (~$600) gated on Stage 1 passing its decision check.
-2. Approve the use of the cloned Ferg-Lab repo on PACE per
-   `tasks/lessons.md` String Method Implementations note.
+1. Approve **Stage 1 only** (~$0 on the existing RunPod pod, or ~$200 on
+   PACE): topology build + remapped-CV reproduction check + membrane
+   equilibration. Stages 2–3 gated on Stage 1 passing its decision check.
+   *Preferred: RunPod* (existing pod for Stage 1; rent A40/L40S for
+   production on the same persistent volume — cheaper than PACE).
+2. Approve the use of the cloned Ferg-Lab string-method repo.
 3. Optionally approve the parallel Switching Gō-Martini track
    (~$200) per audit §11.5 P=2 — independent cross-validation.
 
@@ -256,4 +277,8 @@ predictor._
 _Revised 2026-06-27 (2): GPU spec corrected after PI asked "do you really
 need A100-80GB?" — no. MD needs < 16 GB; Stage 1 on V100-16GB, production
 on A100-40GB / L40S. 80 GB was inherited from the prediction jobs._
-_Status: pre-kickoff. Awaiting PI decision on Stage 1 (V100-16GB, ~$200)._
+_Revised 2026-06-28: RunPod added as preferred (cheaper) compute target.
+Existing pod = RTX 2000 Ada 16 GB + 2.3 PB persistent volume; Stage 1 ≈ $0
+once a GPU slot frees (currently 99 % busy with the oxDNA job). PACE is
+the fallback._
+_Status: pre-kickoff. Awaiting PI go-ahead to set up Stage 1 on RunPod._
