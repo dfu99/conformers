@@ -226,11 +226,17 @@ commit the full ~$800 up front. The run is gated (see
 **Compute target: RunPod is the cheaper option (added 2026-06-28).** PI
 flagged an already-running RunPod pod. Read-only inspection
 (`ssh -p 11363 root@213.173.109.6`): **RTX 2000 Ada 16 GB**, 48 CPU,
-251 GB RAM, persistent **2.3 PB `/workspace`** network volume (ideal for
-multi-week runs that must survive pod restarts). 16 GB fits the MD
-comfortably. *Constraint*: the GPU is currently at 99 % utilization
-(memory free, compute saturated) by the caDNAgentic oxDNA job — do NOT
-contend with it; wait for a free GPU window or spin a second pod.
+251 GB RAM, **40 GB container disk**. 16 GB fits the MD comfortably.
+**Disk correction (2026-06-28)**: `/workspace` is a *shared* RunPod
+MooseFS network mount (`mfs#euro.runpod.net:9421`, fuse). `df` on it
+reports the **whole cluster** (2.3 PB total / 591 TB free) — that is NOT
+an allocation we own. Actual content there is only ~6.4 GB. An earlier
+revision of this doc wrongly stated "2.3 PB persistent volume of ours" —
+that was a misread of a shared-filesystem `df`; **there is no large
+dedicated volume to attach.** New pods must size their own disk. *GPU
+constraint*: the existing pod's GPU is at 99 % utilization (memory free,
+compute saturated) by the caDNAgentic oxDNA job — do NOT contend; wait
+for a free GPU window or spin a separate pod.
 - **Stage 1 on RunPod ≈ $0**: the pod is already paid for; the
   build-and-check gate is short. Replaces the ~$200 PACE Stage-1.
 - **DECIDED 2026-06-28: PI deploying an `RTX A5000`** (the sweet-spot
@@ -240,11 +246,13 @@ contend with it; wait for a free GPU window or spin a second pod.
   *persistent volume*, not the container. System is ~1 M atoms; the env
   alone (OpenMM + AmberTools/topology stack) is ~8 GB, and trajectories
   run tens–hundreds of GB. **20 GB volume is below the floor.** Set:
-  container 20 GB OK; volume **≥50 GB for Stage 1**, **≥200 GB for
-  production** — or attach the existing 2.3 PB network volume (same
-  RunPod region required) so data survives restarts and never needs
-  resizing. Trajectory output is throttleable (save interval / XTC
-  compression / strip waters), but 20 GB volume is too small regardless.
+  container 20 GB OK; **provision the new pod's own volume** at **≥50 GB
+  for Stage 1**, **≥200 GB for production** (there is no pre-existing
+  large volume of ours to attach — see disk correction above). If
+  persistence across restarts is wanted, create a real RunPod network
+  volume and mount it. Trajectory output is throttleable (save interval /
+  XTC compression / strip waters), but 20 GB volume is too small
+  regardless.
 - **Production on RunPod**: rent on the same `/workspace` volume. RunPod
   $/hr ≪ the ~$10/hr PACE A100-80GB proxy → real production likely a few
   hundred $, not $800. (A40 already in-budget per
@@ -311,9 +319,12 @@ _Revised 2026-06-27 (2): GPU spec corrected after PI asked "do you really
 need A100-80GB?" — no. MD needs < 16 GB; Stage 1 on V100-16GB, production
 on A100-40GB / L40S. 80 GB was inherited from the prediction jobs._
 _Revised 2026-06-28: RunPod added as preferred (cheaper) compute target.
-Existing pod = RTX 2000 Ada 16 GB + 2.3 PB persistent volume; Stage 1 ≈ $0
-once a GPU slot frees (currently 99 % busy with the oxDNA job). PACE is
-the fallback._
+Existing pod = RTX 2000 Ada 16 GB; PACE is the fallback._
+_CORRECTION 2026-06-28: an earlier version of this revision claimed a
+"2.3 PB persistent volume" — that was a misread of `df` on the shared
+RunPod MooseFS mount (reports cluster-wide capacity, not our allocation;
+real usage ~6.4 GB). No large dedicated volume exists; size new pods'
+disks explicitly._
 _Revised 2026-06-28 (2): GPU decided — PI deploying an RTX A5000. Disk
 guidance: container 20 GB OK, volume ≥50 GB (Stage 1) / ≥200 GB (prod) or
 attach the existing network volume; 20 GB volume is too small._
