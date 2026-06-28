@@ -233,10 +233,23 @@ comfortably. *Constraint*: the GPU is currently at 99 % utilization
 contend with it; wait for a free GPU window or spin a second pod.
 - **Stage 1 on RunPod ≈ $0**: the pod is already paid for; the
   build-and-check gate is short. Replaces the ~$200 PACE Stage-1.
-- **Production on RunPod**: rent a faster card (A40 48 GB / L40S, well
-  under $1/hr) on the same `/workspace` volume. RunPod $/hr ≪ the
-  ~$10/hr PACE A100-80GB proxy → real production likely a few hundred $,
-  not $800. (A40 already in-budget per `docs/go_martini_kickoff.md`.)
+- **Production on RunPod**: rent on the same `/workspace` volume. RunPod
+  $/hr ≪ the ~$10/hr PACE A100-80GB proxy → real production likely a few
+  hundred $, not $800. (A40 already in-budget per
+  `docs/go_martini_kickoff.md`.) **Card choice — for MD, bandwidth >
+  VRAM > FLOPS** (all candidates have ample VRAM; we need only a few GB).
+  Budget-card MD ranking (PI-suggested cheaper options, 2026-06-28):
+  - `RTX A5000` (24 GB, 768 GB/s) — fastest of the budget set.
+  - `RTX A4500` (20 GB, 640 GB/s) — close second.
+  - `RTX A4000` (16 GB, 448 GB/s) — value pick; cheapest, exactly fits.
+  - `RTX 4000 Ada` (20 GB, ~360 GB/s) — Ada-efficient but bandwidth-limited.
+  - `L4` (24 GB, ~300 GB/s, 72 W) — **avoid for MD**; inference card,
+    bandwidth-starved despite newest gen + most VRAM.
+  - A40 (696 GB/s) / L40S (864 GB/s) remain the fast-but-pricier tier.
+  - **Decide by $/ns, not spec sheet**: Stage 1 benchmarks ns/day on the
+    1–2 cheapest viable cards (A4000 + A4500); RunPod card-swap on the
+    same volume is a few minutes, so production tier is locked from real
+    nanoseconds-per-dollar.
 - **Setup**: isolated env on `/workspace` (OpenMM + Ferg-Lab string
   stack + force fields), ~1 hr one-time. `nvcc`/conda not in base PATH —
   use a conda env that ships the CUDA runtime (OpenMM does).
