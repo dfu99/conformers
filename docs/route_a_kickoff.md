@@ -245,11 +245,19 @@ contend with it; wait for a free GPU window or spin a second pod.
   - `RTX 4000 Ada` (20 GB, ~360 GB/s) — Ada-efficient but bandwidth-limited.
   - `L4` (24 GB, ~300 GB/s, 72 W) — **avoid for MD**; inference card,
     bandwidth-starved despite newest gen + most VRAM.
-  - A40 (696 GB/s) / L40S (864 GB/s) remain the fast-but-pricier tier.
-  - **Decide by $/ns, not spec sheet**: Stage 1 benchmarks ns/day on the
-    1–2 cheapest viable cards (A4000 + A4500); RunPod card-swap on the
-    same volume is a few minutes, so production tier is locked from real
-    nanoseconds-per-dollar.
+  - Premium tier: A40 (48 GB, 696 GB/s) / L40S (48 GB, 864 GB/s).
+    **Key insight — the A5000 (768 GB/s) out-bandwidths the A40 and ≈
+    ties it for MD**; the A40's only edge is 48 GB VRAM we don't use.
+    Rough MD throughput (A4000 = 1.0): A4000 1.0 / A4500 ~1.3 / A5000
+    ~1.6 / A40 ~1.7 / L40S ~2.3. Premium gap is only ~1.5–2.3×, not
+    5–10×; budget cards usually match/beat premium on $/ns. A40/L40S buy
+    wall-clock turnaround, not value. **A5000 = sweet spot** (premium-
+    class speed at budget price); pay up for L40S only if turnaround
+    matters.
+  - **Decide by $/ns, not spec sheet**: Stage 1 benchmarks ns/day across
+    tiers (A4000 + A4500 + A5000 + L40S) on the same `/workspace` volume
+    (RunPod card-swap = minutes); production tier locked from real
+    nanoseconds-per-dollar before committing to the weeks-long Stage 2.
 - **Setup**: isolated env on `/workspace` (OpenMM + Ferg-Lab string
   stack + force fields), ~1 hr one-time. `nvcc`/conda not in base PATH —
   use a conda env that ships the CUDA runtime (OpenMM does).
