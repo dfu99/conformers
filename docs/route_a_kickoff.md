@@ -233,6 +233,18 @@ comfortably. *Constraint*: the GPU is currently at 99 % utilization
 contend with it; wait for a free GPU window or spin a second pod.
 - **Stage 1 on RunPod ≈ $0**: the pod is already paid for; the
   build-and-check gate is short. Replaces the ~$200 PACE Stage-1.
+- **DECIDED 2026-06-28: PI deploying an `RTX A5000`** (the sweet-spot
+  pick — premium-class MD speed at budget price).
+- **Disk sizing (RunPod two-disk model)**: container disk is *ephemeral*
+  (wiped on pod stop) → install the conda env + write all data on the
+  *persistent volume*, not the container. System is ~1 M atoms; the env
+  alone (OpenMM + AmberTools/topology stack) is ~8 GB, and trajectories
+  run tens–hundreds of GB. **20 GB volume is below the floor.** Set:
+  container 20 GB OK; volume **≥50 GB for Stage 1**, **≥200 GB for
+  production** — or attach the existing 2.3 PB network volume (same
+  RunPod region required) so data survives restarts and never needs
+  resizing. Trajectory output is throttleable (save interval / XTC
+  compression / strip waters), but 20 GB volume is too small regardless.
 - **Production on RunPod**: rent on the same `/workspace` volume. RunPod
   $/hr ≪ the ~$10/hr PACE A100-80GB proxy → real production likely a few
   hundred $, not $800. (A40 already in-budget per
@@ -302,4 +314,8 @@ _Revised 2026-06-28: RunPod added as preferred (cheaper) compute target.
 Existing pod = RTX 2000 Ada 16 GB + 2.3 PB persistent volume; Stage 1 ≈ $0
 once a GPU slot frees (currently 99 % busy with the oxDNA job). PACE is
 the fallback._
-_Status: pre-kickoff. Awaiting PI go-ahead to set up Stage 1 on RunPod._
+_Revised 2026-06-28 (2): GPU decided — PI deploying an RTX A5000. Disk
+guidance: container 20 GB OK, volume ≥50 GB (Stage 1) / ≥200 GB (prod) or
+attach the existing network volume; 20 GB volume is too small._
+_Status: pre-kickoff. PI deploying A5000 pod; standing by to set up the
+OpenMM env + Stage 1 once the pod + volume are up._
