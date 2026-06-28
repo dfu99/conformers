@@ -179,17 +179,37 @@ the HS-AFM movies top out short of it (obj-055), no EO crystal exists
 (obj-025). The string method is the one remaining route, and it is the
 only one that produces the ΔG curve reviewers keep demanding.
 
+**GPU sizing — A100-80GB is NOT required (corrected 2026-06-27).** The
+80 GB figure was inherited from our structure-prediction jobs
+(Protenix/Boltz/AF2), which need 40–80 GB to hold attention over the
+full sequence. This is **MD**, a much lighter memory regime: the system
+is αVβ3 + endothelial bilayer + explicit solvent ≈ ~1 M atoms, and MD
+holds only positions, forces, and neighbor lists — **comfortably under
+16 GB VRAM**. Cost here is driven by *throughput* (ns/day), not VRAM.
+The finite-temperature string method also parallelizes as ~8
+independent images (1 image/GPU), so this is "several modest cards,"
+never one large one. Per-GPU need ≈ 8 GB; 16 GB gives headroom.
+- **Stage 1 card**: `V100-16GB` (PACE cheapest; `-C V100-16GB`) — the
+  setup-and-check gate is a single short equilibration, not production.
+- **Production card (Stages 2–3)**: `A100-40GB` or `L40S` — full MD
+  throughput at lower cost than A100-80GB. Lock the final choice from a
+  real ns/day benchmark measured during Stage 1, not a guess.
+- The $ figures below are rough proxies at the old A100-80GB rate;
+  dropping the card tier either lowers the bill or buys more sampling
+  for the same spend.
+
 **Staged budget with early-stop gates (cap the downside).** Do NOT
-commit the full $800 up front. The run is gated (see
+commit the full ~$800 up front. The run is gated (see
 `docs/route_a_risk_register.md`); each gate is a cheap decision point:
 
-| Stage | Work | GPU-hr | ~$ | Decision gate |
-|------|------|-------:|---:|---------------|
-| 1 | Topology build + remapped-CV check + membrane equilibration | ~20 | ~$200 | Does the ported setup reproduce obj-029 geometry at 300 K? |
-| 2 | String optimization (production) | ~50 | ~$500 | String converged in < 50 GPU-hr? |
-| 3 | Validation + ΔG / committor analysis | ~10 | ~$100 | EO endpoint reaches CV0 ≥ 80, CV2 ≥ 50? |
+| Stage | Work | GPU-hr | ~$ | Card | Decision gate |
+|------|------|-------:|---:|------|---------------|
+| 1 | Topology build + remapped-CV check + membrane equilibration | ~20 | ~$200 | V100-16GB | Does the ported setup reproduce obj-029 geometry at 300 K? |
+| 2 | String optimization (production) | ~50 | ~$500 | A100-40GB / L40S | String converged in < 50 GPU-hr? |
+| 3 | Validation + ΔG / committor analysis | ~10 | ~$100 | A100-40GB / L40S | EO endpoint reaches CV0 ≥ 80, CV2 ≥ 50? |
 
-- **Hardware**: PACE A100-80GB, account `gts-yke8`
+- **Account**: `gts-yke8`. Cheaper cards reduce per-hour cost; the
+  staged $ caps above are upper bounds at the old rate.
 - **Recommended approval**: Stage 1 only (~$200, ~1 week). If it clears,
   continue to Stages 2–3. If Stage 1 fails, stop — $200 spent, not
   $800 — and publish around the bent→EC transition already fully
@@ -233,4 +253,7 @@ _Revised 2026-06-27: budget restructured into staged early-stop gates
 (Stage 1 ~$200 decision point) after PI questioned the flat $800 ask and
 the "is it another model?" framing. This is enhanced-sampling MD, not a
 predictor._
-_Status: pre-kickoff. Awaiting PI decision on Stage 1 (~$200)._
+_Revised 2026-06-27 (2): GPU spec corrected after PI asked "do you really
+need A100-80GB?" — no. MD needs < 16 GB; Stage 1 on V100-16GB, production
+on A100-40GB / L40S. 80 GB was inherited from the prediction jobs._
+_Status: pre-kickoff. Awaiting PI decision on Stage 1 (V100-16GB, ~$200)._
