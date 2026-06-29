@@ -161,12 +161,16 @@ Before any MD launch:
 3. **TODO**: write `pipelines/route_a/scripts/build_av_topology.py`
    — apply force-field gotchas §2.1, §2.4, §2.6 to produce a
    ready-to-equilibrate αVβ3 + membrane topology.
-4. **TODO**: 50 ns equilibration on PACE A100-80GB to verify the
+4. **TODO**: 50 ns equilibration on a RunPod GPU to verify the
    topology + membrane build are stable (Risk-register Risk 2 gate).
 
 ---
 
-## 4. Compute budget and PACE allocation
+## 4. Compute budget and GPU allocation (RunPod)
+
+> **PACE removed 2026-06 — RunPod is the sole GPU path.** All PACE /
+> `gts-yke8` / SLURM references in older revisions of this section are
+> void; there is no cluster fallback. Launch via RunPod (`mc runpod`).
 
 **What this is — and is not.** This block is *not* another structure
 predictor (Protenix/Boltz/AFCluster/AF2 all collapse to bent; that is
@@ -189,14 +193,12 @@ holds only positions, forces, and neighbor lists — **comfortably under
 The finite-temperature string method also parallelizes as ~8
 independent images (1 image/GPU), so this is "several modest cards,"
 never one large one. Per-GPU need ≈ 8 GB; 16 GB gives headroom.
-- **Stage 1 card**: `V100-16GB` (PACE cheapest; `-C V100-16GB`) — the
-  setup-and-check gate is a single short equilibration, not production.
-- **Production card (Stages 2–3)**: `A100-40GB` or `L40S` — full MD
-  throughput at lower cost than A100-80GB. Lock the final choice from a
-  real ns/day benchmark measured during Stage 1, not a guess.
-- The $ figures below are rough proxies at the old A100-80GB rate;
-  dropping the card tier either lowers the bill or buys more sampling
-  for the same spend.
+- **Card**: see the RunPod card ranking further below. Stage 1 fits any
+  ≥16 GB card (the existing pod's RTX 2000 Ada, or the new RTX A5000);
+  production on the **RTX A5000** (decided 2026-06-28). Lock the final
+  tier from a real ns/day benchmark in Stage 1, not a guess.
+- The $ figures below are rough proxies at an old ~$10/hr A100-80GB rate;
+  on RunPod the real cost is far lower (see the production note below).
 
 **Staged budget with early-stop gates (cap the downside).** Do NOT
 commit the full ~$800 up front. The run is gated (see
@@ -204,24 +206,26 @@ commit the full ~$800 up front. The run is gated (see
 
 | Stage | Work | GPU-hr | ~$ | Card | Decision gate |
 |------|------|-------:|---:|------|---------------|
-| 1 | Topology build + remapped-CV check + membrane equilibration | ~20 | ~$200 | V100-16GB | Does the ported setup reproduce obj-029 geometry at 300 K? |
-| 2 | String optimization (production) | ~50 | ~$500 | A100-40GB / L40S | String converged in < 50 GPU-hr? |
-| 3 | Validation + ΔG / committor analysis | ~10 | ~$100 | A100-40GB / L40S | EO endpoint reaches CV0 ≥ 80, CV2 ≥ 50? |
+| 1 | Topology build + remapped-CV check + membrane equilibration | ~20 | ~$0–10 | existing pod / A5000 | Does the ported setup reproduce obj-029 geometry at 300 K? |
+| 2 | String optimization (production) | ~50 | ~$20–40 | RTX A5000 | String converged in < 50 GPU-hr? |
+| 3 | Validation + ΔG / committor analysis | ~10 | ~$5 | RTX A5000 | EO endpoint reaches CV0 ≥ 80, CV2 ≥ 50? |
 
-- **Account**: `gts-yke8`. Cheaper cards reduce per-hour cost; the
-  staged $ caps above are upper bounds at the old rate.
-- **Recommended approval**: Stage 1 only (~$200, ~1 week). If it clears,
-  continue to Stages 2–3. If Stage 1 fails, stop — $200 spent, not
-  $800 — and publish around the bent→EC transition already fully
-  characterized (reviewer tally 13/3/7 of 23), documenting EO as a hard
-  limit. Real downside is capped at ~$200.
+- **Cost on RunPod is small** (A5000 ≈ $0.4/hr → whole run ~$30–50; the
+  old ~$200/$500/$800 figures were the PACE A100-80GB proxy and no longer
+  apply). So the gates are now mainly about **saving wall-clock time and
+  effort**, not dollars: don't run the weeks-long Stage 2 until Stage 1
+  proves the ported setup is sound.
+- **Recommended approval**: run Stage 1 first (~1 week, ~free). If it
+  clears, continue to Stages 2–3. If Stage 1 fails, stop and publish
+  around the bent→EC transition already fully characterized (reviewer
+  tally 13/3/7 of 23), documenting EO as a hard limit.
 - **Success odds**: ~70 % the method works in principle (validated in
   published αIIbβ3 work); ~40 % joint pass after all porting risks
   (`docs/route_a_risk_register.md`). The gates exist precisely because
-  the joint odds are a coin-flip — they convert a $800 gamble into a
-  $200 test.
-- **Submit script**: copy `pipelines/protenix-avb3-template/scripts/submit_slurm.sh`
-  as starting template, modify for the string-method run loop.
+  the joint odds are a coin-flip — Stage 1 is a cheap, fast correctness
+  test before the long run.
+- **Launch**: RunPod pod (env on the persistent volume). Adapt the
+  string-method run loop from the Ferg-Lab repo; no SLURM (PACE removed).
 
 **Compute target: RunPod is the cheaper option (added 2026-06-28).** PI
 flagged an already-running RunPod pod. Read-only inspection
@@ -237,8 +241,8 @@ dedicated volume to attach.** New pods must size their own disk. *GPU
 constraint*: the existing pod's GPU is at 99 % utilization (memory free,
 compute saturated) by the caDNAgentic oxDNA job — do NOT contend; wait
 for a free GPU window or spin a separate pod.
-- **Stage 1 on RunPod ≈ $0**: the pod is already paid for; the
-  build-and-check gate is short. Replaces the ~$200 PACE Stage-1.
+- **Stage 1 on RunPod ≈ $0**: the existing pod is already paid for; the
+  build-and-check gate is short.
 - **DECIDED 2026-06-28: PI deploying an `RTX A5000`** (the sweet-spot
   pick — premium-class MD speed at budget price).
 - **Disk sizing (RunPod two-disk model)**: container disk is *ephemeral*
@@ -253,10 +257,9 @@ for a free GPU window or spin a separate pod.
   volume and mount it. Trajectory output is throttleable (save interval /
   XTC compression / strip waters), but 20 GB volume is too small
   regardless.
-- **Production on RunPod**: rent on the same `/workspace` volume. RunPod
-  $/hr ≪ the ~$10/hr PACE A100-80GB proxy → real production likely a few
-  hundred $, not $800. (A40 already in-budget per
-  `docs/go_martini_kickoff.md`.) **Card choice — for MD, bandwidth >
+- **Production on RunPod**: rent on the same persistent volume. At
+  RunPod A5000 rates (~$0.4/hr) the full production run is ~$30–50 — a
+  fraction of the old ~$10/hr A100-80GB proxy. **Card choice — for MD, bandwidth >
   VRAM > FLOPS** (all candidates have ample VRAM; we need only a few GB).
   Budget-card MD ranking (PI-suggested cheaper options, 2026-06-28):
   - `RTX A5000` (24 GB, 768 GB/s) — fastest of the budget set.
@@ -278,21 +281,22 @@ for a free GPU window or spin a separate pod.
     tiers (A4000 + A4500 + A5000 + L40S) on the same `/workspace` volume
     (RunPod card-swap = minutes); production tier locked from real
     nanoseconds-per-dollar before committing to the weeks-long Stage 2.
-- **Setup**: isolated env on `/workspace` (OpenMM + Ferg-Lab string
-  stack + force fields), ~1 hr one-time. `nvcc`/conda not in base PATH —
-  use a conda env that ships the CUDA runtime (OpenMM does).
-- PACE (`gts-yke8`, A100-40GB/L40S) remains the fallback if RunPod
-  capacity/stability is insufficient for the weeks-long Stage-2 run.
+- **Setup**: isolated env on the persistent volume (OpenMM + Ferg-Lab
+  string stack + force fields), ~1 hr one-time. `nvcc`/conda not in base
+  PATH — use a conda env that ships the CUDA runtime (OpenMM does).
+- **No cluster fallback**: PACE access was removed 2026-06. RunPod is the
+  sole GPU path; for resilience on the weeks-long Stage 2, checkpoint to
+  the persistent volume so an interrupted pod can resume.
 
 ---
 
 ## 5. PI sign-off requested
 
-1. Approve **Stage 1 only** (~$0 on the existing RunPod pod, or ~$200 on
-   PACE): topology build + remapped-CV reproduction check + membrane
-   equilibration. Stages 2–3 gated on Stage 1 passing its decision check.
-   *Preferred: RunPod* (existing pod for Stage 1; rent A40/L40S for
-   production on the same persistent volume — cheaper than PACE).
+1. Approve **Stage 1** (~$0 on the existing RunPod pod, or pennies on a
+   fresh A5000 pod): topology build + remapped-CV reproduction check +
+   membrane equilibration. Stages 2–3 gated on Stage 1 passing its
+   decision check. RunPod throughout (A5000 for production on the
+   persistent volume); PACE is gone, so there is no cluster alternative.
 2. Approve the use of the cloned Ferg-Lab string-method repo.
 3. Optionally approve the parallel Switching Gō-Martini track
    (~$200) per audit §11.5 P=2 — independent cross-validation.
@@ -319,14 +323,22 @@ _Revised 2026-06-27 (2): GPU spec corrected after PI asked "do you really
 need A100-80GB?" — no. MD needs < 16 GB; Stage 1 on V100-16GB, production
 on A100-40GB / L40S. 80 GB was inherited from the prediction jobs._
 _Revised 2026-06-28: RunPod added as preferred (cheaper) compute target.
-Existing pod = RTX 2000 Ada 16 GB; PACE is the fallback._
+Existing pod = RTX 2000 Ada 16 GB. (PACE was the fallback at this
+revision — superseded 2026-06-29 below.)_
 _CORRECTION 2026-06-28: an earlier version of this revision claimed a
 "2.3 PB persistent volume" — that was a misread of `df` on the shared
 RunPod MooseFS mount (reports cluster-wide capacity, not our allocation;
 real usage ~6.4 GB). No large dedicated volume exists; size new pods'
 disks explicitly._
 _Revised 2026-06-28 (2): GPU decided — PI deploying an RTX A5000. Disk
-guidance: container 20 GB OK, volume ≥50 GB (Stage 1) / ≥200 GB (prod) or
-attach the existing network volume; 20 GB volume is too small._
-_Status: pre-kickoff. PI deploying A5000 pod; standing by to set up the
-OpenMM env + Stage 1 once the pod + volume are up._
+guidance: container 20 GB OK, volume ≥50 GB (Stage 1) / ≥200 GB (prod);
+20 GB volume is too small. (Earlier "attach the existing network volume"
+struck — no such allocation exists, see correction above.)_
+_Revised 2026-06-29: PACE access permanently removed (infra change) —
+RunPod is now the SOLE GPU path; every PACE / `gts-yke8` / SLURM mention
+in this doc is void. Costs re-based to RunPod A5000 (~$0.4/hr): full run
+~$30–50, Stage 1 ~free. Disk split confirmed to PI: **20 GB container +
+50 GB volume** for Stage 1._
+_Status: pre-kickoff. PI deploying A5000 pod (20 GB container + 50 GB
+volume); standing by to set up the OpenMM env on the volume + run Stage 1
+once the pod is up and a GPU is free._
