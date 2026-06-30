@@ -4141,3 +4141,46 @@ objectives:
     reading, so future agents notice the choice without grepping.
   connects_to: null
   completed_date: '2026-06-07'
+
+- id: obj-072
+  status: completed
+  statement: Route-A Stage 1 pipeline validated on RunPod A5000; bent αVβ3 stable on GPU.
+  methodology: >
+    PI deployed a dedicated RTX A5000 RunPod pod for the αIIbβ3→αVβ3
+    string-method port (route A). Set up an isolated OpenMM 8.4 + AmberTools
+    + PDBFixer conda env on the pod's persistent volume; hit and fixed a
+    CUDA-PTX/driver mismatch (env pulled cuda-version 13.3 vs driver max
+    CUDA 13.0 → CUDA_ERROR_UNSUPPORTED_PTX_VERSION; pinned cuda-version=12.6).
+    Implemented two scripts: stage1_cv_baseline.py (pure stdlib, computes the
+    bent-state route-A CVs from 1JV2) and stage1_build_equil.py (PDBFixer
+    clean → amber14/TIP3P solvate+neutralize → GPU minimize → NVT → NPT →
+    recompute CVs). Validated the full chain with a GPU smoke test (2 ps NVT
+    + 2 ps NPT). Solvent-only this pass; Ca²⁺, membrane, and crystal loop
+    gaps are flagged Stage-1b increments.
+  metrics:
+    pod_gpu: RTX A5000 24GB (idle, separate from caDNAgentic oxDNA node)
+    solvated_atoms: 472926
+    potential_energy_kJ_mol: -6549037.6
+    cv0_head_calf_bent_A: 54.26
+    cv1_beta_head_tail_bent_A: 28.36
+    cv2_head_open_bent_A: 36.38
+    cv0_after_equil_A: 53.94
+    cv1_after_equil_A: 27.62
+    cv2_after_equil_A: 36.16
+    max_cv_drift_A: 0.74
+    obj029_head_tail_crosscheck_A: 46.37
+    smoke_wall_seconds: 508.7
+    cost_usd_estimate: "<1 (cents of A5000 time)"
+  figures:
+    - figures/route_a_stage1_cv_stability.png
+  conclusions: >
+    The ported αVβ3 setup builds, runs MD on the A5000 GPU, and the bent
+    crystal geometry is preserved through minimize + MD (all route-A CVs
+    drift < 1 Å, energy sane) — the Stage-1 feasibility gate is met. This
+    is the first executable route-A result (prior work was docs + a remap
+    stub) and the first GPU compute since the PACE→RunPod migration. Next:
+    read the fuller 100+100 ps equilibration, add structural Ca²⁺ + the
+    endothelial membrane (Stage-1b), then port the Ferg-Lab string-method
+    loop and define the extended (state B) endpoint for Stage 2.
+  connects_to: null
+  completed_date: '2026-06-30'

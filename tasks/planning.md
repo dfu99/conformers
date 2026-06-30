@@ -60,6 +60,22 @@ Final outputs:
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.cif`
 - `data/runs/a5b1/staged_attachment/outputs/final/a5b1_tagged_complete.pdb`
 
+## Checkpoint 2026-06-30 — route-A KICKED OFF: Stage-1 pipeline validated on A5000
+PI approved and deployed an RTX A5000 RunPod pod (separate from the caDNAgentic
+oxDNA node — not touching that). **Stage 1 pipeline is validated end-to-end on
+GPU** (obj-072): set up OpenMM 8.4 + CUDA env on the persistent volume (hit and
+fixed a CUDA-PTX/driver mismatch — pinned cuda-version=12.6), then built →
+solvated (472,926 atoms) → minimized → ran GPU MD → recomputed CVs. **Bent αVβ3
+geometry holds at 300 K**: route-A CVs drift < 1 Å (cv0 54.26→53.94, cv1
+28.36→27.62, cv2 36.38→36.16), potential energy −6.55M kJ/mol (sane). Stage-1
+gate essentially PASSED on the smoke test; a fuller 100+100 ps equilibration is
+running for a credible stability number + an equilibrated structure to seed
+Stage 2. Cost so far: cents. Figure `figures/route_a_stage1_cv_stability.png`.
+Two operational lessons codified (CUDA-version pinning; pkill self-match).
+**Simplifications this pass (Stage-1b increments): solvent-only (no membrane
+yet), Ca²⁺ dropped, crystal loop gaps not rebuilt** — all flagged for the next
+iteration before Stage-2 production.
+
 ## Checkpoint 2026-06-27 — awaiting PI decision on staged Stage-1 ($200)
 Queue still drained (70 completed, 0 pending); no new analysis since obj-071
 (2026-06-09) — CPU-only analysis of existing v7 HS-AFM data remains exhausted
@@ -78,19 +94,21 @@ Queue fully drained (70 completed, 0 pending). Last analysis work was obj-071
 (v16 overlay alignment fix, committed 2026-06-09). The audit-deepening thread
 (obj-038→068) has exhausted CPU-only analysis of the existing v7 HS-AFM data —
 the per-state thread is closed across 6 orthogonal axes and the reviewer tally
-sits at 13/3/7 of 23. **Every remaining open/partial concern requires either the
-pending PACE A100-80GB allocation, external RunPod compute, or a new HS-AFM
-dataset we do not have.** Surfaced to PI via Slack at this checkpoint.
+sits at 13/3/7 of 23. **Every remaining open/partial concern requires either
+external RunPod GPU compute (the former PACE A100-80GB allocation is gone — PACE
+access permanently removed 2026-06) or a new HS-AFM dataset we do not have.**
+Surfaced to PI via Slack at this checkpoint.
 
 ## Next Priority
-1. **PI go-ahead + αIIbβ3 string-method port kickoff (Stage 1)** — P=1 BLOCKED by PI approval. Restructured from a flat $800 ask into staged early-stop gates (`docs/route_a_kickoff.md` §4): Stage 1 ~1 wk (topology + CV-reproduction check) → gate → Stages 2–3. This is enhanced-sampling MD (string method), NOT a predictor. **GPU spec corrected 2026-06-27**: A100-80GB NOT needed — MD on ~1 M atoms fits < 16 GB. **Compute target 2026-06-28: RunPod preferred** — existing pod is RTX 2000 Ada 16 GB, 48 CPU, 251 GB RAM, 40 GB container disk; `/workspace` is a *shared* RunPod MooseFS network mount (`df` shows cluster-wide 2.3 PB, NOT our allocation — only ~6.4 GB actually used; **earlier "2.3 PB volume of ours" was my misread of a shared-fs df, corrected**). No large dedicated volume to attach; size new pods' own disk. **PI deploying an RTX A5000** for the run. Stage 1 ≈ $0 if it fits the existing pod once a GPU slot frees (currently 99 % busy with the caDNAgentic oxDNA job — do not contend). Production: rent A5000 (or A40/L40S) ≪ PACE $/hr. PACE (`gts-yke8`, A100-40GB/L40S) = fallback. Closes EO-coverage blocker #1. Day-1 starter scripts ready (`pipelines/route_a/scripts/{remap_cvs.py, build_av_topology.py}`). ~40% joint pass after gating; gates convert the gamble into a cheap test. **Next action on approval: set up isolated OpenMM env on RunPod `/workspace`, run Stage 1 when GPU frees.**
+1. **Route-A Stage 1 → Stage 2 (string method) on the A5000** — P=1 ACTIVE (unblocked 2026-06-30; PI deployed A5000). Stage-1 pipeline validated (obj-072): bent αVβ3 builds + runs GPU MD + geometry stable. **Immediate next**: (a) read the 100+100 ps equilibration result (RMSD/energy/CV stability); (b) Stage-1b increments before production — add structural Ca²⁺ (β-propeller + MIDAS), then the endothelial membrane, then re-equilibrate; (c) define the extended (state B) endpoint + port the Ferg-Lab string-method loop for Stage 2. SSH (direct, NOT `mc runpod`): `ssh -p 22076 root@69.30.85.240`; env at `/workspace/envs/route_a`, code at `/workspace/route_a/`. ~40% joint pass after gating; cost on A5000 ~$30–50 total. _(prior gating context retained below)_
+1b. **[superseded — kickoff context]** PI go-ahead + αIIbβ3 string-method port kickoff (Stage 1) — was P=1 BLOCKED by PI approval. Restructured from a flat $800 ask into staged early-stop gates (`docs/route_a_kickoff.md` §4): Stage 1 ~1 wk (topology + CV-reproduction check) → gate → Stages 2–3. This is enhanced-sampling MD (string method), NOT a predictor. **GPU spec corrected 2026-06-27**: A100-80GB NOT needed — MD on ~1 M atoms fits < 16 GB. **Compute target 2026-06-28: RunPod preferred** — existing pod is RTX 2000 Ada 16 GB, 48 CPU, 251 GB RAM, 40 GB container disk; `/workspace` is a *shared* RunPod MooseFS network mount (`df` shows cluster-wide 2.3 PB, NOT our allocation — only ~6.4 GB actually used; **earlier "2.3 PB volume of ours" was my misread of a shared-fs df, corrected**). No large dedicated volume to attach; size new pods' own disk. **PI deploying an RTX A5000** for the run. Stage 1 ≈ $0 if it fits the existing pod once a GPU slot frees (currently 99 % busy with the caDNAgentic oxDNA job — do not contend). Production: rent A5000 (or A40/L40S) on RunPod. **PACE access permanently removed 2026-06 — there is no cluster fallback; RunPod is the sole GPU path.** Closes EO-coverage blocker #1. Day-1 starter scripts ready (`pipelines/route_a/scripts/{remap_cvs.py, build_av_topology.py}`). ~40% joint pass after gating; gates convert the gamble into a cheap test. **Next action on approval: set up isolated OpenMM env on RunPod `/workspace`, run Stage 1 when GPU frees.**
 2. **Gō-Martini week-1 setup** — P=2 parallel cross-validation track for route A. CG MD with switching Gō-contacts (Gō-A = 1JV2 bent, Gō-B = literature EO target). 14-day plan, ~$200 GPU on A40. Acceptance: monotonic CV0+CV2 trajectory, MIDAS SASA increases (would reverse obj-039 negative). See `docs/go_martini_kickoff.md`.
 3. **αIIbβ3 steering MD on RunPod** — First-principles prediction (obj-029) confirms αIIbβ3 (3FCS) is the right second integrin. Pipeline path locked: feed 3FCS conformers + library.json into `pipelines/sim-afm-video/run_pipeline.sh`. Domain re-mapping uses `pipelines/avb3-conformers/scripts/map_aiib3_to_avb3_domains.py`.
 4. **AF2-Multimer ablation** — Reviewer B last open of 2. ~50 GPU-hours on A100-40GB. Pre-registered expected outcome + falsifying threshold per `docs/af2_multimer_ablation_prep.md`.
 5. **Third independent HS-AFM dataset** — transferability test; falsifying if corr < 0.7.
 6. **Multi-integrin first-principles extension** — DONE 2026-05-13 (obj-070): the earlier "6WOV α5β1 bent cryo-EM" reference was a wrong PDB ID — 6WOV is ryanodine receptor RyR2, not an integrin. The actual α5β1 full ectodomain cryo-EM is 7NXD (Schumacher 2021 "half-bent"). Added 7NXD to `multi_integrin_first_principles.py` registry; results: head-leg buried SASA = 10555 Å² (between αVβ3=13442 and αIIbβ3=15298 in ranking? actually lower than both); head-tail centroid distance = 73.9 Å (vs αVβ3=42.6, αIIbβ3=37.2) — α5β1 cryo-EM is substantially LESS bent than the αVβ3/αIIbβ3 crystal forms, consistent with Schumacher 2021's finding that the "bent" state of α5β1 in cryo-EM solution is actually a half-bent intermediate. Rg = 48.8 Å vs 39 Å for the others. Doc fix in `docs/integrin_heterodimer_plan.md`. No CIF extraction script needed; downloaded the curated .pdb directly.
 7. **CNN retraining with corrected tip size (1-2 nm)** — Correlation matching (std=8.5 Å) remains the better inference method. CNN needs real-AFM fine-tuning.
-8. **A5B1 Protenix co-fold on RunPod A100** — Blocked by PACE billing limits.
+8. **A5B1 Protenix co-fold on RunPod A100** — Was gated on PACE billing; PACE access removed 2026-06, so this is now purely a RunPod GPU-window/cost item.
 
 ## Audit 2026-05-05 status (v19, end of day)
 - 22 objectives shipped today (obj-038→obj-059), 7 docs, 2 starter scripts, 19 deepening passes

@@ -1,0 +1,12 @@
+{
+  "pdb": "inputs/1jv2.pdb",
+  "stage": "1b_solvent_only_smoke",
+  "mode": "GPU smoke test (2 ps NVT + 2 ps NPT) on RunPod A5000",
+  "cvs_after_fix": {"cv0_head_calf": 54.26, "cv1_beta_head_tail": 28.36, "cv2_head_open": 36.38},
+  "n_atoms_solvated": 472926,
+  "cvs_equilibrated": {"cv0_head_calf": 53.94, "cv1_beta_head_tail": 27.62, "cv2_head_open": 36.16},
+  "potential_kJ_mol": -6549037.6,
+  "wall_seconds": 508.7,
+  "platform": "CUDA (OpenMM 8.4, cuda-version 12.6)",
+  "verdict": "PASS - full build->solvate->minimize->GPU MD->CV chain works; bent geometry preserved (all CV drift < 1 A)"
+}
