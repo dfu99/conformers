@@ -4177,6 +4177,7 @@ objectives:
     cost_usd_estimate: "<1 (cents of A5000 time)"
   figures:
     - figures/route_a_stage1_cv_stability.png
+  conclusions: >
     The ported αVβ3 setup builds, runs MD on the A5000 GPU, and the bent
     crystal geometry is preserved through minimize + 200 ps equilibration
     (cv0/cv2 drift < 0.6 Å; cv1 β head-tail relaxed 2.4 Å as the β leg
