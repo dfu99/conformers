@@ -1,0 +1,26 @@
+{
+  "pdb": "data/reference_pdbs/1jv2.pdb",
+  "n_ca": {
+    "A": 927,
+    "B": 539
+  },
+  "obj029_head_tail_combined_A": 46.37,
+  "alpha_head_tail_A": 56.13,
+  "beta_head_tail_A": 31.19,
+  "obj029_reference_1jv2_head_tail_A": 42.6,
+  "cvs_bent_state_A": {
+    "cv0_head_calf": 54.26,
+    "cv1_beta_head_tail": 28.36,
+    "cv2_head_open": 36.38
+  },
+  "resseq_span": {
+    "A": [
+      1,
+      956
+    ],
+    "B": [
+      55,
+      690
+    ]
+  }
+}
