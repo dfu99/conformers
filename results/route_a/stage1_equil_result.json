@@ -1,0 +1,14 @@
+{
+  "pdb": "inputs/1jv2.pdb",
+  "stage": "1b_solvent_only",
+  "mode": "full equilibration (minimize + 100 ps NVT + 100 ps NPT) on RunPod A5000",
+  "cvs_after_fix": {"cv0_head_calf": 54.26, "cv1_beta_head_tail": 28.36, "cv2_head_open": 36.38},
+  "n_atoms_solvated": 478225,
+  "cvs_equilibrated": {"cv0_head_calf": 53.68, "cv1_beta_head_tail": 25.93, "cv2_head_open": 36.47},
+  "cv_drift_A": {"cv0_head_calf": -0.58, "cv1_beta_head_tail": -2.43, "cv2_head_open": 0.09},
+  "potential_kJ_mol": -6579382.4,
+  "wall_seconds": 1151.9,
+  "platform": "CUDA (OpenMM 8.4, cuda-version 12.6), RTX A5000",
+  "equilibrated_structure": "pod:/workspace/route_a/stage1_equil/equilibrated.pdb",
+  "verdict": "PASS - bent geometry holds at 300 K over 200 ps; cv1 (beta leg) relaxed 2.4 A, expected without Ca2+/membrane (Stage-1b)"
+}

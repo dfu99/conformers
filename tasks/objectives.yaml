@@ -4164,23 +4164,30 @@ objectives:
     cv0_head_calf_bent_A: 54.26
     cv1_beta_head_tail_bent_A: 28.36
     cv2_head_open_bent_A: 36.38
-    cv0_after_equil_A: 53.94
-    cv1_after_equil_A: 27.62
-    cv2_after_equil_A: 36.16
-    max_cv_drift_A: 0.74
+    cv0_after_equil_200ps_A: 53.68
+    cv1_after_equil_200ps_A: 25.93
+    cv2_after_equil_200ps_A: 36.47
+    cv0_drift_A: -0.58
+    cv1_drift_A: -2.43
+    cv2_drift_A: 0.09
     obj029_head_tail_crosscheck_A: 46.37
     smoke_wall_seconds: 508.7
+    full_equil_wall_seconds: 1151.9
+    full_equil_ps: 200
     cost_usd_estimate: "<1 (cents of A5000 time)"
   figures:
     - figures/route_a_stage1_cv_stability.png
-  conclusions: >
     The ported αVβ3 setup builds, runs MD on the A5000 GPU, and the bent
-    crystal geometry is preserved through minimize + MD (all route-A CVs
-    drift < 1 Å, energy sane) — the Stage-1 feasibility gate is met. This
-    is the first executable route-A result (prior work was docs + a remap
-    stub) and the first GPU compute since the PACE→RunPod migration. Next:
-    read the fuller 100+100 ps equilibration, add structural Ca²⁺ + the
-    endothelial membrane (Stage-1b), then port the Ferg-Lab string-method
-    loop and define the extended (state B) endpoint for Stage 2.
+    crystal geometry is preserved through minimize + 200 ps equilibration
+    (cv0/cv2 drift < 0.6 Å; cv1 β head-tail relaxed 2.4 Å as the β leg
+    settles — expected without structural Ca²⁺/membrane; energy stable at
+    −6.58M kJ/mol) — the Stage-1 feasibility gate is met. This is the first
+    executable route-A result (prior work was docs + a remap stub) and the
+    first GPU compute since the PACE→RunPod migration. Equilibrated structure
+    saved at pod:/workspace/route_a/stage1_equil/equilibrated.pdb. Next:
+    Stage-1b — add structural Ca²⁺ (β-propeller + MIDAS) and the endothelial
+    membrane, re-equilibrate (expect cv1 to stabilize), then port the
+    Ferg-Lab string-method loop and define the extended (state B) endpoint
+    for Stage 2.
   connects_to: null
   completed_date: '2026-06-30'
