@@ -69,7 +69,7 @@ pipelines:
     added: 2026-04-22
     purpose: Template-guided Protenix structure inference for αVβ3
     trigger: manual
-    schedule: PACE SLURM submit
+    schedule: "DISABLED — PACE access removed 2026-06; re-scope to RunPod (mc runpod)"
     components:
       - pipelines/protenix-avb3-template/scripts/setup_protenix_template_inputs.py
       - pipelines/protenix-avb3-template/scripts/register_protenix_template_entry.py
@@ -87,7 +87,7 @@ pipelines:
     added: 2026-04-22
     purpose: BoltzGen conformational sampling sweep for extended-state search
     trigger: manual
-    schedule: PACE SLURM submit
+    schedule: "DISABLED — PACE access removed 2026-06; re-scope to RunPod (mc runpod)"
     components:
       - pipelines/boltz/scripts/run_boltz_predict_sweep.sh
       - pipelines/boltz/scripts/submit_boltz_predict_slurm.sh
@@ -108,7 +108,7 @@ pipelines:
     added: 2026-04-22
     purpose: AFCluster MSA clustering with BoltzGen (or legacy Boltz) backend
     trigger: manual
-    schedule: PACE SLURM submit
+    schedule: "DISABLED — PACE access removed 2026-06; re-scope to RunPod (mc runpod)"
     components:
       - pipelines/afcluster/scripts/run_afcluster_pipeline.sh
       - pipelines/afcluster/scripts/submit_afcluster_boltz_slurm.sh
@@ -128,7 +128,7 @@ pipelines:
     added: 2026-04-22
     purpose: α5β1 heterodimer + tag co-fold workflow (staged Protenix inference)
     trigger: manual
-    schedule: PACE SLURM submit
+    schedule: "DISABLED — PACE access removed 2026-06; re-scope to RunPod (mc runpod)"
     components:
       - pipelines/protenix-a5b1/scripts/build_staged_protenix_inputs.py
       - pipelines/protenix-a5b1/scripts/build_conjugates_first_protenix_inputs.py
