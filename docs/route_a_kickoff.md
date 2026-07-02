@@ -95,6 +95,17 @@ endpoint and verifying structural stability.
 
 ### 2.2 Membrane composition
 
+> **CORRECTION 2026-07-01 — no membrane for this construct.** Our starting
+> structure 1JV2 is the αVβ3 **ectodomain** (chain A ends res 956, chain B
+> res 690 — no transmembrane helices). An ectodomain has nothing to embed in
+> a bilayer, and the route-A CVs measure ectodomain head–leg extension, so the
+> transition can (and should) be run in explicit solvent only. The membrane
+> table below applies ONLY to a future full-length (TM-containing) construct.
+> This removes route A's hardest/most error-prone build step (was Risk 2).
+> What we DO preserve instead: the 6 structural **Ca²⁺** ions from 1JV2
+> (5 αV β-propeller + 1 β3) — see obj-072 Stage-1b. Verified in Stage-1b that
+> amber14 parameterizes them and the system builds (477,380 atoms).
+
 | | Ferg-Lab (αIIbβ3) | recommended (αVβ3) |
 |---|-------------------|--------------------|
 | host cell | platelet | endothelial |
