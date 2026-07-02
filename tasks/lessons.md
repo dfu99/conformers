@@ -614,3 +614,10 @@ Before diagnosing new failures, verify in order:
 - Root cause: `pkill -f` matches against the FULL command line of every process, including the shell currently running the pkill (whose argv contains the pattern string).
 - Action: kill orphans by explicit PID (`kill -9 <pid>` from a prior `ps`/`pgrep` lookup), or use `pkill -f` with a pattern that cannot appear in the launcher, or add `-v $$`/exclude-self logic. Never put the kill pattern and the relaunch command in the same shell invocation.
 - Practical implication: separate "kill" and "relaunch" into two steps; prefer PID-targeted kills for orphaned remote processes.
+
+### Verify construct scope (ectodomain vs full-length) before designing the MD box
+- Command context: 2026-07-01, route-A Stage-1b. The kickoff plan (and risk register Risk 2) called for building αVβ3 in an "endothelial membrane." But the starting crystal 1JV2 is the **ectodomain** (chain A ends res 956, chain B res 690 — no transmembrane helices). An ectodomain has nothing to embed in a bilayer.
+- Symptom: a planned build step (membrane construction — the hardest, most error-prone part) that is inapplicable to the actual input structure. Would have burned days on a membrane the construct can't sit in.
+- Root cause: the compute plan was written before checking the residue extents / domain content of the specific PDB. Integrin full-length ≈ ecto + TM + cytoplasmic; crystal structures are usually ectodomain-only.
+- Action: before designing a simulation system, check the input structure's residue ranges against the protein's full sequence to confirm what's actually present (ectodomain? headpiece-only? TM included?). `grep '^ATOM' file.pdb | tail` for the last resseq per chain; compare to UniProt domain boundaries. Only add a membrane if TM helices are present. For an ectodomain conformational transition, explicit solvent is the correct model.
+- Practical implication: this removed route A's single hardest build step and a whole risk category. What DID matter for fidelity was preserving the structural ions (6 Ca²⁺ in 1JV2), not a membrane. Match the box to the construct, not to a generic "membrane protein" template.
