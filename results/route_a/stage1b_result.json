@@ -1,0 +1,14 @@
+{
+  "pdb": "inputs/1jv2.pdb",
+  "stage": "1b_solvent_plus_Ca",
+  "mode": "structural Ca2+ preserved (6 ions), solvent-only, minimize + 100 ps NVT + 100 ps NPT, A5000",
+  "n_ca_ions": 6,
+  "n_atoms_solvated": 476888,
+  "cvs_after_build": {"cv0_head_calf": 54.26, "cv1_beta_head_tail": 28.36, "cv2_head_open": 36.38},
+  "cvs_equilibrated": {"cv0_head_calf": 54.56, "cv1_beta_head_tail": 26.02, "cv2_head_open": 36.34},
+  "cv_drift_A": {"cv0_head_calf": 0.30, "cv1_beta_head_tail": -2.34, "cv2_head_open": -0.04},
+  "potential_kJ_mol": -6561736.1,
+  "wall_seconds": 1296.5,
+  "comparison_stage1a_no_ca_drift_A": {"cv0_head_calf": -0.58, "cv1_beta_head_tail": -2.43, "cv2_head_open": 0.09},
+  "finding": "Ca2+ does NOT change cv1 beta-leg relaxation (-2.34 vs -2.43 A); the ~2.3 A relaxation is intrinsic crystal->solution equilibration, not a missing-ion artifact. Bent state preserved; bent endpoint (state A) ready for Stage 2."
+}

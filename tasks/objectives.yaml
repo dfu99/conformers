@@ -4192,3 +4192,36 @@ objectives:
     for Stage 2.
   connects_to: null
   completed_date: '2026-06-30'
+
+- id: obj-073
+  status: completed
+  statement: Stage 1b — structural Ca²⁺ included; bent αVβ3 endpoint equilibrated, ready for Stage 2.
+  methodology: >
+    Preserved the 6 structural Ca²⁺ ions from 1JV2 (5 αV β-propeller + 1 β3)
+    through PDBFixer clean + solvation (amber14 parameterizes them), re-ran the
+    minimize + 100 ps NVT + 100 ps NPT equilibration on the A5000, and compared
+    CV drift against the Stage-1a (no-Ca²⁺) run. Also established that 1JV2 is
+    ectodomain-only (no TM), so no membrane is needed.
+  metrics:
+    n_ca_ions: 6
+    n_atoms_solvated: 476888
+    potential_kJ_mol: -6561736.1
+    wall_seconds: 1296.5
+    cv0_drift_withCa_A: 0.30
+    cv1_drift_withCa_A: -2.34
+    cv2_drift_withCa_A: -0.04
+    cv1_drift_noCa_stage1a_A: -2.43
+  figures:
+    - figures/route_a_stage1_ca_comparison.png
+  conclusions: >
+    Adding the structural Ca²⁺ did NOT change the cv1 β-leg relaxation
+    (−2.34 Å with Ca²⁺ vs −2.43 Å without) — expected, since 5 of 6 ions sit in
+    the αV β-propeller, not the β3 leg. The ~2.3 Å β-leg relaxation is therefore
+    intrinsic crystal→solution equilibration, not a missing-ion artifact; it is
+    small (~8%) and the bent state is preserved (cv0/cv2 < 0.6 Å). Ca²⁺ improves
+    structural fidelity regardless. The bent endpoint (state A) is equilibrated
+    and ready. Critical-path next step: define the extended endpoint (state B) —
+    no EO crystal exists (obj-041), so map an αIIbβ3 extended template onto αV
+    or generate it by targeted MD — then port the string-method loop for Stage 2.
+  connects_to: null
+  completed_date: '2026-07-01'
