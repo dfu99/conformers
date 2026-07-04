@@ -4260,5 +4260,48 @@ objectives:
     Stage 2 needs proper extension CVs (Rg or head-tip↔leg-tip distance).
     Next: relax the seed (GPU, in a free window), define real CVs, then run the
     string method connecting bent (state A) ↔ extended (state B).
+  connects_to: obj-075
+  completed_date: '2026-07-04'
+
+- id: obj-075
+  status: completed
+  statement: Built a clean extended αVβ3 state (state B) by incremental leg-swing with relaxation.
+  methodology: >
+    The one-shot 139° rigid leg-swing (obj-074) left a genu (knee) clash at
+    ~1e13 kJ/mol that no direct energy minimize could descend — constrained or
+    not, a CPU worker held 715% for ~4 min without progress. Two root causes:
+    (1) the single enormous clash gave the L-BFGS line search no foothold, and
+    (2) GB implicit solvent is ~1 s/force-eval on CPU for this 22k-atom system
+    (poorly threaded), so even the bent structure would not minimize in 2 min.
+    Fix: morph the legs open incrementally — rotate the lower legs ~9°/step about
+    the genu hinge and energy-minimize after each step (adaptive, stopping when
+    the legs point opposite the head) — in vacuum amber14 (ff14SB) so each
+    minimize is fast. CPU-only (48 threads) on the RunPod A5000, zero GPU, no
+    contention with the oxDNA FFS jobs sharing the pod. 16 steps, 144° total.
+  metrics:
+    n_steps: 16
+    total_swing_deg: 144
+    rg_bent_A: 39.14
+    rg_extended_A: 67.32
+    rg_change_pct: 72
+    long_axis_extent_bent_A: 130.02
+    long_axis_extent_extended_A: 211.36
+    extent_change_pct: 62
+    E_bent_kJ_mol: 15150
+    E_extended_kJ_mol: 11630
+    E_peak_during_swing_kJ_mol: 15150
+    cv1_beta_head_tail_extended_A: 106.55
+  figures:
+    - figures/route_a_morph_descent.png
+  conclusions: >
+    The incremental swing produces a physically valid extended endpoint: Rg
+    39→67 Å (+72%) and long-axis extent 130→211 Å (+62%, ~21 nm, matching an
+    activated-integrin ectodomain), with the potential energy staying ~1e4
+    kJ/mol at EVERY step instead of the 1e13 catastrophe of the one-shot build.
+    The step-by-step frames double as a ready-made initial path for the string
+    method. This is a usable state B for the bent↔extended transition. Fixes the
+    obj-074 blocker (strained seed) entirely — no GPU needed. Next: replace the
+    synthetic placeholder CVs with a real extension coordinate (Rg or
+    head-tip↔leg-tip), then run the Ferg-Lab string method A↔B.
   connects_to: null
   completed_date: '2026-07-04'
