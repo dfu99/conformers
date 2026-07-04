@@ -1,0 +1,24 @@
+{
+  "source_pdb": "data/reference_pdbs/1jv2.pdb",
+  "method": "rigid-body lower-leg rotation about genu hinge (seed for string method)",
+  "hinge_xyz": [
+    -58.57,
+    42.82,
+    -0.76
+  ],
+  "rotation_angle_deg": 139.0,
+  "n_atoms_moved": 3843,
+  "cvs_bent_A": {
+    "cv0_head_calf": 54.26,
+    "cv1_beta_head_tail": 28.36,
+    "cv2_head_open": 36.38
+  },
+  "cvs_extended_seed_A": {
+    "cv0_head_calf": 53.86,
+    "cv1_beta_head_tail": 104.96,
+    "cv2_head_open": 36.38
+  },
+  "cv0_change_A": -0.4,
+  "out_pdb": "results/route_a/extended_seed.pdb",
+  "note": "SEED: rigid rotation leaves a strained hinge; needs GPU minimize+equil before use as state B."
+}
