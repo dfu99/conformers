@@ -79,7 +79,8 @@ def main():
     ap.add_argument("--out-json", default="results/route_a/stage2b_relax_result.json")
     ap.add_argument("--equil-ps", type=float, default=25.0)
     ap.add_argument("--threads", default="32")
-    ap.add_argument("--min-iter", type=int, default=0, help="0 = minimize to convergence")
+    ap.add_argument("--chunk-iters", type=int, default=300, help="L-BFGS iters per chunk")
+    ap.add_argument("--max-chunks", type=int, default=30, help="max minimize chunks")
     args = ap.parse_args()
 
     t0 = time.time()
@@ -100,27 +101,58 @@ def main():
     print(f"[stage2b] seed metrics: {m_before}", flush=True)
 
     ff = app.ForceField("amber14/protein.ff14SB.xml", "implicit/obc2.xml")
+    platform = mm.Platform.getPlatformByName("CPU")
+    # Minimize with NO constraints: from a badly clashed start (E~1e13) a
+    # *constrained* minimize crawls because OpenMM's constraint-enforcement outer
+    # loop fights the clash relief. Unconstrained L-BFGS descends the clash far
+    # faster and lets H atoms move apart directly. HBonds constraints are re-added
+    # only for the (optional) 2 fs dynamics settle afterwards.
     system = ff.createSystem(
         fixer.topology, nonbondedMethod=app.CutoffNonPeriodic,
-        nonbondedCutoff=2.0 * unit.nanometer, constraints=app.HBonds)
+        nonbondedCutoff=2.0 * unit.nanometer, constraints=None)
     integrator = mm.LangevinMiddleIntegrator(
-        300 * unit.kelvin, 1.0 / unit.picosecond, 2.0 * unit.femtoseconds)
-    platform = mm.Platform.getPlatformByName("CPU")
+        300 * unit.kelvin, 1.0 / unit.picosecond, 1.0 * unit.femtoseconds)
     sim = app.Simulation(fixer.topology, system, integrator, platform,
                          {"Threads": args.threads})
     sim.context.setPositions(fixer.positions)
 
     e0 = sim.context.getState(getEnergy=True).getPotentialEnergy().value_in_unit(
         unit.kilojoule_per_mole)
-    print(f"[stage2b] E(seed) = {e0:.1f} kJ/mol -- minimizing...", flush=True)
-    sim.minimizeEnergy(maxIterations=args.min_iter)
-    e1 = sim.context.getState(getEnergy=True).getPotentialEnergy().value_in_unit(
-        unit.kilojoule_per_mole)
-    st = sim.context.getState(getPositions=True)
-    m_min = metrics(fixer.topology, st.getPositions())
-    print(f"[stage2b] E(min)  = {e1:.1f} kJ/mol  metrics={m_min}", flush=True)
-    with open(args.out_pdb, "w") as fh:
-        app.PDBFile.writeFile(fixer.topology, st.getPositions(), fh)
+    print(f"[stage2b] E(seed) = {e0:.3e} kJ/mol -- minimizing (chunked)...", flush=True)
+
+    # Chunked minimize: the rigid leg-swing leaves a badly clashed hinge (E~1e13),
+    # so run L-BFGS in bounded chunks and log energy + shape after each. This gives
+    # a visible descent curve, keeps runtime bounded, and lets us detect a plateau
+    # (construction too strained) instead of blocking on one opaque call.
+    energy_traj = [round(e0, 1)]
+    rg_traj = [m_before["Rg_A"]]
+    prev = e0
+    e1 = e0
+    m_min = m_before
+    for c in range(args.max_chunks):
+        sim.minimizeEnergy(maxIterations=args.chunk_iters)
+        st = sim.context.getState(getPositions=True, getEnergy=True)
+        e1 = st.getPotentialEnergy().value_in_unit(unit.kilojoule_per_mole)
+        m_min = metrics(fixer.topology, st.getPositions())
+        energy_traj.append(round(e1, 1))
+        rg_traj.append(m_min["Rg_A"])
+        print(f"[stage2b] min chunk {c+1}/{args.max_chunks} "
+              f"(~{(c+1)*args.chunk_iters} it)  E={e1:.3e}  "
+              f"Rg={m_min['Rg_A']}  extent={m_min['long_axis_extent_A']}", flush=True)
+        with open(args.out_pdb, "w") as fh:
+            app.PDBFile.writeFile(fixer.topology, st.getPositions(), fh)
+        # write incremental result so progress is externally visible
+        with open(args.out_json, "w") as fh:
+            json.dump({"stage": "2b_relax_seed_cpu_implicit", "status": "minimizing",
+                       "E_seed_kJ_mol": round(e0, 1), "E_current_kJ_mol": round(e1, 1),
+                       "energy_traj_kJ_mol": energy_traj, "rg_traj_A": rg_traj,
+                       "metrics_seed": m_before, "metrics_current": m_min,
+                       "seconds": round(time.time() - t0, 1)}, fh, indent=2)
+        # converged: energy sane (negative) and no longer dropping meaningfully
+        if e1 < 0 and abs(prev - e1) < max(10.0, abs(e1) * 1e-4):
+            print("[stage2b] minimize converged", flush=True)
+            break
+        prev = e1
 
     result = {
         "stage": "2b_relax_seed_cpu_implicit",
@@ -128,16 +160,35 @@ def main():
         "n_atoms": n_atoms,
         "E_seed_kJ_mol": round(e0, 1),
         "E_min_kJ_mol": round(e1, 1),
+        "energy_traj_kJ_mol": energy_traj,
+        "rg_traj_A": rg_traj,
         "metrics_seed": m_before,
         "metrics_min": m_min,
         "minimize_seconds": round(time.time() - t0, 1),
     }
-    # write the minimize result immediately so progress is visible before equil
     with open(args.out_json, "w") as fh:
         json.dump(result, fh, indent=2)
-    print("[stage2b] MINIMIZE_DONE", flush=True)
+    print(f"[stage2b] MINIMIZE_DONE E={e1:.3e} kJ/mol", flush=True)
+
+    # only attempt dynamics if the minimize reached a physically sane energy
+    if e1 > 1e6:
+        result["equil_skipped"] = f"minimize plateaued at E={e1:.3e}; seed too strained"
+        with open(args.out_json, "w") as fh:
+            json.dump(result, fh, indent=2)
+        print("[stage2b] EQUIL_SKIPPED (energy still high)", flush=True)
+        args.equil_ps = 0
 
     if args.equil_ps > 0:
+        # settle on the minimized coords with HBonds constraints + 2 fs
+        st = sim.context.getState(getPositions=True)
+        eq_system = ff.createSystem(
+            fixer.topology, nonbondedMethod=app.CutoffNonPeriodic,
+            nonbondedCutoff=2.0 * unit.nanometer, constraints=app.HBonds)
+        eq_integrator = mm.LangevinMiddleIntegrator(
+            300 * unit.kelvin, 1.0 / unit.picosecond, 2.0 * unit.femtoseconds)
+        sim = app.Simulation(fixer.topology, eq_system, eq_integrator, platform,
+                             {"Threads": args.threads})
+        sim.context.setPositions(st.getPositions())
         n_steps = int(args.equil_ps * 1000 / 2.0)  # 2 fs steps
         print(f"[stage2b] equil {args.equil_ps} ps ({n_steps} steps)...", flush=True)
         sim.context.setVelocitiesToTemperature(300 * unit.kelvin)
