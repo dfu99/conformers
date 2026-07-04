@@ -4225,3 +4225,40 @@ objectives:
     or generate it by targeted MD — then port the string-method loop for Stage 2.
   connects_to: null
   completed_date: '2026-07-01'
+
+- id: obj-074
+  status: completed
+  statement: Constructed extended αVβ3 seed (state B); Rg/length match an activated integrin.
+  methodology: >
+    No extended αVβ3 crystal exists (obj-041), so built the string-method
+    endpoint B from the bent structure: rigid-body rotation of the lower legs
+    (αV calf-1/2 593-956, β3 I-EGF/β-tail 441-690) by 139° about the genu hinge
+    (αV thigh/calf split ~592, β3 ~440), flipping the leg direction from
+    folded-back to pointing-away. Pure numpy, CPU (no GPU — avoids contending
+    with the DNA-origami jobs now sharing the A5000). Confirmed extension via
+    global shape metrics rather than the synthetic placeholder CVs.
+  metrics:
+    rotation_angle_deg: 139
+    n_atoms_moved: 3843
+    rg_bent_A: 39.2
+    rg_extended_A: 65.7
+    rg_change_pct: 67
+    long_axis_extent_bent_A: 129.3
+    long_axis_extent_extended_A: 209.7
+    extent_change_pct: 62
+    cv1_beta_head_tail_bent_A: 28.36
+    cv1_beta_head_tail_extended_A: 104.96
+  figures:
+    - figures/route_a_extended_seed.png
+  conclusions: >
+    The leg-swing produces a physically right-sized extended pose: Rg 39→66 Å
+    and long-axis extent 129→210 Å (+62%), matching the ~20 nm height of an
+    activated integrin ectodomain — not a random elongation. This is a rigid
+    SEED (strained genu hinge) that needs a short GPU minimize+equilibration to
+    become a usable state B. Also flagged: the av_cvs_remapped.json CVs are
+    synthetic placeholders (cv0 measures head-to-thigh, missing the extension);
+    Stage 2 needs proper extension CVs (Rg or head-tip↔leg-tip distance).
+    Next: relax the seed (GPU, in a free window), define real CVs, then run the
+    string method connecting bent (state A) ↔ extended (state B).
+  connects_to: null
+  completed_date: '2026-07-04'
