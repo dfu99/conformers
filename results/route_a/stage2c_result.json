@@ -1,6 +1,22 @@
 {
   "stage": "2c_morph_extend",
-  "status": "morphing",
+  "status": "done",
+  "source_pdb": "inputs/1jv2.pdb",
+  "step_deg": 9.0,
+  "n_steps": 16,
+  "total_swing_deg": 144.0,
+  "E_bent_kJ_mol": 15151.8,
+  "E_extended_kJ_mol": 11633.9,
+  "metrics_bent": {
+    "Rg_A": 39.14,
+    "long_axis_extent_A": 130.02,
+    "cv1_beta_head_tail_A": 28.12
+  },
+  "metrics_extended": {
+    "Rg_A": 67.32,
+    "long_axis_extent_A": 211.36,
+    "cv1_beta_head_tail_A": 106.55
+  },
   "trajectory": [
     {
       "step": 0,
@@ -139,5 +155,12 @@
       "cv1_beta_head_tail_A": 106.55
     }
   ],
-  "seconds": 403.4
+  "out_pdb": "stage2c/extended_relaxed.pdb",
+  "seconds": 404.0,
+  "metrics_equil": {
+    "Rg_A": 66.43,
+    "long_axis_extent_A": 208.43,
+    "cv1_beta_head_tail_A": 103.02
+  },
+  "E_equil_kJ_mol": 72811.3
 }

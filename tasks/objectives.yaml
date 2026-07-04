@@ -4291,6 +4291,8 @@ objectives:
     E_extended_kJ_mol: 11630
     E_peak_during_swing_kJ_mol: 15150
     cv1_beta_head_tail_extended_A: 106.55
+    rg_after_10ps_settle_A: 66.43
+    extent_after_10ps_settle_A: 208.43
   figures:
     - figures/route_a_morph_descent.png
   conclusions: >
@@ -4300,7 +4302,10 @@ objectives:
     kJ/mol at EVERY step instead of the 1e13 catastrophe of the one-shot build.
     The step-by-step frames double as a ready-made initial path for the string
     method. This is a usable state B for the bent↔extended transition. Fixes the
-    obj-074 blocker (strained seed) entirely — no GPU needed. Next: replace the
+    obj-074 blocker (strained seed) entirely — no GPU needed. A 10 ps dynamics
+    settle held the extended shape (extent 211→208 Å, Rg 67→66 Å) — the pose does
+    NOT spring back to bent, confirming a genuinely stable/metastable extended
+    state. Deliverable: results/route_a/extended_state_b.pdb. Next: replace the
     synthetic placeholder CVs with a real extension coordinate (Rg or
     head-tip↔leg-tip), then run the Ferg-Lab string method A↔B.
   connects_to: null
