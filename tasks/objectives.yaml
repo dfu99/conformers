@@ -4354,5 +4354,44 @@ objectives:
     Route-A is now ready for the string method with a validated reaction coordinate.
     Next: port the Ferg-Lab string-method loop A↔B, seeded with the 16 morph frames
     as the initial path and driven along the genu angle.
+  connects_to: obj-077
+  completed_date: '2026-07-06'
+
+- id: obj-077
+  status: completed
+  statement: Built and validated the initial string (17-image bent↔extended path) for the string method.
+  methodology: >
+    Assembled the initial path for the string method from image 0 = bent state A
+    (1JV2 crystal) plus images 1-16 = the incremental leg-swing morph frames pulled
+    from the pod (read-only copy, no GPU contention). Computed the validated genu-angle
+    primary reaction coordinate (plus Rg, end-to-end, extent) per image, then measured
+    adjacent-image Cα-RMSD (Kabsch-aligned) as the string arc-length metric and
+    reparametrized to 12 equally-spaced nodes — the standard string initialization so
+    the run starts from evenly spaced images. Pure-CPU numpy (no OpenMM/GPU), reusing
+    the obj-076 CV code. Deliverables pipelines/route_a/scripts/stage3_build_initial_string.py,
+    results/route_a/initial_string.json.
+  metrics:
+    n_images: 17
+    genu_angle_span_deg: "41.0 -> 175.5"
+    monotonic_genu: true
+    total_path_rmsd_A: 55.6
+    n_segments: 16
+    segment_rmsd_mean_A: 3.48
+    segment_rmsd_min_A: 2.32
+    segment_rmsd_max_A: 4.88
+    spacing_coeff_of_variation: 0.23
+    n_reparametrized_nodes: 12
+  figures:
+    - figures/route_a_initial_string.png
+  conclusions: >
+    The morph seed is a good initial string: the genu angle increases monotonically
+    41→175° across all 17 images, and the 55.6 Å Cα-RMSD path is near-uniformly
+    spaced (segment-length coefficient of variation 0.23). Segment lengths decrease
+    from 4.9 Å (bent side) to 2.3 Å (extended side) — a fixed 9° swing sweeps more
+    Cα displacement when the legs are folded (long lever arm) than when nearly
+    straight — so reparametrization correctly packs more images on the bent side.
+    The CV-space initial string and its evenly-spaced nodes are ready; the remaining
+    half of a string iteration is the per-image MD evolution, which is a GPU step to
+    wire in during a free GPU window (pod GPU currently on the oxDNA FFS jobs).
   connects_to: null
   completed_date: '2026-07-06'
