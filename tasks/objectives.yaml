@@ -4393,5 +4393,53 @@ objectives:
     The CV-space initial string and its evenly-spaced nodes are ready; the remaining
     half of a string iteration is the per-image MD evolution, which is a GPU step to
     wire in during a free GPU window (pod GPU currently on the oxDNA FFS jobs).
+  connects_to: obj-078
+  completed_date: '2026-07-06'
+
+- id: obj-078
+  status: completed
+  statement: Perturbation scan identifies the genu salt-bridge network that locks αVβ3 extended.
+  methodology: >
+    Answered the PI's question — which residues, if mutated, destabilize the extended
+    state so it snaps back to bent — with a structure-based contact/interaction
+    differential (CPU-only; the definitive mutate→MD→snap-back test is the GPU
+    follow-up). Computed heavy-atom residue-residue contacts (<4.5 Å) in both the bent
+    crystal (1JV2, state A) and the extended model (state B), rank-matched across the
+    two numbering schemes. Scored each residue by its EXTENDED-UNIQUE contacts, weighted
+    for salt bridges (x3), H-bonds (x2), cross-knee/inter-chain span (x2), and
+    genu-proximity. Also rendered the leg-swing as a 2D Cα animation (GIF) superposed on
+    the fixed headpiece, and framed the states by knee angle.
+  metrics:
+    n_residues_scanned: 1466
+    n_contacts_bent: 6749
+    n_contacts_extended: 6940
+    n_extended_unique_contacts: 1252
+    top_linchpin_1: "αV GLU598 (thigh/calf-1 genu)"
+    top_linchpin_2: "αV ASP595"
+    top_linchpin_3: "αV LYS459"
+    lock_E598_K459_bent_A: 22.95
+    lock_E598_K459_extended_A: 2.64
+    lock_K459_E636_bent_A: 25.42
+    lock_K459_E636_extended_A: 2.92
+    lock_D457_K688_bent_A: 19.36
+    lock_D457_K688_extended_A: 2.83
+    candidate_mutations: "αV E598, K459, D457, D595, E636, K688"
+    bent_clasp_residues: "β3 R633, M535, P602"
+    knee_angle_bent_deg: 41
+    knee_angle_extended_deg: 175
+  figures:
+    - figures/route_a_linchpin_scan.png
+    - results/route_a/state_change_video.gif
+  conclusions: >
+    The residues governing the bent↔extended switch cluster sharply at the genu (knee):
+    a cross-knee salt-bridge network between the αV thigh (K459, D457) and calf-1
+    (E598, D595) plus K688/E636 that is broken in bent (charged partners 19–25 Å apart)
+    and clasps shut in extended (~2.6–2.9 Å). These electrostatic locks form as the knee
+    straightens and are the top predicted mutation targets to release the extended state
+    back to bent (αV E598, K459, D457, D595, E636, K688). The β3 leg clasp (R633, M535,
+    P602) is the opposite lever — mutating it would stabilize extended. This narrows
+    1466 residues to ~6 targets, making the definitive mutate→MD snap-back test cheap and
+    aimed. Caveat: the extended contacts come from a vacuum-relaxed model, so solvated MD
+    is needed to confirm the specific salt bridges vs looser polar contacts.
   connects_to: null
   completed_date: '2026-07-06'

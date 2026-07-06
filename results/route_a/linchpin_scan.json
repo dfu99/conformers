@@ -1,0 +1,9185 @@
+{
+  "analysis": "extended-state linchpin scan (contact/interaction differential)",
+  "n_residues": 1466,
+  "n_contacts_bent": 6749,
+  "n_contacts_extended": 6940,
+  "n_extended_unique": 1252,
+  "n_bent_unique": 1061,
+  "extended_lock_linchpins": [
+    {
+      "residue": "A:GLU598",
+      "domain": "\u03b1V calf-1",
+      "score": 33.0,
+      "n_extended_unique_contacts": 8,
+      "n_cross_knee": 7,
+      "n_salt_bridges": 1,
+      "near_genu": true,
+      "top_partners": [
+        "A:ASN474",
+        "A:ASN458",
+        "A:THR460",
+        "A:CYS472",
+        "A:GLU636"
+      ],
+      "salt_bridge_partners": [
+        "A:LYS459"
+      ]
+    },
+    {
+      "residue": "A:ASP595",
+      "domain": "\u03b1V calf-1",
+      "score": 32.0,
+      "n_extended_unique_contacts": 10,
+      "n_cross_knee": 3,
+      "n_salt_bridges": 1,
+      "near_genu": true,
+      "top_partners": [
+        "A:LYS688",
+        "A:ASP457",
+        "A:LYS459",
+        "A:CYS602",
+        "A:GLY637"
+      ],
+      "salt_bridge_partners": [
+        "A:LYS688"
+      ]
+    },
+    {
+      "residue": "A:LYS459",
+      "domain": "\u03b1V thigh",
+      "score": 24.0,
+      "n_extended_unique_contacts": 8,
+      "n_cross_knee": 8,
+      "n_salt_bridges": 2,
+      "near_genu": false,
+      "top_partners": [
+        "A:CYS596",
+        "A:ASP595",
+        "A:GLU598",
+        "A:GLY597",
+        "A:LYS688"
+      ],
+      "salt_bridge_partners": [
+        "A:GLU598",
+        "A:GLU636"
+      ]
+    },
+    {
+      "residue": "A:ASN600",
+      "domain": "\u03b1V calf-1",
+      "score": 21.0,
+      "n_extended_unique_contacts": 6,
+      "n_cross_knee": 5,
+      "n_salt_bridges": 0,
+      "near_genu": true,
+      "top_partners": [
+        "A:ASN455",
+        "A:PHE473",
+        "A:ILE453",
+        "A:CYS602",
+        "A:PRO451"
+      ],
+      "salt_bridge_partners": []
+    },
+    {
+      "residue": "B:ARG216",
+      "domain": "\u03b23 \u03b2I (head)",
+      "score": 18.0,
+      "n_extended_unique_contacts": 7,
+      "n_cross_knee": 3,
+      "n_salt_bridges": 2,
+      "near_genu": false,
+      "top_partners": [
+        "B:TYR178",
+        "A:GLU123",
+        "A:ASP148",
+        "B:MET165",
+        "A:TRP179"
+      ],
+      "salt_bridge_partners": [
+        "A:GLU123",
+        "A:ASP148"
+      ]
+    },
+    {
+      "residue": "A:ASP457",
+      "domain": "\u03b1V thigh",
+      "score": 18.0,
+      "n_extended_unique_contacts": 7,
+      "n_cross_knee": 4,
+      "n_salt_bridges": 1,
+      "near_genu": false,
+      "top_partners": [
+        "A:SER471",
+        "A:ASP595",
+        "A:LEU594",
+        "A:CYS596",
+        "A:LYS688"
+      ],
+      "salt_bridge_partners": [
+        "A:LYS688"
+      ]
+    },
+    {
+      "residue": "B:GLN590",
+      "domain": "\u03b23 I-EGF-3/4 + \u03b2-tail (leg)",
+      "score": 17.0,
+      "n_extended_unique_contacts": 7,
+      "n_cross_knee": 4,
+      "n_salt_bridges": 0,
+      "near_genu": false,
+      "top_partners": [
+        "A:ASN785",
+        "B:TYR594",
+        "A:ARG783",
+        "A:GLY892",
+        "B:GLY595"
+      ],
+      "salt_bridge_partners": []
+    },
+    {
+      "residue": "A:LYS369",
+      "domain": "\u03b1V \u03b2-propeller (head)",
+      "score": 17.0,
+      "n_extended_unique_contacts": 6,
+      "n_cross_knee": 3,
+      "n_salt_bridges": 1,
+      "near_genu": false,
+      "top_partners": [
+        "B:PRO268",
+        "B:ASP270",
+        "A:PRO401",
+        "A:PHE337",
+        "A:SER403"
+      ],
+      "salt_bridge_partners": [
+        "B:ASP270"
+      ]
+    },
+    {
+      "residue": "A:ASN455",
+      "domain": "\u03b1V thigh",
+      "score": 17.0,
+      "n_extended_unique_contacts": 6,
+      "n_cross_knee": 5,
+      "n_salt_bridges": 0,
+      "near_genu": false,
+      "top_partners": [
+        "A:LEU542",
+        "A:GLY597",
+        "A:ASN600",
+        "A:LEU594",
+        "A:CYS596"
+      ],
+      "salt_bridge_partners": []
+    },
+    {
+      "residue": "A:LEU594",
+      "domain": "\u03b1V calf-1",
+      "score": 16.0,
+      "n_extended_unique_contacts": 6,
+      "n_cross_knee": 3,
+      "n_salt_bridges": 0,
+      "near_genu": true,
+      "top_partners": [
+        "A:PRO686",
+        "A:ASP457",
+        "A:LYS688",
+        "A:ASN455",
+        "A:GLN456"
+      ],
+      "salt_bridge_partners": []
+    },
+    {
+      "residue": "A:ARG321",
+      "domain": "\u03b1V \u03b2-propeller (head)",
+      "score": 15.0,
+      "n_extended_unique_contacts": 7,
+      "n_cross_knee": 0,
+      "n_salt_bridges": 3,
+      "near_genu": false,
+      "top_partners": [
+        "A:GLY287",
+        "A:TYR290",
+        "A:ASP288",
+        "A:ASN286",
+        "A:ASP284"
+      ],
+      "salt_bridge_partners": [
+        "A:ASP288",
+        "A:ASP284",
+        "A:ASP292"
+      ]
+    },
+    {
+      "residue": "A:CYS596",
+      "domain": "\u03b1V calf-1",
+      "score": 14.0,
+      "n_extended_unique_contacts": 4,
+      "n_cross_knee": 4,
+      "n_salt_bridges": 0,
+      "near_genu": true,
+      "top_partners": [
+        "A:LYS459",
+        "A:ASP457",
+        "A:ASN455",
+        "A:ASN458"
+      ],
+      "salt_bridge_partners": []
+    },
+    {
+      "residue": "B:THR656",
+      "domain": "\u03b23 I-EGF-3/4 + \u03b2-tail (leg)",
+      "score": 14.0,
+      "n_extended_unique_contacts": 6,
+      "n_cross_knee": 3,
+      "n_salt_bridges": 0,
+      "near_genu": false,
+      "top_partners": [
+        "A:VAL753",
+        "B:LYS658",
+        "B:ASN654",
+        "A:ILE757",
+        "B:VAL664"
+      ],
+      "salt_bridge_partners": []
+    },
+    {
+      "residue": "A:GLY597",
+      "domain": "\u03b1V calf-1",
+      "score": 14.0,
+      "n_extended_unique_contacts": 5,
+      "n_cross_knee": 3,
+      "n_salt_bridges": 0,
+      "near_genu": true,
+      "top_partners": [
+        "A:LYS603",
+        "A:ASN455",
+        "A:ASN458",
+        "A:LYS459",
+        "A:VAL601"
+      ],
+      "salt_bridge_partners": []
+    },
+    {
+      "residue": "A:LEU838",
+      "domain": "\u03b1V calf-2 (foot)",
+      "score": 14.0,
+      "n_extended_unique_contacts": 12,
+      "n_cross_knee": 0,
+      "n_salt_bridges": 0,
+      "near_genu": false,
+      "top_partners": [
+        "A:THR768",
+        "A:LEU755",
+        "A:ASP868",
+        "A:VAL772",
+        "A:LEU903"
+      ],
+      "salt_bridge_partners": []
+    }
+  ],
+  "key_cross_knee_salt_bridges": [
+    {
+      "pair": "A:LYS459 \u2014 A:GLU636",
+      "bent_dist_A": 25.42,
+      "extended_dist_A": 2.92,
+      "forms_on_extension": true
+    },
+    {
+      "pair": "A:GLU598 \u2014 A:LYS459",
+      "bent_dist_A": 22.95,
+      "extended_dist_A": 2.64,
+      "forms_on_extension": true
+    },
+    {
+      "pair": "A:ASP457 \u2014 A:LYS688",
+      "bent_dist_A": 19.36,
+      "extended_dist_A": 2.83,
+      "forms_on_extension": true
+    },
+    {
+      "pair": "A:LYS369 \u2014 B:ASP270",
+      "bent_dist_A": 8.32,
+      "extended_dist_A": 2.66,
+      "forms_on_extension": true
+    },
+    {
+      "pair": "A:ARG321 \u2014 A:ASP284",
+      "bent_dist_A": 8.23,
+      "extended_dist_A": 2.77,
+      "forms_on_extension": true
+    },
+    {
+      "pair": "A:ASP595 \u2014 A:LYS688",
+      "bent_dist_A": 7.39,
+      "extended_dist_A": 2.67,
+      "forms_on_extension": true
+    },
+    {
+      "pair": "A:ARG321 \u2014 A:ASP292",
+      "bent_dist_A": 6.87,
+      "extended_dist_A": 2.88,
+      "forms_on_extension": true
+    },
+    {
+      "pair": "B:ARG216 \u2014 A:ASP148",
+      "bent_dist_A": 5.71,
+      "extended_dist_A": 2.8,
+      "forms_on_extension": false
+    },
+    {
+      "pair": "A:ARG321 \u2014 A:ASP288",
+      "bent_dist_A": 5.48,
+      "extended_dist_A": 2.69,
+      "forms_on_extension": false
+    },
+    {
+      "pair": "B:ARG216 \u2014 A:GLU123",
+      "bent_dist_A": 5.06,
+      "extended_dist_A": 2.71,
+      "forms_on_extension": false
+    }
+  ],
+  "bent_clasp_residues": [
+    {
+      "residue": "B:ARG633",
+      "domain": "\u03b23 I-EGF-3/4 + \u03b2-tail (leg)",
+      "n_clasp_contacts": 7
+    },
+    {
+      "residue": "B:MET535",
+      "domain": "\u03b23 I-EGF-3/4 + \u03b2-tail (leg)",
+      "n_clasp_contacts": 5
+    },
+    {
+      "residue": "B:PRO602",
+      "domain": "\u03b23 I-EGF-3/4 + \u03b2-tail (leg)",
+      "n_clasp_contacts": 5
+    },
+    {
+      "residue": "A:SER305",
+      "domain": "\u03b1V \u03b2-propeller (head)",
+      "n_clasp_contacts": 4
+    },
+    {
+      "residue": "B:ARG404",
+      "domain": "\u03b23 I-EGF-1/2 (knee)",
+      "n_clasp_contacts": 4
+    },
+    {
+      "residue": "B:MET387",
+      "domain": "\u03b23 I-EGF-1/2 (knee)",
+      "n_clasp_contacts": 4
+    },
+    {
+      "residue": "B:ARG563",
+      "domain": "\u03b23 I-EGF-3/4 + \u03b2-tail (leg)",
+      "n_clasp_contacts": 4
+    },
+    {
+      "residue": "B:SER551",
+      "domain": "\u03b23 I-EGF-3/4 + \u03b2-tail (leg)",
+      "n_clasp_contacts": 4
+    }
+  ],
+  "per_residue_score": [
+    {
+      "chain": "A",
+      "resid": 1,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 2,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 3,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 4,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 5,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 6,
+      "resname": "ASP",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 7,
+      "resname": "SER",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 8,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 9,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 10,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 11,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 12,
+      "resname": "SER",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 13,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 14,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 15,
+      "resname": "GLU",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 16,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 17,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 18,
+      "resname": "TYR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 19,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 20,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 21,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 22,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 23,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 24,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 25,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 26,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 27,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 28,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 29,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 30,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 31,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 32,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 33,
+      "resname": "ARG",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 34,
+      "resname": "MET",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 35,
+      "resname": "PHE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 36,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 37,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 38,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 39,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 40,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 41,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 42,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 43,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 44,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 45,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 46,
+      "resname": "THR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 47,
+      "resname": "GLN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 48,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 49,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 50,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 51,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 52,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 53,
+      "resname": "GLY",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 54,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 55,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 56,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 57,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 58,
+      "resname": "LYS",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 59,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 60,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 61,
+      "resname": "TRP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 62,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 63,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 64,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 65,
+      "resname": "ARG",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 66,
+      "resname": "ARG",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 67,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 68,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 69,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 70,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 71,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 72,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 73,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 74,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 75,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 76,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 77,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 78,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 79,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 80,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 81,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 82,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 83,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 84,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 85,
+      "resname": "PRO",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 86,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 87,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 88,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 89,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 90,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 91,
+      "resname": "HIS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 92,
+      "resname": "GLN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 93,
+      "resname": "TRP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 94,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 95,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 96,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 97,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 98,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 99,
+      "resname": "ARG",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 100,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 101,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 102,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 103,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 104,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 105,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 106,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 107,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 108,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 109,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 110,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 111,
+      "resname": "LEU",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 112,
+      "resname": "TYR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 113,
+      "resname": "HIS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 114,
+      "resname": "TRP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 115,
+      "resname": "ARG",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 116,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 117,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 118,
+      "resname": "MET",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 119,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 120,
+      "resname": "GLN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 121,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 122,
+      "resname": "ARG",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 123,
+      "resname": "GLU",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 124,
+      "resname": "PRO",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 125,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 126,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 127,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 128,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 129,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 130,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 131,
+      "resname": "GLN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 132,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 133,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 134,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 135,
+      "resname": "LYS",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 136,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 137,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 138,
+      "resname": "GLU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 139,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 140,
+      "resname": "ALA",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 141,
+      "resname": "PRO",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 142,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 143,
+      "resname": "ARG",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 144,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 145,
+      "resname": "GLN",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 146,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 147,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 148,
+      "resname": "ASP",
+      "score": 11.0
+    },
+    {
+      "chain": "A",
+      "resid": 149,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 150,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 151,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 152,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 153,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 154,
+      "resname": "PHE",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 155,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 156,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 157,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 158,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 159,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 160,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 161,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 162,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 163,
+      "resname": "PHE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 164,
+      "resname": "THR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 165,
+      "resname": "LYS",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 166,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 167,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 168,
+      "resname": "ARG",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 169,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 170,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 171,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 172,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 173,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 174,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 175,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 176,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 177,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 178,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 179,
+      "resname": "TRP",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 180,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 181,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 182,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 183,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 184,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 185,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 186,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 187,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 188,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 189,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 190,
+      "resname": "GLU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 191,
+      "resname": "ILE",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 192,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 193,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 194,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 195,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 196,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 197,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 198,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 199,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 200,
+      "resname": "TYR",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 201,
+      "resname": "SER",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 202,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 203,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 204,
+      "resname": "TYR",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 205,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 206,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 207,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 208,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 209,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 210,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 211,
+      "resname": "ARG",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 212,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 213,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 214,
+      "resname": "GLN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 215,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 216,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 217,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 218,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 219,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 220,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 221,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 222,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 223,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 224,
+      "resname": "TYR",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 225,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 226,
+      "resname": "VAL",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 227,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 228,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 229,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 230,
+      "resname": "ASP",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 231,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 232,
+      "resname": "ASN",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 233,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 234,
+      "resname": "ASP",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 235,
+      "resname": "GLY",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 236,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 237,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 238,
+      "resname": "ASP",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 239,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 240,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 241,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 242,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 243,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 244,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 245,
+      "resname": "ARG",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 246,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 247,
+      "resname": "ALA",
+      "score": 9.0
+    },
+    {
+      "chain": "A",
+      "resid": 248,
+      "resname": "ARG",
+      "score": 12.0
+    },
+    {
+      "chain": "A",
+      "resid": 249,
+      "resname": "THR",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 250,
+      "resname": "LEU",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 251,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 252,
+      "resname": "MET",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 253,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 254,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 255,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 256,
+      "resname": "TYR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 257,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 258,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 259,
+      "resname": "LYS",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 260,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 261,
+      "resname": "MET",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 262,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 263,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 264,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 265,
+      "resname": "TYR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 266,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 267,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 268,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 269,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 270,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 271,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 272,
+      "resname": "MET",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 273,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 274,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 275,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 276,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 277,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 278,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 279,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 280,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 281,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 282,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 283,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 284,
+      "resname": "ASP",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 285,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 286,
+      "resname": "ASN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 287,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 288,
+      "resname": "ASP",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 289,
+      "resname": "ASP",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 290,
+      "resname": "TYR",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 291,
+      "resname": "ALA",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 292,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 293,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 294,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 295,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 296,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 297,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 298,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 299,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 300,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 301,
+      "resname": "MET",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 302,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 303,
+      "resname": "ARG",
+      "score": 11.0
+    },
+    {
+      "chain": "A",
+      "resid": 304,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 305,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 306,
+      "resname": "ASP",
+      "score": 12.0
+    },
+    {
+      "chain": "A",
+      "resid": 307,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 308,
+      "resname": "LYS",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 309,
+      "resname": "LEU",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 310,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 311,
+      "resname": "GLU",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 312,
+      "resname": "VAL",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 313,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 314,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 315,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 316,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 317,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 318,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 319,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 320,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 321,
+      "resname": "ARG",
+      "score": 15.0
+    },
+    {
+      "chain": "A",
+      "resid": 322,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 323,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 324,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 325,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 326,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 327,
+      "resname": "GLN",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 328,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 329,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 330,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 331,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 332,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 333,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 334,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 335,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 336,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 337,
+      "resname": "PHE",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 338,
+      "resname": "ALA",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 339,
+      "resname": "ARG",
+      "score": 11.0
+    },
+    {
+      "chain": "A",
+      "resid": 340,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 341,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 342,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 343,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 344,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 345,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 346,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 347,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 348,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 349,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 350,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 351,
+      "resname": "ASP",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 352,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 353,
+      "resname": "ASP",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 354,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 355,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 356,
+      "resname": "ASN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 357,
+      "resname": "ASP",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 358,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 359,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 360,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 361,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 362,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 363,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 364,
+      "resname": "TYR",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 365,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 366,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 367,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 368,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 369,
+      "resname": "LYS",
+      "score": 17.0
+    },
+    {
+      "chain": "A",
+      "resid": 370,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 371,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 372,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 373,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 374,
+      "resname": "TYR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 375,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 376,
+      "resname": "PHE",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 377,
+      "resname": "ASN",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 378,
+      "resname": "GLY",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 379,
+      "resname": "ARG",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 380,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 381,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 382,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 383,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 384,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 385,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 386,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 387,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 388,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 389,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 390,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 391,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 392,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 393,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 394,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 395,
+      "resname": "TRP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 396,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 397,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 398,
+      "resname": "ARG",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 399,
+      "resname": "SER",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 400,
+      "resname": "MET",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 401,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 402,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 403,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 404,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 405,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 406,
+      "resname": "TYR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 407,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 408,
+      "resname": "MET",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 409,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 410,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 411,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 412,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 413,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 414,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 415,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 416,
+      "resname": "LYS",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 417,
+      "resname": "ASN",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 418,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 419,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 420,
+      "resname": "PRO",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 421,
+      "resname": "ASP",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 422,
+      "resname": "LEU",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 423,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 424,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 425,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 426,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 427,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 428,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 429,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 430,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 431,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 432,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 433,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 434,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 435,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 436,
+      "resname": "ARG",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 437,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 438,
+      "resname": "ARG",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 439,
+      "resname": "PRO",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 440,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 441,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 442,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 443,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 444,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 445,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 446,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 447,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 448,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 449,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 450,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 451,
+      "resname": "PRO",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 452,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 453,
+      "resname": "ILE",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 454,
+      "resname": "LEU",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 455,
+      "resname": "ASN",
+      "score": 17.0
+    },
+    {
+      "chain": "A",
+      "resid": 456,
+      "resname": "GLN",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 457,
+      "resname": "ASP",
+      "score": 18.0
+    },
+    {
+      "chain": "A",
+      "resid": 458,
+      "resname": "ASN",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 459,
+      "resname": "LYS",
+      "score": 24.0
+    },
+    {
+      "chain": "A",
+      "resid": 460,
+      "resname": "THR",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 461,
+      "resname": "CYS",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 462,
+      "resname": "SER",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 463,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 464,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 465,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 466,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 467,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 468,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 469,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 470,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 471,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 472,
+      "resname": "CYS",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 473,
+      "resname": "PHE",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 474,
+      "resname": "ASN",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 475,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 476,
+      "resname": "ARG",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 477,
+      "resname": "PHE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 478,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 479,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 480,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 481,
+      "resname": "ALA",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 482,
+      "resname": "ASP",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 483,
+      "resname": "GLY",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 484,
+      "resname": "LYS",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 485,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 486,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 487,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 488,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 489,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 490,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 491,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 492,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 493,
+      "resname": "PHE",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 494,
+      "resname": "GLN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 495,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 496,
+      "resname": "GLU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 497,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 498,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 499,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 500,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 501,
+      "resname": "LYS",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 502,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 503,
+      "resname": "LYS",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 504,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 505,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 506,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 507,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 508,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 509,
+      "resname": "ARG",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 510,
+      "resname": "ARG",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 511,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 512,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 513,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 514,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 515,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 516,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 517,
+      "resname": "ARG",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 518,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 519,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 520,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 521,
+      "resname": "HIS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 522,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 523,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 524,
+      "resname": "ASN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 525,
+      "resname": "MET",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 526,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 527,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 528,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 529,
+      "resname": "ARG",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 530,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 531,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 532,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 533,
+      "resname": "MET",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 534,
+      "resname": "GLN",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 535,
+      "resname": "CYS",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 536,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 537,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 538,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 539,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 540,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 541,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 542,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 543,
+      "resname": "ARG",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 544,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 545,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 546,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 547,
+      "resname": "GLU",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 548,
+      "resname": "PHE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 549,
+      "resname": "ARG",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 550,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 551,
+      "resname": "LYS",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 552,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 553,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 554,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 555,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 556,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 557,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 558,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 559,
+      "resname": "MET",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 560,
+      "resname": "GLU",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 561,
+      "resname": "TYR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 562,
+      "resname": "ARG",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 563,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 564,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 565,
+      "resname": "TYR",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 566,
+      "resname": "ARG",
+      "score": 11.0
+    },
+    {
+      "chain": "A",
+      "resid": 567,
+      "resname": "THR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 568,
+      "resname": "ALA",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 569,
+      "resname": "ALA",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 570,
+      "resname": "ASP",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 571,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 572,
+      "resname": "THR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 573,
+      "resname": "GLY",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 574,
+      "resname": "LEU",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 575,
+      "resname": "GLN",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 576,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 577,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 578,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 579,
+      "resname": "ASN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 580,
+      "resname": "GLN",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 581,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 582,
+      "resname": "THR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 583,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 584,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 585,
+      "resname": "ASN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 586,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 587,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 588,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 589,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 590,
+      "resname": "ALA",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 591,
+      "resname": "HIS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 592,
+      "resname": "ILE",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 593,
+      "resname": "LEU",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 594,
+      "resname": "LEU",
+      "score": 16.0
+    },
+    {
+      "chain": "A",
+      "resid": 595,
+      "resname": "ASP",
+      "score": 32.0
+    },
+    {
+      "chain": "A",
+      "resid": 596,
+      "resname": "CYS",
+      "score": 14.0
+    },
+    {
+      "chain": "A",
+      "resid": 597,
+      "resname": "GLY",
+      "score": 14.0
+    },
+    {
+      "chain": "A",
+      "resid": 598,
+      "resname": "GLU",
+      "score": 33.0
+    },
+    {
+      "chain": "A",
+      "resid": 599,
+      "resname": "ASP",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 600,
+      "resname": "ASN",
+      "score": 21.0
+    },
+    {
+      "chain": "A",
+      "resid": 601,
+      "resname": "VAL",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 602,
+      "resname": "CYS",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 603,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 604,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 605,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 606,
+      "resname": "LEU",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 607,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 608,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 609,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 610,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 611,
+      "resname": "ASP",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 612,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 613,
+      "resname": "ASP",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 614,
+      "resname": "GLN",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 615,
+      "resname": "LYS",
+      "score": 9.0
+    },
+    {
+      "chain": "A",
+      "resid": 616,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 617,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 618,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 619,
+      "resname": "ILE",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 620,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 621,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 622,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 623,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 624,
+      "resname": "PRO",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 625,
+      "resname": "LEU",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 626,
+      "resname": "THR",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 627,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 628,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 629,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 630,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 631,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 632,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 633,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 634,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 635,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 636,
+      "resname": "GLU",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 637,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 638,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 639,
+      "resname": "TYR",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 640,
+      "resname": "GLU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 641,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 642,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 643,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 644,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 645,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 646,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 647,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 648,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 649,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 650,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 651,
+      "resname": "ALA",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 652,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 653,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 654,
+      "resname": "ILE",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 655,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 656,
+      "resname": "VAL",
+      "score": 9.0
+    },
+    {
+      "chain": "A",
+      "resid": 657,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 658,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 659,
+      "resname": "ASN",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 660,
+      "resname": "ASN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 661,
+      "resname": "GLU",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 662,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 663,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 664,
+      "resname": "ALA",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 665,
+      "resname": "ARG",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 666,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 667,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 668,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 669,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 670,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 671,
+      "resname": "LYS",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 672,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 673,
+      "resname": "GLU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 674,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 675,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 676,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 677,
+      "resname": "ARG",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 678,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 679,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 680,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 681,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 682,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 683,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 684,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 685,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 686,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 687,
+      "resname": "MET",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 688,
+      "resname": "LYS",
+      "score": 12.0
+    },
+    {
+      "chain": "A",
+      "resid": 689,
+      "resname": "ALA",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 690,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 691,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 692,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 693,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 694,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 695,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 696,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 697,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 698,
+      "resname": "ARG",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 699,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 700,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 701,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 702,
+      "resname": "HIS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 703,
+      "resname": "GLN",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 704,
+      "resname": "GLN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 705,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 706,
+      "resname": "GLU",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 707,
+      "resname": "MET",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 708,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 709,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 710,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 711,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 712,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 713,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 714,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 715,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 716,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 717,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 718,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 719,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 720,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 721,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 722,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 723,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 724,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 725,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 726,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 727,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 728,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 729,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 730,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 731,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 732,
+      "resname": "HIS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 733,
+      "resname": "LYS",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 734,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 735,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 736,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 737,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 738,
+      "resname": "VAL",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 739,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 740,
+      "resname": "ALA",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 741,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 742,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 743,
+      "resname": "GLU",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 744,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 745,
+      "resname": "ARG",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 746,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 747,
+      "resname": "VAL",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 748,
+      "resname": "SER",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 749,
+      "resname": "SER",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 750,
+      "resname": "PRO",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 751,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 752,
+      "resname": "HIS",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 753,
+      "resname": "VAL",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 754,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 755,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 756,
+      "resname": "PRO",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 757,
+      "resname": "ILE",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 758,
+      "resname": "PRO",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 759,
+      "resname": "ASN",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 760,
+      "resname": "TRP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 761,
+      "resname": "GLU",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 762,
+      "resname": "HIS",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 763,
+      "resname": "LYS",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 764,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 765,
+      "resname": "ASN",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 766,
+      "resname": "PRO",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 767,
+      "resname": "GLU",
+      "score": 12.0
+    },
+    {
+      "chain": "A",
+      "resid": 768,
+      "resname": "THR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 769,
+      "resname": "GLU",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 770,
+      "resname": "GLU",
+      "score": 7.0
+    },
+    {
+      "chain": "A",
+      "resid": 771,
+      "resname": "ASP",
+      "score": 12.0
+    },
+    {
+      "chain": "A",
+      "resid": 772,
+      "resname": "VAL",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 773,
+      "resname": "GLY",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 774,
+      "resname": "PRO",
+      "score": 9.0
+    },
+    {
+      "chain": "A",
+      "resid": 775,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 776,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 777,
+      "resname": "GLN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 778,
+      "resname": "HIS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 779,
+      "resname": "ILE",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 780,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 781,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 782,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 783,
+      "resname": "ARG",
+      "score": 9.0
+    },
+    {
+      "chain": "A",
+      "resid": 784,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 785,
+      "resname": "ASN",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 786,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 787,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 788,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 789,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 790,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 791,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 792,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 793,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 794,
+      "resname": "MET",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 795,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 796,
+      "resname": "HIS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 797,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 798,
+      "resname": "GLN",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 799,
+      "resname": "TRP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 800,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 801,
+      "resname": "TYR",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 802,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 803,
+      "resname": "TYR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 804,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 805,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 806,
+      "resname": "ASN",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 807,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 808,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 809,
+      "resname": "LEU",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 810,
+      "resname": "TYR",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 811,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 812,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 813,
+      "resname": "HIS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 814,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 815,
+      "resname": "ASP",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 816,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 817,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 818,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 819,
+      "resname": "PRO",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 820,
+      "resname": "MET",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 821,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 822,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 823,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 824,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 825,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 826,
+      "resname": "MET",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 827,
+      "resname": "GLU",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 828,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 829,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 830,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 831,
+      "resname": "LEU",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 832,
+      "resname": "ARG",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 833,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 834,
+      "resname": "LYS",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 835,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 836,
+      "resname": "SER",
+      "score": 9.0
+    },
+    {
+      "chain": "A",
+      "resid": 837,
+      "resname": "SER",
+      "score": 14.0
+    },
+    {
+      "chain": "A",
+      "resid": 838,
+      "resname": "LEU",
+      "score": 14.0
+    },
+    {
+      "chain": "A",
+      "resid": 868,
+      "resname": "ASP",
+      "score": 11.0
+    },
+    {
+      "chain": "A",
+      "resid": 869,
+      "resname": "ILE",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 870,
+      "resname": "HIS",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 871,
+      "resname": "THR",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 872,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 873,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 874,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 875,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 876,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 877,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 878,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 879,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 880,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 881,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 882,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 883,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 884,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 885,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 886,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 887,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 888,
+      "resname": "ARG",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 889,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 890,
+      "resname": "ASP",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 891,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 892,
+      "resname": "GLY",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 893,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 894,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 895,
+      "resname": "ALA",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 896,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 897,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 898,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 899,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 900,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 901,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 902,
+      "resname": "LEU",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 903,
+      "resname": "LEU",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 904,
+      "resname": "TRP",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 905,
+      "resname": "THR",
+      "score": 8.0
+    },
+    {
+      "chain": "A",
+      "resid": 906,
+      "resname": "GLU",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 907,
+      "resname": "THR",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 908,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 909,
+      "resname": "MET",
+      "score": 9.0
+    },
+    {
+      "chain": "A",
+      "resid": 910,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 911,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 912,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 913,
+      "resname": "ASN",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 914,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 915,
+      "resname": "ASN",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 916,
+      "resname": "HIS",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 917,
+      "resname": "SER",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 918,
+      "resname": "TYR",
+      "score": 6.0
+    },
+    {
+      "chain": "A",
+      "resid": 919,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 920,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 921,
+      "resname": "LYS",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 922,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 923,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 924,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 925,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 926,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 927,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 928,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 929,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 930,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 931,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 932,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 933,
+      "resname": "TYR",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 934,
+      "resname": "LYS",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 935,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 936,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 937,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 938,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 939,
+      "resname": "GLU",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 940,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 941,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 942,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 943,
+      "resname": "ASN",
+      "score": 5.0
+    },
+    {
+      "chain": "A",
+      "resid": 944,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 945,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 946,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 947,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 948,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 949,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 950,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "A",
+      "resid": 951,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "A",
+      "resid": 952,
+      "resname": "THR",
+      "score": 4.0
+    },
+    {
+      "chain": "A",
+      "resid": 953,
+      "resname": "TRP",
+      "score": 0.0
+    },
+    {
+      "chain": "A",
+      "resid": 954,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "A",
+      "resid": 955,
+      "resname": "ILE",
+      "score": 10.0
+    },
+    {
+      "chain": "A",
+      "resid": 956,
+      "resname": "GLN",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 55,
+      "resname": "GLU",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 56,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 57,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 58,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 59,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 60,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 61,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 62,
+      "resname": "ARG",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 63,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 64,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 65,
+      "resname": "GLU",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 66,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 67,
+      "resname": "ARG",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 68,
+      "resname": "PRO",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 69,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 70,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 71,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 72,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 73,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 74,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 75,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 76,
+      "resname": "ASP",
+      "score": 8.0
+    },
+    {
+      "chain": "B",
+      "resid": 77,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 78,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 79,
+      "resname": "GLN",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 80,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 81,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 82,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 83,
+      "resname": "VAL",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 84,
+      "resname": "SER",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 85,
+      "resname": "PRO",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 86,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 87,
+      "resname": "ARG",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 88,
+      "resname": "ILE",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 89,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 90,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 91,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 92,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 93,
+      "resname": "ARG",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 94,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 95,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 96,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 97,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 98,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 99,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 100,
+      "resname": "PHE",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 101,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 102,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 103,
+      "resname": "GLN",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 104,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 105,
+      "resname": "ARG",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 106,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 107,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 108,
+      "resname": "GLU",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 109,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 110,
+      "resname": "TYR",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 111,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 112,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 113,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 114,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 115,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 116,
+      "resname": "TYR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 117,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 118,
+      "resname": "MET",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 119,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 120,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 121,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 122,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 123,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 124,
+      "resname": "MET",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 125,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 126,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 127,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 128,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 129,
+      "resname": "TRP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 130,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 131,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 132,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 133,
+      "resname": "ASN",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 134,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 135,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 136,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 137,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 138,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 139,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 140,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 141,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 142,
+      "resname": "MET",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 143,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 144,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 145,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 146,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 147,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 148,
+      "resname": "ASN",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 149,
+      "resname": "LEU",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 150,
+      "resname": "ARG",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 151,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 152,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 153,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 154,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 155,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 156,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 157,
+      "resname": "VAL",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 158,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 159,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 160,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 161,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 162,
+      "resname": "SER",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 163,
+      "resname": "PRO",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 164,
+      "resname": "TYR",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 165,
+      "resname": "MET",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 166,
+      "resname": "TYR",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 167,
+      "resname": "ILE",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 168,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 169,
+      "resname": "PRO",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 170,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 171,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 172,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 173,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 174,
+      "resname": "GLU",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 175,
+      "resname": "ASN",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 176,
+      "resname": "PRO",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 177,
+      "resname": "CYS",
+      "score": 9.0
+    },
+    {
+      "chain": "B",
+      "resid": 178,
+      "resname": "TYR",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 179,
+      "resname": "ASP",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 180,
+      "resname": "MET",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 181,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 182,
+      "resname": "THR",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 183,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 184,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 185,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 186,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 187,
+      "resname": "MET",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 188,
+      "resname": "PHE",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 189,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 190,
+      "resname": "TYR",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 191,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 192,
+      "resname": "HIS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 193,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 194,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 195,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 196,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 197,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 198,
+      "resname": "ASP",
+      "score": 10.0
+    },
+    {
+      "chain": "B",
+      "resid": 199,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 200,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 201,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 202,
+      "resname": "ARG",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 203,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 204,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 205,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 206,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 207,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 208,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 209,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 210,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 211,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 212,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 213,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 214,
+      "resname": "ARG",
+      "score": 12.0
+    },
+    {
+      "chain": "B",
+      "resid": 215,
+      "resname": "ASN",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 216,
+      "resname": "ARG",
+      "score": 18.0
+    },
+    {
+      "chain": "B",
+      "resid": 217,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 218,
+      "resname": "ALA",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 219,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 220,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 221,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 222,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 223,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 224,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 225,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 226,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 227,
+      "resname": "MET",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 228,
+      "resname": "GLN",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 229,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 230,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 231,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 232,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 233,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 234,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 235,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 236,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 237,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 238,
+      "resname": "TRP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 239,
+      "resname": "ARG",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 240,
+      "resname": "ASN",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 241,
+      "resname": "ASP",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 242,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 243,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 244,
+      "resname": "HIS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 245,
+      "resname": "LEU",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 246,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 247,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 248,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 249,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 250,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 251,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 252,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 253,
+      "resname": "LYS",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 254,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 255,
+      "resname": "HIS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 256,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 257,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 258,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 259,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 260,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 261,
+      "resname": "ARG",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 262,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 263,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 264,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 265,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 266,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 267,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 268,
+      "resname": "PRO",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 269,
+      "resname": "ASN",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 270,
+      "resname": "ASP",
+      "score": 10.0
+    },
+    {
+      "chain": "B",
+      "resid": 271,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 272,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 273,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 274,
+      "resname": "HIS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 275,
+      "resname": "VAL",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 276,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 277,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 278,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 279,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 280,
+      "resname": "HIS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 281,
+      "resname": "TYR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 282,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 283,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 284,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 285,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 286,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 287,
+      "resname": "MET",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 288,
+      "resname": "ASP",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 289,
+      "resname": "TYR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 290,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 291,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 292,
+      "resname": "LEU",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 293,
+      "resname": "GLY",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 294,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 295,
+      "resname": "MET",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 296,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 297,
+      "resname": "GLU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 298,
+      "resname": "LYS",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 299,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 300,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 301,
+      "resname": "GLN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 302,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 303,
+      "resname": "ASN",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 304,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 305,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 306,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 307,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 308,
+      "resname": "PHE",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 309,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 310,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 311,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 312,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 313,
+      "resname": "ASN",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 314,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 315,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 316,
+      "resname": "ASN",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 317,
+      "resname": "LEU",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 318,
+      "resname": "TYR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 319,
+      "resname": "GLN",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 320,
+      "resname": "ASN",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 321,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 322,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 323,
+      "resname": "GLU",
+      "score": 9.0
+    },
+    {
+      "chain": "B",
+      "resid": 324,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 325,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 326,
+      "resname": "PRO",
+      "score": 8.0
+    },
+    {
+      "chain": "B",
+      "resid": 327,
+      "resname": "GLY",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 328,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 329,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 330,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 331,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 332,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 333,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 334,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 335,
+      "resname": "MET",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 336,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 337,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 338,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 339,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 340,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 341,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 342,
+      "resname": "GLN",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 343,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 344,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 345,
+      "resname": "VAL",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 346,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 347,
+      "resname": "ALA",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 348,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 349,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 350,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 351,
+      "resname": "ILE",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 352,
+      "resname": "ARG",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 353,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 354,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 355,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 356,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 357,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 358,
+      "resname": "GLU",
+      "score": 9.0
+    },
+    {
+      "chain": "B",
+      "resid": 359,
+      "resname": "VAL",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 360,
+      "resname": "ARG",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 361,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 362,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 363,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 364,
+      "resname": "GLU",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 365,
+      "resname": "GLU",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 366,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 367,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 368,
+      "resname": "LEU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 369,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 370,
+      "resname": "PHE",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 371,
+      "resname": "ASN",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 372,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 373,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 374,
+      "resname": "CYS",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 375,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 376,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 377,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 378,
+      "resname": "GLU",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 379,
+      "resname": "VAL",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 380,
+      "resname": "ILE",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 381,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 382,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 383,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 384,
+      "resname": "LYS",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 385,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 386,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 387,
+      "resname": "MET",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 388,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 389,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 390,
+      "resname": "LYS",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 391,
+      "resname": "ILE",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 392,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 393,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 394,
+      "resname": "THR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 395,
+      "resname": "VAL",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 396,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 397,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 398,
+      "resname": "SER",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 399,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 400,
+      "resname": "GLU",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 401,
+      "resname": "ALA",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 402,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 403,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 404,
+      "resname": "ARG",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 405,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 406,
+      "resname": "CYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 407,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 408,
+      "resname": "GLN",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 409,
+      "resname": "GLU",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 410,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 411,
+      "resname": "GLU",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 412,
+      "resname": "LYS",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 413,
+      "resname": "SER",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 414,
+      "resname": "PHE",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 415,
+      "resname": "THR",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 416,
+      "resname": "ILE",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 417,
+      "resname": "LYS",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 418,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 419,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 420,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 421,
+      "resname": "PHE",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 422,
+      "resname": "LYS",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 423,
+      "resname": "ASP",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 424,
+      "resname": "SER",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 425,
+      "resname": "LEU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 426,
+      "resname": "ILE",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 427,
+      "resname": "VAL",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 428,
+      "resname": "GLN",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 429,
+      "resname": "VAL",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 430,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 431,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 432,
+      "resname": "ASP",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 433,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 434,
+      "resname": "ASP",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 532,
+      "resname": "LYS",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 533,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 534,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 535,
+      "resname": "MET",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 536,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 537,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 538,
+      "resname": "GLY",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 539,
+      "resname": "HIS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 540,
+      "resname": "GLY",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 541,
+      "resname": "GLN",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 542,
+      "resname": "CYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 543,
+      "resname": "SER",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 544,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 545,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 546,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 547,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 548,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 549,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 550,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 551,
+      "resname": "SER",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 552,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 553,
+      "resname": "TRP",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 554,
+      "resname": "THR",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 555,
+      "resname": "GLY",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 556,
+      "resname": "TYR",
+      "score": 13.0
+    },
+    {
+      "chain": "B",
+      "resid": 557,
+      "resname": "TYR",
+      "score": 9.0
+    },
+    {
+      "chain": "B",
+      "resid": 558,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 559,
+      "resname": "ASN",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 560,
+      "resname": "CYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 561,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 562,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 563,
+      "resname": "ARG",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 564,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 565,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 566,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 567,
+      "resname": "CYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 568,
+      "resname": "MET",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 569,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 570,
+      "resname": "SER",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 571,
+      "resname": "ASN",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 572,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 573,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 574,
+      "resname": "LEU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 575,
+      "resname": "CYS",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 576,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 577,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 578,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 579,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 580,
+      "resname": "LYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 581,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 582,
+      "resname": "GLU",
+      "score": 11.0
+    },
+    {
+      "chain": "B",
+      "resid": 583,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 584,
+      "resname": "GLY",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 585,
+      "resname": "SER",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 586,
+      "resname": "CYS",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 587,
+      "resname": "VAL",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 588,
+      "resname": "CYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 589,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 590,
+      "resname": "GLN",
+      "score": 17.0
+    },
+    {
+      "chain": "B",
+      "resid": 591,
+      "resname": "PRO",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 592,
+      "resname": "GLY",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 593,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 594,
+      "resname": "TYR",
+      "score": 8.0
+    },
+    {
+      "chain": "B",
+      "resid": 595,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 596,
+      "resname": "ASP",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 597,
+      "resname": "THR",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 598,
+      "resname": "CYS",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 599,
+      "resname": "GLU",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 600,
+      "resname": "LYS",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 601,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 602,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 603,
+      "resname": "THR",
+      "score": 5.0
+    },
+    {
+      "chain": "B",
+      "resid": 604,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 605,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 606,
+      "resname": "ASP",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 607,
+      "resname": "ALA",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 608,
+      "resname": "CYS",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 609,
+      "resname": "THR",
+      "score": 10.0
+    },
+    {
+      "chain": "B",
+      "resid": 610,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 611,
+      "resname": "LYS",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 612,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 613,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 614,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 615,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 616,
+      "resname": "GLU",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 617,
+      "resname": "CYS",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 618,
+      "resname": "LYS",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 619,
+      "resname": "LYS",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 620,
+      "resname": "PHE",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 621,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 622,
+      "resname": "ARG",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 623,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 624,
+      "resname": "PRO",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 625,
+      "resname": "TYR",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 626,
+      "resname": "MET",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 627,
+      "resname": "THR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 628,
+      "resname": "GLU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 629,
+      "resname": "ASN",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 630,
+      "resname": "THR",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 631,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 632,
+      "resname": "ASN",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 633,
+      "resname": "ARG",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 634,
+      "resname": "TYR",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 635,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 636,
+      "resname": "ARG",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 637,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 638,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 639,
+      "resname": "ILE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 640,
+      "resname": "GLU",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 641,
+      "resname": "SER",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 642,
+      "resname": "VAL",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 643,
+      "resname": "LYS",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 644,
+      "resname": "GLU",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 645,
+      "resname": "LEU",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 646,
+      "resname": "LYS",
+      "score": 9.0
+    },
+    {
+      "chain": "B",
+      "resid": 647,
+      "resname": "ASP",
+      "score": 8.0
+    },
+    {
+      "chain": "B",
+      "resid": 648,
+      "resname": "THR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 649,
+      "resname": "GLY",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 650,
+      "resname": "LYS",
+      "score": 9.0
+    },
+    {
+      "chain": "B",
+      "resid": 651,
+      "resname": "ASP",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 652,
+      "resname": "ALA",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 653,
+      "resname": "VAL",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 654,
+      "resname": "ASN",
+      "score": 10.0
+    },
+    {
+      "chain": "B",
+      "resid": 655,
+      "resname": "CYS",
+      "score": 6.0
+    },
+    {
+      "chain": "B",
+      "resid": 656,
+      "resname": "THR",
+      "score": 14.0
+    },
+    {
+      "chain": "B",
+      "resid": 657,
+      "resname": "TYR",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 658,
+      "resname": "LYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 659,
+      "resname": "ASN",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 660,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 661,
+      "resname": "ASP",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 662,
+      "resname": "ASP",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 663,
+      "resname": "CYS",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 664,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 665,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 666,
+      "resname": "ARG",
+      "score": 7.0
+    },
+    {
+      "chain": "B",
+      "resid": 667,
+      "resname": "PHE",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 668,
+      "resname": "GLN",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 669,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 670,
+      "resname": "TYR",
+      "score": 1.0
+    },
+    {
+      "chain": "B",
+      "resid": 671,
+      "resname": "GLU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 672,
+      "resname": "ASP",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 673,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 674,
+      "resname": "SER",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 675,
+      "resname": "GLY",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 676,
+      "resname": "LYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 677,
+      "resname": "SER",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 678,
+      "resname": "ILE",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 679,
+      "resname": "LEU",
+      "score": 0.0
+    },
+    {
+      "chain": "B",
+      "resid": 680,
+      "resname": "TYR",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 681,
+      "resname": "VAL",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 682,
+      "resname": "VAL",
+      "score": 4.0
+    },
+    {
+      "chain": "B",
+      "resid": 683,
+      "resname": "GLU",
+      "score": 8.0
+    },
+    {
+      "chain": "B",
+      "resid": 684,
+      "resname": "GLU",
+      "score": 9.0
+    },
+    {
+      "chain": "B",
+      "resid": 685,
+      "resname": "PRO",
+      "score": 3.0
+    },
+    {
+      "chain": "B",
+      "resid": 686,
+      "resname": "GLU",
+      "score": 8.0
+    },
+    {
+      "chain": "B",
+      "resid": 687,
+      "resname": "CYS",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 688,
+      "resname": "PRO",
+      "score": 2.0
+    },
+    {
+      "chain": "B",
+      "resid": 689,
+      "resname": "LYS",
+      "score": 9.0
+    },
+    {
+      "chain": "B",
+      "resid": 690,
+      "resname": "GLY",
+      "score": 2.0
+    }
+  ],
+  "caveat": "structure-based prediction from the current extended model; the definitive test is mutate->MD and observe snap-back (GPU follow-up)."
+}
