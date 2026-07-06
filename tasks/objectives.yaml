@@ -4308,5 +4308,51 @@ objectives:
     state. Deliverable: results/route_a/extended_state_b.pdb. Next: replace the
     synthetic placeholder CVs with a real extension coordinate (Rg or
     head-tip↔leg-tip), then run the Ferg-Lab string method A↔B.
-  connects_to: null
+  connects_to: obj-076
   completed_date: '2026-07-04'
+
+- id: obj-076
+  status: completed
+  statement: Defined mechanistic extension CVs that separate the bent and extended αVβ3 endpoints.
+  methodology: >
+    Replaced the synthetic placeholder CVs (av_cvs_remapped.json, built only to
+    test the αIIb→αV remap converter) with real reaction coordinates, then verified
+    each one actually separates state A (bent, 1JV2 crystal) from state B (the
+    extended morph product). The two PDBs use different residue numbering (PDBFixer
+    renumbered state B to a contiguous 1..N) but contain the identical Cα set in the
+    same order, so residues are matched by rank and every CV is keyed to the original
+    1JV2 numbering. CVs computed with a dependency-light numpy parser (no OpenMM/GPU):
+    genu hinge angle (angle between the upper-body and lower-leg axes about the genu
+    centroid — the literal leg-swing coordinate), head↔foot end-to-end distance,
+    radius of gyration, and long-axis extent; the broken cv0 was recomputed alongside
+    to document its failure. Cross-validated against the pod: local bent Rg 39.23 vs
+    the morph's recorded 39.14, and extended Rg/extent match metrics_equil exactly.
+  metrics:
+    genu_angle_bent_deg: 40.98
+    genu_angle_extended_deg: 173.51
+    genu_angle_change_pct: 323
+    end_to_end_bent_A: 51.81
+    end_to_end_extended_A: 154.51
+    end_to_end_change_pct: 198
+    rg_bent_A: 39.23
+    rg_extended_A: 66.43
+    rg_change_pct: 69
+    long_extent_change_pct: 61
+    cv0_placeholder_bent_A: 54.26
+    cv0_placeholder_extended_A: 52.30
+    cv0_placeholder_change_pct: -4
+  figures:
+    - figures/route_a_extension_cvs.png
+  conclusions: >
+    The genu hinge angle is the clean primary reaction coordinate: 41°→174° (legs
+    fold→straight, +323%), tracked continuously by the morph. head↔foot end-to-end
+    (+198%), Rg (+69%) and long-axis extent (+61%) all separate the endpoints
+    strongly and monotonically. The old cv0 (head-thigh) moves −4% — quantitative
+    proof it never tracked extension (both groups sit in the upper body and swing
+    together). Deliverables: pipelines/route_a/examples/av_extension_cvs.json (the
+    real CV definition, genu_angle primary) and results/route_a/extension_cv_endpoints.json.
+    Route-A is now ready for the string method with a validated reaction coordinate.
+    Next: port the Ferg-Lab string-method loop A↔B, seeded with the 16 morph frames
+    as the initial path and driven along the genu angle.
+  connects_to: null
+  completed_date: '2026-07-06'

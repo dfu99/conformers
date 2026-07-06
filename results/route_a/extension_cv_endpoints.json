@@ -1,0 +1,55 @@
+{
+  "bent_state_A": {
+    "source": "data/reference_pdbs/1jv2.pdb",
+    "cvs": {
+      "genu_angle_deg": 40.98,
+      "end_to_end_A": 51.81,
+      "Rg_A": 39.23,
+      "long_extent_A": 129.32,
+      "cv0_placeholder_A": 54.26
+    }
+  },
+  "extended_state_B": {
+    "source": "results/route_a/extended_state_b.pdb",
+    "cvs": {
+      "genu_angle_deg": 173.51,
+      "end_to_end_A": 154.51,
+      "Rg_A": 66.43,
+      "long_extent_A": 208.43,
+      "cv0_placeholder_A": 52.3
+    }
+  },
+  "separation": {
+    "genu_angle_deg": {
+      "bent": 40.98,
+      "extended": 173.51,
+      "delta": 132.53,
+      "separates": "YES"
+    },
+    "end_to_end_A": {
+      "bent": 51.81,
+      "extended": 154.51,
+      "delta": 102.7,
+      "separates": "YES"
+    },
+    "Rg_A": {
+      "bent": 39.23,
+      "extended": 66.43,
+      "delta": 27.2,
+      "separates": "YES"
+    },
+    "long_extent_A": {
+      "bent": 129.32,
+      "extended": 208.43,
+      "delta": 79.11,
+      "separates": "YES"
+    },
+    "cv0_placeholder_A": {
+      "bent": 54.26,
+      "extended": 52.3,
+      "delta": -1.96,
+      "separates": "no"
+    }
+  },
+  "note": "genu_angle + end_to_end + Rg + long_extent all separate the endpoints strongly; cv0_placeholder (head-thigh) does NOT -- confirming it was the wrong reaction coordinate."
+}

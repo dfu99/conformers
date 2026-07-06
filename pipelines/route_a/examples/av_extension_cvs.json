@@ -1,0 +1,113 @@
+{
+  "_source": "Mechanistic extension CVs for route-A alphaV-beta3 bent->extended string method",
+  "_derivation": "pipelines/route_a/scripts/define_extension_cvs.py",
+  "_supersedes": "examples/av_cvs_remapped.json (synthetic placeholder; cv0 was head-thigh, did not track extension)",
+  "_numbering": "ORIGINAL 1JV2 crystal numbering (chain A 1..956, chain B 55..690)",
+  "_endpoints": {
+    "bent_state_A": {
+      "genu_angle_deg": 40.98,
+      "end_to_end_A": 51.81,
+      "Rg_A": 39.23,
+      "long_extent_A": 129.32,
+      "cv0_placeholder_A": 54.26
+    },
+    "extended_state_B": {
+      "genu_angle_deg": 173.51,
+      "end_to_end_A": 154.51,
+      "Rg_A": 66.43,
+      "long_extent_A": 208.43,
+      "cv0_placeholder_A": 52.3
+    }
+  },
+  "primary_cv": "genu_angle",
+  "cvs": [
+    {
+      "name": "genu_angle",
+      "type": "hinge_angle",
+      "vertex": {
+        "chain_ranges": {
+          "A": [
+            588,
+            596
+          ],
+          "B": [
+            436,
+            444
+          ]
+        },
+        "role": "genu (knee) hinge centroid"
+      },
+      "arm_upper": {
+        "chain_ranges": {
+          "A": [
+            1,
+            592
+          ],
+          "B": [
+            1,
+            440
+          ]
+        },
+        "role": "headpiece + upper legs"
+      },
+      "arm_lower": {
+        "chain_ranges": {
+          "A": [
+            593,
+            956
+          ],
+          "B": [
+            441,
+            690
+          ]
+        },
+        "role": "lower legs (calf/beta-tail)"
+      },
+      "units": "degrees",
+      "bent": 40.98,
+      "extended": 173.51,
+      "_role": "PRIMARY reaction coordinate for the string method"
+    },
+    {
+      "name": "end_to_end",
+      "type": "centroid_distance",
+      "domain_a": {
+        "chain_ranges": {
+          "A": [
+            1,
+            438
+          ],
+          "B": [
+            55,
+            352
+          ]
+        },
+        "role": "ligand-binding head cap"
+      },
+      "domain_b": {
+        "chain_ranges": {
+          "A": [
+            880,
+            956
+          ],
+          "B": [
+            600,
+            690
+          ]
+        },
+        "role": "membrane-proximal feet"
+      },
+      "units": "angstrom",
+      "bent": 51.81,
+      "extended": 154.51
+    },
+    {
+      "name": "Rg",
+      "type": "radius_of_gyration",
+      "selection": "all CA",
+      "units": "angstrom",
+      "bent": 39.23,
+      "extended": 66.43
+    }
+  ]
+}
