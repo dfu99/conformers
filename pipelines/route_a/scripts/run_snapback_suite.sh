@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# ⚠️ DEPRECATED / DO NOT USE — PI directive 2026-07-08: "Do not use local GPU. Just wait
+# for a GPU slot on the A5000." The snap-back runs on the RunPod A5000 via
+# scripts/run_snapback_suite_pod.sh, launched by scripts/wait_and_run_snapback.sh once the
+# oxDNA jobs clear. This local-GPU version is kept only as a record; do not run it.
+#
 # Snap-back suite: WT control + linchpin mutants, implicit-solvent MD on the local GPU.
 # RUN ONLY after receiving "GPU ACCESS GRANTED" (sets CUDA_VISIBLE_DEVICES=0).
 # Uses the isolated CUDA-enabled OpenMM env (conda env: snapback).
