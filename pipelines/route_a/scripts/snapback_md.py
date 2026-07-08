@@ -149,6 +149,8 @@ def main():
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--vacuum", action="store_true",
                     help="build in vacuum (fast; for validation). Default implicit solvent.")
+    ap.add_argument("--build-only", action="store_true",
+                    help="build the production implicit system + report start observables, no MD.")
     args = ap.parse_args()
 
     outdir = os.path.join(args.out_dir, args.tag)
@@ -157,6 +159,16 @@ def main():
     implicit = not (args.vacuum or args.smoke)  # smoke validates in vacuum for speed
     topo, pos, system = build(args.pdb, args.mutations, outdir, implicit=implicit)
     print(f"[{args.tag}] force field: {'implicit-solvent GB-OBC2' if implicit else 'vacuum'}", flush=True)
+    if args.build_only:
+        obs = make_observables(topo)
+        p0 = np.array(pos.value_in_unit(unit.nanometer))
+        knee0, rg0, sd0 = obs(p0)
+        print(f"[{args.tag}] BUILD OK: {system.getNumParticles()} atoms  "
+              f"knee={knee0}° Rg={rg0}Å  salt={sd0}", flush=True)
+        json.dump({"tag": args.tag, "mutations": args.mutations, "atoms": system.getNumParticles(),
+                   "start": {"knee": knee0, "Rg": rg0, "salt": sd0}},
+                  open(os.path.join(outdir, "build_check.json"), "w"), indent=2)
+        return
     integ = mm.LangevinMiddleIntegrator(args.temperature * unit.kelvin,
                                         1.0 / unit.picosecond, 0.002 * unit.picosecond)
     if args.platform == "CPU":

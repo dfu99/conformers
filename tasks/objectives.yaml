@@ -4441,5 +4441,44 @@ objectives:
     1466 residues to ~6 targets, making the definitive mutate→MD snap-back test cheap and
     aimed. Caveat: the extended contacts come from a vacuum-relaxed model, so solvated MD
     is needed to confirm the specific salt bridges vs looser polar contacts.
-  connects_to: null
+  connects_to: obj-079
   completed_date: '2026-07-06'
+
+- id: obj-079
+  status: completed
+  statement: Built + validated the snap-back MD experiment; every mutation knocks out exactly its target bridges.
+  methodology: >
+    Implemented the PI's definitive test (mutate extended-state linchpin → MD → watch the
+    knee). snapback_md.py mutates the extended state (PDBFixer), builds implicit-solvent
+    GB-OBC2 (amber14/ff14SB), and tracks knee angle + Rg + the four key cross-knee
+    salt-bridge distances over time; run_snapback_suite.sh runs WT + K459A + E598A + the
+    K459A/E598A double. Validated the machinery two ways: a vacuum CPU dynamics smoke
+    (stepping + observables work) and a build-only pre-flight of all four systems in the
+    exact production implicit-solvent force field. Because the base OpenMM ships no GPU
+    platform, built an isolated CUDA-enabled conda env (openmm + pdbfixer); pre-flight
+    also caught a missing pdbfixer in that env before it could waste a GPU window.
+  metrics:
+    n_systems: 4
+    atoms_wt: 22483
+    atoms_k459a: 22471
+    atoms_e598a: 22478
+    atoms_double: 22466
+    start_knee_deg: 174.36
+    wt_salt_bridges_present: 4
+    k459a_removes: "E598-K459, K459-E636"
+    e598a_removes: "E598-K459 only (K459-E636 retained)"
+    double_removes: "E598-K459, K459-E636"
+    build_check: "all 4 build in production GB-OBC2 FF; mutations remove exactly their target bridges"
+  figures:
+    - figures/route_a_snapback_validation.png
+  conclusions: >
+    The experiment is correct and de-risked before spending a GPU window: all four systems
+    build in the production implicit-solvent force field, and each mutation removes exactly
+    the salt bridges it should (WT keeps all four; K459A drops both K459 bridges; E598A
+    drops only E598-K459; the double drops both). CUDA-OpenMM env verified. Only the
+    dynamics remain, which is GPU-only (22k-atom MD is infeasible on CPU — a 20 ns run
+    would take months). GPU-gated: local RTX 3060 idle but no scheduler grant received
+    (not self-granting); pod GPU still on the oxDNA FFS jobs (no contention). On a GPU
+    window, `run_snapback_suite.sh` produces the knee-angle trajectories -> obj-080.
+  connects_to: null
+  completed_date: '2026-07-08'
