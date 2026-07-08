@@ -14,16 +14,23 @@ PY=/home/dan/anaconda3/envs/snapback/bin/python
 export CUDA_VISIBLE_DEVICES=0
 
 run() { # tag  mutations
+  if [[ -f "results/route_a/snapback/$1/summary.json" ]]; then
+    echo "=== $1 already done (summary.json present) — skipping ==="
+    return
+  fi
   echo "=== $1 ($2) — ${NS} ns ==="
   "$PY" pipelines/route_a/scripts/snapback_md.py \
         --mutations "$2" --tag "$1" --ns "$NS" \
         --platform CUDA --report-ps 100
 }
 
-run wt      WT                    # control
-run k459a   A:459:ALA             # break E598-K459 + K459-E636 (K459 is in two bridges)
-run e598a   A:598:ALA             # break the top-ranked lock partner
-run double  A:459:ALA,A:598:ALA   # break the core cross-knee lock hard
+# Ordered for maximum information first: WT (control) then the double mutant give the
+# strongest expected contrast, so even a short GPU window yields the key comparison.
+# Each system is skipped if already finished (summary.json present) -> resumable suite.
+run wt      WT                    # control (should hold extended)
+run double  A:459:ALA,A:598:ALA   # break the core cross-knee lock hard (biggest effect)
+run k459a   A:459:ALA             # single: break E598-K459 + K459-E636 (K459 in two bridges)
+run e598a   A:598:ALA             # single: break the top-ranked lock (E598-K459 only)
 
 $PY pipelines/route_a/scripts/plot_snapback.py
 echo "ALL DONE"
