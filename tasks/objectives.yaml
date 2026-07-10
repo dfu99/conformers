@@ -4479,6 +4479,36 @@ objectives:
     dynamics remain, which is GPU-only (22k-atom MD is infeasible on CPU — a 20 ns run
     would take months). GPU-gated: local RTX 3060 idle but no scheduler grant received
     (not self-granting); pod GPU still on the oxDNA FFS jobs (no contention). On a GPU
-    window, `run_snapback_suite.sh` produces the knee-angle trajectories -> obj-080.
-  connects_to: null
+    window, `run_snapback_suite.sh` produces the knee-angle trajectories -> obj-081.
+  connects_to: obj-080
   completed_date: '2026-07-08'
+
+- id: obj-080
+  status: completed
+  statement: The genu salt-bridge locks engage in sequence as αVβ3 extends (D595-K688 first, K459-E636 last).
+  methodology: >
+    While the snap-back MD waits for an A5000 slot, refined the mechanism CPU-only from the
+    morph path: for every frame along bent→extended, measured the genu knee angle (extension
+    reaction coordinate) and the four cross-knee salt-bridge charged-atom distances, and took
+    each bridge's engagement point as the knee angle where it first closes below 4 Å. The six
+    linchpin residues are all αV chain A and identity-numbered across bent/frames/extended, so
+    they select directly. Script pipelines/route_a/scripts/linchpin_engagement_order.py.
+  metrics:
+    engage_D595_K688_knee_deg: 49.9
+    engage_E598_K459_knee_deg: 84.16
+    engage_K459_E636_knee_deg: 158.74
+    engage_D457_K688: "only during the 10 ps equilibration settle (never <4 A on the rigid morph)"
+    order: "D595-K688 -> E598-K459 -> K459-E636"
+    knee_span_deg: "41 (bent) -> 175 (extended)"
+  figures:
+    - figures/route_a_linchpin_engagement.png
+  conclusions: >
+    The genu locks do not snap shut together — they engage sequentially as the knee straightens:
+    D595-K688 first (~50°, near-bent), the top-ranked E598-K459 at mid-extension (~84°, a gate),
+    and K459-E636 last (~159°, the final latch that commits the straight state); D457-K688 closes
+    only in the post-morph equilibration. K459 sits in BOTH the mid gate and the final latch, so
+    mutating it should be the most disruptive single change — independent support for prioritizing
+    K459A (and the K459A/E598A double) in the snap-back test. A testable, mechanistic refinement
+    of obj-078 that complements (does not replace) the pending MD.
+  connects_to: obj-081
+  completed_date: '2026-07-10'
