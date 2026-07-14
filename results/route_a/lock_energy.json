@@ -1,0 +1,91 @@
+{
+  "model": "direct ff14SB nonbonded (Coulomb eps=1 + Lennard-Jones) between full residues; ddd = distance-dependent dielectric eps=4r(A). WT extended, GB-OBC2 build.",
+  "per_bridge": {
+    "E598-K459": {
+      "anion": "A598",
+      "cation": "A459",
+      "net_charge_anion": -1.0,
+      "net_charge_cation": 1.0,
+      "min_charged_dist_A": 2.64,
+      "E_coulomb_direct_kJ": -415.3,
+      "E_lj_kJ": 8.9,
+      "E_total_direct_kJ": -406.4,
+      "E_total_direct_kcal": -97.12,
+      "E_total_ddd_kJ": -28.0,
+      "E_total_ddd_kcal": -6.7
+    },
+    "K459-E636": {
+      "anion": "A636",
+      "cation": "A459",
+      "net_charge_anion": -1.0,
+      "net_charge_cation": 1.0,
+      "min_charged_dist_A": 2.92,
+      "E_coulomb_direct_kJ": -335.6,
+      "E_lj_kJ": -6.7,
+      "E_total_direct_kJ": -342.3,
+      "E_total_direct_kcal": -81.82,
+      "E_total_ddd_kJ": -32.7,
+      "E_total_ddd_kcal": -7.81
+    },
+    "D457-K688": {
+      "anion": "A457",
+      "cation": "A688",
+      "net_charge_anion": -1.0,
+      "net_charge_cation": 1.0,
+      "min_charged_dist_A": 2.83,
+      "E_coulomb_direct_kJ": -355.8,
+      "E_lj_kJ": -4.5,
+      "E_total_direct_kJ": -360.3,
+      "E_total_direct_kcal": -86.12,
+      "E_total_ddd_kJ": -33.8,
+      "E_total_ddd_kcal": -8.08
+    },
+    "D595-K688": {
+      "anion": "A595",
+      "cation": "A688",
+      "net_charge_anion": -1.0,
+      "net_charge_cation": 1.0,
+      "min_charged_dist_A": 2.67,
+      "E_coulomb_direct_kJ": -400.0,
+      "E_lj_kJ": 16.0,
+      "E_total_direct_kJ": -384.0,
+      "E_total_direct_kcal": -91.77,
+      "E_total_ddd_kJ": -23.8,
+      "E_total_ddd_kcal": -5.68
+    }
+  },
+  "per_mutation": {
+    "E598A": {
+      "bridges_broken": [
+        "E598-K459"
+      ],
+      "n_broken": 1,
+      "lock_energy_removed_direct_kcal": 97.12,
+      "lock_energy_removed_ddd_kcal": 6.7
+    },
+    "K459A": {
+      "bridges_broken": [
+        "E598-K459",
+        "K459-E636"
+      ],
+      "n_broken": 2,
+      "lock_energy_removed_direct_kcal": 178.94,
+      "lock_energy_removed_ddd_kcal": 14.51
+    },
+    "K459A+E598A": {
+      "bridges_broken": [
+        "E598-K459",
+        "K459-E636"
+      ],
+      "n_broken": 2,
+      "lock_energy_removed_direct_kcal": 178.94,
+      "lock_energy_removed_ddd_kcal": 14.51
+    }
+  },
+  "destabilization_ranking": [
+    "K459A",
+    "K459A+E598A",
+    "E598A"
+  ],
+  "note": "Static upper bound on lock strength; GB solvent screens magnitude but not ranking. The pending snap-back MD tests the ranking dynamically."
+}

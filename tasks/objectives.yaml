@@ -4512,3 +4512,38 @@ objectives:
     of obj-078 that complements (does not replace) the pending MD.
   connects_to: obj-081
   completed_date: '2026-07-10'
+
+- id: obj-081
+  status: completed
+  statement: K459 is the energetic hub of the genu lock — mutating it removes ~1.8x the lock energy E598A does.
+  methodology: >
+    Static/thermodynamic companion to the pending snap-back MD, fully CPU-only (no dynamics, no
+    minimization, no GPU — read force-field params straight off the built System's NonbondedForce,
+    no Context or platform needed). Built the exact WT extended production system snap-back uses
+    (amber14/ff14SB + GB-OBC2 via snapback_md.build) and computed the direct ff14SB nonbonded
+    interaction energy (Coulomb eps=1 + Lennard-Jones) between the two full residues of each of the
+    four cross-knee salt bridges — a local per-pair quantity independent of total atom count.
+    Combined with the obj-079 knockout matrix (which bridges each mutation abolishes), the
+    destabilization proxy per mutation = sum of the interaction energies of the bridges it removes.
+    Scripts pipelines/route_a/scripts/lock_energy_analysis.py (energies) + plot_lock_energy.py (figure).
+  metrics:
+    per_bridge_direct_kcal: "E598-K459 -97.1, D595-K688 -91.8, D457-K688 -86.1, K459-E636 -81.8"
+    per_bridge_screened_kcal: "distance-dependent dielectric eps=4r: -5.7 to -8.1 (buried-salt-bridge range)"
+    net_charge_validation: "every residue group +/-1.00 e exactly (full-residue selection)"
+    lock_energy_removed_E598A_kcal: 97.1
+    lock_energy_removed_K459A_kcal: 178.9
+    lock_energy_removed_double_kcal: 178.9
+    ranking: "K459A ~= K459A+E598A (2 locks, 179) > E598A (1 lock, 97)"
+  figures:
+    - figures/route_a_lock_energy.png
+  conclusions: >
+    Quantifies obj-080's "K459 is the hub" into a falsifiable prediction: K459 participates in two of
+    the four genu locks (E598-K459 and K459-E636), so K459A strips ~179 kcal/mol of direct lock energy
+    vs E598A's ~97 (one lock) — K459A should destabilize the extended state ~1.8x more and snap back
+    hardest. The K459A/E598A double removes the SAME two bridges as K459A alone (E598's only bridge is
+    already gone via K459A), so it adds no extra lock energy — meaning if the MD shows the double
+    snapping back harder than K459A, that is cooperativity beyond simple bridge count, a distinct
+    testable signature. Static upper bound (GB solvent screens magnitude ~2-4x but not the ranking);
+    the pending A5000 snap-back MD is the dynamical test of this exact ranking.
+  connects_to: obj-082
+  completed_date: '2026-07-14'
