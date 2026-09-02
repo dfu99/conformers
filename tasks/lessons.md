@@ -665,3 +665,56 @@ Before diagnosing new failures, verify in order:
 - Command context: 2026-07-14, route-A obj-081. The definitive snap-back test is dynamical MD (blocked on a GPU slot for 6 days). But the *static* question — "how strong is each salt-bridge lock, and how much does each mutation remove?" — needs no dynamics at all. Building the OpenMM `System` (PDBFixer + `ForceField.createSystem`) is pure CPU and fast; the per-atom ff14SB partial charges + LJ params come straight off `system.getForces()`'s `NonbondedForce` via `nb.getParticleParameters(i)` — **no `Context`, no `Platform`, no `Simulation`, no GPU**. A pairwise Coulomb+LJ numpy sum between two residues' atoms then gives a per-pair interaction energy in seconds.
 - Why it matters: when a dynamical experiment is GPU-blocked, you can often extract a rigorous *thermodynamic* precursor on CPU that yields a falsifiable prediction the dynamics will later test. Here: K459A removes ~179 kcal/mol of direct lock energy (2 bridges) vs E598A's ~97 (1 bridge) → predicts K459A snaps back ~1.8× harder. Turns dead GPU-wait time into a real result.
 - Gotchas: (a) compare only LOCAL/per-pair quantities (interaction energy between two residues) across mutants — NOT total potential energy, which is uncomparable when mutations change atom count (WT 22483 vs double 22466 atoms). (b) Select FULL residues so each charged group nets exactly ±1 e (validate: sum the charges — got ±1.00 exactly); a partial sidechain selection leaks fractional charge. (c) The direct (eps=1) energy is an UNSCREENED upper bound; report a distance-dependent-dielectric (eps=4r) value too to show the RANKING survives solvent screening (magnitude drops ~10× but order holds). (d) Reuse the production `build()` so the parametrization is identical to the pending MD. See `pipelines/route_a/scripts/lock_energy_analysis.py`.
+
+### A shared MPS server can enter FAULT and refuse every new CUDA client — preflight the GPU, and never let `set -e` discard a queued campaign
+- Command context: 2026-08-21/22, route-A obj-083 force-ramp replication campaign (~20 GPU-h queued on the RunPod A5000). The campaign died **on its first run** with `openmm.OpenMMException: Error initializing CUDA: CUDA_ERROR_MPS_SERVER_NOT_READY (807)` and, because `run_force_ramp.sh` runs under `set -euo pipefail`, the failure propagated and killed all remaining queued work. It sat dead for ~21 hours before anyone looked.
+- Root cause: the pod's shared CUDA MPS server had entered a fault state — `echo get_server_list | nvidia-cuda-mps-control` returned the pid, and `get_server_status <pid>` returned **FAULT**. The control daemon and server processes were both still alive, so `pgrep`/`nvidia-smi` looked completely healthy. A tenant job that had attached BEFORE the fault kept running normally (`nvidia-smi` shows it as `M+C`), which makes the GPU look fine while every new client is refused.
+- Why not just restart MPS: `nvidia-cuda-mps-control quit` / restart would kill the other tenant's attached 16 GB job. On shared infrastructure that is not ours to do.
+- Fix: GPU **compute mode was `Default`** (check with `nvidia-smi --query-gpu=compute_mode --format=csv`), which makes MPS optional — pointing a client at an empty pipe directory (`export CUDA_MPS_PIPE_DIRECTORY=/tmp/no-mps-<project>`) makes it open a normal context and bypass the faulted server entirely. Verified by creating a one-particle `mm.Context` on the CUDA platform. In `EXCLUSIVE_PROCESS` mode this escape does not exist and you must wait for the daemon.
+- Action, now codified in `run_force_ramp.sh`: (a) **preflight** with a throwaway one-particle CUDA context before queueing hours of work; if it fails, retry once with the MPS bypass exported, and abort loudly only if both fail — never start a long campaign blind. (b) Give each run its own **retry loop** (default 3 attempts, 300 s apart) and, on persistent failure, record the tag in a `FAILED` array and CONTINUE to the next system, exiting non-zero at the end with the list. One flaky run must never discard the queue. (c) Prefer MPS when it is healthy — the bypass is a fallback, not the default, because the pod is shared and MPS is what lets route-A co-run with the oxDNA campaign.
+- Practical implication: any long unattended GPU campaign on shared hardware needs the same three properties — preflight, per-item retry, and per-item failure isolation. A watcher that only greps for a success marker will also sit silent through this: it looks identical to "still running".
+
+
+## ESM-2 scoring on `extended_state_b.pdb` sequences (2026-08-27)
+
+- Chain A of `results/route_a/extended_state_b.pdb` is contiguous 1-927, so a sequence read
+  straight from the PDB indexes identically to the residue numbers in `snapback_md.py`.
+  That is the *only* reason mutation strings like `K459A` are safe to use directly — do not
+  reuse this shortcut on a file whose numbering has not been checked for contiguity.
+- But it is NOT wild-type. `snapback_md.py:102-106` documents the splices: alphaV 839-867 is
+  absent (+29 offset after resSeq 838) and beta3 435-531 is absent (chain B starts at beta3
+  mature 55). Any PLM score computed on these sequences is a score on a deletion variant.
+  All six genu sites are <= 688 and so sit in the identity segment, but anything past 838
+  (chain A) or 380 (chain B) is not comparable to UniProt P06756 / P05106.
+- Always assert the WT letter before scoring a mutation. `score_mutations` raises when
+  `sequence[pos-1] != wt`; that guard is what converts this repo's most repeated bug
+  (a residue range silently matching the wrong residues) into an abort instead of a null.
+- ESM-2 tokenizer prepends `<cls>`, so **token index == 1-based residue position**. Off by
+  one here produces plausible-looking garbage, not an error.
+- Do not gate a pipeline on the SIGN of a zero-shot score. Position 2 (right after the
+  initiator Met) is the flattest masked-marginal in any sequence and scores positive for
+  Ala on the 35M/150M/650M checkpoints. Assert indexing and bookkeeping, not the model's
+  opinion.
+- LangChain/Anthropic: `temperature`/`top_p`/`top_k` are REMOVED on Opus 5 and Sonnet 5 and
+  return HTTP 400. Nothing validates client-side, so a stray `temperature=0` builds fine and
+  400s on the first turn. The depth knob on those models is `effort`.
+
+### Never generate a report figure or PDF from hardcoded numbers
+- Symptom (2026-09-02): a "write the executive summary to PDF" request produced
+  `results/route_a/executive_summary_obj083.pdf` whose tables were typed into a matplotlib
+  script as string literals rather than read from `results/route_a/force_ramp/readouts.json`.
+  The JSON was loaded and then used only in a trailing `print`, which crashed on a KeyError,
+  so nothing in the document was ever cross-checked against it.
+- What it produced: n=4 replicates (the campaign ran n=3), a `double_ramp` genotype arm that
+  does not exist in the results tree, "F-half = 67 pN" for WT where the pooled value in the
+  JSON is 0.0, an invented "R^2 > 0.95" bridge/knee correlation, and three literature
+  citations attributed to the wrong journals (Kolasangiani 2025 is Structure, not bioRxiv;
+  Driscoll 2021 is Biophys J, not JPCB; Chen Y 2017 is Matrix Biology and is not a crystal
+  structure paper).
+- Rule: any number that appears in a figure, table, PDF or blog post is read from the results
+  file at render time. If a value cannot be loaded, the renderer prints the missing key and
+  exits nonzero. A prose summary of an objective is written from `tasks/objectives.yaml`,
+  which is itself written from the results, not from context.
+- Corollary: the crash was in the *verification* code path at the end of the script while the
+  document had already been written. Load and validate the inputs BEFORE rendering anything,
+  so a bad key fails the render instead of decorating it.

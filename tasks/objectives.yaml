@@ -4547,3 +4547,111 @@ objectives:
     the pending A5000 snap-back MD is the dynamical test of this exact ranking.
   connects_to: obj-082
   completed_date: '2026-07-14'
+
+- id: obj-083
+  status: completed
+  statement: >
+    Measure how the genu-lock mutations change aVb3's FORCE behaviour (F-half, compliance,
+    P(extended|F)) rather than its zero-force decay — closing link 6 of the causal chain.
+  methodology: >
+    Constant-force pulling added to pipelines/route_a/scripts/snapback_md.py: a
+    CustomCentroidBondForce with energy -f_pull*distance(g1,g2), which gives a separation-
+    independent force of exactly f_pull on each anchor, equal and opposite (no net force, no COM
+    runaway). Anchors are the physiological axis — g1 = ligand-binding headpiece (aV beta-propeller
+    A:1-438 + b3 betaI/hybrid B:1-298, 736 CA), g2 = the C-terminal 30 residues of each chain
+    (60 CA, where the TM helices would continue). f_pull is a global parameter, so the load is
+    ramped live via setParameter without rebuilding the context.
+    PROTOCOL (revised after the 2026-08-17 audit): equilibrate 2 ns AT the holding load, then ramp
+    DOWN 60 -> 0 pN over 8 ns, 3 replicates x 3 genotypes (WT, K459A, E598A). Ramping UP from 0 is
+    unmeasurable from this starting structure — the knee collapses unaided before the load arrives
+    (see null model in metrics). Readouts via analyze_force_ramp.py; kappa comes only from
+    constant-force (--force-pn) rungs, never from a ramp, where var(knee) is ramp drift.
+  metrics:
+    force_delivery_verified: "20 pN requested -> head -20.000 pN / foot +20.000 pN / net 2e-13 pN; 40 pN -> -40.000/+40.000 (real 22483-atom build)"
+    force_moves_atoms: "20 ps vacuum: 400 pN -> knee 174.4->176.9 deg, head-foot held 152.5 A; 0 pN control -> 172.2 deg, contracts to 151.5 A"
+    pull_axis_A: 153.1
+    null_model_f_half_pN: "12 +/- 7 — what a 0->60 pN / 20 ns up-ramp would report from the zero-force collapse clock alone (t50 = 3.8 +/- 2.4 ns over obj-082's 9 replicates). Any claimed F-half must beat this."
+    replicate_scatter_deg: "12.8 pooled within-genotype SD of knee angle (obj-082) — the reason n=1 is not claimable"
+    observable_bug_fixed: "GENU['B']=(436,444) selected b3 mature 587-595, 61.3 A from the aV knee; a 30 deg bend read as 15.3 deg (1.8x compressed, var 3.3x low). GENU is now aV-only; UPPER/LOWER chain B split at the 380/381 numbering break."
+    budget: "90 ns total ~ 20 GPU-h on the shared A5000 (~14 GB of 24 GB free, co-runnable under MPS)"
+    pilot_2026_08_18: "n=1 x 3 genotypes, 2 ns hold @ 60 pN + 8 ns ramp 60->0, 30 ns / 6.6 GPU-h, all completed"
+    pilot_bridge_result: "under load WT kept 0 of 4 genu bridges open over 10 ns; at F=0 all 4 opened in all 3 obj-082 replicates (1.2-9.6 ns). K459A opened both remaining bridges at 55 pN, E598A all three at 49-60 pN — neither mutant rescued by the same load."
+    pilot_knee_f_half_pN: "WT 8.8, K459A 56.9, E598A never holds — CONFOUNDED (force and time move together in one ramp); the zero-force null predicts 42.8+/-15.1, 60.0+/-0.0, 59.8+/-0.4 and already reproduces this ordering. Not a result."
+    pilot_statistics: "run-level n=1 vs 3 -> p >= 0.25. Suggestive, not significant. 2 more loaded replicates per genotype (~13 GPU-h) makes it a run-level test."
+    obj_081_ranking: "inverted again — E598A collapsed further than K459A (110.3 vs 118.9 deg final knee, 3 bridges vs 2), as in obj-082"
+    final_campaign: "3 loaded reps/genotype (2 ns @ 60 pN + 8 ns ramp 60->0) + matched no-load control arm; 12 runs, ~26 GPU-h incl. pilot"
+    bridges_ruptured_loaded: "WT 0/12 (0 of 3 runs); K459A 4/6 (2 of 3); E598A 9/9 (3 of 3)"
+    bridges_ruptured_no_load: "WT 4/4; K459A 2/2; E598A 3/3 — matched protocol, same script"
+    runs_fully_protected: "WT 3/3, K459A 1/3, E598A 0/3"
+    fisher_wt_load_vs_no_load: "p = 0.029 (0 of 3 loaded runs affected vs 4 of 4 unloaded)"
+    fisher_wt_vs_e598a_loaded: "p = 0.05 one-sided"
+    deferred: "kappa and equilibrium P(extended|F) need the constant-force ladder (~52 GPU-h), not funded"
+  figures:
+    - figures/route_a_force_ramp.png
+  conclusions: >
+    Pilot done, campaign not. The delivered force is verified both ways (readback AND displacement
+    response), which is the standing precondition from the four prior silent-null bugs, and the
+    pilot produced this project's first force-attributable observation: 60 pN along the
+    physiological axis keeps the WT genu salt-bridge network clasped over a window in which it
+    always ruptures unloaded, while neither single mutant is rescued. That readout survives because
+    bridge distances are direct atom-pair distances — immune to the hinge-numbering bug, and
+    directly comparable to obj-082's identical columns. The knee-angle F-half numbers do NOT
+    survive their null model and must not be quoted. Needs replicates before it is claimable.
+  connects_to: obj-082
+  completed_date: '2026-08-24'
+- id: obj-084
+  status: completed
+  statement: Genu-hinge morph generalises from αVβ3 to five integrin heterodimers via alignment-transferred boundaries.
+  methodology: >
+    Generalised the route-A stage2c incremental leg-swing morph (`morph_extend_generic.py`)
+    so domain boundaries are transferred to a target heterodimer by structural alignment
+    against the αVβ3 reference instead of being hand-specified. Ran it on five deposited
+    bent or half-bent ectodomains (1JV2 αVβ3, 3FCS αIIbβ3, 7NXD α5β1, 7USM αMβ2, 5ES4 αXβ2):
+    swing the lower legs ~9° about the genu axis per step, vacuum-minimize in ff14SB after
+    each step, stop when the genu angle passes 150°. CPU-only, 35-45 min per variant.
+    Acceptance = genu ≥ 150° AND monotonic to 5° AND extent gain ≥ 20% AND finite energy.
+    αVβ3 doubles as a positive control against the hand-built obj-075 endpoint; 8XEN
+    (cryo-EM extended αVβ3) is the only available experimental extended reference.
+  metrics:
+    variants_run: 5
+    variants_passed: 5
+    avb3_genu_deg: "41.2 -> 176.2"
+    avb3_extent_A: "130.0 -> 209.9"
+    avb3_Rg_A: "39.1 -> 66.6"
+    aiibb3_genu_deg: "36.3 -> 179.4"
+    aiibb3_extent_A: "118.5 -> 207.3"
+    a5b1_genu_deg: "78.0 -> 178.2"
+    a5b1_extent_A: "160.2 -> 214.7"
+    amb2_genu_deg: "48.2 -> 172.3"
+    axb2_genu_deg: "12.9 -> 175.5"
+    axb2_extent_A: "137.3 -> 238.6"
+    control_target_Rg_A: 67.32
+    control_got_Rg_A: 66.57
+    control_Rg_rel_dev: 0.0111
+    control_target_extent_A: 211.36
+    control_got_extent_A: 209.9
+    control_extent_rel_dev: 0.0069
+    exp_8XEN_extent_A: 214.46
+    exp_8XEN_genu_deg: 145.26
+    morph_vs_8XEN_extent_abs_diff_A: 4.6
+    boundary_confidence_high: "alphaVbeta3 (score 1357), alphaIIbbeta3 (663), alpha5beta1 (353)"
+    boundary_confidence_low: "alphaMbeta2 (137), alphaXbeta2 (146)"
+    final_energy_range_kJ_mol: "46874 - 75316"
+  figures:
+    - figures/variant_extension_summary.png
+    - figures/trajectories/multi_integrin_morph.gif
+  conclusions: >
+    The incremental genu-hinge morph is not αVβ3-specific. Alignment-transferred boundaries
+    reproduce the hand-built αVβ3 endpoint to 1.1% in Rg and 0.7% in extent, and all five
+    variants clear the acceptance conditions. α5β1 (7NXD) needs the least swing (108° over
+    12 steps) because it starts at genu 78° and extent 160 Å, which independently supports
+    the "half-bent" annotation and matches the obj-070 first-principles ranking. Two caveats
+    bound the endpoints: the morph is vacuum-only, so each result is a clash-free seed for a
+    solvated run rather than an equilibrated structure; and the β2 integrins carry an inserted
+    αI domain the αV-based reference lacks, so their leg-alignment scores (137, 146) are an
+    order of magnitude below αVβ3's and their boundaries need manual curation before the
+    endpoints are used quantitatively. Against the only experimental extended reference (8XEN)
+    the morph matches extent to 4.6 Å but over-straightens the genu by 31°, which is expected
+    from a protocol that swings to a threshold rather than to a target angle.
+  connects_to: null
+  completed_date: '2026-07-25'

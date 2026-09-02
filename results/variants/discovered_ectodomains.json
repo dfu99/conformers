@@ -1,0 +1,1476 @@
+{
+  "n_candidates": 225,
+  "n_accepted": 35,
+  "criteria": {
+    "min_alpha_ca": 780,
+    "min_beta_ca": 520,
+    "min_long_axis_A": 90.0
+  },
+  "accepted": [
+    {
+      "pdb_id": "1JV2",
+      "title": "CRYSTAL STRUCTURE OF THE EXTRACELLULAR SEGMENT OF INTEGRIN ALPHAVBETA3",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "INTEGRIN, ALPHA V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 927,
+        "resseq_min": 1,
+        "resseq_max": 956
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "PLATELET MEMBRANE GLYCOPROTEIN IIIA BETA SUBUNIT",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 539,
+        "resseq_min": 55,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 129.3,
+      "pdb_path": "inputs/variants/1JV2.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "1L5G",
+      "title": "CRYSTAL STRUCTURE OF THE EXTRACELLULAR SEGMENT OF INTEGRIN AVB3 IN COMPLEX WITH AN ARG-GLY-ASP LIGAND",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "INTEGRIN ALPHA V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 927,
+        "resseq_min": 1,
+        "resseq_max": 956
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "INTEGRIN BETA-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 539,
+        "resseq_min": 55,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 130.0,
+      "pdb_path": "inputs/variants/1L5G.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "1M1X",
+      "title": "CRYSTAL STRUCTURE OF THE EXTRACELLULAR SEGMENT OF INTEGRIN ALPHA VBETA3 BOUND TO MN2+",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 927,
+        "resseq_min": 1,
+        "resseq_max": 956
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 539,
+        "resseq_min": 55,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 130.3,
+      "pdb_path": "inputs/variants/1M1X.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "1U8C",
+      "title": "A novel adaptation of the integrin PSI domain revealed from its crystal structure",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 927,
+        "resseq_min": 1,
+        "resseq_max": 956
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 599,
+        "resseq_min": 1001,
+        "resseq_max": 1690
+      },
+      "long_axis_extent_A": 126.8,
+      "pdb_path": "inputs/variants/1U8C.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "3FCS",
+      "title": "Structure of complete ectodomain of integrin aIIBb3",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaIIb",
+        "name": "Integrin, alpha 2b",
+        "accessions": [
+          "P08514"
+        ],
+        "observed_ca": 913,
+        "resseq_min": 1,
+        "resseq_max": 959
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 680,
+        "resseq_min": 1,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 119.1,
+      "pdb_path": "inputs/variants/3FCS.pdb",
+      "variant": "alphaIIbbeta3"
+    },
+    {
+      "pdb_id": "3IJE",
+      "title": "Crystal structure of the complete integrin alhaVbeta3 ectodomain plus an Alpha/beta transmembrane fragment",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 938,
+        "resseq_min": 1,
+        "resseq_max": 967
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 695,
+        "resseq_min": 1,
+        "resseq_max": 695
+      },
+      "long_axis_extent_A": 135.1,
+      "pdb_path": "inputs/variants/3IJE.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "3K6S",
+      "title": "Structure of integrin alphaXbeta2 ectodomain",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaX",
+        "name": "Integrin alpha-X",
+        "accessions": [
+          "P20702"
+        ],
+        "observed_ca": 1082,
+        "resseq_min": 1,
+        "resseq_max": 1082
+      },
+      "beta": {
+        "chain": "H",
+        "subunit": "beta2",
+        "name": "Integrin beta-2",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 674,
+        "resseq_min": 1,
+        "resseq_max": 674
+      },
+      "long_axis_extent_A": 138.5,
+      "pdb_path": "inputs/variants/3K6S.pdb",
+      "variant": "alphaXbeta2"
+    },
+    {
+      "pdb_id": "3K71",
+      "title": "Structure of integrin alphaX beta2 ectodomain",
+      "alpha": {
+        "chain": "G",
+        "subunit": "alphaX",
+        "name": "Integrin alpha-X",
+        "accessions": [
+          "P20702"
+        ],
+        "observed_ca": 1082,
+        "resseq_min": 1,
+        "resseq_max": 1082
+      },
+      "beta": {
+        "chain": "H",
+        "subunit": "beta2",
+        "name": "Integrin beta-2",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 673,
+        "resseq_min": 1,
+        "resseq_max": 673
+      },
+      "long_axis_extent_A": 157.7,
+      "pdb_path": "inputs/variants/3K71.pdb",
+      "variant": "alphaXbeta2"
+    },
+    {
+      "pdb_id": "3K72",
+      "title": "Structure of integrin alphaX beta2",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaX",
+        "name": "Integrin alpha-X",
+        "accessions": [
+          "P20702"
+        ],
+        "observed_ca": 884,
+        "resseq_min": 1,
+        "resseq_max": 1082
+      },
+      "beta": {
+        "chain": "D",
+        "subunit": "beta2",
+        "name": "Integrin beta-2",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 673,
+        "resseq_min": 1,
+        "resseq_max": 673
+      },
+      "long_axis_extent_A": 185.4,
+      "pdb_path": "inputs/variants/3K72.pdb",
+      "variant": "alphaXbeta2"
+    },
+    {
+      "pdb_id": "4CAK",
+      "title": "Three-dimensional reconstruction of intact human integrin alphaIIbbeta3 in a phospholipid bilayer nanodisc",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaIIb",
+        "name": "Integrin alpha-IIb",
+        "accessions": [
+          "P08514"
+        ],
+        "observed_ca": 912,
+        "resseq_min": 2,
+        "resseq_max": 959
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 680,
+        "resseq_min": 1,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 118.9,
+      "pdb_path": "inputs/variants/4CAK.pdb",
+      "variant": "alphaIIbbeta3"
+    },
+    {
+      "pdb_id": "4G1E",
+      "title": "Crystal structure of integrin alpha V beta 3 with coil-coiled tag.",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 964,
+        "resseq_min": 1,
+        "resseq_max": 994
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 709,
+        "resseq_min": 1,
+        "resseq_max": 729
+      },
+      "long_axis_extent_A": 145.2,
+      "pdb_path": "inputs/variants/4G1E.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "4G1M",
+      "title": "Re-refinement of alpha V beta 3 structure",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 929,
+        "resseq_min": 1,
+        "resseq_max": 959
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 692,
+        "resseq_min": 1,
+        "resseq_max": 692
+      },
+      "long_axis_extent_A": 128.1,
+      "pdb_path": "inputs/variants/4G1M.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "4MMX",
+      "title": "Integrin AlphaVBeta3 ectodomain bound to the tenth domain of Fibronectin",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 924,
+        "resseq_min": 1,
+        "resseq_max": 956
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 690,
+        "resseq_min": 1,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 123.8,
+      "pdb_path": "inputs/variants/4MMX.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "4MMY",
+      "title": "Integrin AlphaVBeta3 ectodomain bound to the tenth domain of Fibronectin with the IAKGDWND motif",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 924,
+        "resseq_min": 1,
+        "resseq_max": 956
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 690,
+        "resseq_min": 1,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 122.8,
+      "pdb_path": "inputs/variants/4MMY.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "4MMZ",
+      "title": "Integrin AlphaVBeta3 ectodomain bound to an antagonistic tenth domain of Fibronectin",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 920,
+        "resseq_min": 1,
+        "resseq_max": 954
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 690,
+        "resseq_min": 1,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 121.9,
+      "pdb_path": "inputs/variants/4MMZ.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "4NEH",
+      "title": "An internal ligand-bound, metastable state of a leukocyte integrin, aXb2",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaX",
+        "name": "Integrin alpha-X",
+        "accessions": [
+          "P20702"
+        ],
+        "observed_ca": 1084,
+        "resseq_min": 1,
+        "resseq_max": 1084
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta2",
+        "name": "Integrin beta-2",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 668,
+        "resseq_min": 1,
+        "resseq_max": 676
+      },
+      "long_axis_extent_A": 155.8,
+      "pdb_path": "inputs/variants/4NEH.pdb",
+      "variant": "alphaXbeta2"
+    },
+    {
+      "pdb_id": "4NEN",
+      "title": "An internal ligand-bound, metastable state of a leukocyte integrin, aXb2",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaX",
+        "name": "Integrin alpha-X",
+        "accessions": [
+          "P20702"
+        ],
+        "observed_ca": 1063,
+        "resseq_min": 1,
+        "resseq_max": 1083
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta2",
+        "name": "Integrin beta-2",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 665,
+        "resseq_min": 1,
+        "resseq_max": 676
+      },
+      "long_axis_extent_A": 157.5,
+      "pdb_path": "inputs/variants/4NEN.pdb",
+      "variant": "alphaXbeta2"
+    },
+    {
+      "pdb_id": "4O02",
+      "title": "AlphaVBeta3 integrin in complex with monoclonal antibody FAB fragment.",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 915,
+        "resseq_min": 1,
+        "resseq_max": 953
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 687,
+        "resseq_min": 1,
+        "resseq_max": 687
+      },
+      "long_axis_extent_A": 123.8,
+      "pdb_path": "inputs/variants/4O02.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "5ES4",
+      "title": "RE-REFINEMENT OF INTEGRIN ALPHAXBETA2 ECTODOMAIN IN THE CLOSED/BENT CONFORMATION",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaX",
+        "name": "Integrin alpha-X",
+        "accessions": [
+          "P20702"
+        ],
+        "observed_ca": 1080,
+        "resseq_min": 1,
+        "resseq_max": 1080
+      },
+      "beta": {
+        "chain": "H",
+        "subunit": "beta2",
+        "name": "Integrin beta-2",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 674,
+        "resseq_min": 1,
+        "resseq_max": 674
+      },
+      "long_axis_extent_A": 137.8,
+      "pdb_path": "inputs/variants/5ES4.pdb",
+      "variant": "alphaXbeta2"
+    },
+    {
+      "pdb_id": "6AVQ",
+      "title": "The Therapeutic Antibody LM609 Selectively Inhibits Ligand Binding to Human alpha-V beta-3 Integrin via Steric Hindrance",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 927,
+        "resseq_min": 1,
+        "resseq_max": 956
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 688,
+        "resseq_min": 1,
+        "resseq_max": 688
+      },
+      "long_axis_extent_A": 123.5,
+      "pdb_path": "inputs/variants/6AVQ.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "6AVR",
+      "title": "Human alpha-V beta-3 Integrin (intermediate conformation) in complex with the therapeutic antibody LM609",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 924,
+        "resseq_min": 1,
+        "resseq_max": 953
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 685,
+        "resseq_min": 1,
+        "resseq_max": 685
+      },
+      "long_axis_extent_A": 144.8,
+      "pdb_path": "inputs/variants/6AVR.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "6MK0",
+      "title": "Integrin AlphaVBeta3 ectodomain bound to antagonist TDI-4161",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 920,
+        "resseq_min": 1,
+        "resseq_max": 954
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 687,
+        "resseq_min": 4,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 122.4,
+      "pdb_path": "inputs/variants/6MK0.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "6MSL",
+      "title": "Integrin AlphaVBeta3 ectodomain bound to EETI-II 2.5D",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 924,
+        "resseq_min": 1,
+        "resseq_max": 956
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 690,
+        "resseq_min": 1,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 123.6,
+      "pdb_path": "inputs/variants/6MSL.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "6MSU",
+      "title": "Integrin alphaVBeta3 in complex with EETI-II 2.5F",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 924,
+        "resseq_min": 1,
+        "resseq_max": 956
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 690,
+        "resseq_min": 1,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 124.2,
+      "pdb_path": "inputs/variants/6MSU.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "6NAJ",
+      "title": "Integrin AlphaVBeta3 ectodomain bound to Hr10 variant of the 10th domain of Fibronectin.",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 920,
+        "resseq_min": 1,
+        "resseq_max": 954
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 690,
+        "resseq_min": 1,
+        "resseq_max": 690
+      },
+      "long_axis_extent_A": 121.8,
+      "pdb_path": "inputs/variants/6NAJ.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "7NXD",
+      "title": "Cryo-EM structure of human integrin alpha5beta1 in the half-bent conformation",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alpha5",
+        "name": "Integrin alpha-5",
+        "accessions": [
+          "P08648"
+        ],
+        "observed_ca": 905,
+        "resseq_min": 1,
+        "resseq_max": 947
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta1",
+        "name": "Integrin beta-1",
+        "accessions": [
+          "P05556"
+        ],
+        "observed_ca": 690,
+        "resseq_min": 3,
+        "resseq_max": 703
+      },
+      "long_axis_extent_A": 161.2,
+      "pdb_path": "inputs/variants/7NXD.pdb",
+      "variant": "alpha5beta1"
+    },
+    {
+      "pdb_id": "7USL",
+      "title": "Integrin alphaM/beta2 ectodomain in complex with adenylate cyclase toxin RTX751 and M1F5 Fab",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaM",
+        "name": "Integrin alpha-M",
+        "accessions": [
+          "P11215"
+        ],
+        "observed_ca": 856,
+        "resseq_min": 1,
+        "resseq_max": 1083
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta2",
+        "name": "Integrin beta",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 673,
+        "resseq_min": 2,
+        "resseq_max": 674
+      },
+      "long_axis_extent_A": 123.1,
+      "pdb_path": "inputs/variants/7USL.pdb",
+      "variant": "alphaMbeta2"
+    },
+    {
+      "pdb_id": "7USM",
+      "title": "Integrin alphaM/beta2 ectodomain",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaM",
+        "name": "Integrin alpha-M",
+        "accessions": [
+          "P11215"
+        ],
+        "observed_ca": 848,
+        "resseq_min": 1,
+        "resseq_max": 1083
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta2",
+        "name": "Integrin beta",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 673,
+        "resseq_min": 2,
+        "resseq_max": 674
+      },
+      "long_axis_extent_A": 108.4,
+      "pdb_path": "inputs/variants/7USM.pdb",
+      "variant": "alphaMbeta2"
+    },
+    {
+      "pdb_id": "8GCD",
+      "title": "Full length Integrin AlphaIIbBeta3 in inactive state",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaIIb",
+        "name": "Integrin alpha-IIb",
+        "accessions": [
+          "P08514"
+        ],
+        "observed_ca": 939,
+        "resseq_min": 1,
+        "resseq_max": 985
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 697,
+        "resseq_min": 1,
+        "resseq_max": 712
+      },
+      "long_axis_extent_A": 154.4,
+      "pdb_path": "inputs/variants/8GCD.pdb",
+      "variant": "alphaIIbbeta3"
+    },
+    {
+      "pdb_id": "8GCE",
+      "title": "The Extracellular Domain of Integrin AlphaIIbBeta3 in Intermediate State",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaIIb",
+        "name": "Integrin alpha-IIb",
+        "accessions": [
+          "P08514"
+        ],
+        "observed_ca": 912,
+        "resseq_min": 1,
+        "resseq_max": 958
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 676,
+        "resseq_min": 1,
+        "resseq_max": 686
+      },
+      "long_axis_extent_A": 112.6,
+      "pdb_path": "inputs/variants/8GCE.pdb",
+      "variant": "alphaIIbbeta3"
+    },
+    {
+      "pdb_id": "8T2V",
+      "title": "Cryo-EM Structures of Full-length Integrin alphaIIbbeta3 in Native Lipids",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaIIb",
+        "name": "Integrin alpha-IIb",
+        "accessions": [
+          "P08514"
+        ],
+        "observed_ca": 946,
+        "resseq_min": 1,
+        "resseq_max": 991
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 718,
+        "resseq_min": 1,
+        "resseq_max": 718
+      },
+      "long_axis_extent_A": 165.5,
+      "pdb_path": "inputs/variants/8T2V.pdb",
+      "variant": "alphaIIbbeta3"
+    },
+    {
+      "pdb_id": "8XEI",
+      "title": "Cryo-EM structure of integrin ITGAV/ITGB3 complex, conformation 1",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 916,
+        "resseq_min": 31,
+        "resseq_max": 983
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 684,
+        "resseq_min": 29,
+        "resseq_max": 712
+      },
+      "long_axis_extent_A": 124.0,
+      "pdb_path": "inputs/variants/8XEI.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "8XEN",
+      "title": "Cryo-EM structure of integrin ITGAV/ITGB3 complex, conformation 4",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 928,
+        "resseq_min": 31,
+        "resseq_max": 989
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 593,
+        "resseq_min": 29,
+        "resseq_max": 626
+      },
+      "long_axis_extent_A": 214.5,
+      "pdb_path": "inputs/variants/8XEN.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "8XEZ",
+      "title": "Cryo-EM structure of integrin ITGAV/ITGB3 complex, conformation 5",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 927,
+        "resseq_min": 32,
+        "resseq_max": 989
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 601,
+        "resseq_min": 27,
+        "resseq_max": 627
+      },
+      "long_axis_extent_A": 196.3,
+      "pdb_path": "inputs/variants/8XEZ.pdb",
+      "variant": "alphaVbeta3"
+    },
+    {
+      "pdb_id": "9E8A",
+      "title": "Integrin aIIbb3 bent conformation from human platelet membrane crude preparation",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaIIb",
+        "name": "Integrin alpha-IIb",
+        "accessions": [
+          "P08514"
+        ],
+        "observed_ca": 915,
+        "resseq_min": 32,
+        "resseq_max": 991
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 683,
+        "resseq_min": 27,
+        "resseq_max": 713
+      },
+      "long_axis_extent_A": 114.6,
+      "pdb_path": "inputs/variants/9E8A.pdb",
+      "variant": "alphaIIbbeta3"
+    }
+  ],
+  "representatives": {
+    "alphaVbeta3": {
+      "pdb_id": "4G1E",
+      "title": "Crystal structure of integrin alpha V beta 3 with coil-coiled tag.",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaV",
+        "name": "Integrin alpha-V",
+        "accessions": [
+          "P06756"
+        ],
+        "observed_ca": 964,
+        "resseq_min": 1,
+        "resseq_max": 994
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 709,
+        "resseq_min": 1,
+        "resseq_max": 729
+      },
+      "long_axis_extent_A": 145.2,
+      "pdb_path": "inputs/variants/4G1E.pdb",
+      "variant": "alphaVbeta3"
+    },
+    "alphaIIbbeta3": {
+      "pdb_id": "8T2V",
+      "title": "Cryo-EM Structures of Full-length Integrin alphaIIbbeta3 in Native Lipids",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaIIb",
+        "name": "Integrin alpha-IIb",
+        "accessions": [
+          "P08514"
+        ],
+        "observed_ca": 946,
+        "resseq_min": 1,
+        "resseq_max": 991
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta3",
+        "name": "Integrin beta-3",
+        "accessions": [
+          "P05106"
+        ],
+        "observed_ca": 718,
+        "resseq_min": 1,
+        "resseq_max": 718
+      },
+      "long_axis_extent_A": 165.5,
+      "pdb_path": "inputs/variants/8T2V.pdb",
+      "variant": "alphaIIbbeta3"
+    },
+    "alphaXbeta2": {
+      "pdb_id": "3K6S",
+      "title": "Structure of integrin alphaXbeta2 ectodomain",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaX",
+        "name": "Integrin alpha-X",
+        "accessions": [
+          "P20702"
+        ],
+        "observed_ca": 1082,
+        "resseq_min": 1,
+        "resseq_max": 1082
+      },
+      "beta": {
+        "chain": "H",
+        "subunit": "beta2",
+        "name": "Integrin beta-2",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 674,
+        "resseq_min": 1,
+        "resseq_max": 674
+      },
+      "long_axis_extent_A": 138.5,
+      "pdb_path": "inputs/variants/3K6S.pdb",
+      "variant": "alphaXbeta2"
+    },
+    "alpha5beta1": {
+      "pdb_id": "7NXD",
+      "title": "Cryo-EM structure of human integrin alpha5beta1 in the half-bent conformation",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alpha5",
+        "name": "Integrin alpha-5",
+        "accessions": [
+          "P08648"
+        ],
+        "observed_ca": 905,
+        "resseq_min": 1,
+        "resseq_max": 947
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta1",
+        "name": "Integrin beta-1",
+        "accessions": [
+          "P05556"
+        ],
+        "observed_ca": 690,
+        "resseq_min": 3,
+        "resseq_max": 703
+      },
+      "long_axis_extent_A": 161.2,
+      "pdb_path": "inputs/variants/7NXD.pdb",
+      "variant": "alpha5beta1"
+    },
+    "alphaMbeta2": {
+      "pdb_id": "7USL",
+      "title": "Integrin alphaM/beta2 ectodomain in complex with adenylate cyclase toxin RTX751 and M1F5 Fab",
+      "alpha": {
+        "chain": "A",
+        "subunit": "alphaM",
+        "name": "Integrin alpha-M",
+        "accessions": [
+          "P11215"
+        ],
+        "observed_ca": 856,
+        "resseq_min": 1,
+        "resseq_max": 1083
+      },
+      "beta": {
+        "chain": "B",
+        "subunit": "beta2",
+        "name": "Integrin beta",
+        "accessions": [
+          "P05107"
+        ],
+        "observed_ca": 673,
+        "resseq_min": 2,
+        "resseq_max": 674
+      },
+      "long_axis_extent_A": 123.1,
+      "pdb_path": "inputs/variants/7USL.pdb",
+      "variant": "alphaMbeta2"
+    }
+  },
+  "rejected_sample": [
+    {
+      "pdb_id": "1KUP",
+      "title": "Solution Structure of the Membrane Proximal Regions of alpha-IIb and beta-3 Integrins",
+      "reason": "construct too short (alpha 11, beta 25)"
+    },
+    {
+      "pdb_id": "1KUZ",
+      "title": "Solution Structure of the Membrane Proximal Regions of alpha-IIb and beta-3 Integrins",
+      "reason": "construct too short (alpha 11, beta 25)"
+    },
+    {
+      "pdb_id": "1L3Y",
+      "title": "INTEGRIN EGF-LIKE MODULE 3 FROM THE BETA-2 SUBUNIT",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "1M8O",
+      "title": "Platelet integrin alfaIIb-beta3 cytoplasmic domain",
+      "reason": "construct too short (alpha 20, beta 47)"
+    },
+    {
+      "pdb_id": "1MIZ",
+      "title": "Crystal structure of an integrin beta3-talin chimera",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "1MK7",
+      "title": "CRYSTAL STRUCTURE OF AN INTEGRIN BETA3-TALIN CHIMERA",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "1MK9",
+      "title": "CRYSTAL STRUCTURE OF AN INTEGRIN BETA3-TALIN CHIMERA",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "1QG3",
+      "title": "CRYSTAL STRUCTURE OF A TANDEM PAIR OF FIBRONECTIN TYPE III DOMAINS FROM THE CYTOPLASMIC TAIL OF INTEGRIN ALPHA6 BETA4",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "1S4X",
+      "title": "NMR Structure of the integrin B3 cytoplasmic domain in DPC micelles",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "1TYE",
+      "title": "Structural basis for allostery in integrins and binding of ligand-mimetic therapeutics to the platelet receptor for fibrinogen",
+      "reason": "construct too short (alpha 452, beta 440)"
+    },
+    {
+      "pdb_id": "1YUK",
+      "title": "The crystal structure of the PSI/Hybrid domain/ I-EGF1 segment from the human integrin beta2 at 1.8 resolution",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2BRQ",
+      "title": "Crystal structure of the filamin A repeat 21 complexed with the integrin beta7 cytoplasmic tail peptide",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2JF1",
+      "title": "CRYSTAL STRUCTURE OF THE FILAMIN A REPEAT 21 COMPLEXED WITH THE INTEGRIN BETA2 CYTOPLASMIC TAIL PEPTIDE",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2K9J",
+      "title": "Integrin alphaIIb-beta3 transmembrane complex",
+      "reason": "construct too short (alpha 42, beta 43)"
+    },
+    {
+      "pdb_id": "2KNC",
+      "title": "Platelet integrin ALFAIIB-BETA3 transmembrane-cytoplasmic heterocomplex",
+      "reason": "construct too short (alpha 54, beta 79)"
+    },
+    {
+      "pdb_id": "2KV9",
+      "title": "Integrin beta3 subunit in a disulfide linked alphaIIb-beta3 cytosolic domain",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2L1C",
+      "title": "Shc-PTB:biphosphorylated integrin beta3 cytoplasmic tail complex (1:1)",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2L91",
+      "title": "Structure of the Integrin beta3 (A711P,K716A) Transmembrane Segment",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2LJD",
+      "title": "monophosphorylated (747pY) beta3 integrin cytoplasmic tail under membrane mimetic conditions",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2LJE",
+      "title": "Biphosphorylated (747pY, 759pY) beta3 integrin cytoplasmic tail under membrane mimetic conditions",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2LJF",
+      "title": "Monophosphorylated (747pY) beta3 integrin cytoplasmic tail under aqueous conditions",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2MTP",
+      "title": "The structure of Filamin repeat 21 bound to integrin",
+      "reason": "construct too short (alpha 21, beta 47)"
+    },
+    {
+      "pdb_id": "2N9Y",
+      "title": "Structure of the Integrin alphaIIb-beta3(A711P) Transmembrane Complex",
+      "reason": "construct too short (alpha 42, beta 43)"
+    },
+    {
+      "pdb_id": "2P26",
+      "title": "Structure of the PHE2 and PHE3 fragments of the integrin beta2 subunit",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2P28",
+      "title": "Structure of the PHE2 and PHE3 fragments of the integrin beta2 subunit",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2Q6W",
+      "title": "The structure of HLA-DRA, DRB3*0101 (DR52a) with bound platelet integrin peptide associated with fetal and neonatal alloimmune thrombocytopenia",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2RMZ",
+      "title": "Bicelle-embedded integrin beta3 transmembrane segment",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2RN0",
+      "title": "Micelle-embedded integrin beta3 transmembrane segment",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2V7D",
+      "title": "14-3-3 protein zeta in complex with Thr758 phosphorylated integrin beta2 peptide",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "2VC2",
+      "title": "Re-refinement of Integrin AlphaIIbBeta3 Headpiece Bound to Antagonist L-739758",
+      "reason": "construct too short (alpha 452, beta 461)"
+    },
+    {
+      "pdb_id": "2VDK",
+      "title": "Re-refinement of Integrin AlphaIIbBeta3 Headpiece",
+      "reason": "construct too short (alpha 452, beta 461)"
+    },
+    {
+      "pdb_id": "2VDL",
+      "title": "Re-refinement of Integrin AlphaIIbBeta3 Headpiece",
+      "reason": "construct too short (alpha 452, beta 461)"
+    },
+    {
+      "pdb_id": "2VDM",
+      "title": "Re-refinement of Integrin AlphaIIbBeta3 Headpiece Bound to Antagonist Tirofiban",
+      "reason": "construct too short (alpha 452, beta 461)"
+    },
+    {
+      "pdb_id": "2VDN",
+      "title": "Re-refinement of Integrin AlphaIIbBeta3 Headpiece Bound to Antagonist Eptifibatide",
+      "reason": "construct too short (alpha 452, beta 461)"
+    },
+    {
+      "pdb_id": "2VDO",
+      "title": "Integrin AlphaIIbBeta3 Headpiece Bound to Fibrinogen Gamma chain peptide, HHLGGAKQAGDV",
+      "reason": "construct too short (alpha 452, beta 461)"
+    },
+    {
+      "pdb_id": "2VDP",
+      "title": "Integrin AlphaIIbBeta3 Headpiece Bound to Fibrinogen Gamma chain peptide,LGGAKQAGDV",
+      "reason": "construct too short (alpha 452, beta 461)"
+    },
+    {
+      "pdb_id": "2VDQ",
+      "title": "Integrin AlphaIIbBeta3 Headpiece Bound to a Chimeric Fibrinogen Gamma chain peptide, HHLGGAKQRGDV",
+      "reason": "construct too short (alpha 452, beta 461)"
+    },
+    {
+      "pdb_id": "2VDR",
+      "title": "Integrin AlphaIIbBeta3 Headpiece Bound to a chimeric Fibrinogen Gamma chain peptide, LGGAKQRGDV",
+      "reason": "construct too short (alpha 452, beta 461)"
+    },
+    {
+      "pdb_id": "2YRZ",
+      "title": "Solution structure of the fibronectin type III domain of human Integrin beta-4",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "3F7P",
+      "title": "Crystal structure of a complex between integrin beta4 and plectin",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "3F7Q",
+      "title": "First pair of Fibronectin type III domains and part of the connecting segment of the integrin beta4",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "3F7R",
+      "title": "First pair of Fibronectin type III domains and part of the connecting segment of the integrin beta4",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "3FCU",
+      "title": "Structure of headpiece of integrin aIIBb3 in open conformation",
+      "reason": "construct too short (alpha 457, beta 461)"
+    },
+    {
+      "pdb_id": "3FQ4",
+      "title": "Crystal structure of the Calx-beta domain of integrin beta4",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "3FSO",
+      "title": "Crystal structure of the Calx-beta domain of integrin beta4, calcium soak",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "3G9W",
+      "title": "Crystal Structure of Talin2 F2-F3 in Complex with the Integrin Beta1D Cytoplasmic Tail",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "3H6A",
+      "title": "Structure of the Calx-beta domain of integrin beta4 crystallized in the presence of calcium",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "3NID",
+      "title": "The Closed Headpiece of Integrin alphaIIB beta3 and its Complex with an alpahIIB beta3 -Specific Antagonist That Does Not Induce Opening",
+      "reason": "construct too short (alpha 457, beta 471)"
+    },
+    {
+      "pdb_id": "3NIF",
+      "title": "The Closed Headpiece of Integrin IIb 3 and its Complex with an IIb 3 -Specific Antagonist That Does Not Induce Opening",
+      "reason": "construct too short (alpha 457, beta 471)"
+    },
+    {
+      "pdb_id": "3NIG",
+      "title": "The Closed Headpiece of Integrin IIb 3 and its Complex with an IIb 3 -Specific Antagonist That Does Not Induce Opening",
+      "reason": "construct too short (alpha 457, beta 471)"
+    },
+    {
+      "pdb_id": "3T3M",
+      "title": "A Novel High Affinity Integrin alphaIIbbeta3 Receptor Antagonist That Unexpectedly Displaces Mg2+ from the beta3 MIDAS",
+      "reason": "construct too short (alpha 457, beta 472)"
+    },
+    {
+      "pdb_id": "3T3P",
+      "title": "A Novel High Affinity Integrin alphaIIbbeta3 Receptor Antagonist That Unexpectedly Displaces Mg2+ from the beta3 MIDAS",
+      "reason": "construct too short (alpha 457, beta 472)"
+    },
+    {
+      "pdb_id": "3T9K",
+      "title": "Crystal Structure of ACAP1 C-portion mutant S554D fused with integrin beta1 peptide",
+      "reason": "no alpha+beta integrin pair"
+    },
+    {
+      "pdb_id": "3V4P",
+      "title": "crystal structure of a4b7 headpiece complexed with Fab ACT-1",
+      "reason": "construct too short (alpha 597, beta 503)"
+    },
+    {
+      "pdb_id": "3V4V",
+      "title": "crystal structure of a4b7 headpiece complexed with Fab ACT-1 and RO0505376",
+      "reason": "construct too short (alpha 597, beta 503)"
+    },
+    {
+      "pdb_id": "3VI3",
+      "title": "Crystal structure of alpha5beta1 integrin headpiece (ligand-free form)",
+      "reason": "construct too short (alpha 632, beta 454)"
+    },
+    {
+      "pdb_id": "3VI4",
+      "title": "Crystal structure of alpha5beta1 integrin headpiece in complex with RGD peptide",
+      "reason": "construct too short (alpha 632, beta 454)"
+    },
+    {
+      "pdb_id": "3ZDX",
+      "title": "Integrin alphaIIB beta3 headpiece and RGD peptide complex",
+      "reason": "construct too short (alpha 457, beta 472)"
+    },
+    {
+      "pdb_id": "3ZDY",
+      "title": "Integrin alphaIIB beta3 headpiece and RGD peptide complex",
+      "reason": "construct too short (alpha 457, beta 472)"
+    },
+    {
+      "pdb_id": "3ZDZ",
+      "title": "Integrin alphaIIB beta3 headpiece and RGD peptide complex",
+      "reason": "construct too short (alpha 457, beta 472)"
+    }
+  ],
+  "n_rejected": 190
+}

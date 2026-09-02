@@ -212,3 +212,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Raw MD trajectory artifacts: regenerable from final.pdb + final.xml on the pod,
+# and 20-30 MB per run. Analysis-grade outputs (trajectory.csv, summary.json,
+# readouts.json, final.pdb) ARE tracked.
+results/**/frames.dcd
+results/**/final.xml
+results/route_a/snapback_movie/*_ca_traj.pdb

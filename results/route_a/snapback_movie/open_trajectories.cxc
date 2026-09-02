@@ -1,0 +1,15 @@
+# aVb3 snap-back MD -- WT vs K459A, 10 ns
+open wt_ca_traj.pdb
+open k459a_ca_traj.pdb
+style ball
+size ballScale 0.5
+# domain colours: headpiece blue, thigh/upper leg aqua, lower legs orange
+color /A:1-438,/B:55-352 #2a78d6
+color /A:439-592,/B:353-440 #1baf7a
+color /A:593-956,/B:441-690 #eb6834
+# the genu salt-bridge linchpins
+color /A:459,598,457,595,636 red
+show /A:459,598 atoms
+tile
+coordset slider #1
+coordset slider #2

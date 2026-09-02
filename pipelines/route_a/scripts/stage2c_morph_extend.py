@@ -43,6 +43,118 @@ def rot_matrix(axis, theta):
     ])
 
 
+ION_NAMES = {"CA", "MG", "MN", "ZN", "NA", "CL", "K"}  # residue names, not atom names
+
+
+def assign_ions(top, positions_nm, lower_idx):
+    """Ion atoms travel with whichever body coordinates them.
+
+    An ion's residue id (e.g. 4008) falls outside every UPPER/LOWER residue range, so it would
+    otherwise be left behind while the leg rotates away from it -- silently tearing the ion out of
+    its own coordination shell. Decide by geometry instead: whichever body holds most of the atoms
+    within 3.0 A of the ion carries it.
+    """
+    lower = set(int(i) for i in lower_idx)
+    extra = []
+    for res in top.residues():
+        if res.name.strip().upper() not in ION_NAMES or len(list(res.atoms())) != 1:
+            continue
+        ion = next(res.atoms())
+        d = np.linalg.norm(positions_nm - positions_nm[ion.index], axis=1) * 10.0
+        shell = [i for i in np.where(d < 3.0)[0] if i != ion.index]
+        if not shell:
+            raise SystemExit(f"ion {res.name}{res.id} has no coordinating atom within 3 A — "
+                             f"refusing to guess which body it belongs to")
+        n_lower = sum(1 for i in shell if i in lower)
+        side = "lower" if n_lower * 2 > len(shell) else "upper"
+        print(f"[stage2c] ion {res.name}{res.id}: {len(shell)} contacts <3 A, "
+              f"{n_lower} in the lower body -> rotates with the {side} body", flush=True)
+        if side == "lower":
+            extra.append(ion.index)
+    return extra
+
+
+def set_gb_screening(system, salt_M, temperature=300.0, eps=78.5):
+    """Turn on Debye screening in the GB force. It is built with kappa hard-coded to 0.
+
+    ForceField.createSystem in openmm 8.4 rejects implicitSolventSaltConc ("argument was never
+    used"), and the CustomGBForce built from implicit/obc2.xml bakes `kappa=0` into every energy
+    term, i.e. zero ionic strength. Rewriting the constant in place is the only route that does not
+    mean hand-rebuilding the force. kappa = sqrt(2 e^2 N_A I / (eps0 eps kB T)), in nm^-1.
+    """
+    e, NA, eps0, kB = 1.602176634e-19, 6.02214076e23, 8.8541878128e-12, 1.380649e-23
+    kappa = float(np.sqrt(2 * e * e * NA * (salt_M * 1000.0) / (eps0 * eps * kB * temperature))) / 1e9
+    gb = [f for f in system.getForces() if isinstance(f, mm.CustomGBForce)]
+    if not gb:
+        raise SystemExit("--salt-mM given but the system has no CustomGBForce (not implicit?)")
+    patched = 0
+    for force in gb:
+        for i in range(force.getNumEnergyTerms()):
+            expr, typ = force.getEnergyTermParameters(i)
+            if "kappa=0" in expr:
+                force.setEnergyTermParameters(i, expr.replace("kappa=0", f"kappa={kappa}"), typ)
+                patched += 1
+    if not patched:
+        raise SystemExit("could not find kappa=0 to patch — GB expression format changed")
+    print(f"[stage2c] Debye screening on: {salt_M*1000:.0f} mM -> kappa {kappa:.4f} /nm "
+          f"(Debye length {1/kappa:.2f} nm), {patched} energy terms", flush=True)
+
+
+def add_ion_restraints(system, top, pos_nm, k, shell_A=3.0, tol_A=0.2):
+    """Flat-bottom restraints holding each metal ion onto the ligands it has in the input.
+
+    Without these the genu Ca2+ simply leaves: in GB implicit solvent there is no water shell, the
+    ion is over-solvated relative to explicit water, and the minimiser finds it favourable to pull
+    it off its carboxylates -- measured at ~10.5 A from ANY protein atom by the first morph frame,
+    while the five ions in tighter sites stayed at 2.8-3.2 A.
+
+    Flat-bottom, not harmonic: zero force while the contact is at or inside its input length, so the
+    site can still relax and tighten naturally; the penalty only resists the ion LEAVING. r0 is
+    taken per contact from the input geometry, so this holds the crystal coordination rather than
+    imposing an idealised one.
+    """
+    rest = mm.CustomBondForce("0.5*k*step(r - r0)*(r - r0)^2")
+    rest.addPerBondParameter("r0")
+    rest.addGlobalParameter("k", k)
+    ions = [a for res in top.residues() if res.name.strip().upper() in ION_NAMES
+            and len(list(res.atoms())) == 1 for a in res.atoms()]
+    prot = [a for a in top.atoms() if a.residue.name.strip().upper() not in ION_NAMES]
+    n_total = 0
+    for ion in ions:
+        d = np.linalg.norm(pos_nm[[a.index for a in prot]] - pos_nm[ion.index], axis=1) * 10.0
+        shell = np.where(d < shell_A)[0]
+        for j in shell:
+            rest.addBond(ion.index, prot[j].index, [(d[j] + tol_A) / 10.0])
+        n_total += len(shell)
+        if len(shell) == 0:
+            raise SystemExit(f"ion {ion.residue.name}{ion.residue.id} has no ligand within "
+                             f"{shell_A} A in the input — nothing to restrain it to")
+    system.addForce(rest)
+    print(f"[stage2c] ion restraints: {n_total} contacts over {len(ions)} ions, "
+          f"k={k:g} kJ/mol/nm^2, flat-bottom +{tol_A} A", flush=True)
+    return n_total
+
+
+def check_ions_home(top, pos_nm, shell_A=3.5, min_ligands=2):
+    """Verify every ion is still in a coordination shell. A silent escape invalidates the run."""
+    prot = [a for a in top.atoms() if a.residue.name.strip().upper() not in ION_NAMES]
+    P = pos_nm[[a.index for a in prot]]
+    bad = []
+    for res in top.residues():
+        if res.name.strip().upper() not in ION_NAMES or len(list(res.atoms())) != 1:
+            continue
+        ion = next(res.atoms())
+        d = np.linalg.norm(P - pos_nm[ion.index], axis=1) * 10.0
+        n = int((d < shell_A).sum())
+        print(f"[stage2c] ion {res.name}{res.id}: {n} ligands < {shell_A} A "
+              f"(closest {d.min():.2f} A)", flush=True)
+        if n < min_ligands:
+            bad.append(f"{res.name}{res.id} ({n} ligands, closest {d.min():.2f} A)")
+    if bad:
+        raise SystemExit("ION(S) ESCAPED during the morph: " + "; ".join(bad) +
+                         " — the seed is not usable; raise --ion-restraint-k and re-run.")
+
+
 def build_index_sets(top):
     lower_idx, genu_ca, upper_ca, lower_ca, all_ca, b_head, b_tail = ([] for _ in range(7))
     for atom in top.atoms():
@@ -112,6 +224,19 @@ def main():
     ap.add_argument("--min-iter", type=int, default=500)
     ap.add_argument("--threads", default="48")
     ap.add_argument("--equil-ps", type=float, default=10.0)
+    ap.add_argument("--keep-ions", action="store_true",
+                    help="keep structural metal ions (PDBFixer's removeHeterogens deletes them). "
+                         "Sugars and waters are still dropped.")
+    ap.add_argument("--implicit", action="store_true",
+                    help="relax in GB-OBC2 implicit solvent instead of vacuum. Vacuum has "
+                         "dielectric 1 and no counter-ions, which drives adjacent carboxylates "
+                         "apart -- that is what collapsed the genu Ca site in the 2026-07 seed.")
+    ap.add_argument("--salt-mM", type=float, default=0.0,
+                    help="ionic strength for Debye screening in implicit solvent (e.g. 150).")
+    ap.add_argument("--platform", default="CPU", help="CPU or CUDA. GB on CPU is slow.")
+    ap.add_argument("--ion-restraint-k", type=float, default=0.0,
+                    help="flat-bottom restraint (kJ/mol/nm^2) holding each ion on the ligands it "
+                         "has in the input. Without it the genu Ca2+ leaves during minimisation.")
     args = ap.parse_args()
 
     os.makedirs(args.frames_dir, exist_ok=True)
@@ -119,17 +244,37 @@ def main():
     t0 = time.time()
 
     print(f"[stage2c] loading bent {args.pdb}", flush=True)
-    fixer = PDBFixer(filename=args.pdb)
+    src = args.pdb
+    if args.keep_ions:
+        # removeHeterogens() is all-or-nothing, so filter by residue name up front instead and
+        # skip it below: keep protein + ions, drop sugars/waters.
+        src = os.path.join(os.path.dirname(args.out_json) or ".", "input_with_ions.pdb")
+        kept = 0
+        with open(args.pdb) as fh, open(src, "w") as out:
+            for line in fh:
+                if line.startswith("HETATM"):
+                    if line[17:20].strip().upper() not in ION_NAMES:
+                        continue
+                    kept += 1
+                out.write(line)
+        print(f"[stage2c] kept {kept} ion atoms, dropped other heterogens -> {src}", flush=True)
+    fixer = PDBFixer(filename=src)
     fixer.findMissingResidues()
     fixer.missingResidues = {}
     fixer.findNonstandardResidues()
     fixer.replaceNonstandardResidues()
-    fixer.removeHeterogens(keepWater=False)
+    if not args.keep_ions:
+        fixer.removeHeterogens(keepWater=False)
     fixer.findMissingAtoms()
     fixer.addMissingAtoms()
     fixer.addMissingHydrogens(7.0)
     top = fixer.topology
     idx = build_index_sets(top)
+    if args.keep_ions:
+        pos0_nm = np.array(fixer.positions.value_in_unit(unit.nanometer))
+        extra = assign_ions(top, pos0_nm, idx["lower_idx"])
+        if extra:
+            idx["lower_idx"] = np.concatenate([idx["lower_idx"], np.array(extra, dtype=int)])
     print(f"[stage2c] atoms={top.getNumAtoms()}  lower-body atoms={len(idx['lower_idx'])}",
           flush=True)
 
@@ -139,13 +284,23 @@ def main():
     # the incremental swing, vacuum amber14 is ~5-10x faster per iteration and
     # relieves steric overlaps just as well -- the extended shape is held by the
     # rigid-body rotations, and the seed gets a full solvated GPU relax later.
-    ff = app.ForceField("amber14/protein.ff14SB.xml")
+    if args.implicit:
+        # amber14/tip3p.xml is loaded ONLY for its ion templates -- there is no water here.
+        ff = app.ForceField("amber14/protein.ff14SB.xml", "amber14/tip3p.xml", "implicit/obc2.xml")
+    else:
+        ff = app.ForceField("amber14/protein.ff14SB.xml")
     system = ff.createSystem(top, nonbondedMethod=app.CutoffNonPeriodic,
                              nonbondedCutoff=1.2 * unit.nanometer, constraints=None)
+    if args.implicit and args.salt_mM > 0:
+        set_gb_screening(system, args.salt_mM / 1000.0)
+    if args.ion_restraint_k > 0:
+        add_ion_restraints(system, top, np.array(fixer.positions.value_in_unit(unit.nanometer)),
+                           args.ion_restraint_k)
     integ = mm.LangevinMiddleIntegrator(300 * unit.kelvin, 1.0 / unit.picosecond,
                                         1.0 * unit.femtoseconds)
-    plat = mm.Platform.getPlatformByName("CPU")
-    sim = app.Simulation(top, system, integ, plat, {"Threads": args.threads})
+    plat = mm.Platform.getPlatformByName(args.platform)
+    props = {"Threads": args.threads} if args.platform == "CPU" else {"Precision": "mixed"}
+    sim = app.Simulation(top, system, integ, plat, props)
     sim.context.setPositions(fixer.positions)
 
     print("[stage2c] initial minimize of bent...", flush=True)
@@ -209,9 +364,15 @@ def main():
         st = sim.context.getState(getPositions=True)
         eq_sys = ff.createSystem(top, nonbondedMethod=app.CutoffNonPeriodic,
                                  nonbondedCutoff=1.2 * unit.nanometer, constraints=app.HBonds)
+        # the equilibration system is built fresh -- every modification of the morph system has to
+        # be repeated here or the last 10 ps quietly undoes it
+        if args.implicit and args.salt_mM > 0:
+            set_gb_screening(eq_sys, args.salt_mM / 1000.0)
+        if args.ion_restraint_k > 0:
+            add_ion_restraints(eq_sys, top, get_pos_nm(sim), args.ion_restraint_k)
         eq_int = mm.LangevinMiddleIntegrator(300 * unit.kelvin, 1.0 / unit.picosecond,
                                              2.0 * unit.femtoseconds)
-        sim = app.Simulation(top, eq_sys, eq_int, plat, {"Threads": args.threads})
+        sim = app.Simulation(top, eq_sys, eq_int, plat, props)
         sim.context.setPositions(st.getPositions())
         sim.context.setVelocitiesToTemperature(300 * unit.kelvin)
         n = int(args.equil_ps * 1000 / 2.0)
@@ -222,6 +383,9 @@ def main():
         result["metrics_equil"] = m_eq
         result["E_equil_kJ_mol"] = round(energy(sim), 1)
         print(f"[stage2c] EQUIL_DONE  {m_eq}", flush=True)
+
+    if args.keep_ions:
+        check_ions_home(top, get_pos_nm(sim))
 
     with open(args.out_json, "w") as fh:
         json.dump(result, fh, indent=2)

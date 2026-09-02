@@ -1,0 +1,5003 @@
+{
+  "alpha5beta1__7NXD": {
+    "pdb_id": "7NXD",
+    "title": "Cryo-EM structure of human integrin alpha5beta1 in the half-bent conformation",
+    "source_pdb": "inputs/variants/7NXD.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alpha5beta1__7NXD_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alpha5",
+      "name": "Integrin alpha-5",
+      "accessions": [
+        "P08648"
+      ],
+      "observed_ca": 905,
+      "resseq_min": 1,
+      "resseq_max": 947,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta1",
+      "name": "Integrin beta-1",
+      "accessions": [
+        "P05556"
+      ],
+      "observed_ca": 690,
+      "resseq_min": 3,
+      "resseq_max": 703,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 1287.0,
+        "leg": 888.0
+      },
+      "beta_module_scores": {
+        "head": 731.0,
+        "leg": 353.0
+      },
+      "alpha_pct_ref_mapped": 96.2,
+      "beta_pct_ref_mapped": 97.2
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          600
+        ],
+        "B": [
+          3,
+          500
+        ]
+      },
+      "LOWER": {
+        "A": [
+          601,
+          947
+        ],
+        "B": [
+          501,
+          703
+        ]
+      },
+      "GENU": {
+        "A": [
+          596,
+          604
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          449
+        ],
+        "B": [
+          3,
+          358
+        ]
+      },
+      "FOOT": {
+        "A": [
+          876,
+          947
+        ],
+        "B": [
+          612,
+          703
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          3,
+          358
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          360,
+          703
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1098,
+      "n_lower_ca": 497,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 77.86,
+      "end_to_end_A": 92.1,
+      "Rg_A": 48.81,
+      "long_extent_A": 161.22,
+      "n_total_ca": 1595
+    },
+    "usable_for_morph": true
+  },
+  "alphaIIbbeta3__3FCS": {
+    "pdb_id": "3FCS",
+    "title": "Structure of complete ectodomain of integrin aIIBb3",
+    "source_pdb": "inputs/variants/3FCS.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaIIbbeta3__3FCS_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaIIb",
+      "name": "Integrin, alpha 2b",
+      "accessions": [
+        "P08514"
+      ],
+      "observed_ca": 913,
+      "resseq_min": 1,
+      "resseq_max": 959,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 680,
+      "resseq_min": 1,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 848.0,
+        "leg": 663.0
+      },
+      "beta_module_scores": {
+        "head": 1512.0,
+        "leg": 1210.0
+      },
+      "alpha_pct_ref_mapped": 94.3,
+      "beta_pct_ref_mapped": 99.3
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          598
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          599,
+          959
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          594,
+          602
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          451
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          886,
+          959
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1028,
+      "n_lower_ca": 565,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 36.02,
+      "end_to_end_A": 48.09,
+      "Rg_A": 39.15,
+      "long_extent_A": 119.13,
+      "n_total_ca": 1593
+    },
+    "usable_for_morph": true
+  },
+  "alphaIIbbeta3__4CAK": {
+    "pdb_id": "4CAK",
+    "title": "Three-dimensional reconstruction of intact human integrin alphaIIbbeta3 in a phospholipid bilayer nanodisc",
+    "source_pdb": "inputs/variants/4CAK.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaIIbbeta3__4CAK_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaIIb",
+      "name": "Integrin alpha-IIb",
+      "accessions": [
+        "P08514"
+      ],
+      "observed_ca": 912,
+      "resseq_min": 2,
+      "resseq_max": 959,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 680,
+      "resseq_min": 1,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 848.0,
+        "leg": 663.0
+      },
+      "beta_module_scores": {
+        "head": 1512.0,
+        "leg": 1210.0
+      },
+      "alpha_pct_ref_mapped": 94.3,
+      "beta_pct_ref_mapped": 99.3
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          2,
+          598
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          599,
+          959
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          594,
+          602
+        ]
+      },
+      "HEAD": {
+        "A": [
+          2,
+          451
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          886,
+          959
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1027,
+      "n_lower_ca": 565,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 67.37,
+      "end_to_end_A": 54.96,
+      "Rg_A": 34.72,
+      "long_extent_A": 118.88,
+      "n_total_ca": 1592
+    },
+    "usable_for_morph": true
+  },
+  "alphaIIbbeta3__8GCD": {
+    "pdb_id": "8GCD",
+    "title": "Full length Integrin AlphaIIbBeta3 in inactive state",
+    "source_pdb": "inputs/variants/8GCD.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaIIbbeta3__8GCD_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaIIb",
+      "name": "Integrin alpha-IIb",
+      "accessions": [
+        "P08514"
+      ],
+      "observed_ca": 939,
+      "resseq_min": 1,
+      "resseq_max": 985,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 697,
+      "resseq_min": 1,
+      "resseq_max": 712,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 848.0,
+        "leg": 663.0
+      },
+      "beta_module_scores": {
+        "head": 1512.0,
+        "leg": 1202.0
+      },
+      "alpha_pct_ref_mapped": 94.2,
+      "beta_pct_ref_mapped": 98.7
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          598
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          599,
+          985
+        ],
+        "B": [
+          435,
+          712
+        ]
+      },
+      "GENU": {
+        "A": [
+          594,
+          602
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          451
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          886,
+          985
+        ],
+        "B": [
+          600,
+          712
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          712
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1028,
+      "n_lower_ca": 608,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 41.62,
+      "end_to_end_A": 59.94,
+      "Rg_A": 41.64,
+      "long_extent_A": 154.38,
+      "n_total_ca": 1636
+    },
+    "usable_for_morph": true
+  },
+  "alphaIIbbeta3__8GCE": {
+    "pdb_id": "8GCE",
+    "title": "The Extracellular Domain of Integrin AlphaIIbBeta3 in Intermediate State",
+    "source_pdb": "inputs/variants/8GCE.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaIIbbeta3__8GCE_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaIIb",
+      "name": "Integrin alpha-IIb",
+      "accessions": [
+        "P08514"
+      ],
+      "observed_ca": 912,
+      "resseq_min": 1,
+      "resseq_max": 958,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 676,
+      "resseq_min": 1,
+      "resseq_max": 686,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 848.0,
+        "leg": 663.0
+      },
+      "beta_module_scores": {
+        "head": 1512.0,
+        "leg": 1193.0
+      },
+      "alpha_pct_ref_mapped": 94.2,
+      "beta_pct_ref_mapped": 98.5
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          598
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          599,
+          958
+        ],
+        "B": [
+          435,
+          686
+        ]
+      },
+      "GENU": {
+        "A": [
+          594,
+          602
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          451
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          886,
+          958
+        ],
+        "B": [
+          600,
+          686
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          686
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1028,
+      "n_lower_ca": 560,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 45.27,
+      "end_to_end_A": 53.09,
+      "Rg_A": 39.86,
+      "long_extent_A": 112.58,
+      "n_total_ca": 1588
+    },
+    "usable_for_morph": true
+  },
+  "alphaIIbbeta3__8T2V": {
+    "pdb_id": "8T2V",
+    "title": "Cryo-EM Structures of Full-length Integrin alphaIIbbeta3 in Native Lipids",
+    "source_pdb": "inputs/variants/8T2V.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaIIbbeta3__8T2V_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaIIb",
+      "name": "Integrin alpha-IIb",
+      "accessions": [
+        "P08514"
+      ],
+      "observed_ca": 946,
+      "resseq_min": 1,
+      "resseq_max": 991,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 718,
+      "resseq_min": 1,
+      "resseq_max": 718,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 848.0,
+        "leg": 663.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 94.3,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          598
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          599,
+          991
+        ],
+        "B": [
+          435,
+          718
+        ]
+      },
+      "GENU": {
+        "A": [
+          594,
+          602
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          451
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          886,
+          991
+        ],
+        "B": [
+          600,
+          718
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          718
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1032,
+      "n_lower_ca": 632,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.42,
+      "end_to_end_A": 60.48,
+      "Rg_A": 42.34,
+      "long_extent_A": 165.53,
+      "n_total_ca": 1664
+    },
+    "usable_for_morph": true
+  },
+  "alphaIIbbeta3__9E8A": {
+    "pdb_id": "9E8A",
+    "title": "Integrin aIIbb3 bent conformation from human platelet membrane crude preparation",
+    "source_pdb": "inputs/variants/9E8A.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaIIbbeta3__9E8A_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaIIb",
+      "name": "Integrin alpha-IIb",
+      "accessions": [
+        "P08514"
+      ],
+      "observed_ca": 915,
+      "resseq_min": 32,
+      "resseq_max": 991,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 683,
+      "resseq_min": 27,
+      "resseq_max": 713,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 848.0,
+        "leg": 663.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1163.0
+      },
+      "alpha_pct_ref_mapped": 94.3,
+      "beta_pct_ref_mapped": 98.7
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          32,
+          629
+        ],
+        "B": [
+          27,
+          460
+        ]
+      },
+      "LOWER": {
+        "A": [
+          630,
+          991
+        ],
+        "B": [
+          461,
+          713
+        ]
+      },
+      "GENU": {
+        "A": [
+          625,
+          633
+        ]
+      },
+      "HEAD": {
+        "A": [
+          32,
+          482
+        ],
+        "B": [
+          27,
+          378
+        ]
+      },
+      "FOOT": {
+        "A": [
+          917,
+          991
+        ],
+        "B": [
+          626,
+          713
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          27,
+          378
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          379,
+          713
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1032,
+      "n_lower_ca": 566,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 38.7,
+      "end_to_end_A": 49.63,
+      "Rg_A": 39.45,
+      "long_extent_A": 114.64,
+      "n_total_ca": 1598
+    },
+    "usable_for_morph": true
+  },
+  "alphaMbeta2__7USL": {
+    "pdb_id": "7USL",
+    "title": "Integrin alphaM/beta2 ectodomain in complex with adenylate cyclase toxin RTX751 and M1F5 Fab",
+    "source_pdb": "inputs/variants/7USL.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaMbeta2__7USL_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaM",
+      "name": "Integrin alpha-M",
+      "accessions": [
+        "P11215"
+      ],
+      "observed_ca": 856,
+      "resseq_min": 1,
+      "resseq_max": 1083,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta2",
+      "name": "Integrin beta",
+      "accessions": [
+        "P05107"
+      ],
+      "observed_ca": 673,
+      "resseq_min": 2,
+      "resseq_max": 674,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 294.0,
+        "leg": 137.0
+      },
+      "beta_module_scores": {
+        "head": 682.0,
+        "leg": 244.0
+      },
+      "alpha_pct_ref_mapped": 74.8,
+      "beta_pct_ref_mapped": 81.4
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          750
+        ],
+        "B": [
+          2,
+          520
+        ]
+      },
+      "LOWER": {
+        "A": [
+          751,
+          1083
+        ],
+        "B": [
+          521,
+          674
+        ]
+      },
+      "GENU": {
+        "A": [
+          746,
+          754
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          599
+        ],
+        "B": [
+          2,
+          341
+        ]
+      },
+      "FOOT": {
+        "A": [
+          1012,
+          1083
+        ],
+        "B": [
+          592,
+          674
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          2,
+          341
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          341,
+          674
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "B_TAIL": {
+        "B": "nearest_aligned(-2)/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1060,
+      "n_lower_ca": 469,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 52.22,
+      "end_to_end_A": 61.31,
+      "Rg_A": 42.13,
+      "long_extent_A": 123.09,
+      "n_total_ca": 1529
+    },
+    "usable_for_morph": true
+  },
+  "alphaMbeta2__7USM": {
+    "pdb_id": "7USM",
+    "title": "Integrin alphaM/beta2 ectodomain",
+    "source_pdb": "inputs/variants/7USM.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaMbeta2__7USM_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaM",
+      "name": "Integrin alpha-M",
+      "accessions": [
+        "P11215"
+      ],
+      "observed_ca": 848,
+      "resseq_min": 1,
+      "resseq_max": 1083,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta2",
+      "name": "Integrin beta",
+      "accessions": [
+        "P05107"
+      ],
+      "observed_ca": 673,
+      "resseq_min": 2,
+      "resseq_max": 674,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 294.0,
+        "leg": 137.0
+      },
+      "beta_module_scores": {
+        "head": 682.0,
+        "leg": 244.0
+      },
+      "alpha_pct_ref_mapped": 74.5,
+      "beta_pct_ref_mapped": 81.4
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          750
+        ],
+        "B": [
+          2,
+          520
+        ]
+      },
+      "LOWER": {
+        "A": [
+          751,
+          1083
+        ],
+        "B": [
+          521,
+          674
+        ]
+      },
+      "GENU": {
+        "A": [
+          746,
+          754
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          599
+        ],
+        "B": [
+          2,
+          341
+        ]
+      },
+      "FOOT": {
+        "A": [
+          1012,
+          1083
+        ],
+        "B": [
+          592,
+          674
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          2,
+          341
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          341,
+          674
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "B_TAIL": {
+        "B": "nearest_aligned(-2)/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1052,
+      "n_lower_ca": 469,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 48.25,
+      "end_to_end_A": 54.05,
+      "Rg_A": 39.89,
+      "long_extent_A": 108.45,
+      "n_total_ca": 1521
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__1JV2": {
+    "pdb_id": "1JV2",
+    "title": "CRYSTAL STRUCTURE OF THE EXTRACELLULAR SEGMENT OF INTEGRIN ALPHAVBETA3",
+    "source_pdb": "inputs/variants/1JV2.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__1JV2_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "INTEGRIN, ALPHA V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 927,
+      "resseq_min": 1,
+      "resseq_max": 956,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "PLATELET MEMBRANE GLYCOPROTEIN IIIA BETA SUBUNIT",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 539,
+      "resseq_min": 55,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2536.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1357.0
+      },
+      "alpha_pct_ref_mapped": 100.0,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          55,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          956
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          55,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          956
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          55,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 972,
+      "n_lower_ca": 494,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 40.98,
+      "end_to_end_A": 51.81,
+      "Rg_A": 39.23,
+      "long_extent_A": 129.32,
+      "n_total_ca": 1466
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__1L5G": {
+    "pdb_id": "1L5G",
+    "title": "CRYSTAL STRUCTURE OF THE EXTRACELLULAR SEGMENT OF INTEGRIN AVB3 IN COMPLEX WITH AN ARG-GLY-ASP LIGAND",
+    "source_pdb": "inputs/variants/1L5G.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__1L5G_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "INTEGRIN ALPHA V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 927,
+      "resseq_min": 1,
+      "resseq_max": 956,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "INTEGRIN BETA-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 539,
+      "resseq_min": 55,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2536.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1357.0
+      },
+      "alpha_pct_ref_mapped": 100.0,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          55,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          956
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          55,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          956
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          55,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 972,
+      "n_lower_ca": 494,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 41.02,
+      "end_to_end_A": 52.03,
+      "Rg_A": 39.27,
+      "long_extent_A": 130.04,
+      "n_total_ca": 1466
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__1M1X": {
+    "pdb_id": "1M1X",
+    "title": "CRYSTAL STRUCTURE OF THE EXTRACELLULAR SEGMENT OF INTEGRIN ALPHA VBETA3 BOUND TO MN2+",
+    "source_pdb": "inputs/variants/1M1X.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__1M1X_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 927,
+      "resseq_min": 1,
+      "resseq_max": 956,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 539,
+      "resseq_min": 55,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2536.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1357.0
+      },
+      "alpha_pct_ref_mapped": 100.0,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          55,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          956
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          55,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          956
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          55,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 972,
+      "n_lower_ca": 494,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 40.9,
+      "end_to_end_A": 51.99,
+      "Rg_A": 39.34,
+      "long_extent_A": 130.29,
+      "n_total_ca": 1466
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__1U8C": {
+    "pdb_id": "1U8C",
+    "title": "A novel adaptation of the integrin PSI domain revealed from its crystal structure",
+    "source_pdb": "inputs/variants/1U8C.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__1U8C_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 927,
+      "resseq_min": 1,
+      "resseq_max": 956,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 599,
+      "resseq_min": 1001,
+      "resseq_max": 1690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2536.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1338.0
+      },
+      "alpha_pct_ref_mapped": 100.0,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1001,
+          1434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          956
+        ],
+        "B": [
+          1435,
+          1690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1001,
+          1352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          956
+        ],
+        "B": [
+          1600,
+          1690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1001,
+          1352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          1353,
+          1690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1023,
+      "n_lower_ca": 503,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 40.56,
+      "end_to_end_A": 50.92,
+      "Rg_A": 39.57,
+      "long_extent_A": 126.83,
+      "n_total_ca": 1526
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__3IJE": {
+    "pdb_id": "3IJE",
+    "title": "Crystal structure of the complete integrin alhaVbeta3 ectodomain plus an Alpha/beta transmembrane fragment",
+    "source_pdb": "inputs/variants/3IJE.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__3IJE_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 938,
+      "resseq_min": 1,
+      "resseq_max": 967,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 695,
+      "resseq_min": 1,
+      "resseq_max": 695,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2536.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 100.0,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          967
+        ],
+        "B": [
+          435,
+          695
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          967
+        ],
+        "B": [
+          600,
+          695
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          695
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 607,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.68,
+      "end_to_end_A": 53.71,
+      "Rg_A": 40.75,
+      "long_extent_A": 135.12,
+      "n_total_ca": 1633
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__4G1E": {
+    "pdb_id": "4G1E",
+    "title": "Crystal structure of integrin alpha V beta 3 with coil-coiled tag.",
+    "source_pdb": "inputs/variants/4G1E.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__4G1E_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 964,
+      "resseq_min": 1,
+      "resseq_max": 994,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 709,
+      "resseq_min": 1,
+      "resseq_max": 729,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2500.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1218.0
+      },
+      "alpha_pct_ref_mapped": 99.9,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          994
+        ],
+        "B": [
+          435,
+          729
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          994
+        ],
+        "B": [
+          600,
+          729
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          729
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1024,
+      "n_lower_ca": 649,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 40.9,
+      "end_to_end_A": 57.98,
+      "Rg_A": 41.23,
+      "long_extent_A": 145.2,
+      "n_total_ca": 1673
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__4G1M": {
+    "pdb_id": "4G1M",
+    "title": "Re-refinement of alpha V beta 3 structure",
+    "source_pdb": "inputs/variants/4G1M.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__4G1M_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 929,
+      "resseq_min": 1,
+      "resseq_max": 959,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 692,
+      "resseq_min": 1,
+      "resseq_max": 692,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2521.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 99.9,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          959
+        ],
+        "B": [
+          435,
+          692
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          959
+        ],
+        "B": [
+          600,
+          692
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          692
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 595,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.38,
+      "end_to_end_A": 51.89,
+      "Rg_A": 40.39,
+      "long_extent_A": 128.14,
+      "n_total_ca": 1621
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__4MMX": {
+    "pdb_id": "4MMX",
+    "title": "Integrin AlphaVBeta3 ectodomain bound to the tenth domain of Fibronectin",
+    "source_pdb": "inputs/variants/4MMX.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__4MMX_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 924,
+      "resseq_min": 1,
+      "resseq_max": 956,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 690,
+      "resseq_min": 1,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2511.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 99.7,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          956
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          956
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 588,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 38.93,
+      "end_to_end_A": 50.85,
+      "Rg_A": 40.22,
+      "long_extent_A": 123.81,
+      "n_total_ca": 1614
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__4MMY": {
+    "pdb_id": "4MMY",
+    "title": "Integrin AlphaVBeta3 ectodomain bound to the tenth domain of Fibronectin with the IAKGDWND motif",
+    "source_pdb": "inputs/variants/4MMY.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__4MMY_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 924,
+      "resseq_min": 1,
+      "resseq_max": 956,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 690,
+      "resseq_min": 1,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2511.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 99.7,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          956
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          956
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 588,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 38.55,
+      "end_to_end_A": 50.75,
+      "Rg_A": 40.23,
+      "long_extent_A": 122.84,
+      "n_total_ca": 1614
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__4MMZ": {
+    "pdb_id": "4MMZ",
+    "title": "Integrin AlphaVBeta3 ectodomain bound to an antagonistic tenth domain of Fibronectin",
+    "source_pdb": "inputs/variants/4MMZ.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__4MMZ_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 920,
+      "resseq_min": 1,
+      "resseq_max": 954,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 690,
+      "resseq_min": 1,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2490.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 99.2,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          954
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          954
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 584,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 38.83,
+      "end_to_end_A": 50.35,
+      "Rg_A": 40.12,
+      "long_extent_A": 121.93,
+      "n_total_ca": 1610
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__4O02": {
+    "pdb_id": "4O02",
+    "title": "AlphaVBeta3 integrin in complex with monoclonal antibody FAB fragment.",
+    "source_pdb": "inputs/variants/4O02.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__4O02_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 915,
+      "resseq_min": 1,
+      "resseq_max": 953,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 687,
+      "resseq_min": 1,
+      "resseq_max": 687,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2458.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1196.0
+      },
+      "alpha_pct_ref_mapped": 98.7,
+      "beta_pct_ref_mapped": 99.4
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          953
+        ],
+        "B": [
+          435,
+          687
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          953
+        ],
+        "B": [
+          600,
+          687
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          687
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 576,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.15,
+      "end_to_end_A": 50.57,
+      "Rg_A": 39.99,
+      "long_extent_A": 123.76,
+      "n_total_ca": 1602
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__6AVQ": {
+    "pdb_id": "6AVQ",
+    "title": "The Therapeutic Antibody LM609 Selectively Inhibits Ligand Binding to Human alpha-V beta-3 Integrin via Steric Hindrance",
+    "source_pdb": "inputs/variants/6AVQ.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__6AVQ_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 927,
+      "resseq_min": 1,
+      "resseq_max": 956,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 688,
+      "resseq_min": 1,
+      "resseq_max": 688,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2535.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1203.0
+      },
+      "alpha_pct_ref_mapped": 100.0,
+      "beta_pct_ref_mapped": 99.6
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          956
+        ],
+        "B": [
+          435,
+          688
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          956
+        ],
+        "B": [
+          600,
+          688
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          688
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 589,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.47,
+      "end_to_end_A": 50.56,
+      "Rg_A": 39.79,
+      "long_extent_A": 123.46,
+      "n_total_ca": 1615
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__6AVR": {
+    "pdb_id": "6AVR",
+    "title": "Human alpha-V beta-3 Integrin (intermediate conformation) in complex with the therapeutic antibody LM609",
+    "source_pdb": "inputs/variants/6AVR.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__6AVR_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 924,
+      "resseq_min": 1,
+      "resseq_max": 953,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 685,
+      "resseq_min": 1,
+      "resseq_max": 685,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2520.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1182.0
+      },
+      "alpha_pct_ref_mapped": 99.7,
+      "beta_pct_ref_mapped": 99.1
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          953
+        ],
+        "B": [
+          435,
+          685
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          953
+        ],
+        "B": [
+          600,
+          685
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          685
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 583,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 62.98,
+      "end_to_end_A": 77.46,
+      "Rg_A": 44.87,
+      "long_extent_A": 144.79,
+      "n_total_ca": 1609
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__6MK0": {
+    "pdb_id": "6MK0",
+    "title": "Integrin AlphaVBeta3 ectodomain bound to antagonist TDI-4161",
+    "source_pdb": "inputs/variants/6MK0.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__6MK0_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 920,
+      "resseq_min": 1,
+      "resseq_max": 954,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 687,
+      "resseq_min": 4,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2490.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 99.2,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          4,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          954
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          4,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          954
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          4,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1023,
+      "n_lower_ca": 584,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.04,
+      "end_to_end_A": 50.77,
+      "Rg_A": 40.15,
+      "long_extent_A": 122.36,
+      "n_total_ca": 1607
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__6MSL": {
+    "pdb_id": "6MSL",
+    "title": "Integrin AlphaVBeta3 ectodomain bound to EETI-II 2.5D",
+    "source_pdb": "inputs/variants/6MSL.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__6MSL_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 924,
+      "resseq_min": 1,
+      "resseq_max": 956,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 690,
+      "resseq_min": 1,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2511.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 99.7,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          956
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          956
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 588,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.0,
+      "end_to_end_A": 51.09,
+      "Rg_A": 40.25,
+      "long_extent_A": 123.61,
+      "n_total_ca": 1614
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__6MSU": {
+    "pdb_id": "6MSU",
+    "title": "Integrin alphaVBeta3 in complex with EETI-II 2.5F",
+    "source_pdb": "inputs/variants/6MSU.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__6MSU_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 924,
+      "resseq_min": 1,
+      "resseq_max": 956,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 690,
+      "resseq_min": 1,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2511.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 99.7,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          956
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          956
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 588,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.25,
+      "end_to_end_A": 51.37,
+      "Rg_A": 40.33,
+      "long_extent_A": 124.24,
+      "n_total_ca": 1614
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__6NAJ": {
+    "pdb_id": "6NAJ",
+    "title": "Integrin AlphaVBeta3 ectodomain bound to Hr10 variant of the 10th domain of Fibronectin.",
+    "source_pdb": "inputs/variants/6NAJ.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__6NAJ_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 920,
+      "resseq_min": 1,
+      "resseq_max": 954,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 690,
+      "resseq_min": 1,
+      "resseq_max": 690,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2490.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1214.0
+      },
+      "alpha_pct_ref_mapped": 99.2,
+      "beta_pct_ref_mapped": 100.0
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          592
+        ],
+        "B": [
+          1,
+          434
+        ]
+      },
+      "LOWER": {
+        "A": [
+          593,
+          954
+        ],
+        "B": [
+          435,
+          690
+        ]
+      },
+      "GENU": {
+        "A": [
+          588,
+          596
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          438
+        ],
+        "B": [
+          1,
+          352
+        ]
+      },
+      "FOOT": {
+        "A": [
+          880,
+          954
+        ],
+        "B": [
+          600,
+          690
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          352
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          353,
+          690
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1026,
+      "n_lower_ca": 584,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.01,
+      "end_to_end_A": 50.77,
+      "Rg_A": 40.19,
+      "long_extent_A": 121.79,
+      "n_total_ca": 1610
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__8XEI": {
+    "pdb_id": "8XEI",
+    "title": "Cryo-EM structure of integrin ITGAV/ITGB3 complex, conformation 1",
+    "source_pdb": "inputs/variants/8XEI.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__8XEI_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 916,
+      "resseq_min": 31,
+      "resseq_max": 983,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 684,
+      "resseq_min": 29,
+      "resseq_max": 712,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2464.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 1187.0
+      },
+      "alpha_pct_ref_mapped": 98.8,
+      "beta_pct_ref_mapped": 99.3
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          31,
+          622
+        ],
+        "B": [
+          29,
+          460
+        ]
+      },
+      "LOWER": {
+        "A": [
+          623,
+          983
+        ],
+        "B": [
+          461,
+          712
+        ]
+      },
+      "GENU": {
+        "A": [
+          618,
+          626
+        ]
+      },
+      "HEAD": {
+        "A": [
+          31,
+          468
+        ],
+        "B": [
+          29,
+          378
+        ]
+      },
+      "FOOT": {
+        "A": [
+          910,
+          983
+        ],
+        "B": [
+          626,
+          712
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          29,
+          378
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          379,
+          712
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1024,
+      "n_lower_ca": 576,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.45,
+      "end_to_end_A": 50.99,
+      "Rg_A": 40.24,
+      "long_extent_A": 123.99,
+      "n_total_ca": 1600
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__8XEN": {
+    "pdb_id": "8XEN",
+    "title": "Cryo-EM structure of integrin ITGAV/ITGB3 complex, conformation 4",
+    "source_pdb": "inputs/variants/8XEN.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__8XEN_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 928,
+      "resseq_min": 31,
+      "resseq_max": 989,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 593,
+      "resseq_min": 29,
+      "resseq_max": 626,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2325.0,
+        "leg": 2512.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 742.0
+      },
+      "alpha_pct_ref_mapped": 99.8,
+      "beta_pct_ref_mapped": 83.3
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          31,
+          622
+        ],
+        "B": [
+          29,
+          460
+        ]
+      },
+      "LOWER": {
+        "A": [
+          623,
+          989
+        ],
+        "B": [
+          461,
+          626
+        ]
+      },
+      "GENU": {
+        "A": [
+          618,
+          626
+        ]
+      },
+      "HEAD": {
+        "A": [
+          31,
+          468
+        ],
+        "B": [
+          29,
+          378
+        ]
+      },
+      "FOOT": {
+        "A": [
+          910,
+          989
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          29,
+          378
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          379,
+          626
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "unavailable (aligned/clamped_high) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1024,
+      "n_lower_ca": 497,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 145.26,
+      "end_to_end_A": 150.68,
+      "Rg_A": 62.41,
+      "long_extent_A": 214.46,
+      "n_total_ca": 1521
+    },
+    "usable_for_morph": true
+  },
+  "alphaVbeta3__8XEZ": {
+    "pdb_id": "8XEZ",
+    "title": "Cryo-EM structure of integrin ITGAV/ITGB3 complex, conformation 5",
+    "source_pdb": "inputs/variants/8XEZ.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaVbeta3__8XEZ_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaV",
+      "name": "Integrin alpha-V",
+      "accessions": [
+        "P06756"
+      ],
+      "observed_ca": 927,
+      "resseq_min": 32,
+      "resseq_max": 989,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta3",
+      "name": "Integrin beta-3",
+      "accessions": [
+        "P05106"
+      ],
+      "observed_ca": 601,
+      "resseq_min": 27,
+      "resseq_max": 627,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 2319.0,
+        "leg": 2512.0
+      },
+      "beta_module_scores": {
+        "head": 1546.0,
+        "leg": 746.0
+      },
+      "alpha_pct_ref_mapped": 99.7,
+      "beta_pct_ref_mapped": 83.5
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          32,
+          622
+        ],
+        "B": [
+          27,
+          460
+        ]
+      },
+      "LOWER": {
+        "A": [
+          623,
+          989
+        ],
+        "B": [
+          461,
+          627
+        ]
+      },
+      "GENU": {
+        "A": [
+          618,
+          626
+        ]
+      },
+      "HEAD": {
+        "A": [
+          32,
+          468
+        ],
+        "B": [
+          27,
+          378
+        ]
+      },
+      "FOOT": {
+        "A": [
+          910,
+          989
+        ],
+        "B": [
+          626,
+          627
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          27,
+          378
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          379,
+          627
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/aligned"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/aligned"
+      },
+      "B_TAIL": {
+        "B": "aligned/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1025,
+      "n_lower_ca": 503,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 102.19,
+      "end_to_end_A": 120.33,
+      "Rg_A": 53.63,
+      "long_extent_A": 196.28,
+      "n_total_ca": 1528
+    },
+    "usable_for_morph": true
+  },
+  "alphaXbeta2__3K6S": {
+    "pdb_id": "3K6S",
+    "title": "Structure of integrin alphaXbeta2 ectodomain",
+    "source_pdb": "inputs/variants/3K6S.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaXbeta2__3K6S_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaX",
+      "name": "Integrin alpha-X",
+      "accessions": [
+        "P20702"
+      ],
+      "observed_ca": 1082,
+      "resseq_min": 1,
+      "resseq_max": 1082,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "H",
+      "subunit": "beta2",
+      "name": "Integrin beta-2",
+      "accessions": [
+        "P05107"
+      ],
+      "observed_ca": 674,
+      "resseq_min": 1,
+      "resseq_max": 674,
+      "source_chain": "H",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 261.0,
+        "leg": 146.0
+      },
+      "beta_module_scores": {
+        "head": 687.0,
+        "leg": 244.0
+      },
+      "alpha_pct_ref_mapped": 73.1,
+      "beta_pct_ref_mapped": 81.4
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          748
+        ],
+        "B": [
+          1,
+          520
+        ]
+      },
+      "LOWER": {
+        "A": [
+          749,
+          1082
+        ],
+        "B": [
+          521,
+          674
+        ]
+      },
+      "GENU": {
+        "A": [
+          744,
+          752
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          597
+        ],
+        "B": [
+          1,
+          341
+        ]
+      },
+      "FOOT": {
+        "A": [
+          1009,
+          1082
+        ],
+        "B": [
+          592,
+          674
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          341
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          341,
+          674
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "B_TAIL": {
+        "B": "nearest_aligned(-2)/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1268,
+      "n_lower_ca": 488,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 12.94,
+      "end_to_end_A": 15.31,
+      "Rg_A": 54.89,
+      "long_extent_A": 138.47,
+      "n_total_ca": 1756
+    },
+    "usable_for_morph": true
+  },
+  "alphaXbeta2__3K71": {
+    "pdb_id": "3K71",
+    "title": "Structure of integrin alphaX beta2 ectodomain",
+    "source_pdb": "inputs/variants/3K71.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaXbeta2__3K71_bent.pdb",
+    "alpha": {
+      "chain": "G",
+      "subunit": "alphaX",
+      "name": "Integrin alpha-X",
+      "accessions": [
+        "P20702"
+      ],
+      "observed_ca": 1082,
+      "resseq_min": 1,
+      "resseq_max": 1082,
+      "source_chain": "G",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "H",
+      "subunit": "beta2",
+      "name": "Integrin beta-2",
+      "accessions": [
+        "P05107"
+      ],
+      "observed_ca": 673,
+      "resseq_min": 1,
+      "resseq_max": 673,
+      "source_chain": "H",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 261.0,
+        "leg": 146.0
+      },
+      "beta_module_scores": {
+        "head": 687.0,
+        "leg": 244.0
+      },
+      "alpha_pct_ref_mapped": 73.1,
+      "beta_pct_ref_mapped": 81.4
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          748
+        ],
+        "B": [
+          1,
+          520
+        ]
+      },
+      "LOWER": {
+        "A": [
+          749,
+          1082
+        ],
+        "B": [
+          521,
+          673
+        ]
+      },
+      "GENU": {
+        "A": [
+          744,
+          752
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          597
+        ],
+        "B": [
+          1,
+          341
+        ]
+      },
+      "FOOT": {
+        "A": [
+          1009,
+          1082
+        ],
+        "B": [
+          592,
+          673
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          341
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          341,
+          673
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "B_TAIL": {
+        "B": "nearest_aligned(-2)/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1268,
+      "n_lower_ca": 487,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 39.96,
+      "end_to_end_A": 47.11,
+      "Rg_A": 43.5,
+      "long_extent_A": 157.7,
+      "n_total_ca": 1755
+    },
+    "usable_for_morph": true
+  },
+  "alphaXbeta2__3K72": {
+    "pdb_id": "3K72",
+    "title": "Structure of integrin alphaX beta2",
+    "source_pdb": "inputs/variants/3K72.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaXbeta2__3K72_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaX",
+      "name": "Integrin alpha-X",
+      "accessions": [
+        "P20702"
+      ],
+      "observed_ca": 884,
+      "resseq_min": 1,
+      "resseq_max": 1082,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "D",
+      "subunit": "beta2",
+      "name": "Integrin beta-2",
+      "accessions": [
+        "P05107"
+      ],
+      "observed_ca": 673,
+      "resseq_min": 1,
+      "resseq_max": 673,
+      "source_chain": "D",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 318.0,
+        "leg": 146.0
+      },
+      "beta_module_scores": {
+        "head": 687.0,
+        "leg": 244.0
+      },
+      "alpha_pct_ref_mapped": 87.6,
+      "beta_pct_ref_mapped": 81.4
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          748
+        ],
+        "B": [
+          1,
+          520
+        ]
+      },
+      "LOWER": {
+        "A": [
+          749,
+          1082
+        ],
+        "B": [
+          521,
+          673
+        ]
+      },
+      "GENU": {
+        "A": [
+          744,
+          752
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          597
+        ],
+        "B": [
+          1,
+          341
+        ]
+      },
+      "FOOT": {
+        "A": [
+          1009,
+          1082
+        ],
+        "B": [
+          592,
+          673
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          341
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          341,
+          673
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "B_TAIL": {
+        "B": "nearest_aligned(-2)/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1070,
+      "n_lower_ca": 487,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 3.09,
+      "end_to_end_A": 12.97,
+      "Rg_A": 57.34,
+      "long_extent_A": 185.42,
+      "n_total_ca": 1557
+    },
+    "usable_for_morph": true
+  },
+  "alphaXbeta2__4NEH": {
+    "pdb_id": "4NEH",
+    "title": "An internal ligand-bound, metastable state of a leukocyte integrin, aXb2",
+    "source_pdb": "inputs/variants/4NEH.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaXbeta2__4NEH_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaX",
+      "name": "Integrin alpha-X",
+      "accessions": [
+        "P20702"
+      ],
+      "observed_ca": 1084,
+      "resseq_min": 1,
+      "resseq_max": 1084,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta2",
+      "name": "Integrin beta-2",
+      "accessions": [
+        "P05107"
+      ],
+      "observed_ca": 668,
+      "resseq_min": 1,
+      "resseq_max": 676,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 260.0,
+        "leg": 130.0
+      },
+      "beta_module_scores": {
+        "head": 684.0,
+        "leg": 245.0
+      },
+      "alpha_pct_ref_mapped": 73.6,
+      "beta_pct_ref_mapped": 78.5
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          748
+        ],
+        "B": [
+          1,
+          520
+        ]
+      },
+      "LOWER": {
+        "A": [
+          749,
+          1084
+        ],
+        "B": [
+          521,
+          676
+        ]
+      },
+      "GENU": {
+        "A": [
+          744,
+          752
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          597
+        ],
+        "B": [
+          1,
+          341
+        ]
+      },
+      "FOOT": {
+        "A": [
+          1009,
+          1084
+        ],
+        "B": [
+          592,
+          676
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          341
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          341,
+          676
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "B_TAIL": {
+        "B": "nearest_aligned(-2)/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1260,
+      "n_lower_ca": 492,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 40.86,
+      "end_to_end_A": 50.53,
+      "Rg_A": 44.13,
+      "long_extent_A": 155.79,
+      "n_total_ca": 1752
+    },
+    "usable_for_morph": true
+  },
+  "alphaXbeta2__4NEN": {
+    "pdb_id": "4NEN",
+    "title": "An internal ligand-bound, metastable state of a leukocyte integrin, aXb2",
+    "source_pdb": "inputs/variants/4NEN.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaXbeta2__4NEN_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaX",
+      "name": "Integrin alpha-X",
+      "accessions": [
+        "P20702"
+      ],
+      "observed_ca": 1063,
+      "resseq_min": 1,
+      "resseq_max": 1083,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "B",
+      "subunit": "beta2",
+      "name": "Integrin beta-2",
+      "accessions": [
+        "P05107"
+      ],
+      "observed_ca": 665,
+      "resseq_min": 1,
+      "resseq_max": 676,
+      "source_chain": "B",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 260.0,
+        "leg": 92.0
+      },
+      "beta_module_scores": {
+        "head": 684.0,
+        "leg": 245.0
+      },
+      "alpha_pct_ref_mapped": 71.8,
+      "beta_pct_ref_mapped": 78.5
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          744
+        ],
+        "B": [
+          1,
+          520
+        ]
+      },
+      "LOWER": {
+        "A": [
+          745,
+          1083
+        ],
+        "B": [
+          521,
+          676
+        ]
+      },
+      "GENU": {
+        "A": [
+          740,
+          748
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          597
+        ],
+        "B": [
+          1,
+          341
+        ]
+      },
+      "FOOT": {
+        "A": [
+          1009,
+          1083
+        ],
+        "B": [
+          592,
+          676
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          341
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          341,
+          676
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "B_TAIL": {
+        "B": "nearest_aligned(-2)/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1253,
+      "n_lower_ca": 475,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 49.33,
+      "end_to_end_A": 51.08,
+      "Rg_A": 44.01,
+      "long_extent_A": 157.55,
+      "n_total_ca": 1728
+    },
+    "usable_for_morph": true
+  },
+  "alphaXbeta2__5ES4": {
+    "pdb_id": "5ES4",
+    "title": "RE-REFINEMENT OF INTEGRIN ALPHAXBETA2 ECTODOMAIN IN THE CLOSED/BENT CONFORMATION",
+    "source_pdb": "inputs/variants/5ES4.pdb",
+    "prepared_pdb": "inputs/variants/prepared/alphaXbeta2__5ES4_bent.pdb",
+    "alpha": {
+      "chain": "A",
+      "subunit": "alphaX",
+      "name": "Integrin alpha-X",
+      "accessions": [
+        "P20702"
+      ],
+      "observed_ca": 1080,
+      "resseq_min": 1,
+      "resseq_max": 1080,
+      "source_chain": "A",
+      "renamed_to": "A"
+    },
+    "beta": {
+      "chain": "H",
+      "subunit": "beta2",
+      "name": "Integrin beta-2",
+      "accessions": [
+        "P05107"
+      ],
+      "observed_ca": 674,
+      "resseq_min": 1,
+      "resseq_max": 674,
+      "source_chain": "H",
+      "renamed_to": "B"
+    },
+    "alignment": {
+      "alpha_module_scores": {
+        "head": 261.0,
+        "leg": 146.0
+      },
+      "beta_module_scores": {
+        "head": 687.0,
+        "leg": 244.0
+      },
+      "alpha_pct_ref_mapped": 73.1,
+      "beta_pct_ref_mapped": 81.4
+    },
+    "boundaries": {
+      "UPPER": {
+        "A": [
+          1,
+          748
+        ],
+        "B": [
+          1,
+          520
+        ]
+      },
+      "LOWER": {
+        "A": [
+          749,
+          1080
+        ],
+        "B": [
+          521,
+          674
+        ]
+      },
+      "GENU": {
+        "A": [
+          744,
+          752
+        ]
+      },
+      "HEAD": {
+        "A": [
+          1,
+          597
+        ],
+        "B": [
+          1,
+          341
+        ]
+      },
+      "FOOT": {
+        "A": [
+          1009,
+          1080
+        ],
+        "B": [
+          592,
+          674
+        ]
+      },
+      "B_HEAD": {
+        "B": [
+          1,
+          341
+        ]
+      },
+      "B_TAIL": {
+        "B": [
+          341,
+          674
+        ]
+      }
+    },
+    "boundary_provenance": {
+      "UPPER": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-6)"
+      },
+      "LOWER": {
+        "A": "aligned/clamped_high",
+        "B": "nearest_aligned(-7)/clamped_high +split_fix"
+      },
+      "GENU": {
+        "A": "aligned/aligned",
+        "B": "unavailable (nearest_aligned(-2)/nearest_aligned(-10)) -- reference window unobserved in the 1JV2 coordinates"
+      },
+      "HEAD": {
+        "A": "clamped_low/aligned",
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "FOOT": {
+        "A": "aligned/clamped_high",
+        "B": "aligned/clamped_high"
+      },
+      "B_HEAD": {
+        "B": "clamped_low/nearest_aligned(-1)"
+      },
+      "B_TAIL": {
+        "B": "nearest_aligned(-2)/clamped_high"
+      }
+    },
+    "bent_cvs": {
+      "n_upper_ca": 1268,
+      "n_lower_ca": 486,
+      "n_genu_ca": 9,
+      "genu_angle_deg": 12.86,
+      "end_to_end_A": 15.44,
+      "Rg_A": 54.84,
+      "long_extent_A": 137.78,
+      "n_total_ca": 1754
+    },
+    "usable_for_morph": true
+  }
+}

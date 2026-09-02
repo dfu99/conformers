@@ -1,0 +1,36 @@
+# aVb3 snap-back MD -- WT vs K459A, 10 ns -- ChimeraX movie
+# Layout + superposition are baked into the PDB coordinates, so no geometry
+# commands are needed here (they hang the headless-script runner on macOS).
+open wt_ca_traj.pdb coordset true
+open k459a_ca_traj.pdb coordset true
+
+set bgColor white
+lighting soft
+graphics silhouettes true width 1
+
+style #1,2 stick
+size #1,2 stickRadius 1.4
+
+color #1,2/A:1-438 cornflowerblue
+color #1,2/B:55-352 cornflowerblue
+color #1,2/A:439-592 mediumseagreen
+color #1,2/B:353-440 mediumseagreen
+color #1,2/A:593-956 chocolate
+color #1,2/B:441-690 chocolate
+
+color #1,2/A:457,459,595,598,636 red
+style #1,2/A:457,459,595,598,636 sphere
+size #1,2/A:457,459,595,598,636 atomRadius 3.5
+
+view
+zoom 0.95
+
+2dlabels text "WT" xpos 0.20 ypos 0.93 size 28 color black bold true
+2dlabels text "K459A" xpos 0.68 ypos 0.93 size 28 color black bold true
+2dlabels text "aVb3 snap-back MD, 10 ns, GB-OBC2 310 K -- red = genu linchpins" xpos 0.02 ypos 0.03 size 15 color dimgray
+
+movie record supersample 3
+coordset #1,2 1,250
+wait 250
+movie encode ~/code/conformers/figures/trajectories/snapback_chimerax_wt_vs_k459a.mp4 framerate 25 quality high
+exit

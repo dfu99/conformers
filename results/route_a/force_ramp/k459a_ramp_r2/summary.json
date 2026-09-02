@@ -1,0 +1,44 @@
+{
+  "tag": "k459a_ramp_r2",
+  "mutations": "A:459:ALA",
+  "ns": 8.0,
+  "start": {
+    "knee": 173.51,
+    "Rg": 66.43,
+    "salt": {
+      "D457-K688": 2.83,
+      "D595-K688": 2.67
+    }
+  },
+  "end": {
+    "knee": 121.37,
+    "Rg": 57.84,
+    "salt": {
+      "D457-K688": 2.61,
+      "D595-K688": 2.69
+    }
+  },
+  "pull": {
+    "mode": "ramp",
+    "ramp_from_pn": 60.0,
+    "ramp_pn": 0.0,
+    "force_pn": 0.0,
+    "equil_ns": 2.0,
+    "final_pn": 0.375,
+    "head_CA": 736,
+    "foot_CA": 60,
+    "axis_A": 153.1,
+    "force_check": {
+      "20pN": {
+        "on_head_pN": -20.0,
+        "on_foot_pN": 20.0,
+        "net_pN": 1e-06
+      },
+      "40pN": {
+        "on_head_pN": -40.0,
+        "on_foot_pN": 40.0,
+        "net_pN": 3e-06
+      }
+    }
+  }
+}

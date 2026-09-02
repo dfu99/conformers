@@ -1,0 +1,470 @@
+{
+  "wt_ramp": {
+    "n_replicates": 3,
+    "mode": "ramp",
+    "kappa_reported": false,
+    "f_half_per_replicate_pN": [
+      8.75,
+      0.0,
+      0.0
+    ],
+    "f_half_mean_pN": 2.92,
+    "f_half_sd_pN": 5.05,
+    "f_half_pooled_pN": 0.0,
+    "bridge_rupture_pN": {
+      "E598-K459": [
+        null,
+        null,
+        null
+      ],
+      "D457-K688": [
+        null,
+        null,
+        null
+      ],
+      "K459-E636": [
+        null,
+        null,
+        null
+      ],
+      "D595-K688": [
+        null,
+        null,
+        null
+      ]
+    },
+    "bridge_survival": {
+      "n_runs": 3,
+      "runs_with_a_rupture": 0,
+      "bridges_ruptured": 0,
+      "bridges_monitored": 12
+    },
+    "extended_deg": 150.0,
+    "bin_pn": 5.0,
+    "temperature_K": 310.0,
+    "bins": [
+      {
+        "f_pN": 2.5,
+        "n": 21,
+        "knee_mean_deg": 152.79,
+        "knee_sd_deg": 5.86,
+        "P_extended": 0.667,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 7.5,
+        "n": 18,
+        "knee_mean_deg": 155.29,
+        "knee_sd_deg": 5.52,
+        "P_extended": 0.778,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 12.5,
+        "n": 21,
+        "knee_mean_deg": 158.2,
+        "knee_sd_deg": 4.81,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 17.5,
+        "n": 21,
+        "knee_mean_deg": 158.21,
+        "knee_sd_deg": 3.8,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 22.5,
+        "n": 18,
+        "knee_mean_deg": 157.8,
+        "knee_sd_deg": 3.18,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 27.5,
+        "n": 21,
+        "knee_mean_deg": 159.21,
+        "knee_sd_deg": 3.77,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 32.5,
+        "n": 21,
+        "knee_mean_deg": 160.34,
+        "knee_sd_deg": 4.14,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 37.5,
+        "n": 18,
+        "knee_mean_deg": 162.66,
+        "knee_sd_deg": 2.47,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 42.5,
+        "n": 21,
+        "knee_mean_deg": 161.99,
+        "knee_sd_deg": 3.13,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 47.5,
+        "n": 21,
+        "knee_mean_deg": 161.0,
+        "knee_sd_deg": 3.23,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 52.5,
+        "n": 18,
+        "knee_mean_deg": 162.96,
+        "knee_sd_deg": 3.19,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 57.5,
+        "n": 21,
+        "knee_mean_deg": 162.29,
+        "knee_sd_deg": 2.56,
+        "P_extended": 1.0,
+        "kappa_kJ_per_mol_rad2": null
+      }
+    ],
+    "control_no_load": {
+      "bridge_survival": {
+        "n_runs": 1,
+        "runs_with_a_rupture": 1,
+        "bridges_ruptured": 4,
+        "bridges_monitored": 4
+      },
+      "bridge_rupture_pN": {
+        "E598-K459": [
+          0.0
+        ],
+        "D457-K688": [
+          0.0
+        ],
+        "K459-E636": [
+          0.0
+        ],
+        "D595-K688": [
+          0.0
+        ]
+      }
+    }
+  },
+  "k459a_ramp": {
+    "n_replicates": 3,
+    "mode": "ramp",
+    "kappa_reported": false,
+    "f_half_per_replicate_pN": [
+      56.88,
+      55.0,
+      37.5
+    ],
+    "f_half_mean_pN": 49.79,
+    "f_half_sd_pN": 10.69,
+    "f_half_pooled_pN": 57.27,
+    "bridge_rupture_pN": {
+      "D457-K688": [
+        55.1,
+        null,
+        59.6
+      ],
+      "D595-K688": [
+        55.1,
+        null,
+        59.6
+      ]
+    },
+    "bridge_survival": {
+      "n_runs": 3,
+      "runs_with_a_rupture": 2,
+      "bridges_ruptured": 4,
+      "bridges_monitored": 6
+    },
+    "extended_deg": 150.0,
+    "bin_pn": 5.0,
+    "temperature_K": 310.0,
+    "bins": [
+      {
+        "f_pN": 2.5,
+        "n": 21,
+        "knee_mean_deg": 126.4,
+        "knee_sd_deg": 6.1,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 7.5,
+        "n": 18,
+        "knee_mean_deg": 129.62,
+        "knee_sd_deg": 6.02,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 12.5,
+        "n": 21,
+        "knee_mean_deg": 135.6,
+        "knee_sd_deg": 5.97,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 17.5,
+        "n": 21,
+        "knee_mean_deg": 136.84,
+        "knee_sd_deg": 4.67,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 22.5,
+        "n": 18,
+        "knee_mean_deg": 137.23,
+        "knee_sd_deg": 5.56,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 27.5,
+        "n": 21,
+        "knee_mean_deg": 138.02,
+        "knee_sd_deg": 5.02,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 32.5,
+        "n": 21,
+        "knee_mean_deg": 142.45,
+        "knee_sd_deg": 5.3,
+        "P_extended": 0.143,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 37.5,
+        "n": 18,
+        "knee_mean_deg": 143.64,
+        "knee_sd_deg": 4.44,
+        "P_extended": 0.167,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 42.5,
+        "n": 21,
+        "knee_mean_deg": 146.48,
+        "knee_sd_deg": 3.03,
+        "P_extended": 0.095,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 47.5,
+        "n": 21,
+        "knee_mean_deg": 145.82,
+        "knee_sd_deg": 2.6,
+        "P_extended": 0.095,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 52.5,
+        "n": 18,
+        "knee_mean_deg": 145.15,
+        "knee_sd_deg": 2.76,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 57.5,
+        "n": 21,
+        "knee_mean_deg": 147.79,
+        "knee_sd_deg": 6.59,
+        "P_extended": 0.524,
+        "kappa_kJ_per_mol_rad2": null
+      }
+    ],
+    "control_no_load": {
+      "bridge_survival": {
+        "n_runs": 1,
+        "runs_with_a_rupture": 1,
+        "bridges_ruptured": 2,
+        "bridges_monitored": 2
+      },
+      "bridge_rupture_pN": {
+        "D457-K688": [
+          0.0
+        ],
+        "D595-K688": [
+          0.0
+        ]
+      }
+    }
+  },
+  "e598a_ramp": {
+    "n_replicates": 3,
+    "mode": "ramp",
+    "kappa_reported": false,
+    "f_half_per_replicate_pN": [
+      null,
+      null,
+      43.33
+    ],
+    "f_half_mean_pN": 43.33,
+    "f_half_sd_pN": null,
+    "f_half_pooled_pN": null,
+    "bridge_rupture_pN": {
+      "D457-K688": [
+        58.1,
+        39.4,
+        59.6
+      ],
+      "K459-E636": [
+        59.6,
+        59.6,
+        59.6
+      ],
+      "D595-K688": [
+        49.1,
+        41.6,
+        22.9
+      ]
+    },
+    "bridge_survival": {
+      "n_runs": 3,
+      "runs_with_a_rupture": 3,
+      "bridges_ruptured": 9,
+      "bridges_monitored": 9
+    },
+    "extended_deg": 150.0,
+    "bin_pn": 5.0,
+    "temperature_K": 310.0,
+    "bins": [
+      {
+        "f_pN": 2.5,
+        "n": 21,
+        "knee_mean_deg": 129.06,
+        "knee_sd_deg": 12.88,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 7.5,
+        "n": 18,
+        "knee_mean_deg": 127.33,
+        "knee_sd_deg": 9.8,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 12.5,
+        "n": 21,
+        "knee_mean_deg": 131.35,
+        "knee_sd_deg": 10.18,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 17.5,
+        "n": 21,
+        "knee_mean_deg": 134.2,
+        "knee_sd_deg": 8.81,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 22.5,
+        "n": 18,
+        "knee_mean_deg": 136.53,
+        "knee_sd_deg": 8.63,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 27.5,
+        "n": 21,
+        "knee_mean_deg": 136.94,
+        "knee_sd_deg": 8.17,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 32.5,
+        "n": 21,
+        "knee_mean_deg": 138.06,
+        "knee_sd_deg": 8.88,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 37.5,
+        "n": 18,
+        "knee_mean_deg": 140.79,
+        "knee_sd_deg": 6.81,
+        "P_extended": 0.0,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 42.5,
+        "n": 21,
+        "knee_mean_deg": 139.93,
+        "knee_sd_deg": 8.2,
+        "P_extended": 0.143,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 47.5,
+        "n": 21,
+        "knee_mean_deg": 140.95,
+        "knee_sd_deg": 8.9,
+        "P_extended": 0.286,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 52.5,
+        "n": 18,
+        "knee_mean_deg": 144.07,
+        "knee_sd_deg": 5.64,
+        "P_extended": 0.056,
+        "kappa_kJ_per_mol_rad2": null
+      },
+      {
+        "f_pN": 57.5,
+        "n": 21,
+        "knee_mean_deg": 149.32,
+        "knee_sd_deg": 4.12,
+        "P_extended": 0.476,
+        "kappa_kJ_per_mol_rad2": null
+      }
+    ],
+    "control_no_load": {
+      "bridge_survival": {
+        "n_runs": 1,
+        "runs_with_a_rupture": 1,
+        "bridges_ruptured": 3,
+        "bridges_monitored": 3
+      },
+      "bridge_rupture_pN": {
+        "D457-K688": [
+          0.0
+        ],
+        "K459-E636": [
+          0.0
+        ],
+        "D595-K688": [
+          0.0
+        ]
+      }
+    }
+  }
+}

@@ -39,6 +39,9 @@ try:
         CustomCentroidBondForce,
         CustomExternalForce,
         CustomCompoundBondForce,
+        CustomCVForce,
+        RMSDForce,
+        Vec3,
     )
     from openmm.unit import nanometers, kilojoules_per_mole, radians
 except ImportError:
@@ -46,8 +49,15 @@ except ImportError:
         CustomCentroidBondForce,
         CustomExternalForce,
         CustomCompoundBondForce,
+        CustomCVForce,
+        RMSDForce,
+        Vec3,
     )
     from simtk.unit import nanometers, kilojoules_per_mole, radians
+
+# Force unit conversion. 1 kJ/(mol*nm) = 1000 / (N_A * 1e-9) N = 1.6605e-12 N
+# = 1.6605 pN, so 1 pN = 0.602214076 kJ/(mol*nm).
+PN_TO_KJ_PER_MOL_NM = 0.602214076
 
 import numpy as np
 
@@ -85,21 +95,39 @@ AVB3_HEADOPEN_DISTANCES = [
 ]
 
 
+def _resseq(residue) -> int | None:
+    """PDB resSeq for a residue, or None if it carries no integer id."""
+    try:
+        return int(residue.id)
+    except (ValueError, AttributeError, TypeError):
+        return None
+
+
 def _select_atoms_by_range(topology, chain_id: str, start: int, end: int) -> list[int]:
-    """Select atom indices for a chain/residue range."""
+    """Select atom indices for a chain/residue range, matching on PDB resSeq.
+
+    AVB3_DOMAINS is written in crystal numbering, so resSeq (residue.id) is the only
+    correct key. The previous order tried the POSITIONAL residue.index + 1 first and
+    only fell back to resSeq if that matched nothing -- but index+1 essentially always
+    matches something, so the fallback never fired. 1JV2 chain B spans resSeq 55..690
+    with just 539 residues observed, so index+1 runs 1..539 and "beta_head" (B, 1, 352)
+    selected a stretch running well into the leg instead of the headpiece.
+    tasks/lessons.md already records this exact failure mode for CV definitions:
+    a range selects DIFFERENT physical residues with no error raised.
+    """
     indices = []
     for atom in topology.atoms():
-        if (atom.residue.chain.id == chain_id and
-                start <= atom.residue.index + 1 <= end):
+        if atom.residue.chain.id != chain_id:
+            continue
+        rs = _resseq(atom.residue)
+        if rs is not None and start <= rs <= end:
             indices.append(atom.index)
-    # Fallback: try matching by residue.id (string PDB resSeq)
+    # Only if the topology carries no usable resSeq at all (e.g. it was renumbered by a
+    # writer) fall back to positional indexing.
     if not indices:
         for atom in topology.atoms():
-            try:
-                resseq = int(atom.residue.id)
-            except (ValueError, AttributeError):
-                continue
-            if atom.residue.chain.id == chain_id and start <= resseq <= end:
+            if (atom.residue.chain.id == chain_id and
+                    start <= atom.residue.index + 1 <= end):
                 indices.append(atom.index)
     return indices
 
@@ -218,37 +246,46 @@ def add_domain_restraints_with_pulling(
     if pull_pairs is None:
         pull_pairs = AVB3_HINGE_DISTANCES
 
-    # Intra-domain position restraints on CA atoms
-    restraint_force = CustomExternalForce(
-        "0.5 * k_domain * ((x-x0)^2 + (y-y0)^2 + (z-z0)^2)")
-    restraint_force.addGlobalParameter("k_domain", restraint_k)
-    restraint_force.addPerParticleParameter("x0")
-    restraint_force.addPerParticleParameter("y0")
-    restraint_force.addPerParticleParameter("z0")
-
+    # Intra-domain restraints: RMSD to the reference FOLD, not to absolute positions.
+    #
+    # This previously used CustomExternalForce with per-particle x0,y0,z0 taken from the
+    # starting coordinates -- an absolute lab-frame cage on every restrained CA. That does
+    # not "preserve the domain's internal fold" as the docstring claims; it pins the domain
+    # in the box and directly opposes the pulling force added below. At restraint_k=200
+    # over the 435 CAs of alpha_head_thigh the effective centroid stiffness is
+    # 200*435 = 87,000 kJ/mol/nm^2 = 1.44e5 pN/nm, so a 40 pN pull displaces the domain by
+    # ~0.003 A: every run was a guaranteed null regardless of the requested force.
+    #
+    # RMSDForce is evaluated after optimal superposition, so it is invariant to rigid-body
+    # translation and rotation. The fold is held; the domain is free to move.
+    restraint_forces = []
+    ref_positions = [Vec3(*(float(c) for c in row)) for row in positions_nm] * nanometers
     n_restrained = 0
     for dname, (chain, start, end) in domains.items():
-        for atom in topology.atoms():
-            if atom.name != "CA":
-                continue
-            try:
-                resseq = int(atom.residue.id)
-            except (ValueError, AttributeError):
-                resseq = atom.residue.index + 1
-            if atom.residue.chain.id == chain and start <= resseq <= end:
-                idx = atom.index
-                if idx < len(positions_nm):
-                    x0, y0, z0 = positions_nm[idx]
-                    restraint_force.addParticle(idx, [x0, y0, z0])
-                    n_restrained += 1
+        ca_idx = [a.index for a in topology.atoms()
+                  if a.name == "CA"
+                  and a.index < len(positions_nm)
+                  and a.residue.chain.id == chain
+                  and (_resseq(a.residue) is not None)
+                  and start <= _resseq(a.residue) <= end]
+        if len(ca_idx) < 4:
+            print(f"  WARNING: domain {dname} matched {len(ca_idx)} CA atoms — not restrained")
+            continue
+        cv_force = CustomCVForce("0.5 * k_domain * rmsd^2")
+        cv_force.addCollectiveVariable("rmsd", RMSDForce(ref_positions, ca_idx))
+        cv_force.addGlobalParameter("k_domain", restraint_k)
+        system.addForce(cv_force)
+        restraint_forces.append(cv_force)
+        n_restrained += len(ca_idx)
 
-    system.addForce(restraint_force)
-    print(f"  Domain restraints: {n_restrained} CA atoms restrained "
-          f"(k={restraint_k} kJ/mol/nm²)")
+    print(f"  Domain restraints: {len(restraint_forces)} domains, {n_restrained} CA atoms "
+          f"(RMSD-to-fold, k={restraint_k} kJ/mol/nm²)")
 
     # Inter-domain centroid pulling
-    # Convert pN to kJ/(mol·nm): F_openmm = F_pN * 6.022e-4
-    pull_force_value = pull_force_pn * 6.022e-4
+    # Convert pN to kJ/(mol·nm). This was 6.022e-4, low by exactly 1000x, so every
+    # requested force was applied at one thousandth of its value (the restrained_pull
+    # preset's 0.5 pN became 0.0005 pN).
+    pull_force_value = pull_force_pn * PN_TO_KJ_PER_MOL_NM
 
     pull_force = CustomCentroidBondForce(2,
         "-f_pull * distance(g1, g2)")
@@ -265,7 +302,7 @@ def add_domain_restraints_with_pulling(
         print(f"  Centroid pull: {d1} ↔ {d2}, F={pull_force_pn} pN")
 
     system.addForce(pull_force)
-    return restraint_force, pull_force
+    return restraint_forces, pull_force
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

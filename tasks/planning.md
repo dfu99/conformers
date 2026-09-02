@@ -99,8 +99,260 @@ external RunPod GPU compute (the former PACE A100-80GB allocation is gone — PA
 access permanently removed 2026-06) or a new HS-AFM dataset we do not have.**
 Surfaced to PI via Slack at this checkpoint.
 
+## Checkpoint 2026-08-14 — snap-back landed; the real gap is that we have never simulated force
+
+**Read this before continuing route-A.** Three things below are not derivable from the
+code or git history and were nearly lost to a context compaction.
+
+**1. The snap-back MD ran, and its first interpretation was wrong.** All four systems
+completed 20 ns on the A5000 (3 replicates each for WT/K459A/E598A). WT collapsed
+174° → 146° alongside every mutant; mutant−WT differential ~9° against ±10–17° replicate
+scatter (Welch t = 1.1 and 0.85), and K459A ≈ E598A, contradicting obj-081's 1.8× ranking.
+My first read was "underpowered, need ~20 replicates per arm." **That diagnosis is wrong
+and should not be repeated.** Per the PI: integrins are force-sensitive machines, so bent
+IS the ground state at F = 0 and extension is thermodynamically uphill without tension
+(~20 pN over ~15 nm ≈ 43 kcal/mol of landscape tilt, vs ~6–8 kcal/mol screened per genu
+lock). obj-082 measured barrier crossing in a regime with no barrier — **wrong ensemble,
+not insufficient sampling.** More replicates would only measure the collapse more
+precisely. Do not queue them.
+
+**2. We have never run a force-biased free-energy simulation.** The causal chain
+residue → mechanobiological actuation is done for links 1–4 (obj-078 contacts → obj-080
+engagement order → obj-081 static lock energies) and completely open for 5–7 (no PMF, no
+force well, no cell-level actuation). Note the trap: `results/afm_pipeline/free_energy_profile/`
+holds ΔG(CV0) from −kT log P of *experimental HS-AFM* frames — there is no MD in it,
+despite the name.
+
+**3. The only constant-force code we own was broken twice over, and obj-025's negative
+is therefore suspect.** In `pipelines/{avb3-conformers,conformer-library}/scripts/domain_steering.py`:
+the pN → kJ/(mol·nm) factor was `6.022e-4`, **low by exactly 1000×**; and the
+"domain restraints" were a `CustomExternalForce` lab-frame cage at ~1.44e5 pN/nm, so a
+40 pN pull moved a domain ~0.003 Å. Both now fixed (correct constant + `RMSDForce`, which
+is invariant to rigid-body motion), **uncommitted and never re-run**. A third bug in the
+same family: `_select_atoms_by_range` preferred positional `residue.index + 1` over PDB
+resSeq, so `beta_head = (B, 1, 352)` selected leg residues instead of headpiece. This means
+obj-025 ("EC vs EO SMD steering — confirmed negative") and the EO-coverage blocker built
+on it were mechanically incapable of showing motion regardless of biology. **Re-opening
+obj-025 is pending a PI decision.** `docs/eo_coverage_strategy.md` currently plans
+expensive workarounds (metadynamics, REMD, string method) around a blocker that may not exist.
+
+**Next build — PI-approved 2026-08-14, in progress.** Add a `CustomCentroidBondForce`
+pull term to `pipelines/route_a/scripts/snapback_md.py`: pull headpiece against
+lower-leg C-termini (the physiological ligand↔cytoskeleton axis; `UPPER`/`LOWER`/`GENU`
+ranges are already defined there), reusing `PN_TO_KJ_PER_MOL_NM = 0.602214076` from the
+fixed `domain_steering.py` — do not re-derive it. Ramp 0 → 60 pN over 20 ns, one run per
+genotype (WT / K459A / E598A), then a constant-force ladder only where they separate.
+Readouts chosen to be lab-comparable: **F½** (force at which the knee holds → magnetic
+tweezers), **κ = k_BT/var(θ)** (→ AFM compliance), **P(extended | F)**. Locks resist
+rupture over ~1 nm, so ~8 kcal/mol maps to a ~50 pN threshold shift — measurable, unlike
+the 9° zero-force smear. Cost: 3 ramps ≈ 13 GPU-h; full ladder ≈ 66 GPU-h / ~$15–25.
+**Before trusting any result, verify the requested pN actually reaches the atoms**
+(finite-difference the force, or check displacement scales with F). Every prior force run
+in this repo was a silent null.
+
+## Checkpoint 2026-08-17 — force-ramp patch built, validated, and re-designed after audit
+
+**Status: code done and proven, no GPU time spent yet.** `snapback_md.py` now carries the
+pull term, `run_force_ramp.sh` runs the suite, `analyze_force_ramp.py` produces the readouts.
+Nothing has been launched — the pod has ~14 GB of 24 GB free (oxDNA at 58% util, co-runnable
+under MPS), so this is waiting on a go, not on a slot.
+
+**The force is real this time, and here are the two numbers that prove it** (both on the real
+22,483-atom WT build, vacuum, CPU):
+- *Reaches the atoms*: requesting 20 pN puts −20.000 pN on the head anchor and +20.000 pN on
+  the foot anchor, net 2e-13 pN; 40 pN gives −40.000/+40.000. Pull axis 153.1 Å over 736 head
+  CA ↔ 60 foot CA. `verify_pull()` runs inline on every force run, not just under `--check-force`.
+- *Moves the atoms*: 20 ps at 400 pN takes the knee 174.4° → 176.9° and holds head↔foot at
+  152.5 Å, while the 0 pN control falls to 172.2° and contracts to 151.5 Å.
+The unit constant is now asserted at import against openmm's own unit system
+(`1 pN × N_A → kJ/(mol·nm)`), because `verify_pull` multiplies and divides by the same constant
+and would happily report the requested pN back to itself even at the historical 1000×-low value.
+
+**A blocker was found in the knee observable itself — fixed.** `UPPER/LOWER/GENU` claimed to be
+"ORIGINAL 1JV2 numbering (== extended_state_b numbering)". That equality is false for chain B:
+`extended_state_b.pdb` is renumbered contiguously (A 1-927, B 1-539), so `GENU["B"]=(436,444)`
+selected β3 mature 587-595 — **61.3 Å from the αV knee**, at fraction 0.841 along the head→foot
+axis versus the real hinge at 0.441 — and `UPPER["B"]` swallowed 60 lower-leg residues
+(B:381-440, fraction 0.671). Nothing raised: the ranges matched 9 and 440 real residues. Effect:
+a true 30° genu bend registered as 15.3°, i.e. **1.8× compressed, var(knee) 3.3× too small**, so
+κ would have come out ~3.3× too stiff and a 20°-bent structure would have scored as "extended".
+Now `GENU = {"A": (588,596)}` only (β3 mature 435-531, which contains the β3 genu, is absent from
+the model), `UPPER["B"]=(1,380)` / `LOWER["B"]=(381,539)` split at chain B's actual numbering
+break — which *is* that missing-genu gap. Start knee reads 173.5° instead of 174.4°.
+`make_observables` now aborts unless the ranges resolve to exactly 972/494/9 CA.
+
+**This bug is not confined to snapback_md.py — obj-076's headline CV is suspect.**
+`define_extension_cvs.py` applies the same 1JV2-numbered `GENU/UPPER/LOWER` constants to BOTH
+`--bent data/reference_pdbs/1jv2.pdb` (where B:436-444 IS the real β3 genu) and
+`--extended results/route_a/extended_state_b.pdb` (where it is 61 Å down the leg). So the
+published primary reaction coordinate **"genu hinge angle 41° → 174°" is measured about two
+different hinges at its two endpoints.** Same for `perturbation_linchpin_scan.py` and
+`lock_energy_analysis.py` insofar as they use those ranges on the renumbered file. Re-deriving
+obj-076/077 is a PI-level call, not a side effect of this patch — flagged, not touched.
+
+**The protocol changed: ramp DOWN, not up.** The original design (0 → 60 pN over 20 ns) cannot
+measure F½ from this starting structure. The run starts extended, so the low-force half of an
+up-ramp is exactly the obj-082 regime: across the 9 zero-force replicates the knee loses half
+its total drop at **3.8 ± 2.4 ns**, which at 3 pN/ns reports as **"F½ = 12 ± 7 pN" with no force
+applied at all** — a null model that lands right on the literature integrin extension force, i.e.
+a believable wrong answer. Production protocol is now: equilibrate under the holding load
+(`--equil-ns 2` at 60 pN, no data recorded), then release 60 → 0 pN, so the measurement is the
+force at which holding *stops*. That number — the null F½ of 12 ± 7 pN — is the control any
+result must beat, and it cost 0 GPU-hours to compute.
+
+**n = 3 per genotype, not n = 1.** Pooled within-genotype SD across obj-082's replicates is
+12.8° of knee; at n = 1 no genotype ordering is claimable (that is what made obj-082
+uninterpretable). Budget-neutral trade: 3 genotypes × 3 reps × (2 ns hold + 8 ns ramp) = 90 ns
+≈ 20 GPU-h, versus 13 GPU-h for the original three un-replicated 20 ns ramps.
+
+**κ needs the ladder, not the ramp.** Under a ramp, var(knee) inside a force bin is the drift
+the ramp is driving, not thermal fluctuation. `--force-pn` (already implemented) is the way to
+get κ and an equilibrium P(extended|F); `analyze_force_ramp.py` reports `kappa = null` for ramp
+files by construction rather than printing a meaningless number. Fund the ladder only after the
+ramps say which forces are worth 20 ns each.
+
+**Frames are now saved** (`frames.dcd`, one per report chunk, ~55 MB/run). The observable bug
+above would have cost a full re-run to recover from; with frames it is a re-analysis.
+
+**Files**: `pipelines/route_a/scripts/{snapback_md.py, run_force_ramp.sh, analyze_force_ramp.py}`.
+Also fixed a publish bug shared with `run_snapback_replicates.sh`: `cp -r "$LOCAL/$1" "$FINAL/$1"`
+nests into `$FINAL/$1/$1` when the target already exists (which a half-finished earlier publish
+leaves behind) — now copies contents.
+
+### Pilot result 2026-08-18 — the first force-attributable signal this project has produced
+
+Ran `run_force_ramp.sh 8 60 1 2` on the A5000: 3 genotypes x (2 ns hold @ 60 pN + 8 ns ramp
+60 -> 0), 30 ns, ~6.6 GPU-h, all three completed. Results in `results/route_a/force_ramp/`
+(trajectories + `frames.dcd` + `readouts.json`), figure `figures/route_a_force_ramp.png`.
+
+**The result is in the salt bridges, not the knee angle.**
+
+| genu bridge state, first 10 ns | WT | K459A | E598A |
+|---|---|---|---|
+| under 60 -> 0 pN load (n=1)  | **0 of 4 opened** | both opened @ 55 pN | all three opened @ 49-60 pN |
+| at F = 0, obj-082 (n=3)      | 4 of 4 opened in all 3 reps (1.2-9.6 ns) | opened 0.3-5.0 ns | opened 0.2-4.0 ns |
+
+Load keeps the WT genu clasped over a window in which, unloaded, it always comes apart; neither
+single mutant is rescued by the same load. That is link 6 of the causal chain: the locks and the
+force hold the extended state together, and removing one lock is enough for 60 pN to fail.
+The bridge readout is also the only one immune to the two things that could have faked it -- it is
+a direct atom-pair distance, so the hinge-numbering bug does not touch it, and obj-082's CSVs
+carry the identical columns, so the F = 0 control is like-for-like.
+
+**Do NOT quote the knee-angle F½ numbers** (WT 8.8 pN, K459A 56.9 pN, E598A never holds). Within a
+single ramp force and time are perfectly confounded, so anything that merely decays produces that
+signature. The null model -- obj-082's own collapse clock mapped onto this ramp schedule -- predicts
+F½ = 42.8 +/- 15.1 pN (WT), 60.0 +/- 0.0 (K459A), 59.8 +/- 0.4 (E598A), i.e. **it already reproduces
+the observed ordering**. The only part of the knee readout that beats its null is WT holding down to
+8.8 pN against a predicted 42.8 +/- 15.1, and that is one run. (Caveat on the null itself: obj-082
+stored knee in the old compressed observable and saved no frames, so the conversion runs through a
+rigid-bend calibration -- an approximation, not a re-measurement.)
+
+**Statistics, stated honestly.** n = 1 loaded run per genotype. Counting bridges, WT is 0/4 opened
+under load vs 12/12 at F = 0 (Fisher p ~ 5e-4), but four bridges inside one trajectory are not
+independent samples; at the run level this is n = 1 vs n = 3, so p >= 0.25. **Suggestive, not
+significant.** Two more loaded replicates per genotype (~13 GPU-h) would make it a run-level test.
+
+**obj-081's ranking is inverted again.** E598A collapsed further than K459A (110.3 deg vs 118.9 deg
+final knee; 3 bridges opened vs 2), as it did in obj-082. The static lock-energy prediction that
+K459A should be the harder hit has now failed twice, under load and without it.
+
+### Model gaps found while interpreting the pilot (2026-08-21)
+
+Three facts about the model we are simulating, **verified locally, not taken on trust**:
+
+1. **There is no calcium anywhere in it.** `results/route_a/extended_state_b.pdb` has 0 HETATM
+   records, as does every route_a PDB on the pod. 1JV2 carries 6 structural Ca2+, one of them at
+   the genu (Xiong 2001 describes a well-coordinated genu Ca2+); obj-073 kept them for the BENT
+   stage-1b equilibration. The extended morph dropped them. **E636 is one of our four lock
+   residues and is a genu-Ca2+ coordinating residue in the crystal**, so the lock we are measuring
+   is missing a partner. This does not invalidate the WT-vs-mutant differential (all arms share
+   it) but it does bound how literally the rupture forces can be read.
+2. **Zero ionic screening.** The GB-OBC2 energy expression as we build it contains `kappa=0`
+   verbatim, i.e. 0 mM salt, and the NonbondedForce runs reaction-field dielectric 1.0 with a
+   2.0 nm cutoff. Our salt bridges are unscreened -- an upper bound on lock strength, consistent
+   with obj-081's own caveat.
+3. **The pull couples to the knee as cos(theta/2), which vanishes at full extension.** Measured
+   from our own coordinates: genu->head arm 67.7 A, genu->foot arm 85.6 A, head->foot 153.1 A.
+   cos(theta/2) = 0.049 at theta = 174.4 deg vs 0.296 at 145.6 deg. **Delivering the knee torque
+   that 17.8 pN delivers at 145.6 deg needs ~108 pN of axial force at 174.4 deg.** This is why
+   60 pN did not hold the knee near-straight in the pilot while the bridges still felt the load,
+   and why the earlier vacuum probe needed 400 pN to visibly straighten it. Force-vs-knee is
+   intrinsically weak at the extended end; the bridge readout is the better observable for a
+   second reason.
+
+**Unverified lead, flagged as such.** A background research task (not commissioned in the
+session that ran the pilot) reports that the integrin-SMD literature mostly applies forces chosen
+for wall-clock convenience rather than calibration, and -- more consequentially -- that the ~40 pN
+figure this project has been anchoring to is a **TGT DNA-rupture threshold for ligand-bond tension**
+(Wang & Ha, Science 2013), not a knee-opening force; it gives the right anchor for bent->extended
+as **f-half = 17.8 pN (Ca2+/Mg2+) / 22.7 pN (Mn2+), Delta-x = 0.5-0.7 nm**, BFP on the purified
+alphaVbeta3 ectodomain (Chen Y et al., ACS Nano 2024). The arm-length and force-field claims in
+that report reproduce exactly against our files, which is reassuring but is not verification of
+its citations. **Spot-check the DOIs before any of it goes into writing.**
+
+### Novelty verdict on obj-083 (2026-08-24) — narrowly novel, NOT yet defensible
+
+Two literature sweeps (62 agents, then 33 re-verifying every citation against the actual record).
+Full adjudication: `docs/route_a_novelty_adjudication_2026-08-24.md`. Read it before writing anything.
+
+**Answer to "is this novel": partly, and less than it looks.** Nothing published scores a NAMED aV
+genu ion pair against applied force, or mutates a genu lock residue — that claim shape is ours. But
+three papers own the surrounding ground, and the first sweep missed all three:
+- **Kolasangiani 2025** (10.1016/j.str.2024.11.016): constant 66.4 pN on full-length aVb3, n=3, plus
+  force-release re-bending — our protocol and our n, in explicit solvent, with PUBLIC TRAJECTORIES.
+- **Driscoll 2021** (10.1016/j.bpj.2021.09.010): aVb3 genu angle vs force, WT vs point mutants.
+- **Chen Y 2017** (10.1016/j.matbio.2016.07.002): a single point mutation abolishing force-regulated
+  bending in aVb3 (L138I, D723R, >=35-fold).
+
+**Two threats the first sweep raised turned out to be mis-readings** — worth knowing because they
+were nearly written into the record as settled. Li 2024's "lock" sentence was truncated mid-clause:
+it locks the alpha subunit **in the opposite bent conformation**, in the ISOLATED alpha subunit,
+UNLOADED — not the extended state; and K459/E598/D595 appear nowhere in that paper. Cormier 2018 is
+an **alphaVbeta8 cryo-EM** paper at 6.4 A that names no salt bridges; the "D595/E598 do not
+participate" claim was our own gloss on it.
+
+**THE PROBLEM, and it is upstream of obj-083.** The four-pair genu network does not exist in the
+1JV2 crystal (22.95 / 19.36 / 25.42 / 7.39 A) NOR in `extended_seed.pdb` (21.82 / 6.39 / 15.67 /
+7.39 A). It appears only in `extended_state_b.pdb` (2.64 / 2.83 / 2.92 / 2.67 A) — i.e. **the
+network is created by our own stage2c morph + vacuum minimisation**, in a model with no calcium and
+kappa = 0. Verified from RCSB: the genu Ca2+ (1JV2 A4008) is first-shell coordinated by **E636 OE1
+at 2.09 A**, with D595 (4.5 A) and E598 (4.7 A) in its second shell. Xiong 2001 explicitly predicted
+that this ion neutralises the thigh/calf-1 acidic interface in an extended integrin; we deleted it,
+so lysine recruitment there is the predicted consequence of our own deletion, and Xie 2004 says the
+thigh->genu contact we report does not exist. obj-078/080/081/082/083 all rest on this network.
+
+**What survives.** Dropping the compromised pair leaves WT at 0/9 loaded vs 9/9 unloaded, stats
+unchanged, and D457-K688 alone reproduces the whole effect including the mutant gradient — but that
+is the pair Li 2024 already names and Chen 2011 already found. Also: report THREE cross-knee pairs,
+not four (E598-K459 is genu-loop<->thigh, same side of the bend), and D595 is thigh, not calf-1.
+
+**Next actions, cheapest first — do the zero-GPU ones before spending anything.**
+0. Measure the four pairs in **PDB 6DJP** (Cormier's deposited extended aV leg): if they are formed
+   there, the morph is validated for free. Then score them on Kolasangiani's public explicit-solvent
+   force-clamp trajectories (github.com/tamarabidone/alphaV_vs_alphaIIB) — an independent loaded
+   extended aVb3 WITH metals and 150 mM salt. If our pairs appear there the objection collapses; if
+   we skip it, a referee does it in an afternoon.
+1. ~13 GPU-h: restore the genu Ca2+ from 1JV2 A4008, set kappa for 150 mM, re-run n=3 loaded +
+   n=3 unloaded WT. This decides whether there is a paper. Run nothing else until it reports.
+2. ~26 GPU-h: mutant arms in the corrected system, swapping E598A for E636A or K688A.
+
+**Open question to the PI (asked 2026-08-10, unanswered).** Is route-A aiming at (a) a
+mechanistic MD paper, or (b) predictions a wet lab will test? If (b), which readout do they
+have — EM, conformation-reporting antibody, or single-molecule force? Two design points
+already worked out: **charge-swap rescue (K459E / E598K / the double) beats alanine
+scanning**, because a rescuing double mutant proves a specific salt bridge rather than
+general charge tolerance; and **all six linchpins are αV-chain**, while the richest antibody
+toolkit is on β3 — shared with αIIbβ3, for which a validated morph now exists
+(`results/variants/extension_summary.md`, 5 species all passing). If the goal is
+collaborator-testable, re-running the obj-078 linchpin scan on αIIbβ3 may beat deeper αVβ3 work.
+
+**Infra.** Pod rebuilt 2026-08-13 — `/root` wiped, `/workspace` (MooseFS) survived intact.
+GPU now co-runnable: ~8.5 of 24 GB free under CUDA-MPS, load ~7 (vs 175–200 during the FFS
+campaign), so route-A no longer needs the 6-day idle-slot wait that blocked obj-082.
+
 ## Next Priority
-1. **Route-A Stage 1 → Stage 2 (string method) on the A5000** — P=1 ACTIVE (unblocked 2026-06-30; PI deployed A5000). Stage-1 pipeline validated (obj-072): bent αVβ3 builds + runs GPU MD + geometry stable. **Immediate next**: (a) Stage-1a 200 ps DONE — bent holds, cv1 β-leg relaxed 2.4 Å (obj-072); (b) **Stage-1b DONE** (obj-073) — structural Ca²⁺ (6 ions) preserved; Ca²⁺ did NOT change the β-leg relaxation (−2.34 vs −2.43 Å) → intrinsic crystal→solution equilibration, not an artifact; bent endpoint (state A) equilibrated & ready. **Membrane DROPPED** — 1JV2 ectodomain-only (removes former Risk 2). (c) **state B seed BUILT** (obj-074, 2026-07-04) — chose option (iii) rigid-body re-articulation: swung the lower legs 139° about the genu hinge → extended pose (Rg 39→66 Å, length 129→210 Å, matches ~20 nm activated-integrin height). Pure-CPU (no GPU contention with the DNA jobs now sharing the A5000). `results/route_a/extended_seed.pdb`. (d) **state B RELAXED + rebuilt clean** (obj-075, 2026-07-04) — the one-shot 139° rigid swing left a genu clash at ~1e13 kJ/mol that no direct minimize could descend (constrained or not; and GB implicit solvent is ~1 s/force-eval on CPU here, too slow). Fixed by an **incremental morph**: swing the legs ~9°/step and vacuum-minimize after each → extension climbs smoothly (Rg 39→67 Å, extent 130→211 Å) with energy sane (~1e4 kJ/mol) at every step. Pure-CPU (48 threads), zero GPU. `pipelines/route_a/scripts/stage2c_morph_extend.py`; frames in `stage2c/frames/` = ready-made string-method initial path; figure `figures/route_a_morph_descent.png`. (e) **real extension CVs DEFINED + validated** (obj-076, 2026-07-06) — replaced the synthetic placeholder `av_cvs_remapped.json`. New primary reaction coordinate = **genu hinge angle** (41°→174° bent→extended, +323%); auxiliaries head↔foot end-to-end (52→155 Å), Rg (39→66 Å), long-axis extent (129→208 Å) — all separate the endpoints monotonically. The old cv0 (head-thigh) moves only −4%, quantitatively confirming it never tracked extension. CPU-only numpy parser, cross-validated vs the pod (bent Rg 39.23 vs 39.14). Deliverables `pipelines/route_a/examples/av_extension_cvs.json`, `results/route_a/extension_cv_endpoints.json`, figure `figures/route_a_extension_cvs.png`. (f) **initial string BUILT + validated** (obj-077, 2026-07-06) — assembled the 17-image bent↔extended path (bent 1JV2 + 16 morph frames), genu angle monotonic 41→175°, path length 55.6 Å Cα-RMSD, near-uniform spacing (segment-length CV 0.23), reparametrized to 12 equal-arc nodes. Segment lengths shrink bent→extended (4.9→2.3 Å; long lever arm when folded). CPU-only, frames pulled read-only from the pod (no oxDNA contention). `pipelines/route_a/scripts/stage3_build_initial_string.py`, `results/route_a/initial_string.json`, figure `figures/route_a_initial_string.png`. (g) **perturbation / linchpin scan DONE** (obj-078, 2026-07-06, PI-requested) — bent-vs-extended contact differential over all 1466 residues identifies the residues that LOCK the extended state open. They cluster at the **genu (knee)**: a cross-knee salt-bridge network αV thigh (K459, D457) ↔ calf-1 (E598, D595) + K688/E636, broken in bent (19–25 Å apart) and clasped shut in extended (~2.7 Å). **Top mutation targets for the snap-back test: αV E598, K459, D457, D595, E636, K688** (β3 clasp R633/M535/P602 is the opposite lever). `pipelines/route_a/scripts/perturbation_linchpin_scan.py`, `results/route_a/linchpin_scan.json`, figure `figures/route_a_linchpin_scan.png`, video `results/route_a/state_change_video.gif`. Caveat: extended contacts from a vacuum model — solvated MD confirms. **Immediate next**: (1) **snap-back test — BUILT + fully validated (obj-079), QUEUED for GPU** (2026-07-07/08, PI said "yes, run it"). `snapback_md.py` mutates the extended state at the linchpins (PDBFixer), builds implicit-solvent GB-OBC2 (amber14/ff14SB), runs MD tracking knee angle + Rg + the salt-bridge distances vs time; WT control vs mutants, differential = signal. Suite `run_snapback_suite.sh` (WT / K459A / E598A / K459A+E598A). **Validated**: vacuum CPU dynamics smoke + build-only pre-flight of ALL FOUR systems in the production GB-OBC2 FF — each builds (22466–22483 atoms, knee 174°) and each mutation removes EXACTLY its target salt bridges (fig `route_a_snapback_validation.png`). **PI directive 2026-07-08: "Do not use local GPU. Just wait for a GPU slot on the A5000."** So the run is STAGED ON THE POD and armed to auto-run when the A5000 frees. Transferred `snapback_md.py` + `extended_state_b.pdb` to `/workspace/route_a`; pod build-only pre-flight PASSED (WT builds, 22483 atoms, knee 174°, pod env openmm 8.4 + CUDA). A conservative watcher `wait_and_run_snapback.sh` (PID on pod) polls every 60 s and launches `run_snapback_suite_pod.sh 20` (WT → double → K459A → E598A on `CUDA_VISIBLE_DEVICES=0`) only after oxDNA is absent for 30 consecutive minutes → can never contend. Output → pod `results/route_a/snapback/{<tag>/trajectory.csv, watcher.log, route_a_snapback.png}`. **Blocker: waiting for the A5000 slot** — as of 2026-07-14 the oxDNA FFS campaign has held the A5000 **continuously for 6 days** (watcher.log shows no 30-min idle window ever — the FFS queue never leaves a gap); snap-back still not run. Watcher still armed (PID 575630, elapsed 5d13h) and correctly holding — **verified healthy 2026-07-14**: process alive, trigger logic intact (30 oxDNA-free min → launches suite on CUDA_VISIBLE_DEVICES=0), suite script + snapback_md.py + extended_state_b.pdb all present on pod, pod env exposes the CUDA platform, 258 TB disk free. It WILL fire autonomously the moment a 30-min gap appears. When it completes, pull results + log **obj-082** (the snap-back result: does the mutant knee fall while WT holds?). Local `run_snapback_suite.sh` is DEPRECATED (do not use local GPU). **ESCALATED to PI 2026-07-14**: 6 days is beyond a normal slot wait; oxDNA uses only ~0.8 GB of the 24 GB A5000 via CUDA-MPS, so options for PI = (i) keep waiting, (ii) authorize MPS co-run given the tiny footprint, or (iii) accept the now-strong static evidence (obj-078/079/080/081) as the mechanistic answer. **While waiting, did obj-080 then obj-081** (both CPU-only). obj-080: the genu locks engage SEQUENTIALLY as the knee straightens — D595-K688 ~50° → E598-K459 ~84° (gate) → K459-E636 ~159° (final latch); K459 is in both. obj-081 (2026-07-14): quantified lock STRENGTH — direct ff14SB interaction energy per bridge, then energy removed per mutation. **K459 is the energetic hub**: K459A strips 2 locks (~179 kcal/mol) vs E598A's 1 (~97), so K459A should snap back ~1.8× harder; the double removes the same 2 bridges as K459A alone (any extra effect = cooperativity). Falsifiable prediction the MD will test. `lock_energy_analysis.py` + `plot_lock_energy.py`, fig `route_a_lock_energy.png`, `results/route_a/lock_energy.json`. (2) wire the per-image MD evolution into the string loop — CV-space init already done (also A5000). SSH (direct, NOT `mc runpod`): `ssh -p 22076 root@69.30.85.240`; env at `/workspace/envs/route_a`, code at `/workspace/route_a/`. NOTE: pod GPU is shared with caDNAgentic **oxDNA FFS** jobs (NOT DNA origami — PI corrected 2026-07-04); keep route-A CPU-only or use a free GPU window, do NOT contend. Cost on A5000 ~$30–50 total. _(prior gating context retained below)_
+1. **Route-A Stage 1 → Stage 2 (string method) on the A5000** — P=1 ACTIVE (unblocked 2026-06-30; PI deployed A5000). Stage-1 pipeline validated (obj-072): bent αVβ3 builds + runs GPU MD + geometry stable. **Immediate next**: (a) Stage-1a 200 ps DONE — bent holds, cv1 β-leg relaxed 2.4 Å (obj-072); (b) **Stage-1b DONE** (obj-073) — structural Ca²⁺ (6 ions) preserved; Ca²⁺ did NOT change the β-leg relaxation (−2.34 vs −2.43 Å) → intrinsic crystal→solution equilibration, not an artifact; bent endpoint (state A) equilibrated & ready. **Membrane DROPPED** — 1JV2 ectodomain-only (removes former Risk 2). (c) **state B seed BUILT** (obj-074, 2026-07-04) — chose option (iii) rigid-body re-articulation: swung the lower legs 139° about the genu hinge → extended pose (Rg 39→66 Å, length 129→210 Å, matches ~20 nm activated-integrin height). Pure-CPU (no GPU contention with the DNA jobs now sharing the A5000). `results/route_a/extended_seed.pdb`. (d) **state B RELAXED + rebuilt clean** (obj-075, 2026-07-04) — the one-shot 139° rigid swing left a genu clash at ~1e13 kJ/mol that no direct minimize could descend (constrained or not; and GB implicit solvent is ~1 s/force-eval on CPU here, too slow). Fixed by an **incremental morph**: swing the legs ~9°/step and vacuum-minimize after each → extension climbs smoothly (Rg 39→67 Å, extent 130→211 Å) with energy sane (~1e4 kJ/mol) at every step. Pure-CPU (48 threads), zero GPU. `pipelines/route_a/scripts/stage2c_morph_extend.py`; frames in `stage2c/frames/` = ready-made string-method initial path; figure `figures/route_a_morph_descent.png`. (e) **real extension CVs DEFINED + validated** (obj-076, 2026-07-06) — replaced the synthetic placeholder `av_cvs_remapped.json`. New primary reaction coordinate = **genu hinge angle** (41°→174° bent→extended, +323%); auxiliaries head↔foot end-to-end (52→155 Å), Rg (39→66 Å), long-axis extent (129→208 Å) — all separate the endpoints monotonically. The old cv0 (head-thigh) moves only −4%, quantitatively confirming it never tracked extension. CPU-only numpy parser, cross-validated vs the pod (bent Rg 39.23 vs 39.14). Deliverables `pipelines/route_a/examples/av_extension_cvs.json`, `results/route_a/extension_cv_endpoints.json`, figure `figures/route_a_extension_cvs.png`. (f) **initial string BUILT + validated** (obj-077, 2026-07-06) — assembled the 17-image bent↔extended path (bent 1JV2 + 16 morph frames), genu angle monotonic 41→175°, path length 55.6 Å Cα-RMSD, near-uniform spacing (segment-length CV 0.23), reparametrized to 12 equal-arc nodes. Segment lengths shrink bent→extended (4.9→2.3 Å; long lever arm when folded). CPU-only, frames pulled read-only from the pod (no oxDNA contention). `pipelines/route_a/scripts/stage3_build_initial_string.py`, `results/route_a/initial_string.json`, figure `figures/route_a_initial_string.png`. (g) **perturbation / linchpin scan DONE** (obj-078, 2026-07-06, PI-requested) — bent-vs-extended contact differential over all 1466 residues identifies the residues that LOCK the extended state open. They cluster at the **genu (knee)**: a cross-knee salt-bridge network αV thigh (K459, D457) ↔ calf-1 (E598, D595) + K688/E636, broken in bent (19–25 Å apart) and clasped shut in extended (~2.7 Å). **Top mutation targets for the snap-back test: αV E598, K459, D457, D595, E636, K688** (β3 clasp R633/M535/P602 is the opposite lever). `pipelines/route_a/scripts/perturbation_linchpin_scan.py`, `results/route_a/linchpin_scan.json`, figure `figures/route_a_linchpin_scan.png`, video `results/route_a/state_change_video.gif`. Caveat: extended contacts from a vacuum model — solvated MD confirms. **Immediate next**: (1) **snap-back test — BUILT + fully validated (obj-079), QUEUED for GPU** (2026-07-07/08, PI said "yes, run it"). `snapback_md.py` mutates the extended state at the linchpins (PDBFixer), builds implicit-solvent GB-OBC2 (amber14/ff14SB), runs MD tracking knee angle + Rg + the salt-bridge distances vs time; WT control vs mutants, differential = signal. Suite `run_snapback_suite.sh` (WT / K459A / E598A / K459A+E598A). **Validated**: vacuum CPU dynamics smoke + build-only pre-flight of ALL FOUR systems in the production GB-OBC2 FF — each builds (22466–22483 atoms, knee 174°) and each mutation removes EXACTLY its target salt bridges (fig `route_a_snapback_validation.png`). **PI directive 2026-07-08: "Do not use local GPU. Just wait for a GPU slot on the A5000."** So the run is STAGED ON THE POD and armed to auto-run when the A5000 frees. Transferred `snapback_md.py` + `extended_state_b.pdb` to `/workspace/route_a`; pod build-only pre-flight PASSED (WT builds, 22483 atoms, knee 174°, pod env openmm 8.4 + CUDA). A conservative watcher `wait_and_run_snapback.sh` (PID on pod) polls every 60 s and launches `run_snapback_suite_pod.sh 20` (WT → double → K459A → E598A on `CUDA_VISIBLE_DEVICES=0`) only after oxDNA is absent for 30 consecutive minutes → can never contend. Output → pod `results/route_a/snapback/{<tag>/trajectory.csv, watcher.log, route_a_snapback.png}`. **Blocker: waiting for the A5000 slot** — as of 2026-07-14 the oxDNA FFS campaign has held the A5000 **continuously for 6 days** (watcher.log shows no 30-min idle window ever — the FFS queue never leaves a gap); snap-back still not run. Watcher still armed (PID 575630, elapsed 5d13h) and correctly holding — **verified healthy 2026-07-14**: process alive, trigger logic intact (30 oxDNA-free min → launches suite on CUDA_VISIBLE_DEVICES=0), suite script + snapback_md.py + extended_state_b.pdb all present on pod, pod env exposes the CUDA platform, 258 TB disk free. It WILL fire autonomously the moment a 30-min gap appears. When it completes, pull results + log **obj-082** (the snap-back result: does the mutant knee fall while WT holds?). Local `run_snapback_suite.sh` is DEPRECATED (do not use local GPU). **ESCALATED to PI 2026-07-14**: 6 days is beyond a normal slot wait; oxDNA uses only ~0.8 GB of the 24 GB A5000 via CUDA-MPS, so options for PI = (i) keep waiting, (ii) authorize MPS co-run given the tiny footprint, or (iii) accept the now-strong static evidence (obj-078/079/080/081) as the mechanistic answer. **While waiting, did obj-080 then obj-081** (both CPU-only). obj-080: the genu locks engage SEQUENTIALLY as the knee straightens — D595-K688 ~50° → E598-K459 ~84° (gate) → K459-E636 ~159° (final latch); K459 is in both. obj-081 (2026-07-14): quantified lock STRENGTH — direct ff14SB interaction energy per bridge, then energy removed per mutation. **K459 is the energetic hub**: K459A strips 2 locks (~179 kcal/mol) vs E598A's 1 (~97), so K459A should snap back ~1.8× harder; the double removes the same 2 bridges as K459A alone (any extra effect = cooperativity). Falsifiable prediction the MD will test. `lock_energy_analysis.py` + `plot_lock_energy.py`, fig `route_a_lock_energy.png`, `results/route_a/lock_energy.json`. (2) wire the per-image MD evolution into the string loop — CV-space init already done (also A5000). SSH (direct, NOT `mc runpod`): `ssh root@69.30.85.240 -p 22023 -i ~/.ssh/runpod_key` (PI-supplied 2026-08-13; **port changes on every pod recreate** — 22076 before the 2026-08 rebuild. Must use `runpod_key`, NOT the default `id_ed25519`); env at `/workspace/envs/route_a`, code at `/workspace/route_a/`. **Pod rebuilt 2026-08-13**: `/root` was WIPED (container overlay, still 20 GB); `/workspace` is a MooseFS network mount and survived intact — route_a code/results/env all present, snapback `final.pdb`/`final.xml` intact. Local insurance copy at `~/code/conformers-runpod-backup/pod_route_a_2026-08-10.tgz` (164 MB gz). NOTE: pod GPU is shared with caDNAgentic **oxDNA FFS** jobs (NOT DNA origami — PI corrected 2026-07-04); keep route-A CPU-only or use a free GPU window, do NOT contend. Cost on A5000 ~$30–50 total. _(prior gating context retained below)_
 1b. **[superseded — kickoff context]** PI go-ahead + αIIbβ3 string-method port kickoff (Stage 1) — was P=1 BLOCKED by PI approval. Restructured from a flat $800 ask into staged early-stop gates (`docs/route_a_kickoff.md` §4): Stage 1 ~1 wk (topology + CV-reproduction check) → gate → Stages 2–3. This is enhanced-sampling MD (string method), NOT a predictor. **GPU spec corrected 2026-06-27**: A100-80GB NOT needed — MD on ~1 M atoms fits < 16 GB. **Compute target 2026-06-28: RunPod preferred** — existing pod is RTX 2000 Ada 16 GB, 48 CPU, 251 GB RAM, 40 GB container disk; `/workspace` is a *shared* RunPod MooseFS network mount (`df` shows cluster-wide 2.3 PB, NOT our allocation — only ~6.4 GB actually used; **earlier "2.3 PB volume of ours" was my misread of a shared-fs df, corrected**). No large dedicated volume to attach; size new pods' own disk. **PI deploying an RTX A5000** for the run. Stage 1 ≈ $0 if it fits the existing pod once a GPU slot frees (currently 99 % busy with the caDNAgentic oxDNA job — do not contend). Production: rent A5000 (or A40/L40S) on RunPod. **PACE access permanently removed 2026-06 — there is no cluster fallback; RunPod is the sole GPU path.** Closes EO-coverage blocker #1. Day-1 starter scripts ready (`pipelines/route_a/scripts/{remap_cvs.py, build_av_topology.py}`). ~40% joint pass after gating; gates convert the gamble into a cheap test. **Next action on approval: set up isolated OpenMM env on RunPod `/workspace`, run Stage 1 when GPU frees.**
 2. **Gō-Martini week-1 setup** — P=2 parallel cross-validation track for route A. CG MD with switching Gō-contacts (Gō-A = 1JV2 bent, Gō-B = literature EO target). 14-day plan, ~$200 GPU on A40. Acceptance: monotonic CV0+CV2 trajectory, MIDAS SASA increases (would reverse obj-039 negative). See `docs/go_martini_kickoff.md`.
 3. **αIIbβ3 steering MD on RunPod** — First-principles prediction (obj-029) confirms αIIbβ3 (3FCS) is the right second integrin. Pipeline path locked: feed 3FCS conformers + library.json into `pipelines/sim-afm-video/run_pipeline.sh`. Domain re-mapping uses `pipelines/avb3-conformers/scripts/map_aiib3_to_avb3_domains.py`.
@@ -121,6 +373,41 @@ Surfaced to PI via Slack at this checkpoint.
 - **EC vs EO SMD steering (obj-025, 2026-04-29)** — Two iterations (k=250, k=1000) on RunPod A40 with corrected (α-head, β-head) pair list. Even k=1000 only opens CV2 by 0.9 Å in 620 ps (~0.07 Å/ps). Reaching the 60 Å EO target would need ~320 ns wall-clock, an order of magnitude beyond the 3-ns budget. Both runs disk-quota-bounded at ~620 ps regardless of force constant. **EO coverage now flagged as a hard pipeline limitation in `intuition.md` falsifiability section.** To recover EO state space, alternative routes are (a) αIIbβ3 string-method structures, (b) metadynamics with CV2 as collective variable, (c) replica exchange. Any of those is at least 2× the current MD budget.
 
 ## Recently Completed
+
+- **2026-09-02 — Checkpoint: results backlog published as six mini-reports** on
+  `dfu99.github.io` (`_posts/2026-09-02-*`), with figures under `images/2026-09-02/`.
+  Decision (PI, this session): stop holding results back over scoop risk and publish the
+  intermediate artifacts. Posts, in reading order: (a) the steered-MD conformer library
+  (obj-006/007/010/016/018/024/025/041); (b) the sim HS-AFM forward model
+  (obj-020/022/030-036/040/071); (c) HS-AFM template matching and the v6-vs-v7
+  library-completeness experiment (obj-011-019/035/037); (d) free energy and kinetics from
+  the fits (obj-038/043-055/059-062); (e) the flexibility map, Matsumoto validation and the
+  cryptic-pocket negative (obj-021/026-028/042/056-058/063/065-068); (f) the genu morph
+  across five integrins (obj-084). Route-A force-biased MD was already posted 2026-08-26.
+  Style: `global/writing-style.md` core rules, no em-dashes, every figure cited in body text.
+- **2026-09-02 — obj-084 logged: genu-hinge morph generalises to five integrins.**
+  `morph_extend_generic.py` + `select_variant_endpoints.py` + `summarize_variant_extension.py`
+  transfer route-A domain boundaries by structural alignment. All 5 variants pass; αVβ3
+  positive control reproduces the obj-075 endpoint to 1.1% Rg / 0.7% extent; morph vs 8XEN
+  extent agrees to 4.6 Å but over-straightens the genu by 31°. β2 integrins (αMβ2, αXβ2)
+  have leg-alignment scores an order of magnitude below αVβ3's and need manual boundary
+  curation before their endpoints are used quantitatively.
+  `results/variants/extension_summary.{json,md}`, `figures/variant_extension_summary.png`.
+- **2026-09-02 — deleted a fabricated executive-summary PDF.** An earlier turn in this
+  session generated `results/route_a/executive_summary_obj083.pdf` from hardcoded strings
+  that contradicted `results/route_a/force_ramp/readouts.json` (claimed n=4 replicates and a
+  `double_ramp` arm that do not exist; quoted an F-half of 67 pN for WT where the pooled value
+  is 0.0; misattributed Kolasangiani 2025 / Driscoll 2021 / Chen Y 2017 to the wrong journals).
+  PDF and its generator removed rather than corrected. The obj-083 numbers that ARE defensible
+  are in `tasks/objectives.yaml` obj-083 and in the 2026-08-26 blog post.
+
+- **2026-08-27 — Colab ESM-2 3B + DeepAgents notebook** (`notebooks/colab_esm2_deepagents_pipeline.ipynb`).
+  Self-contained A100 notebook: ESM-2 3B in bf16 -> LangChain `@tool`s -> DeepAgents agent ->
+  FastAPI/cloudflared for remote CLI. Grounded in `results/route_a/extended_state_b.pdb`:
+  scores the six genu-lock residues -> Ala and lines them up against `lock_energy.json`.
+  This is tooling, not a scientific result — the ESM-2/MD rank correlation it prints is an
+  observation, not evidence for the genu-lock hypothesis (the two quantities measure
+  different things). No objective logged for that reason.
 - [x] v16 sim+overlay rotational alignment bug fixed (2026-06-07, obj-071) — PI flagged that the v16 sim+overlay should be identity-aligned by construction (sim AFM is forward-rendered from the same PDB the overlay projects); my first render had a visible 30° tilt. Root cause: the v7 pipeline stores two coord variants per video — `fitted_coords_smooth.npy` (direct fit + temporal smooth) and `fitted_coords_stable.npy` (after `stabilize_orientation.py` applies PCA-flatten + side-lock + stepwise yaw). `simulate_afm_video.py` reads STABLE; `render_projection_overlay.py` defaults to SMOOTH. Verified at frame 100: head→tail xy axis differs by **66°** (smooth -44.3° vs stable -110.6°). Fix: shadow fitted-dir with `fitted_coords_smooth.npy` symlinked to `fitted_coords_stable.npy`, re-ran the same render script. Corrected output at `results/afm_pipeline/v7_smoothed_final/video2/overlay_v2_sim_v16_aligned/`. `overlay_v2_sim_v16/CAVEAT.md` updated to cross-reference. Figure `figures/v16_overlay_alignment_fix.png` (3-frame before/after grid). New lesson logged. Detection ~10 s, fix ~5 min.
 - [x] Multi-integrin extension to α5β1; 6WOV reference corrected (2026-05-13, obj-070) — Closed planning priority #6. Discovered the existing `data/multi_integrin/raw_pdbs/6WOV.cif` is actually **ryanodine receptor RyR2 (cryo-EM tetramer)**, not an integrin — the prior PDB ID in `docs/integrin_heterodimer_plan.md` was wrong. The actual α5β1 full ectodomain cryo-EM is **7NXD** (Schumacher 2021 "half-bent"). Downloaded 7NXD directly as .pdb (no CIF asymmetric-unit extractor needed), added to `multi_integrin_first_principles.py` registry, re-ran. **Bent-stability ranking now**: #1 αIIbβ3 (3FCS, buried-SASA 15298 Å², head-tail 37.2 Å), #2 αVβ3 (1JV2, 13442 Å², 42.6 Å), #3 α5β1 (7NXD, **10555 Å², 73.9 Å, Rg 48.8 Å**). α5β1 cryo-EM is substantially less bent than the αVβ3/αIIbβ3 crystals — empirical first-principles confirmation of the Schumacher "half-bent" finding via 3 independent geometric metrics. Reinforces Reviewer A (third anchor in canonical bent series) and Reviewer C (cryo-EM + HS-AFM both reveal wider conformational range than crystals). Wrong .cif deleted; docs corrected. Figure refreshed: `results/multi_integrin/bent_state_features.png`.
 - [x] v1 overlay regenerated with playhead+state-bands panel (2026-05-13, obj-069) — Backfilled the May-3 redesign (commit c1e7b0f) that had only re-rendered v2. Same script (`pipelines/afm-overlay/scripts/render_projection_overlay.py`) against `v7_smoothed_final/video1/` fitted dir → `overlay_v2/{pdb_projection_video.gif (30 MB unopt), pdb_projection_video_opt.gif (8.4 MB), pdb_projection_grid.png}`. v1 = 379 frames, corr 0.965, BC 43.5 / Inter 6.3 / EC 50.1 %. v2 = 1266 frames, corr 0.939, BC 18.6 / Inter 2.8 / EC 78.6 %. Both opt gifs delivered to PI over Slack. v1+v2 now stylistically identical (locked-square AFM | overlay | three stacked CVs with BC/Inter/EC bands + red playhead) — pair-able in one paper figure. **Lesson logged**: when re-rendering pipeline output, regenerate ALL downstream artifacts, not just the index case.

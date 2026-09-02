@@ -1,0 +1,183 @@
+{
+  "variants": {
+    "alphaVbeta3": {
+      "checks": {
+        "genu_reaches_extended": true,
+        "genu_monotonic": true,
+        "extent_grows": true,
+        "Rg_grows": true,
+        "energy_sane": true
+      },
+      "passed": true,
+      "notes": [],
+      "genu_bent_deg": 41.21,
+      "genu_extended_deg": 176.17,
+      "extent_bent_A": 130.01,
+      "extent_extended_A": 209.9,
+      "Rg_bent_A": 39.14,
+      "Rg_extended_A": 66.57,
+      "extent_gain_frac": 0.614,
+      "Rg_gain_frac": 0.701,
+      "E_bent_kJ_mol": 15674.8,
+      "E_final_kJ_mol": 73497.3,
+      "n_steps": 16,
+      "total_swing_deg": 144.0,
+      "seconds": 2312.0
+    },
+    "alphaIIbbeta3": {
+      "checks": {
+        "genu_reaches_extended": true,
+        "genu_monotonic": true,
+        "extent_grows": true,
+        "Rg_grows": true,
+        "energy_sane": true
+      },
+      "passed": true,
+      "notes": [],
+      "genu_bent_deg": 36.26,
+      "genu_extended_deg": 179.45,
+      "extent_bent_A": 118.54,
+      "extent_extended_A": 207.35,
+      "Rg_bent_A": 39.02,
+      "Rg_extended_A": 63.5,
+      "extent_gain_frac": 0.749,
+      "Rg_gain_frac": 0.627,
+      "E_bent_kJ_mol": 7368.7,
+      "E_final_kJ_mol": 71085.0,
+      "n_steps": 17,
+      "total_swing_deg": 152.5,
+      "seconds": 2468.5
+    },
+    "alpha5beta1": {
+      "checks": {
+        "genu_reaches_extended": true,
+        "genu_monotonic": true,
+        "extent_grows": true,
+        "Rg_grows": true,
+        "energy_sane": true
+      },
+      "passed": true,
+      "notes": [],
+      "genu_bent_deg": 78.0,
+      "genu_extended_deg": 178.15,
+      "extent_bent_A": 160.17,
+      "extent_extended_A": 214.71,
+      "Rg_bent_A": 48.7,
+      "Rg_extended_A": 63.27,
+      "extent_gain_frac": 0.341,
+      "Rg_gain_frac": 0.299,
+      "E_bent_kJ_mol": 18820.7,
+      "E_final_kJ_mol": 75315.7,
+      "n_steps": 12,
+      "total_swing_deg": 108.0,
+      "seconds": 2089.1
+    },
+    "alphaMbeta2": {
+      "checks": {
+        "genu_reaches_extended": true,
+        "genu_monotonic": true,
+        "extent_grows": true,
+        "Rg_grows": true,
+        "energy_sane": true
+      },
+      "passed": true,
+      "notes": [],
+      "genu_bent_deg": 48.24,
+      "genu_extended_deg": 172.29,
+      "extent_bent_A": 108.97,
+      "extent_extended_A": 207.86,
+      "Rg_bent_A": 39.81,
+      "Rg_extended_A": 61.42,
+      "extent_gain_frac": 0.907,
+      "Rg_gain_frac": 0.543,
+      "E_bent_kJ_mol": -13335.6,
+      "E_final_kJ_mol": 46874.2,
+      "n_steps": 15,
+      "total_swing_deg": 135.0,
+      "seconds": 2250.6
+    },
+    "alphaXbeta2": {
+      "checks": {
+        "genu_reaches_extended": true,
+        "genu_monotonic": true,
+        "extent_grows": true,
+        "Rg_grows": true,
+        "energy_sane": true
+      },
+      "passed": true,
+      "notes": [],
+      "genu_bent_deg": 12.86,
+      "genu_extended_deg": 175.52,
+      "extent_bent_A": 137.32,
+      "extent_extended_A": 238.62,
+      "Rg_bent_A": 54.79,
+      "Rg_extended_A": 80.29,
+      "extent_gain_frac": 0.738,
+      "Rg_gain_frac": 0.465,
+      "E_bent_kJ_mol": -6503.6,
+      "E_final_kJ_mol": 67222.1,
+      "n_steps": 20,
+      "total_swing_deg": 180.0,
+      "seconds": 2728.7
+    }
+  },
+  "start_states": {
+    "alphaVbeta3": {
+      "boundary_confidence": "high",
+      "leg_alignment_score": 1357.0,
+      "start_pdb": "1JV2",
+      "start_genu_deg": 40.98
+    },
+    "alphaIIbbeta3": {
+      "boundary_confidence": "high",
+      "leg_alignment_score": 663.0,
+      "start_pdb": "3FCS",
+      "start_genu_deg": 36.02
+    },
+    "alpha5beta1": {
+      "boundary_confidence": "high",
+      "leg_alignment_score": 353.0,
+      "start_pdb": "7NXD",
+      "start_genu_deg": 77.86
+    },
+    "alphaMbeta2": {
+      "boundary_confidence": "low",
+      "leg_alignment_score": 137.0,
+      "start_pdb": "7USM",
+      "start_genu_deg": 48.25
+    },
+    "alphaXbeta2": {
+      "boundary_confidence": "low",
+      "leg_alignment_score": 146.0,
+      "start_pdb": "5ES4",
+      "start_genu_deg": 12.86
+    }
+  },
+  "control_check": {
+    "target_Rg_A": 67.32,
+    "target_extent_A": 211.36,
+    "got_Rg_A": 66.57,
+    "got_extent_A": 209.9,
+    "Rg_rel_dev": 0.0111,
+    "extent_rel_dev": 0.0069,
+    "reproduces_published_endpoint": true
+  },
+  "experimental_comparison": {
+    "alphaVbeta3": {
+      "reference_pdb": "8XEN",
+      "reference_title": "Cryo-EM structure of integrin ITGAV/ITGB3 complex, conformation 4",
+      "exp_genu_deg": 145.26,
+      "morph_genu_deg": 176.17,
+      "exp_extent_A": 214.46,
+      "morph_extent_A": 209.9,
+      "exp_Rg_A": 62.41,
+      "morph_Rg_A": 66.57,
+      "extent_abs_diff_A": 4.6
+    }
+  },
+  "acceptance": {
+    "genu_extended_min_deg": 150.0,
+    "extension_min_frac": 0.2,
+    "monotonic_tol_deg": 5.0
+  }
+}
