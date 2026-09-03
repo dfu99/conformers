@@ -628,3 +628,48 @@ campaign), so route-A no longer needs the 6-day idle-slot wait that blocked obj-
 - Relaunched the same tiny sequential RTX 6000 jobs with scratch-backed HF cache:
   - direct BoltzGen cache-fixed run: job `4963854`
   - AFCluster -> BoltzGen cache-fixed run (`top_a=2`, `top_b=1`) dependent on `4963854`: job `4963855`
+
+## Checkpoint 2026-09-03 — step 0 queued: is the genu lock real outside our own morph?
+
+**Priority, and the only thing that matters right now.** The 2026-08-27 Ca²⁺-corrected
+rebuild opened three of the four αV genu ion pairs — including both cross-knee pairs —
+so obj-078 through obj-083 currently rest on contacts a properly built model does not
+make. Nothing downstream is worth funding until we know whether the pairs exist in data
+that is not ours.
+
+**Step 0 is running and costs no GPU.** `pipelines/route_a/scripts/check_pairs_external.py`,
+queued as `20260903T093400-88353-15403` (CPU-only; 1 G placeholder VRAM because the queue
+validator requires a positive number). It measures the same four pairs — BRIDGES imported
+from `linchpin_engagement_order`, same min carboxylate-O···Lys-NZ definition, same 4 Å
+engaged / 5 Å ruptured cuts as obj-080/083 — in:
+
+- **8XEN**, deposited extended αVβ3 cryo-EM 3.2 Å (the real test)
+- **6DJP**, αVβ8 4.8 Å (include but discount: side chains are not resolved at 4.8 Å, so
+  this cannot confirm a salt bridge — the novelty memo overstated it)
+- our three seeds (vacuum morph vs Ca²⁺+150 mM rebuild), as the internal comparison
+- **Kolasangiani 2025**'s published explicit-solvent αVβ3 force-clamp trajectories
+  (`github.com/tamarabidone/alphaV_vs_alphaIIB`, 3 extension + bending replicas, metals
+  and 150 mM present) — an independent *loaded extended* αVβ3. A referee will run this
+  if we do not.
+
+**How to read the answer when it lands.**
+- Pairs present in 8XEN and intact across the published loaded replicas → the calcium
+  objection collapses, obj-078..083 survives, proceed to the ~13 GPU-h corrected WT
+  loaded/unloaded arms.
+- Pairs absent → obj-078..083 is a null. Report it as one, and move to the β3-side
+  linchpin scan on αIIbβ3, where the antibody and functional toolkit actually is (see
+  memory `integrin-lab-viable-open-question`, design point 2).
+
+**Do not skip the numbering check.** 8XEN's entity sequence runs +30 from our mature αV
+numbering (signal peptide), so the script identity-checks D457/K459/D595/E598/E636/K688
+across every chain and a window of offsets and refuses to report a structure it cannot
+match. `--selftest` reproduces the recorded 1JV2 distances (22.95 / 25.42 / 19.36 /
+7.39 Å) before any conclusion is drawn.
+
+**Standing caveat on significance** (asked by the PI 2026-09-02, worth not re-deriving):
+this thread is largely scooped. Kolasangiani 2025 published our protocol (66.4 pN constant
+force, full-length αVβ3, n=3, explicit solvent), Driscoll 2021 published our readout
+(genu angle vs force, WT vs point mutants), Chen 2017 published our claim shape. The
+repo's frontier-model contribution is nil: no ML here, and ~330 ns of MD against BioEmu's
+200 ms of training data. The distinctive unexploited asset is the HS-AFM non-stationarity
+result (obj-045/046), idle since June.
