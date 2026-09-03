@@ -1,0 +1,14 @@
+# Bulk this repo carries that no pod job reads. The pod ROOT disk is 20 GB and
+# every project's copy lives on it, so pushing these fills it for everyone.
+# Anchored '/dir/***' form: matches through symlinks too, so --delete cannot
+# reach pod-side outputs (see runpod.sh, rl-arm-39 checkpoint loss 2026-08-27).
+/figures/***
+/notebooks/***
+/results/afm_pipeline/***
+/results/route_a/force_ramp/***
+/results/route_a/snapback_movie/***
+/results/route_a/snapback/***
+/data/runs/***
+# Third-party trajectory cache the step-0 job downloads ON the pod. Shield it so
+# it is neither pushed nor deleted between jobs.
+/data/external/***

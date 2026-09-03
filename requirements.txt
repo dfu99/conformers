@@ -1,0 +1,5 @@
+# Project deps the GPU-queue runner restores on the pod before every job.
+# torch is deliberately absent: the pod image owns it (see ~/.claude/CLAUDE.md).
+numpy
+matplotlib
+MDAnalysis
