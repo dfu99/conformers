@@ -1883,3 +1883,17 @@ queue:
     \ trigger,\n   when-to-use, canonical entry, preflight, smoke contract, real pipeline\
     \ workflow,\n   operational defaults, failure handling.\n2. Documented pace_minimal.sh's\
     \ 5-verb dispatch (check / s"
+- objective: GPU job 20260903T093400-88353-15403 failed (infra, exit 1) — read /Users/dan/code/development/status/gpuq/logs/20260903T093400-88353-15403.log,
+    fix the cause, resubmit with 'mc gpuq submit'
+  priority: 3
+  status: completed
+  added: 2026-09-03 17:28
+  source: gpuq
+  context: 'sent 8 bytes  received 8 bytes  4.57 bytes/sec total size is 0  speedup
+    is 0.00 rsync error: some files/attrs were not transferred (see previous errors)
+    (code 23) at main.c(1872) [Receiver=3.4.1] rsync: [Receiver] write error: Broken
+    pipe (32) Fetched conformers results + figures back to /Users/dan/code/conformers/ '
+  started: 2026-09-03 17:30
+  completed: 2026-09-03 17:32
+  commits: 1
+  notes: Auto-completed via 1 commit(s).

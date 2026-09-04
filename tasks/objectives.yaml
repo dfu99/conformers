@@ -4655,3 +4655,47 @@ objectives:
     from a protocol that swings to a threshold rather than to a target angle.
   connects_to: null
   completed_date: '2026-07-25'
+- id: obj-085
+  status: completed
+  statement: >
+    NULL RESULT — the four αV genu ion pairs behind obj-078..083 do not exist in deposited
+    extended αVβ3 or in independent loaded explicit-solvent MD; they are a morph artifact.
+  methodology: >
+    Zero-GPU external check (`pipelines/route_a/scripts/check_pairs_external.py`). Measures the
+    same four pairs with the same definition used throughout the thread — BRIDGES imported from
+    linchpin_engagement_order so the definitions cannot drift, distance = min(carboxylate O ···
+    Lys NZ), 4 Å engaged / 5 Å ruptured — in four classes of reference: (1) 1JV2 bent crystal as
+    a self-test, (2) deposited structures 8XEN (extended αVβ3 cryo-EM 3.2 Å) and 6DJP (αVβ8
+    4.8 Å), (3) our own three seeds, and (4) Kolasangiani 2025's published explicit-solvent
+    αVβ3 force-clamp trajectories (github.com/tamarabidone/alphaV_vs_alphaIIB) — an independent
+    loaded full-length αVβ3 with metals and 150 mM salt present.
+    Numbering is never assumed: every input is identity-checked (D457/K459/D595/E598/E636/K688)
+    across all chains over an offset window, and an input that cannot be matched uniquely is
+    reported unresolved rather than mismeasured. Trajectories are sha256'd so byte-identical
+    files cannot be counted as independent replicas.
+  metrics:
+    selftest: "1JV2 reproduces all four audit-recorded distances at offset 0 — 22.95 / 25.42 / 19.36 / 7.39 Å. Measurement path validated before any conclusion."
+    numbering_resolved: "8XEN at chain A offset +30 (signal peptide), exactly as predicted from its entity sequence; 1JV2 and our seeds at offset 0; 6DJP unresolved (0 candidate matches) and correctly refused rather than guessed."
+    8XEN_extended_aVb3_A: "E598-K459 22.01, K459-E636 17.79, D457-K688 12.38, D595-K688 17.61 — 0 of 4 engaged <4 Å"
+    ours_vacuum_morph_A: "2.64 / 2.92 / 2.83 / 2.67 — all four clasped"
+    ours_Ca_150mM_rebuild_A: "3.11 / 4.17 / 6.42 / 9.20 — degrading"
+    ours_pre_relax_seed_A: "21.82 / 15.67 / 6.39 / 7.39"
+    published_traj_files: "7 downloaded, 6 distinct (combineallnopbc3.xtc is byte-identical to Extension/Replica1.xtc); 201 frames each except Bending/Replica3 at 26"
+    published_frac_intact_lt5A: "E598-K459 0.0%, K459-E636 0.0%, D457-K688 0.0% — never, in any frame of any of the 6. D595-K688 8.9% mean (2.0-19.9%)"
+    D595_K688_is_a_bent_contact: "closed MORE often in the Bending replicas (19.9 / 9.5 / 15.4%) than the Extension ones (2.0 / 2.0 / 4.5%), and is already 7.39 Å in the bent 1JV2 crystal — the opposite polarity to an extension lock"
+    cost: "0 GPU-h (CPU-only job on the shared queue), ~84 MB downloaded, minutes of runtime"
+  figures:
+    - figures/route_a_step0_external_pairs.png
+  conclusions: >
+    The genu salt-bridge network is an artifact of our own incremental leg-swing morph run in
+    vacuum with the structural Ca²⁺ deleted. Three of the four pairs form in zero frames of six
+    independent published trajectories of the same protein under load with metals and screening
+    present, and none of the four is engaged in the deposited extended cryo-EM structure. The
+    fourth, D595-K688, is a bent-state contact, not an extension lock. obj-078 (linchpin
+    identification), obj-080 (engagement order), obj-081 (lock energies), obj-082 and obj-083
+    (force protection) therefore rest on contacts that neither experiment nor independent
+    simulation reproduces, and the thread is a null. This was the pre-registered decision rule
+    written into tasks/planning.md before the result returned. Reported as a null rather than
+    re-run: the corrected ~13 GPU-h campaign would only measure the artifact more precisely.
+  connects_to: obj-083
+  completed_date: '2026-09-03'

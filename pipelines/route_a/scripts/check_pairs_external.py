@@ -57,6 +57,15 @@ KOLA_TOP = "proteinalphaVbeta3.pdb"
 KOLA_TRAJ_DIRS = ["AlphaVBeta3/Extension_Trajectories", "AlphaVBeta3/Bending_Trajectories"]
 
 
+def sha256(path):
+    import hashlib
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()[:16]
+
+
 def fetch(url, dest):
     """Download once. Returns dest, or None if the resource is unavailable."""
     if os.path.exists(dest) and os.path.getsize(dest) > 0:
@@ -215,63 +224,76 @@ def selftest(cache):
 
 
 def plot(report, out):
+    """Left: every static reference, one group per pair. Right: the published
+    trajectories pooled into Extension vs Bending per pair — 8 boxes, not 28.
+    Byte-identical inputs are dropped so a duplicated file cannot widen a box."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
     statics = [r for r in report["structures"] if "error" not in r]
-    trajs = [r for r in report["trajectories"] if "error" not in r]
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5.6),
-                             gridspec_kw={"width_ratios": [1.15, 1]})
+    seen, trajs = set(), []
+    for r in report["trajectories"]:
+        if "stats" not in r or r.get("sha256_16") in seen:
+            continue
+        seen.add(r.get("sha256_16"))
+        trajs.append(r)
+
+    fig, axes = plt.subplots(1, 2, figsize=(15, 5.8), gridspec_kw={"width_ratios": [1.25, 1]})
 
     ax = axes[0]
     x = np.arange(len(PAIR_NAMES))
     w = 0.8 / max(len(statics), 1)
     for i, r in enumerate(statics):
         vals = [r["distances_A"][n] or np.nan for n in PAIR_NAMES]
-        ax.bar(x + i * w - 0.4 + w / 2, vals, w, label=r["label"])
+        bars = ax.bar(x + i * w - 0.4 + w / 2, vals, w, label=r["label"])
+        for b, v in zip(bars, vals):
+            if v == v and v < ENGAGED_A:  # annotate only what is actually engaged
+                ax.text(b.get_x() + b.get_width() / 2, v + 0.4, f"{v:.1f}",
+                        ha="center", fontsize=7, weight="bold")
     ax.axhline(ENGAGED_A, ls="--", color="k", lw=1)
-    ax.text(len(PAIR_NAMES) - 0.5, ENGAGED_A + 0.4, "engaged (4 Å)", fontsize=8, ha="right")
     ax.axhline(RUPTURED_A, ls=":", color="crimson", lw=1)
-    ax.text(len(PAIR_NAMES) - 0.5, RUPTURED_A + 0.4, "ruptured (5 Å)", fontsize=8,
-            ha="right", color="crimson")
-    ax.set_xticks(x); ax.set_xticklabels(PAIR_NAMES, fontsize=9)
+    ax.text(-0.46, ENGAGED_A - 1.3, "engaged (4 Å)", fontsize=8)
+    ax.text(-0.46, RUPTURED_A + 0.5, "ruptured (5 Å)", fontsize=8, color="crimson")
+    ax.set_xticks(x); ax.set_xticklabels(PAIR_NAMES, fontsize=10)
     ax.set_ylabel("min carboxylate-O ··· Lys-NZ distance (Å)")
-    ax.set_title("Static references: our morph vs. deposited structures", fontsize=11,
-                 weight="bold")
-    ax.legend(fontsize=7.5)
+    ax.set_title("Only our own calcium-free morph makes these contacts",
+                 fontsize=11, weight="bold")
+    ax.legend(fontsize=8, loc="upper right")
     ax.grid(alpha=0.25, axis="y")
 
     ax = axes[1]
-    if trajs:
-        data, labels, colors = [], [], []
-        cmap = {"Extension": "#2166ac", "Bending": "#d6604d"}
-        for r in trajs:
-            for n in PAIR_NAMES:
-                s = [v for v in r["series"][n] if v is not None]
-                if s:
-                    data.append(s)
-                    labels.append(f"{n}\n{r['label'].split()[0]}")
-                    colors.append(cmap.get(r["label"].split()[0], "gray"))
-        if data:
-            bp = ax.boxplot(data, showfliers=False, patch_artist=True)
-            for patch, c in zip(bp["boxes"], colors):
-                patch.set_facecolor(c); patch.set_alpha(0.55)
-            ax.set_xticklabels(labels, fontsize=6, rotation=90)
-        ax.axhline(RUPTURED_A, ls=":", color="crimson", lw=1)
-        ax.axhline(ENGAGED_A, ls="--", color="k", lw=1)
-        ax.set_ylabel("distance (Å)")
-        ax.set_title("Kolasangiani 2025 independent explicit-solvent αVβ3\n"
-                     "(metals + 150 mM, published trajectories)", fontsize=11, weight="bold")
-        ax.grid(alpha=0.25, axis="y")
-    else:
-        ax.text(0.5, 0.5, "no external trajectory measured", ha="center", va="center",
-                transform=ax.transAxes, fontsize=11, color="gray")
-        ax.set_axis_off()
+    groups = {"Extension": "#2166ac", "Bending": "#d6604d"}
+    data, pos, colors = [], [], []
+    for j, n in enumerate(PAIR_NAMES):
+        for k, (g, c) in enumerate(groups.items()):
+            pooled = [v for r in trajs if r["label"].startswith(g)
+                      for v in r["series"][n] if v is not None]
+            if pooled:
+                data.append(pooled); pos.append(j + (k - 0.5) * 0.34); colors.append(c)
+    if data:
+        bp = ax.boxplot(data, positions=pos, widths=0.3, showfliers=False, patch_artist=True)
+        for patch, c in zip(bp["boxes"], colors):
+            patch.set_facecolor(c); patch.set_alpha(0.6)
+        for med in bp["medians"]:
+            med.set_color("k")
+    ax.axhline(ENGAGED_A, ls="--", color="k", lw=1)
+    ax.axhline(RUPTURED_A, ls=":", color="crimson", lw=1)
+    ax.set_xticks(np.arange(len(PAIR_NAMES)))
+    ax.set_xticklabels(PAIR_NAMES, fontsize=10)
+    ax.set_xlim(-0.6, len(PAIR_NAMES) - 0.4)
+    ax.set_ylabel("distance (Å)")
+    ax.set_ylim(0, None)
+    handles = [plt.Rectangle((0, 0), 1, 1, fc=c, alpha=0.6) for c in groups.values()]
+    ax.legend(handles, [f"{g} replicas" for g in groups], fontsize=8, loc="lower right")
+    ax.set_title(f"Independent explicit-solvent αVβ3 under load\n"
+                 f"(Kolasangiani 2025, metals + 150 mM, {len(trajs)} distinct trajectories)",
+                 fontsize=11, weight="bold")
+    ax.grid(alpha=0.25, axis="y")
 
-    fig.suptitle("Step 0 — are the four αV genu ion pairs real outside our own calcium-free morph?",
-                 fontsize=12.5, weight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.94])
+    fig.suptitle("Step 0 — the four αV genu ion pairs do not exist outside our own "
+                 "calcium-free morph", fontsize=13, weight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
     fig.savefig(out, dpi=130)
     print(f"wrote {out}")
 
@@ -284,7 +306,13 @@ def main():
     ap.add_argument("--out-fig", default="figures/route_a_step0_external_pairs.png")
     ap.add_argument("--stride", type=int, default=1)
     ap.add_argument("--selftest", action="store_true", help="only run the 1JV2 check")
+    ap.add_argument("--replot", action="store_true",
+                    help="rebuild the figure from --out-json; no network, no trajectories")
     a = ap.parse_args()
+
+    if a.replot:
+        plot(json.load(open(a.out_json)), a.out_fig)
+        return
 
     os.makedirs(a.cache, exist_ok=True)
     if a.selftest:
@@ -325,21 +353,23 @@ def main():
             for fn in list_github_dir(d):
                 if not fn.endswith(".xtc"):
                     continue
-                p = fetch(KOLA_RAW.format(f"{d}/{fn}"), os.path.join(a.cache, fn))
+                # Cache under the SOURCE DIRECTORY. Both trajectory dirs contain a
+                # "Replica1.xtc"; keying the cache on the basename alone silently
+                # served the Extension file for the Bending arm and inflated n.
+                p = fetch(KOLA_RAW.format(f"{d}/{fn}"),
+                          os.path.join(a.cache, d.replace("/", "_"), fn))
                 if not p:
                     continue
                 try:
                     r = measure_trajectory(top, p, f"{kind} {fn}", stride=a.stride)
                 except Exception as e:
                     r = {"label": f"{kind} {fn}", "error": f"{type(e).__name__}: {e}"}
+                r["sha256_16"] = sha256(p)
                 report["trajectories"].append(r)
                 print(f"  {kind} {fn}: {r.get('stats', r.get('error'))}")
 
     os.makedirs(os.path.dirname(a.out_json) or ".", exist_ok=True)
     os.makedirs(os.path.dirname(a.out_fig) or ".", exist_ok=True)
-    with open(a.out_json, "w") as f:
-        json.dump(report, f, indent=2)
-    print(f"wrote {a.out_json}")
     plot(report, a.out_fig)
 
     # Verdict, stated plainly so the log answers the question without re-reading the JSON.
@@ -349,14 +379,27 @@ def main():
         eng = [n for n, v in ext["engaged"].items() if v]
         print(f"8XEN (deposited extended αVβ3): {len(eng)}/4 pairs engaged <4 Å -> {eng or 'none'}")
     tstats = [r for r in report["trajectories"] if "stats" in r]
-    if tstats:
+    seen, uniq = set(), []
+    for r in tstats:  # identical files must not be counted as independent replicas
+        if r.get("sha256_16") in seen:
+            print(f"  (duplicate input skipped: {r['label']} == "
+                  f"{next(x['label'] for x in uniq if x['sha256_16'] == r['sha256_16'])})")
+            continue
+        seen.add(r.get("sha256_16"))
+        uniq.append(r)
+    if uniq:
         for n in PAIR_NAMES:
-            fr = [r["stats"][n].get("frac_intact_lt5A") for r in tstats
+            fr = [r["stats"][n].get("frac_intact_lt5A") for r in uniq
                   if r["stats"][n].get("n")]
             fr = [x for x in fr if x is not None]
             if fr:
-                print(f"  {n}: intact <5 Å in {np.mean(fr)*100:.0f}% of frames "
-                      f"across {len(fr)} published replicas")
+                print(f"  {n}: intact <5 Å in {np.mean(fr)*100:.1f}% of frames "
+                      f"across {len(fr)} DISTINCT published trajectories")
+    report["distinct_trajectories"] = len(uniq)
+
+    with open(a.out_json, "w") as f:
+        json.dump(report, f, indent=2)
+    print(f"wrote {a.out_json}")
 
 
 if __name__ == "__main__":
