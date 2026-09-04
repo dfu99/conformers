@@ -718,3 +718,29 @@ Before diagnosing new failures, verify in order:
 - Corollary: the crash was in the *verification* code path at the end of the script while the
   document had already been written. Load and validate the inputs BEFORE rendering anything,
   so a bad key fails the render instead of decorating it.
+
+### The gpuq default environment restore has never actually run — do not assume requirements.txt
+- Symptom (2026-09-03): step-0 job `20260903T093400-88353-15403` died three times on
+  `ModuleNotFoundError: No module named 'matplotlib'`, despite the repo shipping a
+  `requirements.txt` naming it. The global contract says the runner pip-installs that
+  manifest on the pod before every job.
+- Cause, verified: the restore block exists in `development/bin/runpod-runner.sh:419`
+  and landed in commit `9b19515` on **2026-08-26**, but the running daemon (pid 80433)
+  has been up since **2026-08-24 02:10**. It is executing the pre-feature code. Proof
+  that this is fleet-wide, not ours: **0 of 52** job logs written since 2026-08-26 —
+  across FIND-SNP, caDNAgentic, RL-Arm and conformers — contain a `--- setup:` line,
+  which the runner emits unconditionally before the restore. Several of those projects'
+  jobs are sitting in the queue marked `dead`.
+- Consequence: on this queue a job currently gets whatever the pod image happens to
+  have. numpy is present (it is a torch image); matplotlib and MDAnalysis are not.
+  Writing `tasks/gpu-setup.sh` does NOT help — it is selected inside the same block
+  that never executes.
+- Rule until the daemon is restarted: a submitted command restores its own deps as its
+  first act — audit, install only what is missing, exit 0 when already correct. See
+  `pipelines/route_a/scripts/run_step0.sh`. Once `mc-gpuq-runner` is restarted, that
+  logic moves to `tasks/gpu-setup.sh` and the wrapper is deleted.
+- Restarting the daemon is shared infra and needs the PI's go-ahead — every project on
+  the queue depends on it, and a job was mid-run when this was found. Not done unilaterally.
+- General form: a documented capability that lives in a long-running daemon is only real
+  if the daemon has been restarted since it shipped. Check for the log line the feature
+  is supposed to emit before relying on it.
